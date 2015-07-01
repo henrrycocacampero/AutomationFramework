@@ -15,8 +15,9 @@ public class TestNGListener extends TestListenerAdapter{
 	  @Override
 	  public void onTestFailure(ITestResult tr){
 		  String testName = tr.getTestContext().getName();
+		  String errorMessage = tr.getThrowable().getMessage();
 		  LogsMessages.info("Test : \"" + testName + "\" FAILED" );
-		  ReportManager.appendTestCaseName(testName);
+		  ReportManager.appendTestCaseErrorMessage(testName, errorMessage);
 	  }
 	  
 	  @Override
