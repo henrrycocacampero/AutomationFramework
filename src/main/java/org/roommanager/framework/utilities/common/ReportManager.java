@@ -1,4 +1,4 @@
-package org.roommanager.framework.utilities;
+package org.roommanager.framework.utilities.common;
 
 import org.testng.Reporter;
 
