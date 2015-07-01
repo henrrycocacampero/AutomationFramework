@@ -1,10 +1,7 @@
 package org.roommanager.test.admin;
-
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
-
 import org.roommanager.framework.pages.admin.HomeAdminPageExample;
 import org.roommanager.framework.pages.admin.LoginPageExample;
 import org.roommanager.framework.pages.admin.ResourceCreatePageExample;
