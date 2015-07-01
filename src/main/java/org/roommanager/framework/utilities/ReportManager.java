@@ -29,7 +29,21 @@ public class ReportManager {
 		Reporter.log(errorMessageTag); 
 	}
 	
+	public static void appendTestCaseName(String testName){
+
+		String errorMessageTag = "<b>[testCaseName]</b>";
+		errorMessageTag = errorMessageTag
+				.replace("[testCaseName]", testName);
+		
+		enableHtmlReportEdition();
+		Reporter.log(errorMessageTag); 
+	}
+	
 	private static void enableHtmlReportEdition(){
 		System.setProperty(REPORTNG_PROPERTY , "false");
 	}
+	
+	
+	
+	
 }
