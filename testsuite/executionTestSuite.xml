@@ -5,6 +5,7 @@
 	      <listener class-name="org.uncommons.reportng.HTMLReporter"/>
 	      <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
 	      <listener class-name="org.roommanager.framework.utilities.common.TestNGListener"/>
+	      <listener class-name="org.roommanager.framework.utilities.common.TestBase"/>
 	</listeners>	
    	<test name="Verify it is possible to create a Resource">
    		<classes>

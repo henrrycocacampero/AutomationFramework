@@ -24,9 +24,9 @@
         <version>2.18.1</version>
         <configuration>
         	<reportsDirectory>${basedir}/reports</reportsDirectory>
-            <!-- <suiteXmlFiles>
-                <suiteXmlFile>testsuite/</suiteXmlFile>
-            </suiteXmlFiles> -->
+            <suiteXmlFiles>
+                <suiteXmlFile>testsuite/executionTestSuite.xml</suiteXmlFile>
+            </suiteXmlFiles>
         </configuration>
       </plugin>
     </plugins>
