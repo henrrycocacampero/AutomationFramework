@@ -4,12 +4,11 @@
 	<listeners>
 	      <listener class-name="org.uncommons.reportng.HTMLReporter"/>
 	      <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
-	      <listener class-name="org.roommanager.framework.utilities.TestNGListener"/>
+	      <listener class-name="org.roommanager.framework.utilities.common.TestNGListener"/>
 	</listeners>	
-   <test name="Test Add Location">
-    <classes>
-      <class name="org.roommanager.test.admin.TestReportNG" />
-    </classes>
-  </test>
-  
+   	<test name="Verify it is possible to create a Resource">
+   		<classes>
+      		<class name="org.roommanager.test.admin.CreateResourceTestExample" />
+    	</classes>
+  	</test>
 </suite>

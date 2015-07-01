@@ -20,8 +20,7 @@ public class LoginPageExample {
 	private WebDriver driver;
 	public final static String btnEnter = LoginConstantExample.BTNLOGIN;
 	
-	@FindBy (xpath = btnEnter)
-    WebElement btnEnterPage;
+	@FindBy (xpath = btnEnter)WebElement btnEnterPage;
 	public LoginPageExample(WebDriver driver){
 		this.driver = driver;
 		PageFactory.initElements(driver, this);

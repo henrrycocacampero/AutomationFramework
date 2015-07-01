@@ -7,24 +7,23 @@ public class TestNGListener extends TestListenerAdapter{
 	  
 	  @Override
 	  public void onTestSuccess(ITestResult tr){
-		  String testName = tr.getTestName();
+		  String testName = tr.getTestContext().getName();
 		  LogsMessages.info("Test : \"" + testName + "\" PASSED" );
 		  ReportManager.appendTestCaseName(testName);
-		  
 	  }
 	  
 	  @Override
 	  public void onTestFailure(ITestResult tr){
-		  String testName = tr.getTestName();
+		  String testName = tr.getTestContext().getName();
+		  String errorMessage = tr.getThrowable().getMessage();
 		  LogsMessages.info("Test : \"" + testName + "\" FAILED" );
-		  ReportManager.appendTestCaseName(testName);
+		  ReportManager.appendTestCaseErrorMessage(testName, errorMessage);
 	  }
 	  
 	  @Override
 	  public void onTestStart(ITestResult tr){
-		  String testName = tr.getTestName();
+		  String testName = tr.getTestContext().getName();
 		  LogsMessages.info("Test : \"" + testName + "\" STARTED" );
 		  ReportManager.appendTestCaseName(testName);
 	  }
-	  
 }
