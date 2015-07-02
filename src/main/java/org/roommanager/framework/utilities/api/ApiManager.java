@@ -29,7 +29,7 @@ public class ApiManager {
              resultObject = parser.parse(json);
 		 }
 		 catch(Exception ex){
-			 LogManager.info("Error Message");
+			 LogManager.info("Error Message");			 
 		 }
 		 return resultObject;
 
