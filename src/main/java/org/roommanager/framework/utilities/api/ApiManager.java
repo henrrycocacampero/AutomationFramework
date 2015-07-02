@@ -14,7 +14,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.roommanager.framework.utilities.common.LogsMessages;
+import org.roommanager.framework.utilities.common.LogManager;
 
 public class ApiManager {
 	
@@ -29,7 +29,7 @@ public class ApiManager {
              resultObject = parser.parse(json);
 		 }
 		 catch(Exception ex){
-			 LogsMessages.info("Error Message");
+			 LogManager.info("Error Message");
 		 }
 		 return resultObject;
 
@@ -50,7 +50,7 @@ public class ApiManager {
             httpClient.execute(request);
         } 
 		catch (Exception ex) {
-			LogsMessages.info("Error Message");
+			LogManager.info("Error Message");
         }	
     }
 	
@@ -68,7 +68,7 @@ public class ApiManager {
             json = EntityUtils.toString(result.getEntity(), "UTF-8");
         } 
 		catch (IOException ex) {
-			LogsMessages.info("Error Message");
+			LogManager.info("Error Message");
         }
 		return json;
 		
@@ -90,7 +90,7 @@ public class ApiManager {
             httpClient.execute(request);
         } 
 		catch (IOException ex) {
-			LogsMessages.info("Error Message");
+			LogManager.info("Error Message");
         }
     }
 	

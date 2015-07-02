@@ -8,7 +8,7 @@ public class TestNGListener extends TestListenerAdapter{
 	  @Override
 	  public void onTestSuccess(ITestResult tr){
 		  String testName = tr.getTestContext().getName();
-		  LogsMessages.info("Test : \"" + testName + "\" PASSED" );
+		  LogManager.info("Test : \"" + testName + "\" PASSED" );
 		  ReportManager.appendTestCaseName(testName);
 	  }
 	  
@@ -16,7 +16,7 @@ public class TestNGListener extends TestListenerAdapter{
 	  public void onTestFailure(ITestResult tr){
 		  String testName = tr.getTestContext().getName();
 		  String errorMessage = tr.getThrowable().getMessage();
-		  LogsMessages.info("Test : \"" + testName + "\" FAILED" );
+		  LogManager.info("Test : \"" + testName + "\" FAILED" );
 		  String filePath = ScreenShotManager.takeScreenShot(testName);
 		  ReportManager.appendTestCaseErrorMessage(testName, errorMessage);
 		  ReportManager.appendImageHyperLink(filePath);
@@ -25,7 +25,7 @@ public class TestNGListener extends TestListenerAdapter{
 	  @Override
 	  public void onTestStart(ITestResult tr){
 		  String testName = tr.getTestContext().getName();
-		  LogsMessages.info("Test : \"" + testName + "\" STARTED" );
+		  LogManager.info("Test : \"" + testName + "\" STARTED" );
 		  ReportManager.appendTestCaseName(testName);
 	  }
 }

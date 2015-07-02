@@ -2,9 +2,9 @@ package org.roommanager.framework.utilities.common;
 
 import org.apache.log4j.Logger;
 
-public class LogsMessages {
+public class LogManager {
 	
-	static Logger log = Logger.getLogger(LogsMessages.class.getName());
+	static Logger log = Logger.getLogger(LogManager.class.getName());
 	 
 	public static void info(String message){
 		   log.info(message);
