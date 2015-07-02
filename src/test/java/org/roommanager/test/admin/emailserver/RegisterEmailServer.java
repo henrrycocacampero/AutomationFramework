@@ -24,15 +24,15 @@ public class RegisterEmailServer {
 		  String errorMessage = "The email server was not registered";  
 		  driver.get("http://172.20.208.174:4044/admin/#/login");
 		  
-		  LoginPage signIn = new LoginPage(driver);
-		  HomePage home = signIn.clickSignInButton();	
-		  EmailServerPage emailServers = home.selectEmailServerLink();	
-		  CreateEmailServerPage addServer = emailServers.clickAddButton();
+		  LoginPage login = new LoginPage(driver);
+		  HomePage home = login.clickSignInButton();	
+		  EmailServerPage emailServer = home.selectEmailServerLink();	
+		  CreateEmailServerPage addServer = emailServer.clickAddButton();
 		  addServer.setHostname("qa202-5.qa202.local");
 		  addServer.setUsername("Administrator");
 		  addServer.setPassword("Monitor2020");
-		  emailServers = addServer.clickSaveButton();
-		  Assert.assertEquals(emailServers.getEmailServer(), expected, errorMessage);
+		  emailServer = addServer.clickSaveButton();
+		  Assert.assertEquals(emailServer.getEmailServer(), expected, errorMessage);
 	  }
 	  @AfterSuite (groups = {"ACCEPTANCE"})
 		public void tearDown() throws Exception {
