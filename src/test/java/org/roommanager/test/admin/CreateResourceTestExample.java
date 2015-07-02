@@ -1,26 +1,18 @@
 package org.roommanager.test.admin;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.roommanager.framework.pages.admin.HomeAdminPageExample;
 import org.roommanager.framework.pages.admin.LoginPageExample;
 import org.roommanager.framework.pages.admin.ResourceCreatePageExample;
 import org.roommanager.framework.pages.admin.ResourcePageExample;
+import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-
-public class CreateResourceTestExample {
+public class CreateResourceTestExample extends TestBase{
 	/*Test Case:
-	   * Verify that is possible create a resource*/
-	private static WebDriver driver = null;
+	 * Verify that is possible create a resource*/
   Logger logger=Logger.getLogger("test02CreateResource");
-  @BeforeSuite (groups = {"ACCEPTANCE"})
-	public void setUp() throws Exception {
-      driver= new FirefoxDriver();
-	}
+
   @Test  (groups = {"ACCEPTANCE"})
 	public void CreateResource() throws Exception {
 		String nameResource = "Resource1";
@@ -36,11 +28,8 @@ public class CreateResourceTestExample {
 		resourceAddPage.txt_name().txt_displayName().btn_Save();
 		String resources = resourcePage.getResourceName(nameResource);
 		Assert.assertEquals(resources, nameResource, message);
-		
   }
-	
-  @AfterSuite (groups = {"ACCEPTANCE"})
-	public void tearDown() throws Exception {
-	   driver.quit();
-	}
+  
+  /*Ya no se debe incluir BeforeSuite ni AfterSuite*/
+
 }

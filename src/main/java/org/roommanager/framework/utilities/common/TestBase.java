@@ -1,12 +1,15 @@
 package org.roommanager.framework.utilities.common;
 
 import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.IReporter;
 import org.testng.ISuite;
 import org.testng.ISuiteListener;
+import org.testng.annotations.Listeners;
 import org.testng.xml.XmlSuite;
 
+@Listeners({org.roommanager.framework.utilities.common.TestBase.class})
 public class TestBase implements ISuiteListener,IReporter{
 	protected static WebDriver driver = null;
 	@Override

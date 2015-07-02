@@ -23,6 +23,12 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>2.18.1</version>
         <configuration>
+        	<properties>
+                <property>
+                    <name>listener</name>
+                    <value>org.uncommons.reportng.HTMLReporter, org.uncommons.reportng.JUnitXMLReporter, org.roommanager.framework.utilities.common.TestBase</value>
+                </property>
+            </properties>
         	<reportsDirectory>${basedir}/reports</reportsDirectory>
             <suiteXmlFiles>
                 <suiteXmlFile>testsuite/executionTestSuite.xml</suiteXmlFile>
