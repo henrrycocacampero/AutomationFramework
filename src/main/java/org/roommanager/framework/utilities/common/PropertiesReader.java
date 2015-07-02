@@ -13,7 +13,7 @@ public class PropertiesReader {
 		
 	if(propertyFile == null){
 				try {
-					propertyFile = new FileInputStream("resources\\roommanager.properties");
+					propertyFile = new FileInputStream("src/main/resources/framework.properties");
 					properties.load(propertyFile);
 					} catch (IOException ex) {
 							ex.printStackTrace();
