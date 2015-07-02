@@ -19,8 +19,8 @@ public class ReportManager {
 	
 	public static void appendTestCaseErrorMessage(String testName, String message){
 
-		String errorMessageTag = "<a href=\"javascript:toggleElement('[testCaseName]', 'block')\" title=\"Click to expand/collapse\"><b>[testCaseName]</b></a>";
-		errorMessageTag = errorMessageTag + "<div class=\"stackTrace\" id=\"[testCaseName]\" style=\"display: none;\">[message]</div>";
+		String errorMessageTag = "<a href=\"javascript:toggleElement('[testCaseName]', 'block')\" title=\"Click to expand/collapse\"><b>[testCaseName]</b></a><br />";
+		errorMessageTag = errorMessageTag + "<div class=\"stackTrace\" id=\"[testCaseName]\" style=\"display: none;\">[message]</div><br />";
 		errorMessageTag = errorMessageTag
 				.replace("[testCaseName]", testName)
 				.replace("[message]", message);

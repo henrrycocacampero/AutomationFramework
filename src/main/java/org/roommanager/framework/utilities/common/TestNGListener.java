@@ -17,7 +17,9 @@ public class TestNGListener extends TestListenerAdapter{
 		  String testName = tr.getTestContext().getName();
 		  String errorMessage = tr.getThrowable().getMessage();
 		  LogsMessages.info("Test : \"" + testName + "\" FAILED" );
+		  String filePath = ScreenShotManager.takeScreenShot(testName);
 		  ReportManager.appendTestCaseErrorMessage(testName, errorMessage);
+		  ReportManager.appendImageHyperLink(filePath);
 	  }
 	  
 	  @Override

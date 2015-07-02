@@ -15,25 +15,38 @@ import org.testng.Reporter;
 import org.testng.TestListenerAdapter; 
 
 
-public class ScreenShotManager extends TestListenerAdapter { 
+public class ScreenShotManager { 
 	
-	@Override 
-	public void onTestFailure(ITestResult tr) { 
-		
-		WebDriver driver = new ChromeDriver();	 
+	public static String takeScreenShot(String testName){
+		testName = testName.replace(" ", "_");
+		String filePath = null;
+		WebDriver driver = SeleniumDriverManager.chromeDriver();	 
 		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE); 
 		DateFormat dateFormat = new SimpleDateFormat("dd_MMM_yyyy__hh_mm_ssaa"); /**/
-		String destDir = "./screenshots"; 
+		String destDir = "./reports/screenshots"; 
 		new File(destDir).mkdirs(); 
-		String destFile = tr.getName()+"-"+dateFormat.format(new Date()) + ".png"; 
+		String destFile = testName +"-"+dateFormat.format(new Date()) + ".png"; 
+		saveFile(scrFile, destFile, destDir);
+		File directory = new File(".");
+		
+		try {
+			filePath =directory.getCanonicalPath() + "\\reports\\screenshots\\" + destFile;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("--->"+filePath);
+		
+		return filePath;
+	}
+	
+	public static void saveFile(File sourceFile, String destinyFile, String destinyPath){
 		try { 
-			FileUtils.copyFile(scrFile, new File(destDir + "/" + destFile)); 
-			} 
-			catch (IOException e) { 
-								e.printStackTrace();
-								System.out.println("Test Failure - Screenshoot saved!");	
-							} 
-		Reporter.setEscapeHtml(false); 
-		Reporter.log("Saved <a href=../screenshots/" + destFile + ">Screenshot</a>");
-	} 
+			FileUtils.copyFile(sourceFile, new File(destinyPath + "/" + destinyFile)); 
+		} 
+		catch (IOException e) { 
+			e.printStackTrace();
+			System.out.println("Test Failure - Screenshoot saved!");	
+		} 
+	}
 }
