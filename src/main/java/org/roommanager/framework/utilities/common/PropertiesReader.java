@@ -93,4 +93,11 @@ public class PropertiesReader {
 	public static String getExchangeServerDescription(){
 		return getConfiguration().getProperty("EXCHANGE_SERVER_DESCRIPTION");
 	}
+	/**
+     * This method get a Browser
+     * @return property Browser name
+     */
+	public static String getBrowser(){
+        return getConfiguration().getProperty("BROWSER");
+  }
 }
