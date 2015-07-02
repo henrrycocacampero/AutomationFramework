@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.tablet.HomeConstant;
 import org.roommanager.framework.pages.admin.ResourcePageExample;
+import org.roommanager.framework.pages.tablet.scheduler.SchedulerPage;
 
 public class HomePage extends PageFactory {
 	
@@ -25,13 +26,13 @@ public class HomePage extends PageFactory {
 	
 	 public  SchedulerPage clickSchedule(){
 		    (new WebDriverWait(driver,20)).until(ExpectedConditions.visibilityOf(scheduleLink));
-		    linkSchedule.click();
+		    scheduleLink.click();
 		    return new SchedulerPage(driver);
 	    }
 	 
 	 public  SettingsPage clickSettings(){
 		    (new WebDriverWait(driver,20)).until(ExpectedConditions.visibilityOf(settingsLink));
-		    linkSchedule.click();
+		    settingsLink.click();
 		    return new SettingsPage(driver);
 	    }
 
