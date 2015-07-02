@@ -30,6 +30,8 @@ public class PropertiesReader {
 		return properties;
 	}
 	
+	
+	
 	/**
      * This method get a URL of Room Manager App - Admin module
      * @return property URL_ROOM_MANAGER_ADMIN
