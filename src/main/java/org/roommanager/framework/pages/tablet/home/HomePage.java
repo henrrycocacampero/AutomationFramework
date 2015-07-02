@@ -1,4 +1,4 @@
-package org.roommanager.framework.pages.tablet;
+package org.roommanager.framework.pages.tablet.home;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

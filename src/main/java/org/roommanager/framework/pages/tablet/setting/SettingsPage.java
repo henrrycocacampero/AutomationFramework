@@ -73,13 +73,4 @@ public class SettingsPage {
 		LogManager.info("Room: <"+ roomName +"> wasn't found on the Available Rooms List");
 		return null;
 	}
-	/*
-	public HomePage clickAcceptButton(){
-		(new WebDriverWait(driver, 60))
-			.until(ExpectedConditions.visibilityOf(acceptButton));
-		acceptButton.click();
-		LogManager.info("Accept Button was clicked");
-		return new HomePage(driver);
-	}
-	*/
 }
