@@ -7,8 +7,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.tablet.HomeConstant;
-import org.roommanager.framework.pages.admin.ResourcePageExample;
 import org.roommanager.framework.pages.tablet.scheduler.SchedulerPage;
+import org.roommanager.framework.pages.tablet.setting.SettingsPage;
 
 public class HomePage extends PageFactory {
 	
