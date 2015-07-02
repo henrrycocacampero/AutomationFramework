@@ -2,7 +2,7 @@ package org.roommanager.framework.models.admin.resource;
 
 public class CreateResourceConstant {
 	/**Locator Type = xpath*/
-    public static final String RESOURCE_NAME_FIELD="//input[@type='text'])[3]";
+    public static final String RESOURCE_NAME_FIELD="(//input[@type='text'])[3]";
     /**Locator Type = xpath*/
     public static final String RESOURCE_DISPLAY_NAME_FIELD="(//input[@type='text'])[4]";
 	/**Locator Type = xpath*/
