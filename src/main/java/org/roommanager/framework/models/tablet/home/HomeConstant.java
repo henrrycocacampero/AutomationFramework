@@ -1,4 +1,4 @@
-package org.roommanager.framework.models.tablet;
+package org.roommanager.framework.models.tablet.home;
 
 public class HomeConstant {
 	
