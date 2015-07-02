@@ -3,10 +3,10 @@ package org.roommanager.framework.utilities.api;
 import java.io.IOException;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -15,11 +15,17 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.roommanager.framework.utilities.common.LogManager;
+import org.roommanager.framework.utilities.common.PropertiesReader;
+
 
 public class ApiManager {
 	
-	/*Implement Reader to read data of the Config File*/
-	//public static ReadFile reader = new ReadFile();
+	private static final String CODIFICATION_UTF_8 = "UTF-8";
+	private static final String CONTENT_TYPE_HEADER = "content-type";
+	private static final String APPLICATION_CONTENT_TYPE = "application/json";
+	private static final String AUTHORIZATION_HEADER = "Authorization";
+	
+	
 	public static String json;
 	
 	public static Object jsonRequest(String json){
@@ -29,98 +35,100 @@ public class ApiManager {
              resultObject = parser.parse(json);
 		 }
 		 catch(Exception ex){
-			 LogManager.info("Error Message");			 
+			LogManager.info("Error Message");
 		 }
 		 return resultObject;
 
 	}
 	
-	public static void postRequest(String jsonImpersonation, String urlRequest) {
-		 
-		/*Implement Reader to read data of the Config File*/
-		//Reading URL from Config File
-		//String url = reader.getApiURL()+ urlRequest;
-		System.out.println(url);
+	public static String getHttpMethod(String url){
+	
+		String json = null;
+		String codification = CODIFICATION_UTF_8;
+		String contentTypeHeader = CONTENT_TYPE_HEADER;
+		String contentType = APPLICATION_CONTENT_TYPE;
 		
 		try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
-            HttpPost request = new HttpPost(url);
-            StringEntity params = new StringEntity(jsonImpersonation);
-            request.addHeader("content-type", "application/json");
-            request.setEntity(params);
-            httpClient.execute(request);
-        } 
-		catch (Exception ex) {
-			LogManager.info("Error Message");
-        }	
-    }
-	
-	
-	public static String getRequest(String urlRequest) {
-		
-		
-		
-		System.out.println(urlRequest);
-		 
-		try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
-            HttpGet request = new HttpGet(urlRequest);
-            request.addHeader("content-type", "application/json");
+			HttpGet request = new HttpGet(url);
+            request.addHeader(contentTypeHeader, contentType);
             HttpResponse result = httpClient.execute(request);
-            json = EntityUtils.toString(result.getEntity(), "UTF-8");
-        } 
-		catch (IOException ex) {
-			LogManager.info("Error Message");
+            json = EntityUtils.toString(result.getEntity(), codification);
+        } catch (IOException ex) {
+        	LogManager.info(ex.getMessage());
         }
 		return json;
-		
-		
-    }
+	}
 	
-	public static void deleteRequest(String name, String urlRequest) {
+	public static void deleteHttpMethod(String url){
+		String contentTypeHeader = CONTENT_TYPE_HEADER;
+		String contentType = APPLICATION_CONTENT_TYPE;
+		String authorizationHeader = AUTHORIZATION_HEADER;
+		String authorizationValue = PropertiesReader.getBasicAuthentication();
 		
-		/*Implement Reader to read data of the Config File*/
-		//Reading URL from Config File
-		
-		String id = getItemByName(name,urlRequest);
-		//String urlDelete = reader.getApiURL()+urlRequest+"/"+ id;
-		System.out.println(urlDelete);
+		try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()){
+			HttpDelete request = new HttpDelete(url);
+			request.addHeader(contentTypeHeader, contentType);
+			request.addHeader(authorizationHeader, authorizationValue);
+            
+            CloseableHttpResponse response = httpClient.execute(request);
+            try {
+            	LogManager.info("The Status of the DELETE Request to Room Manager API is: " + response.getStatusLine());
+                EntityUtils.consume(response.getEntity());
+            } finally {
+                response.close();
+            }
+        } catch (IOException ex) {
+        	LogManager.info(ex.getMessage());
+        }
+	}
+	
+	public static void postHttpMethod(String url, String body){
+		String contentTypeHeader = CONTENT_TYPE_HEADER;
+		String contentType = APPLICATION_CONTENT_TYPE;
+		String authorizationHeader = AUTHORIZATION_HEADER;
+		String authorizationValue = PropertiesReader.getBasicAuthentication();
 		
 		try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
-            HttpDelete request = new HttpDelete(urlDelete);
-            request.addHeader("content-type", "application/json");
-            httpClient.execute(request);
-        } 
-		catch (IOException ex) {
-			LogManager.info("Error Message");
+			HttpPost request = new HttpPost(url);
+            StringEntity params = new StringEntity(body);
+            request.addHeader(contentTypeHeader, contentType);
+            request.addHeader(authorizationHeader, authorizationValue);
+            request.setEntity(params);
+            CloseableHttpResponse response = httpClient.execute(request);
+            try {
+            	LogManager.info("The Status of the POST Request to Room Manager API is: " + response.getStatusLine());
+                EntityUtils.consume(response.getEntity());
+            } finally {
+                response.close();
+            }
+        } catch (IOException ex) {
+        	LogManager.info(ex.getMessage());
         }
-    }
+	}
 	
-	public static String getItemByName(String name, String urlRequest) {
-		/*Implement Reader to read data of the Config File*/
-		//Reading URL from Config File
-		String id = null;
-		//String url = reader.getApiURL()+urlRequest;
-		System.out.println(url);
-		String propertyName = "name";
-		String propertyId = "_id";
+	public static String getObejctPropertyByGivenPropertyValue(String propertyToBeSearched, String property, String propertyValue, String url) {
+		String responseProperty = null;
+		String propertyName = property;
 		
-		String json = getRequest(url);
+		String json = getHttpMethod(url);
 		Object resourcesAsJson = jsonRequest(json);
 		
 		if (resourcesAsJson instanceof JSONArray) {
             JSONArray array=(JSONArray)resourcesAsJson;
             for (Object object : array) {
                 JSONObject obj =(JSONObject)object;
-                if(obj.get(propertyName).toString().equals(name)){
-                	return obj.get(propertyId).toString();
+                if(obj.get(propertyName).toString().equals(propertyValue)){
+                	return obj.get(propertyToBeSearched).toString();
                 }
             }
         }else if (resourcesAsJson instanceof JSONObject) {
             JSONObject obj =(JSONObject)resourcesAsJson;
-            if(obj.get(propertyName).toString().equals(name)){
-            	return obj.get(propertyId).toString();
+            if(obj.get(propertyName).toString().equals(propertyValue)){
+            	return obj.get(propertyToBeSearched).toString();
             }
         }
-		return id;
-    }	
+		return responseProperty;
+    }
+	
 }
 

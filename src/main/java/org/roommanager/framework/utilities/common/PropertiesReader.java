@@ -102,4 +102,19 @@ public class PropertiesReader {
 	public static String getBrowser(){
         return getConfiguration().getProperty("BROWSER");
   }
+	/**
+     * This method get a URL of Room Manager APIe
+     * @return property URL_API
+     */
+	public static String getRoomManagerApi(){
+		return getConfiguration().getProperty("URL_API");
+	}
+	
+	/**
+     * This method get a URL of Room Manager APIe
+     * @return property URL_API
+     */
+	public static String getBasicAuthentication(){
+		return getConfiguration().getProperty("basicAuthentication");
+	}
 }
