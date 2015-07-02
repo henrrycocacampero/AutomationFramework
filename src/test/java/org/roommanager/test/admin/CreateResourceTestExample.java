@@ -7,7 +7,8 @@ import org.roommanager.framework.pages.admin.ResourcePageExample;
 import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+/*** incluir este codigo en cada tets case: extends TestBase
+ * En caso de requerir pre o post condiciones llamar a los metodos en un aftertest*/
 public class CreateResourceTestExample extends TestBase{
 	/*Test Case:
 	 * Verify that is possible create a resource*/

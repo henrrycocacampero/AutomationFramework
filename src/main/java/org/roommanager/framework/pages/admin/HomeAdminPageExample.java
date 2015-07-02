@@ -19,8 +19,7 @@ public class HomeAdminPageExample {
 	public final static String linkResourceConstant = HomeConstantExample.LINKRESOURCES;
     
     
-	@FindBy (linkText = linkResourceConstant)
-	WebElement linkResource;
+	@FindBy (linkText = linkResourceConstant)WebElement linkResource;
 	private WebDriver driver;
 	
 	public HomeAdminPageExample(WebDriver driver){
