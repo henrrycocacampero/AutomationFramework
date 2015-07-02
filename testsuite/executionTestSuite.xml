@@ -7,9 +7,9 @@
 	      <listener class-name="org.roommanager.framework.utilities.common.TestNGListener"/>
 	      <listener class-name="org.roommanager.framework.utilities.common.TestBase"/>
 	</listeners>	
-   	<test name="Verify it is possible to create a Resource">
+  	<test name="Verify it is possible to create a Meeting">
    		<classes>
-      		<class name="org.roommanager.test.admin.CreateResourceTestExample" />
+      		<class name="org.roommanager.test.tablet.meetings.VerifyMeetingIsCreated" />
     	</classes>
   	</test>
 </suite>

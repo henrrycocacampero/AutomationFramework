@@ -10,17 +10,16 @@ import org.roommanager.framework.models.tablet.scheduler.CredentialsConstant;
 import org.roommanager.framework.utilities.common.LogManager;
 
 public class CredentialsPage {
-	@FindBy (id = CredentialsConstant.USERNAME_TEXT_FIELD) 
+	@FindBy (xpath = CredentialsConstant.USERNAME_TEXT_FIELD) 
 	private WebElement usernameTextField;
-	@FindBy (id = CredentialsConstant.PASSWORD_TEXT_FIELD) 
+	@FindBy (xpath = CredentialsConstant.PASSWORD_TEXT_FIELD) 
 	private WebElement passwordTextField;
-	@FindBy (id = CredentialsConstant.OK_BUTTON) 
+	@FindBy (xpath = CredentialsConstant.OK_BUTTON) 
 	private WebElement okButton;
 	private WebDriver driver;
 	
 	public CredentialsPage(WebDriver driver){
 		this.driver = driver;
-		driver.get("http://172.20.208.174:4043/tablet/#/settings");
 		PageFactory.initElements(driver, this);
 	}
 	
