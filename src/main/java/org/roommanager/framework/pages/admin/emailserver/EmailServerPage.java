@@ -8,8 +8,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.admin.emailserver.EmailServerConstant;
+import org.roommanager.framework.pages.admin.common.LeftMenu;
 
-public class EmailServerPage {
+public class EmailServerPage extends LeftMenu {
 
 	WebDriver driver;
 	public static final String addButton = EmailServerConstant.ADD_BUTTON;
@@ -20,7 +21,8 @@ public class EmailServerPage {
 	@FindBy (xpath = removeButton) WebElement remove_Button;
 	@FindBy (xpath = serverButton) WebElement server_Button;
 	
-	public EmailServerPage(WebDriver driver){
+	public EmailServerPage  (WebDriver driver){
+		super(driver);
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
@@ -31,9 +33,15 @@ public class EmailServerPage {
 		return new CreateEmailServerPage(driver);
 	}
 	
+	public RemoveEmailServerPage clickRemoveButton(){
+		(new WebDriverWait(driver,20)).until(ExpectedConditions.visibilityOf(remove_Button));
+		remove_Button.click();
+		return new RemoveEmailServerPage(driver);
+	}
+	
 	public String getEmailServer(){
 		(new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(server_Button));
-	    return driver.findElement(By.xpath(addButton)).getText();
+	    return driver.findElement(By.xpath(serverButton)).getText();
 	}
 	
 	public boolean existsEmailServerRegistered(){

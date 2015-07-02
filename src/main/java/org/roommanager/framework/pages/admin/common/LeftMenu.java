@@ -12,7 +12,7 @@ import org.roommanager.framework.pages.admin.resource.ResourcePage;
 
 public class LeftMenu {
 	private WebDriver driver;
-	public static final String emailServerLink = LeftMenuConstant.RESOURCES_LINK;
+	public static final String emailServerLink = LeftMenuConstant.EMAIL_SERVER_LINK;
 	public static final String impersonationLink = LeftMenuConstant.IMPERSONATION_LINK;
 	public static final String conferenceRoomsLink = LeftMenuConstant.CONFERENCE_ROOMS_LINK;
 	public static final String resourcesLink = LeftMenuConstant.RESOURCES_LINK;
