@@ -14,7 +14,7 @@ public class TestBase implements ISuiteListener,IReporter{
 	protected static WebDriver driver = null;
 	@Override
 	public void onStart(ISuite arg0) {
-		driver = SeleniumDriverManager.chromeDriver();
+		driver = SeleniumDriverManager.getDriver(PropertiesReader.getBrowser());
     }
 	@Override
     public void generateReport(List<XmlSuite> arg0, List<ISuite> arg1, String arg2) {           

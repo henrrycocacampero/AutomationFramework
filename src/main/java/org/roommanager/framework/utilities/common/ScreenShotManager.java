@@ -9,18 +9,13 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType; 
 import org.openqa.selenium.TakesScreenshot; 
 import org.openqa.selenium.WebDriver; 
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.ITestResult; 
-import org.testng.Reporter; 
-import org.testng.TestListenerAdapter; 
-
 
 public class ScreenShotManager { 
 	
 	public static String takeScreenShot(String testName){
 		testName = testName.replace(" ", "_");
 		String filePath = null;
-		WebDriver driver = SeleniumDriverManager.chromeDriver();	 
+		WebDriver driver = SeleniumDriverManager.getDriver(PropertiesReader.getBrowser());	 
 		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE); 
 		DateFormat dateFormat = new SimpleDateFormat("dd_MMM_yyyy__hh_mm_ssaa"); /**/
 		String destDir = "./reports/screenshots"; 

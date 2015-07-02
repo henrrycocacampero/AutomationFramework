@@ -11,6 +11,16 @@ public class SeleniumDriverManager {
 	private SeleniumDriverManager(){
 		
 	}
+	public static WebDriver getDriver(String browser){
+		switch (browser) {
+			case "CHROME":
+				return chromeDriver();
+			case "FIREFOX":
+				return firefoxDriver();
+			default:
+				return chromeDriver();
+		}
+	}
 	public static WebDriver firefoxDriver(){
 		if(driver == null || driver.toString().contains("(null)")){
 			driver = new FirefoxDriver();
