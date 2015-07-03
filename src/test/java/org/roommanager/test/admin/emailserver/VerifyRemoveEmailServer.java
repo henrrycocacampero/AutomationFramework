@@ -11,7 +11,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class RemoveEmailServer extends TestBase {
+public class VerifyRemoveEmailServer extends TestBase {
 	
 	 @BeforeTest
 	  public void beforeTest(){
