@@ -12,7 +12,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class RegisterEmailServer extends TestBase{
+public class VerifyEmailServerIsRegistered extends TestBase{
 
 	  @BeforeTest
 	  public void beforeTest(){

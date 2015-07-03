@@ -6,7 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.roommanager.framework.models.admin.emailserver.CreateEmailServerConstant;;
+import org.roommanager.framework.models.admin.emailserver.CreateEmailServerConstant;
+import org.roommanager.framework.utilities.common.LogManager;
 
 public class CreateEmailServerPage {
 
@@ -30,23 +31,27 @@ public class CreateEmailServerPage {
 		(new WebDriverWait(driver,5)).until(ExpectedConditions.visibilityOf(hostname_TextBox));
 		hostname_TextBox.clear();
 		hostname_TextBox.sendKeys(hostname);
+		LogManager.info("Hostname: <" + hostname + "> was entered");
 	}
 	
 	public void setUsername(String username){
 		(new WebDriverWait(driver,5)).until(ExpectedConditions.visibilityOf(username_TextBox));
 		username_TextBox.clear();
 		username_TextBox.sendKeys(username);
+		LogManager.info("Username: <" + username + "> was entered");
 	}
 	
 	public void setPassword(String password){
 		(new WebDriverWait(driver,5)).until(ExpectedConditions.visibilityOf(password_TextBox));
 		password_TextBox.clear();
 		password_TextBox.sendKeys(password);
+		LogManager.info("Password: <" + password + "> was entered");
 	}
 	
 	public EmailServerPage clickSaveButton(){
 		(new WebDriverWait(driver,5)).until(ExpectedConditions.visibilityOf(save_Button));
 		save_Button.click();
+		LogManager.info("Save Button was clicked");
 		return new EmailServerPage(driver);
 	}
 }

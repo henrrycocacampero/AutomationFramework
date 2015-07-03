@@ -86,10 +86,4 @@ public class EmailServerApi {
         } catch (IOException ex) {
         }
     }
-	
-	
-	
-	
-	
-	
 }
