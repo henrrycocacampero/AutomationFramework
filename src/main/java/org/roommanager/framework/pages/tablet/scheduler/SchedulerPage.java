@@ -1,9 +1,12 @@
 package org.roommanager.framework.pages.tablet.scheduler;
 
+import java.util.Calendar;
 import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,7 +16,6 @@ import org.roommanager.framework.utilities.common.LogManager;
 
 public class SchedulerPage extends PageFactory{
 	WebDriver driver = null;
-
 	@FindBy (xpath = SchedulerConstant.ATTENDEE_TEXT) 
 	WebElement attendeeText;
 	@FindBy (xpath = SchedulerConstant.ATTENDEES_LIST) 
@@ -146,6 +148,7 @@ public class SchedulerPage extends PageFactory{
 	}
 	private WebElement getMeetingBoxBySubject(String subject){
 		(new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(roomTimeline));
+		moveTimeline();
 		WebElement time = driver.findElement(By.xpath(SchedulerConstant.ROOM_TIMELINE));
 		List<WebElement> boxes = time.findElements(By.xpath(SchedulerConstant.MEETING_BOX));
 		for(WebElement element: boxes){
@@ -162,5 +165,14 @@ public class SchedulerPage extends PageFactory{
 	}
 	public boolean existAttendee(String attendee){
 		return getAttendee(attendee) != null ? true : false;
+	}
+	
+	@SuppressWarnings("unused")
+	private void moveTimeline(){
+		if(Calendar.HOUR_OF_DAY > 19)
+			(new Actions(driver)).dragAndDropBy(roomTimeline, -500, 0).perform();
+		else if(Calendar.HOUR_OF_DAY < 7){
+			(new Actions(driver)).dragAndDropBy(roomTimeline, 500, 0).perform();
+		}
 	}
 }
