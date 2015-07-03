@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.admin.emailserver.EmailServerConstant;
 import org.roommanager.framework.pages.admin.common.LeftMenu;
+import org.roommanager.framework.utilities.common.LogManager;
 
 public class EmailServerPage extends LeftMenu {
 
@@ -30,12 +31,14 @@ public class EmailServerPage extends LeftMenu {
 	public CreateEmailServerPage clickAddButton(){
 		(new WebDriverWait(driver,20)).until(ExpectedConditions.visibilityOf(add_Button));
 		add_Button.click();
+		LogManager.info("Add Button was clicked");
 		return new CreateEmailServerPage(driver);
 	}
 	
 	public RemoveEmailServerPage clickRemoveButton(){
 		(new WebDriverWait(driver,20)).until(ExpectedConditions.visibilityOf(remove_Button));
 		remove_Button.click();
+		LogManager.info("Remove Button was clicked");
 		return new RemoveEmailServerPage(driver);
 	}
 	

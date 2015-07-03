@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.admin.emailserver.RemoveEmailServerConstant;
+import org.roommanager.framework.utilities.common.LogManager;
 
 public class RemoveEmailServerPage {
 	WebDriver driver;
@@ -23,6 +24,7 @@ public class RemoveEmailServerPage {
 	public EmailServerPage clickOnYesButton(){
 		(new WebDriverWait(driver,10)).until(ExpectedConditions.visibilityOf(yes_Button));
         yes_Button.click();
+        LogManager.info("Yes Button was clicked");
         return new EmailServerPage(driver);
 	}
 }
