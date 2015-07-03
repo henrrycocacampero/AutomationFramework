@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.pages.admin.home.HomePage;
+import org.roommanager.framework.utilities.common.LogManager;
 
 public class LoginPage {
 
@@ -28,12 +29,15 @@ public class LoginPage {
 	public HomePage clickSignInButton(){
 		(new WebDriverWait(driver,30)).until(ExpectedConditions.visibilityOf(login_Button));
 		login_Button.click();
+		LogManager.info("SigIn Button was clicked");
 		return new HomePage(driver);
+		
 	}
 	public LoginPage setUserName(String username){
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions.visibilityOf(username_TextField));
 		username_TextField.clear();
 		username_TextField.sendKeys(username);
+		LogManager.info("Username: <"+ username +">" + "was entered");
 		return this;
 	}
 	
@@ -41,6 +45,7 @@ public class LoginPage {
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions.visibilityOf(password_TextField));
 		password_TextField.clear();
 		password_TextField.sendKeys(password);
+		LogManager.info("Password: <"+ password +">" + "was entered");
 		return this;
 	}
 }
