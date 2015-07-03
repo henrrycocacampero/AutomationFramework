@@ -169,10 +169,11 @@ public class SchedulerPage extends PageFactory{
 	
 	@SuppressWarnings("unused")
 	private void moveTimeline(){
+		int xDirection = 0;
 		if(Calendar.HOUR_OF_DAY > 19)
-			(new Actions(driver)).dragAndDropBy(roomTimeline, -500, 0).perform();
-		else if(Calendar.HOUR_OF_DAY < 7){
-			(new Actions(driver)).dragAndDropBy(roomTimeline, 500, 0).perform();
-		}
+			xDirection = -500;
+		else if(Calendar.HOUR_OF_DAY < 7)
+			xDirection = 800;
+		(new Actions(driver)).dragAndDropBy(roomTimeline, xDirection, 0).perform();
 	}
 }
