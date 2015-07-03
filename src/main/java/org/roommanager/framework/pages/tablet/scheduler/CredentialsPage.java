@@ -17,6 +17,8 @@ public class CredentialsPage {
 	private WebElement passwordTextField;
 	@FindBy (xpath = CredentialsConstant.OK_BUTTON) 
 	private WebElement okButton; 
+	@FindBy (xpath = CredentialsConstant.CREDENTIALS_ERROR_MESSAGE) 
+	private WebElement credentialsErrorMessage; 
 	private By okButtonLocator = CredentialsConstant.OK_BUTTON_LOCATOR;
 	private WebDriver driver;
 	
@@ -51,5 +53,14 @@ public class CredentialsPage {
 		new WebDriverWait(driver, 60)
 			.until(ExpectedConditions.invisibilityOfElementLocated(okButtonLocator));
 		return new SchedulerPage(driver);
+	}
+	
+	public boolean isCredentialsErrorMessagePresent(){
+		String expectedErrorMessage = "Wrong username or password";
+		(new WebDriverWait(driver,60))
+		.until(ExpectedConditions.visibilityOf(credentialsErrorMessage));
+		String errorMessage = credentialsErrorMessage.getText();
+		LogManager.info("Error Message: <"+ errorMessage +"> was displayed");
+		return errorMessage.equals(expectedErrorMessage);
 	}
 }

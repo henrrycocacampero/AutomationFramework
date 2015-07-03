@@ -11,7 +11,6 @@ import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.AfterTest;
 
 public class VerifyMeetingIsRemoved extends TestBase{
 
@@ -19,14 +18,14 @@ public class VerifyMeetingIsRemoved extends TestBase{
 	private String password = PropertiesReader.getPassword();
 	private String organizer = username;
 	private String attendee = "\"" + username + "@" + PropertiesReader.getExchangeDomain() + "\"";
-	private String conferenceRoom = "SM-Room10";
+	private String conferenceRoom = "SM-Room1";
 	private String subject = "Subject Test";
 	private String startTime = Generator.getStartTime();
 	private String endTime = Generator.getEndTime();
 	private String errorMessage = "The Test failed because the deleted meeting could be found in the Scheduler Page";
 	
     @Test
-    public void VerifyIfMeetingIsRemoved() {
+    public void VerifyAMeetingIsRemoved() {
     	SettingsPage settings = new SettingsPage(driver);
 		
 		HomePage home = settings
@@ -42,7 +41,6 @@ public class VerifyMeetingIsRemoved extends TestBase{
 			.clickRemoveButton();
 		
 		scheduler = credential
-			.enterUsername(username)
 			.enterPassword(password)
 			.clickOkButton();
 		
