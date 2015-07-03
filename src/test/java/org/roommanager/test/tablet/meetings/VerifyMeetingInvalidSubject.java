@@ -12,7 +12,7 @@ public class VerifyMeetingInvalidSubject extends TestBase{
 	private String username = PropertiesReader.getUsername();
 	private String roomName = "SM-Room9";
 	private String invalidMeetingSubject = "";
-	private String errorMessage = "The Test failed because the Meeting accepts invalid data";
+	private String errorMessage = "The Test failed because the Meeting doesn't display an Error Message when invalid values are entered in \"Subject\" text field";
 	
 	@Test 
 	public void VerifyMeetingInvalidSubjectErrorMessage(){
@@ -34,6 +34,5 @@ public class VerifyMeetingInvalidSubject extends TestBase{
 		boolean isErrorMessagePresent = scheduler.isSubjectFieldErrorMessagePresent();
 		
 		Assert.assertTrue(isErrorMessagePresent, errorMessage);
-		
 	}
 }

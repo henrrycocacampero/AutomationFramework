@@ -3,7 +3,7 @@ package org.roommanager.framework.utilities.common;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 
-public class TestNGListener extends TestListenerAdapter{
+public class ReportListener extends TestListenerAdapter{
 	  
 	  @Override
 	  public void onTestSuccess(ITestResult tr){
@@ -15,10 +15,16 @@ public class TestNGListener extends TestListenerAdapter{
 	  @Override
 	  public void onTestFailure(ITestResult tr){
 		  String testName = tr.getTestContext().getName();
+		  
 		  String errorMessage = tr.getThrowable().getMessage();
 		  LogManager.info("Test : \"" + testName + "\" FAILED" );
 		  String filePath = ScreenShotManager.takeScreenShot(testName);
-		  ReportManager.appendTestCaseErrorMessage(testName, errorMessage);
+		  if(tr.getThrowable().getClass().isAssignableFrom(AssertionError.class)){
+			  ReportManager.appendTestCaseErrorMessage(testName, errorMessage);
+		  }
+		  else{
+			  ReportManager.appendTestCaseName(testName);
+		  }
 		  ReportManager.appendImageHyperLink(filePath);
 	  }
 	  
