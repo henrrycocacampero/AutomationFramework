@@ -36,6 +36,8 @@ public class SchedulerPage extends PageFactory{
 	WebElement organizerTextField;
 	@FindBy (xpath = SchedulerConstant.MEETING_SUBJECT_ERROR_MESSAGE) 
 	WebElement meetingSubjectErrorMessage;
+	@FindBy (xpath = SchedulerConstant.ORGANIZER_SUBJECT_ERROR_MESSAGE) 
+	WebElement organizerSubjectErrorMessage;
 	@FindBy (xpath = SchedulerConstant.ROOM_TIMELINE) 
 	WebElement roomTimeline;
 	@FindBy (xpath = SchedulerConstant.MEETING_BOX) 
@@ -50,6 +52,7 @@ public class SchedulerPage extends PageFactory{
 		.until(ExpectedConditions.visibilityOf(organizerTextField));
 		organizerTextField.clear();
 		organizerTextField.sendKeys(organizer);
+		LogManager.info("Organizer: <"+ organizer +"> was entered");
 		return this;
 	}
 	public SchedulerPage setSubjectTextField(String subject){
@@ -57,6 +60,7 @@ public class SchedulerPage extends PageFactory{
 		.until(ExpectedConditions.visibilityOf(subjectTextField));
 		subjectTextField.clear();
 		subjectTextField.sendKeys(subject);
+		LogManager.info("Subject: <"+ subject +"> was entered");
 		return this;
 	}
 	public SchedulerPage setAttendeesTextField(String attendee){
@@ -64,6 +68,7 @@ public class SchedulerPage extends PageFactory{
 		.until(ExpectedConditions.visibilityOf(attendeesTextField));
 		attendeesTextField.clear();
 		attendeesTextField.sendKeys(attendee + ";");
+		LogManager.info("Attendee: <"+ attendee +"> was entered");
 		return this;
 	}
 	public SchedulerPage setBodyTextArea(String body){
@@ -71,12 +76,14 @@ public class SchedulerPage extends PageFactory{
 		.until(ExpectedConditions.visibilityOf(bodyTextArea));
 		bodyTextArea.clear();
 		bodyTextArea.sendKeys(body);
+		LogManager.info("Body: <"+ body +"> was entered");
 		return this;
 	}
 	public CredentialsPage clickCreateButton(){
 		(new WebDriverWait(driver, 20))
 		.until(ExpectedConditions.visibilityOf(createButton));
 		createButton.click();
+		LogManager.info("Create Button was clicked");
 		return new CredentialsPage(driver);
 	}
 	public boolean isSubjectFieldErrorMessagePresent(){
@@ -87,6 +94,16 @@ public class SchedulerPage extends PageFactory{
 		LogManager.info("Error Message: <"+ errorMessage +"> was displayed");
 		return errorMessage.equals(expectedErrorMessage);
 	}
+	
+	public boolean isOrganizerFieldErrorMessagePresent(){
+		String expectedErrorMessage = "Organizer is required";
+		(new WebDriverWait(driver,60))
+		.until(ExpectedConditions.visibilityOf(organizerSubjectErrorMessage));
+		String errorMessage = organizerSubjectErrorMessage.getText();
+		LogManager.info("Error Message: <"+ errorMessage +"> was displayed");
+		return errorMessage.equals(expectedErrorMessage);
+	}
+	
 	public String getSuccessfulMessage(){
 		(new WebDriverWait(driver,60))
 		.until(ExpectedConditions.visibilityOf(confirmationMessage));
@@ -96,18 +113,21 @@ public class SchedulerPage extends PageFactory{
 		getMeetingBoxBySubject(subject).click();
 		(new WebDriverWait(driver,20))
 		.until(ExpectedConditions.visibilityOf(updateButton));
+		LogManager.info("Meeting <" + subject + "> was clicked");
 		return this;
 	}
 	public CredentialsPage clickRemoveButton(){
 		(new WebDriverWait(driver,30))
 		.until(ExpectedConditions.visibilityOf(removeButton));
 		removeButton.click();
+		LogManager.info("Remove Button was clicked");
 		return new CredentialsPage(driver);
 	}
 	public CredentialsPage clickUpdateButton(){
 		(new WebDriverWait(driver,30))
 		.until(ExpectedConditions.visibilityOf(updateButton));
 		updateButton.click();
+		LogManager.info("Update Button was clicked");
 		return new CredentialsPage(driver);
 	}
 	private WebElement getAttendee(String attendee){
@@ -117,11 +137,11 @@ public class SchedulerPage extends PageFactory{
 		List<WebElement> attendees = list.findElements(By.xpath(SchedulerConstant.ATTENDEE_TEXT));
 		for(WebElement element : attendees){
 			if(element.getText().equals(attendee)){
-				LogManager.info("Attendee found: " + attendee);
+				LogManager.info("Attendee <" + attendee + "> was not found");
 				return element;
 			}
 		}
-		LogManager.info("Attendee not found: " + attendee);
+		LogManager.info("Attendee <" + attendee + "> was not found");
 		return null;
 	}
 	private WebElement getMeetingBoxBySubject(String subject){
@@ -130,11 +150,11 @@ public class SchedulerPage extends PageFactory{
 		List<WebElement> boxes = time.findElements(By.xpath(SchedulerConstant.MEETING_BOX));
 		for(WebElement element: boxes){
 			if(element.getText().equals(subject)){
-				LogManager.info("Subject found: " + subject);
+				LogManager.info("Subject <" + subject + "> was found");
 				return element;
 			}
 		}
-		LogManager.info("Subject not found: " + subject);
+		LogManager.info("Subject <" + subject + "> was not found");
 		return null;
 	}
 	public boolean existSubjectOnTimeline(String subject){
