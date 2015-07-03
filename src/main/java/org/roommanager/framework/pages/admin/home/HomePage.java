@@ -10,6 +10,7 @@ import org.roommanager.framework.models.admin.HomeConstantExample;
 import org.roommanager.framework.models.admin.home.HomeConstant;
 import org.roommanager.framework.pages.admin.common.LeftMenu;
 import org.roommanager.framework.pages.admin.resource.ResourcePage;
+import org.roommanager.framework.utilities.common.LogManager;
 
 public class HomePage extends LeftMenu{
 	private WebDriver driver;
@@ -23,6 +24,7 @@ public class HomePage extends LeftMenu{
 	}
 	public String getHomePageTitle(){
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions.visibilityOf(roomManagerTitle_Text));
+		LogManager.info("Home Page Link Text: <" + roomManagerTitle_Text.getText() + "> was retrieved");
 		return roomManagerTitle_Text.getText();
 	}
 }

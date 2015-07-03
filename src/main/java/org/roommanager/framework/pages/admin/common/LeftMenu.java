@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.admin.common.LeftMenuConstant;
 import org.roommanager.framework.pages.admin.emailserver.EmailServerPage;
 import org.roommanager.framework.pages.admin.resource.ResourcePage;
+import org.roommanager.framework.utilities.common.LogManager;
 
 public class LeftMenu {
 	private WebDriver driver;
@@ -31,6 +32,7 @@ public class LeftMenu {
 
 	public EmailServerPage selectEmailServerLink(){
 		selectLink(emailServer_Link, 60);
+		LogManager.info("Email Server Page Link was clicked");
 		return new EmailServerPage(driver);
 	}
 
@@ -44,6 +46,7 @@ public class LeftMenu {
 	}*/
 	public ResourcePage selectResourcesLink(){
 		selectLink(resources_Link, 60);
+		LogManager.info("Resource Page Link was clicked");
 		return new ResourcePage(driver);
 	}
 	/**public LocationsPage selectLocationsLink(){
