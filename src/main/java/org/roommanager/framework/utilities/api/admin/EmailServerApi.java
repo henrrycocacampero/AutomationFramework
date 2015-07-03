@@ -1,8 +1,5 @@
 package org.roommanager.framework.utilities.api.admin;
 
-
-import java.io.IOException;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -12,6 +9,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.roommanager.framework.utilities.api.ApiManager;
+import org.roommanager.framework.utilities.common.LogManager;
 import org.roommanager.framework.utilities.common.PropertiesReader;
 
 public class EmailServerApi {
@@ -22,14 +20,15 @@ public class EmailServerApi {
 	public static String getEmailServiceId(){
 		String url = PropertiesReader.getRoomManagerApi() + "services";
 		String propertyId = "_id";
-		
 		String serviceResponse = ApiManager.getHttpMethod(url);
-		
 		JSONArray services = (JSONArray)ApiManager.jsonRequest(serviceResponse);
-		JSONObject emailService =(JSONObject)services.get(0);
-		
-		return emailService.get(propertyId).toString();
-		
+		try{
+			JSONObject emailService =(JSONObject)services.get(0);
+			return emailService.get(propertyId).toString();
+		}
+		catch (Exception e){
+			return null;
+		}
 	}
 	
 	public static void removeEmailServer(String name){
@@ -49,7 +48,6 @@ public class EmailServerApi {
 	}
 	
 	private static void deleteEmailServerByName(String name) {
-
 		String url = PropertiesReader.getRoomManagerApi() + "/services";
 		try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
             HttpGet request = new HttpGet(url);
@@ -59,13 +57,10 @@ public class EmailServerApi {
             try {
                 JSONParser parser = new JSONParser();
                 Object resultObject = parser.parse(json);
-
                 if (resultObject instanceof JSONArray) {
                     JSONArray array=(JSONArray)resultObject;
                     for (Object object : array) {
                         JSONObject obj =(JSONObject)object;
-                        System.out.print("objeto:"+obj.get("name").toString());
-                        System.out.print("el nombre es:"+name);
                         if(obj.get("name").toString().equals(name)){
                         	System.out.print("name:"+name);
                         	url = url + "/" +obj.get("_id").toString();
@@ -81,9 +76,11 @@ public class EmailServerApi {
                 }
 
             } catch (Exception e) {
+            	LogManager.error(e.getMessage());
             }
 
-        } catch (IOException ex) {
+        } catch (Exception e) {
+        	LogManager.error(e.getMessage());
         }
     }
 }

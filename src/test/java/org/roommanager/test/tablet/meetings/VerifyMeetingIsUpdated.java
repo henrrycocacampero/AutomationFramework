@@ -4,6 +4,7 @@ import org.roommanager.framework.pages.tablet.home.HomePage;
 import org.roommanager.framework.pages.tablet.scheduler.CredentialsPage;
 import org.roommanager.framework.pages.tablet.scheduler.SchedulerPage;
 import org.roommanager.framework.pages.tablet.setting.SettingsPage;
+import org.roommanager.framework.utilities.api.admin.EmailServerApi;
 import org.roommanager.framework.utilities.api.tablet.MeetingApi;
 import org.roommanager.framework.utilities.common.Generator;
 import org.roommanager.framework.utilities.common.PropertiesReader;
@@ -26,13 +27,8 @@ public class VerifyMeetingIsUpdated extends TestBase {
 	private String endTime = Generator.getEndTime();
 	private String errorMessage = "The Test failed because the updated meeting could be found in the Scheduler Page";
 
-	  @BeforeTest
-	    public void beforeTest() {
-	    	MeetingApi.createMeeting(organizer, subject, startTime, endTime, conferenceRoom, attendee);
-	    }
-	  
-	  @Test
-	    public void VerifyMeetingISUpdated(){
+	@Test
+	public void VerifyMeetingISUpdated(){
 	    	SettingsPage settings = new SettingsPage(driver);
 			
 			HomePage home = settings
@@ -53,10 +49,17 @@ public class VerifyMeetingIsUpdated extends TestBase {
 				.clickOkButton();
 
 			Assert.assertTrue(scheduler.existSubjectOnTimeline(subjetcUpdate), errorMessage);
-	    }
+	  }
 	  
 	  @AfterTest
 	  public void afterTest(){
 		  MeetingApi.deleteMeetingBySubjectName(conferenceRoom, subjetcUpdate);
-	  }	  
+	  }	
+	  
+	  @BeforeTest
+	  public void beforeTest() {
+		   if(EmailServerApi.getEmailServiceId() == null)
+				EmailServerApi.createEmailServer(PropertiesReader.getUsername(), PropertiesReader.getPassword(), PropertiesReader.getExchangeHostName());
+		   MeetingApi.createMeeting(organizer, subject, startTime, endTime, conferenceRoom, attendee);
+	  }
 }

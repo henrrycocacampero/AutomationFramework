@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <suite name="Test Suite Room Manager Application" parallel="false">
-	<listeners>
-	      <listener class-name="org.uncommons.reportng.HTMLReporter"/>
-	      <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
-	      <listener class-name="org.roommanager.framework.utilities.common.TestNGListener"/>
-	      <listener class-name="org.roommanager.framework.utilities.common.TestBase"/>
-	</listeners>	
 	<suite-files>
-    	<suite-file path="admin/email-server-suite/.xml"/>
-        <suite-file path="admin/resources-suite.xml"/>
-        <suite-file path="tablet/meetings-suite.xml"/>
+    	<suite-file path="testsuite/admin/email-server-suite.xml"/>
+        <suite-file path="testsuite/admin/resources-suite.xml"/>
+        <suite-file path="testsuite/tablet/meetings-suite.xml"/>
 	</suite-files>
 </suite>

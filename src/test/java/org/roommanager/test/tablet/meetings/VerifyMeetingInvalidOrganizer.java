@@ -3,8 +3,11 @@ package org.roommanager.test.tablet.meetings;
 import org.roommanager.framework.pages.tablet.home.HomePage;
 import org.roommanager.framework.pages.tablet.scheduler.SchedulerPage;
 import org.roommanager.framework.pages.tablet.setting.SettingsPage;
+import org.roommanager.framework.utilities.api.admin.EmailServerApi;
+import org.roommanager.framework.utilities.common.PropertiesReader;
 import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class VerifyMeetingInvalidOrganizer extends TestBase{	
@@ -31,5 +34,11 @@ public class VerifyMeetingInvalidOrganizer extends TestBase{
 			.clickCreateButton();
 		
 		Assert.assertTrue(scheduler.isOrganizerFieldErrorMessagePresent(), errorMessage);
+	}
+	
+	@BeforeTest
+	public void beforeTest(){
+		if(EmailServerApi.getEmailServiceId() == null)
+			EmailServerApi.createEmailServer(PropertiesReader.getUsername(), PropertiesReader.getPassword(), PropertiesReader.getExchangeHostName());
 	}
 }

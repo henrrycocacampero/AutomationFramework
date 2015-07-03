@@ -22,7 +22,6 @@ public class VerifyEmailServerIsRegistered extends TestBase{
 	  public void registerEmailServer() {
 		  String expected = PropertiesReader.getExchangeHostName()+"\n" + PropertiesReader.getExchangeServerDescription();
 		  String errorMessage = "The email server was not registered";  
-		  driver.get(PropertiesReader.getLoginUrlAdminModule());
 		  LoginPage login = new LoginPage(driver);
 		  HomePage home = login.clickSignInButton();	
 		  EmailServerPage emailServer = home.selectEmailServerLink();	

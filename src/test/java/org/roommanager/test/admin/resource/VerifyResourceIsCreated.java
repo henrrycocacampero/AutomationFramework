@@ -5,7 +5,6 @@ import org.roommanager.framework.pages.admin.login.LoginPage;
 import org.roommanager.framework.pages.admin.resource.CreateResourcePage;
 import org.roommanager.framework.pages.admin.resource.ResourcePage;
 import org.roommanager.framework.utilities.api.admin.ResourceApi;
-import org.roommanager.framework.utilities.common.PropertiesReader;
 import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -18,8 +17,7 @@ public class VerifyResourceIsCreated extends TestBase {
 	private String errorMessage = "The test failed because the created Resource was not found";
 
 	@Test
-	public void verifyAResourceIsCreated() throws Exception {
-		driver.get(PropertiesReader.getLoginUrlAdminModule());
+	public void verifyAResourceIsCreated() {
 		LoginPage login = new LoginPage(driver);
 		HomePage adminHome = login.clickSignInButton();
 		ResourcePage resources = adminHome.selectResourcesLink();

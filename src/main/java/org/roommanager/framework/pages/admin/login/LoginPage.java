@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.pages.admin.home.HomePage;
 import org.roommanager.framework.utilities.common.LogManager;
+import org.roommanager.framework.utilities.common.PropertiesReader;
 
 public class LoginPage {
 
@@ -23,6 +24,8 @@ public class LoginPage {
 
 	public LoginPage(WebDriver driver){
 		this.driver = driver;
+		driver.get(PropertiesReader.getLoginUrlAdminModule());
+		driver.navigate().refresh();
 		PageFactory.initElements(driver, this);
 	}
 	

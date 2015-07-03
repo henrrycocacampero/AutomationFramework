@@ -4,10 +4,12 @@ import org.roommanager.framework.pages.tablet.home.HomePage;
 import org.roommanager.framework.pages.tablet.scheduler.CredentialsPage;
 import org.roommanager.framework.pages.tablet.scheduler.SchedulerPage;
 import org.roommanager.framework.pages.tablet.setting.SettingsPage;
+import org.roommanager.framework.utilities.api.admin.EmailServerApi;
 import org.roommanager.framework.utilities.api.tablet.MeetingApi;
 import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.roommanager.framework.utilities.common.PropertiesReader;
 
@@ -46,7 +48,13 @@ public class VerifyMeetingIsCreated extends TestBase{
 	}
 	
 	@AfterTest
-	public void testSetUp(){
+	public void testTearDown(){
 		MeetingApi.deleteMeetingBySubjectName(roomName, meetingSubject);
+	}
+	
+	@BeforeTest
+	public void beforeTest(){
+		if(EmailServerApi.getEmailServiceId() == null)
+			EmailServerApi.createEmailServer(PropertiesReader.getUsername(), PropertiesReader.getPassword(), PropertiesReader.getExchangeHostName());
 	}
 }

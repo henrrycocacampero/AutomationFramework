@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.tablet.setting.SettingsConstant;
 import org.roommanager.framework.pages.tablet.home.HomePage;
 import org.roommanager.framework.utilities.common.LogManager;
+import org.roommanager.framework.utilities.common.PropertiesReader;
 
 public class SettingsPage {
 	@FindBy (id = SettingsConstant.SEARCH_TEXT_FIELD) 
@@ -32,7 +33,8 @@ public class SettingsPage {
 	
 	public SettingsPage(WebDriver driver){
 		this.driver = driver;
-		driver.get("http://172.20.208.174:4043/tablet/#/settings");
+		driver.get(PropertiesReader.getLoginUrlTabletModule());
+		driver.navigate().refresh();
 		PageFactory.initElements(driver, this);
 	}
 	

@@ -20,8 +20,6 @@ public class VerifyEmailServerIsRemoved extends TestBase {
 	 @Test
 	  public void removeEmailServer(){
 		  String errorMessage = "The email server was not removed";
-		  driver.get(PropertiesReader.getLoginUrlAdminModule());
-		  
 		  LoginPage login = new LoginPage(driver);
 		  HomePage home = login.clickSignInButton();
 		  EmailServerPage emailServer = home.selectEmailServerLink();
