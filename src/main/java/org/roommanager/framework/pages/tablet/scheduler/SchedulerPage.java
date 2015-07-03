@@ -34,7 +34,8 @@ public class SchedulerPage extends PageFactory{
 	WebElement subjectTextField;
 	@FindBy (xpath = SchedulerConstant.ORGANIZER_TEXT_FIELD) 
 	WebElement organizerTextField;
-	
+	@FindBy (xpath = SchedulerConstant.MEETING_SUBJECT_ERROR_MESSAGE) 
+	WebElement meetingSubjectErrorMessage;
 	@FindBy (xpath = SchedulerConstant.ROOM_TIMELINE) 
 	WebElement roomTimeline;
 	@FindBy (xpath = SchedulerConstant.MEETING_BOX) 
@@ -77,6 +78,14 @@ public class SchedulerPage extends PageFactory{
 		.until(ExpectedConditions.visibilityOf(createButton));
 		createButton.click();
 		return new CredentialsPage(driver);
+	}
+	public boolean isSubjectFieldErrorMessagePresent(){
+		String expectedErrorMessage = "Subject is required";
+		(new WebDriverWait(driver,60))
+		.until(ExpectedConditions.visibilityOf(meetingSubjectErrorMessage));
+		String errorMessage = meetingSubjectErrorMessage.getText();
+		LogManager.info("Error Message: <"+ errorMessage +"> was displayed");
+		return errorMessage.equals(expectedErrorMessage);
 	}
 	public String getSuccessfulMessage(){
 		(new WebDriverWait(driver,60))

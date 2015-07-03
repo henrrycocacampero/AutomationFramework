@@ -1,5 +1,6 @@
 package org.roommanager.framework.pages.tablet.scheduler;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,7 +16,8 @@ public class CredentialsPage {
 	@FindBy (xpath = CredentialsConstant.PASSWORD_TEXT_FIELD) 
 	private WebElement passwordTextField;
 	@FindBy (xpath = CredentialsConstant.OK_BUTTON) 
-	private WebElement okButton;
+	private WebElement okButton; 
+	private By okButtonLocator = CredentialsConstant.OK_BUTTON_LOCATOR;
 	private WebDriver driver;
 	
 	public CredentialsPage(WebDriver driver){
@@ -47,7 +49,7 @@ public class CredentialsPage {
 		okButton.click();
 		LogManager.info("OK Button was clicked");
 		new WebDriverWait(driver, 60)
-			.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(okButton)));
+			.until(ExpectedConditions.invisibilityOfElementLocated(okButtonLocator));
 		return new SchedulerPage(driver);
 	}
 }
