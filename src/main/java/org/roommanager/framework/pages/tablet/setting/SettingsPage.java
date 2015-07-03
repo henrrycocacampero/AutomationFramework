@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.tablet.setting.SettingsConstant;
+import org.roommanager.framework.pages.tablet.home.HomePage;
 import org.roommanager.framework.utilities.common.LogManager;
 
 public class SettingsPage {
@@ -73,7 +74,7 @@ public class SettingsPage {
 		LogManager.info("Room: <"+ roomName +"> wasn't found on the Available Rooms List");
 		return null;
 	}
-	/*
+	
 	public HomePage clickAcceptButton(){
 		(new WebDriverWait(driver, 60))
 			.until(ExpectedConditions.visibilityOf(acceptButton));
@@ -81,5 +82,4 @@ public class SettingsPage {
 		LogManager.info("Accept Button was clicked");
 		return new HomePage(driver);
 	}
-	*/
 }

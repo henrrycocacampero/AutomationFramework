@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.admin.resource.CreateResourceConstant;
+import org.roommanager.framework.utilities.common.LogManager;
 
 public class CreateResourcePage {
 	private WebDriver driver;
@@ -28,15 +29,15 @@ public class CreateResourcePage {
 		PageFactory.initElements(driver, this);
 	}
 
-	public CreateResourcePage enterResourceName(String resourceName) {
-		(new WebDriverWait(driver, 60))
-				.until(ExpectedConditions
-						.visibilityOf(resourceName_TextField));
-		resourceName_TextField.clear();
-		resourceName_TextField.sendKeys(resourceName);
-		//Logger.info("Resource Name: <" + resourceName + "> was entered");
-		return this;
-	}
+		public CreateResourcePage enterResourceName(String resourceName) {
+			(new WebDriverWait(driver, 60))
+					.until(ExpectedConditions
+							.visibilityOf(resourceName_TextField));
+			resourceName_TextField.clear();
+			resourceName_TextField.sendKeys(resourceName);
+			LogManager.info("Resource Name: <" + resourceName + "> was entered");
+			return this;
+		}
 
 	public CreateResourcePage enterResourceDisplayName(
 			String resourceDisplayName) {
@@ -45,7 +46,7 @@ public class CreateResourcePage {
 						.visibilityOf(resourceDisplayName_TextField));
 		resourceDisplayName_TextField.clear();
 		resourceDisplayName_TextField.sendKeys(resourceDisplayName);
-		//Logger.info("Resource Display Name: <" + resourceDisplayName+ "> was entered");
+		LogManager.info("Resource Display Name: <" + resourceDisplayName+ "> was entered");
 		return this;
 	}
 
@@ -56,7 +57,7 @@ public class CreateResourcePage {
 						.visibilityOf(resourceDescription_AreaText));
 		resourceDescription_AreaText.clear();
 		resourceDescription_AreaText.sendKeys(resourceDescription);
-		//Logger.info("Resource Description: <" + resourceDescription+ "> was entered");
+		LogManager.info("Resource Description: <" + resourceDescription+ "> was entered");
 		return this;
 	}
 
@@ -67,7 +68,7 @@ public class CreateResourcePage {
 		saveResource_Button.click();
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions
 				.invisibilityOfElementLocated(By.cssSelector(saveResourceButton)));
-		//Logger.info("Save Resource button was clicked");
+		LogManager.info("Save Resource button was clicked");
 		return new ResourcePage(driver);
 	}
 }

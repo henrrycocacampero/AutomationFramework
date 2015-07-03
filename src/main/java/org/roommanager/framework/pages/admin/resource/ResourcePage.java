@@ -2,6 +2,7 @@ package org.roommanager.framework.pages.admin.resource;
 
 import java.util.List;
 
+import org.apache.commons.lang3.SystemUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.admin.resource.ResourceConstant;
 import org.roommanager.framework.pages.admin.common.LeftMenu;
+import org.roommanager.framework.utilities.common.LogManager;
 
 public class ResourcePage extends LeftMenu {
 	private WebDriver driver;
@@ -50,26 +52,27 @@ public class ResourcePage extends LeftMenu {
 	public CreateResourcePage clickAddResourceButton() {
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions.visibilityOf(addResource_Button));
 		addResource_Button.click();
-		//Log.info("Add Resource button was clicked");
+		LogManager.info("Add Resource button was clicked");
 		return new CreateResourcePage(driver);
 	}
 
 	public RemoveResourcePage clickRemoveResourceButton() {
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions.visibilityOf(removeResource_Button));
 		removeResource_Button.click();
-		//Log.info("Remove Resource button was clicked");
+		LogManager.info("Remove Resource button was clicked");
 		return new RemoveResourcePage(driver);
 	}
-
-	public ResourceInfoPage doubleClickOnResourceFromTable(String resourceName) {
+//changes CreateResourcePage-ResourceInfoPage
+	
+	public CreateResourcePage doubleClickOnResourceFromTable(String resourceName) {
 		WebElement resource = getResourceFromAllPagesByName(resourceName,
 				getResourcesTableNumberOfPages());
 		String resourceItemName = resource.findElement(By.xpath(resourceListItem)).getText();
 		Actions action = new Actions(driver);
 		action.doubleClick(resource);
 		action.perform();
-		//Log.info("Double Click on Resource: <" + resourceItemName+ "> from Resources Table");
-		return new ResourceInfoPage(driver);
+		LogManager.info("Double Click on Resource: <" + resourceItemName+ "> from Resources Table");
+		return new CreateResourcePage(driver);
 	}
 
 	public ResourcePage clickOnResourceFromTable(String resourceName) {
@@ -78,7 +81,7 @@ public class ResourcePage extends LeftMenu {
 		String resourceItemName = resource.findElement(By.xpath(resourceListItem))
 				.getText();
 		resource.click();
-		//Log.info("Click on Resource: <" + resourceItemName+ "> from Resources Table");
+		LogManager.info("Click on Resource: <" + resourceItemName+ "> from Resources Table");
 		return this;
 	}
 
@@ -87,7 +90,8 @@ public class ResourcePage extends LeftMenu {
 				getResourcesTableNumberOfPages());
 		String resourceItemName = resource.findElement(By.xpath(resourceListItem))
 				.getText();
-		//Log.info("Resource Name: <" + resourceItemName+ "> was retrieved");
+		LogManager.info("Resource Name: <" + resourceItemName+ "> was retrieved");
+		System.out.println(resourceItemName);
 		return resourceItemName;
 	}
 
@@ -103,11 +107,11 @@ public class ResourcePage extends LeftMenu {
 		for (int index = 1; index <= numberOfPages; index++) {
 			resource = getResourceByName(resourceName);
 			if (resource != null) {
-				//Logger.info("Resource: <" + resourceName+ "> was found in page:" + index);
+				LogManager.info("Resource: <" + resourceName+ "> was found in page:" + index);
 				return resource;
 			}
 			clickNextPageButton(index + 1, numberOfPages);
-			//Log.info("Searching for resource in page: " + index);
+			LogManager.info("Searching for resource in page: " + index);
 		}
 		return resource;
 	}
@@ -123,13 +127,13 @@ public class ResourcePage extends LeftMenu {
 			nextPageinput = nextPage_Input
 					.getAttribute("value");
 		}
-		//Log.info("The Next Page button was clicked");
+		LogManager.info("The Next Page button was clicked");
 	}
 
 	private int getResourcesTableNumberOfPages() {
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions.visibilityOf(resource_TableNumberOfPages));
 		String pages = resource_TableNumberOfPages.getText().replace("/ ", "");
-		//Log.info("The number of Pages of the Resources Table is: "+ Integer.parseInt(pages));
+		LogManager.info("The number of Pages of the Resources Table is: "+ Integer.parseInt(pages));
 		return Integer.parseInt(pages);
 	}
 
@@ -141,11 +145,11 @@ public class ResourcePage extends LeftMenu {
 			String resourceItemName = resource.findElement(
 					By.xpath(resourceListItem)).getText();
 			if (resourceItemName.equals(resourceName)) {
-				//Log.info("Resource: <" + resourceItemName+ "> was retrieved from Resources Table");
+				LogManager.info("Resource: <" + resourceItemName+ "> was retrieved from Resources Table");
 				return resource;
 			}
 		}
-		//Log.info("Resource: <" + resourceName + "> wasn't found");
+		LogManager.info("Resource: <" + resourceName + "> wasn't found");
 		return null;
 	}
 

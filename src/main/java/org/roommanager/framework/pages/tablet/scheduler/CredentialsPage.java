@@ -1,5 +1,6 @@
 package org.roommanager.framework.pages.tablet.scheduler;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,17 +11,19 @@ import org.roommanager.framework.models.tablet.scheduler.CredentialsConstant;
 import org.roommanager.framework.utilities.common.LogManager;
 
 public class CredentialsPage {
-	@FindBy (id = CredentialsConstant.USERNAME_TEXT_FIELD) 
+	@FindBy (xpath = CredentialsConstant.USERNAME_TEXT_FIELD) 
 	private WebElement usernameTextField;
-	@FindBy (id = CredentialsConstant.PASSWORD_TEXT_FIELD) 
+	@FindBy (xpath = CredentialsConstant.PASSWORD_TEXT_FIELD) 
 	private WebElement passwordTextField;
-	@FindBy (id = CredentialsConstant.OK_BUTTON) 
-	private WebElement okButton;
+	@FindBy (xpath = CredentialsConstant.OK_BUTTON) 
+	private WebElement okButton; 
+	@FindBy (xpath = CredentialsConstant.CREDENTIALS_ERROR_MESSAGE) 
+	private WebElement credentialsErrorMessage; 
+	private By okButtonLocator = CredentialsConstant.OK_BUTTON_LOCATOR;
 	private WebDriver driver;
 	
 	public CredentialsPage(WebDriver driver){
 		this.driver = driver;
-		driver.get("http://172.20.208.174:4043/tablet/#/settings");
 		PageFactory.initElements(driver, this);
 	}
 	
@@ -48,7 +51,16 @@ public class CredentialsPage {
 		okButton.click();
 		LogManager.info("OK Button was clicked");
 		new WebDriverWait(driver, 60)
-			.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(okButton)));
+			.until(ExpectedConditions.invisibilityOfElementLocated(okButtonLocator));
 		return new SchedulerPage(driver);
+	}
+	
+	public boolean isCredentialsErrorMessagePresent(){
+		String expectedErrorMessage = "Wrong username or password";
+		(new WebDriverWait(driver,60))
+		.until(ExpectedConditions.visibilityOf(credentialsErrorMessage));
+		String errorMessage = credentialsErrorMessage.getText();
+		LogManager.info("Error Message: <"+ errorMessage +"> was displayed");
+		return errorMessage.equals(expectedErrorMessage);
 	}
 }
