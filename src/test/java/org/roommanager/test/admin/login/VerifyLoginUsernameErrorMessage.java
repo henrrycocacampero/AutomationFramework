@@ -2,7 +2,6 @@ package org.roommanager.test.admin.login;
 
 import org.junit.Assert;
 import org.roommanager.framework.pages.admin.login.LoginPage;
-import org.roommanager.framework.utilities.common.LogManager;
 import org.roommanager.framework.utilities.common.PropertiesReader;
 import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.annotations.Test;

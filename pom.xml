@@ -26,12 +26,12 @@
         	<properties>
                 <property>
                     <name>listener</name>
-                    <value>org.uncommons.reportng.HTMLReporter, org.uncommons.reportng.JUnitXMLReporter, org.roommanager.framework.utilities.common.TestBase</value>
+                    <value>org.uncommons.reportng.HTMLReporter, org.uncommons.reportng.JUnitXMLReporter, org.roommanager.framework.utilities.common.TestBase, org.roommanager.framework.utilities.common.ReportListener</value>
                 </property>
             </properties>
         	<reportsDirectory>${basedir}/reports</reportsDirectory>
             <suiteXmlFiles>
-                <suiteXmlFile>testsuite/executionTestSuite.xml</suiteXmlFile>
+                <suiteXmlFile>testsuite/build-verification-test.xml</suiteXmlFile>
             </suiteXmlFiles>
         </configuration>
       </plugin>

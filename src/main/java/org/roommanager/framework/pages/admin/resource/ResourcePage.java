@@ -2,7 +2,6 @@ package org.roommanager.framework.pages.admin.resource;
 
 import java.util.List;
 
-import org.apache.commons.lang3.SystemUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -55,14 +54,6 @@ public class ResourcePage extends LeftMenu {
 		LogManager.info("Add Resource button was clicked");
 		return new CreateResourcePage(driver);
 	}
-
-	public RemoveResourcePage clickRemoveResourceButton() {
-		(new WebDriverWait(driver, 60)).until(ExpectedConditions.visibilityOf(removeResource_Button));
-		removeResource_Button.click();
-		LogManager.info("Remove Resource button was clicked");
-		return new RemoveResourcePage(driver);
-	}
-//changes CreateResourcePage-ResourceInfoPage
 	
 	public CreateResourcePage doubleClickOnResourceFromTable(String resourceName) {
 		WebElement resource = getResourceFromAllPagesByName(resourceName,
