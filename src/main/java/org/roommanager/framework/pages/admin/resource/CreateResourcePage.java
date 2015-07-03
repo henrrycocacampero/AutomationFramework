@@ -28,15 +28,15 @@ public class CreateResourcePage {
 		PageFactory.initElements(driver, this);
 	}
 
-	public CreateResourcePage enterResourceName(String resourceName) {
-		(new WebDriverWait(driver, 60))
-				.until(ExpectedConditions
-						.visibilityOf(resourceName_TextField));
-		resourceName_TextField.clear();
-		resourceName_TextField.sendKeys(resourceName);
-		//Logger.info("Resource Name: <" + resourceName + "> was entered");
-		return this;
-	}
+		public CreateResourcePage enterResourceName(String resourceName) {
+			(new WebDriverWait(driver, 60))
+					.until(ExpectedConditions
+							.visibilityOf(resourceName_TextField));
+			resourceName_TextField.clear();
+			resourceName_TextField.sendKeys(resourceName);
+			//Logger.info("Resource Name: <" + resourceName + "> was entered");
+			return this;
+		}
 
 	public CreateResourcePage enterResourceDisplayName(
 			String resourceDisplayName) {

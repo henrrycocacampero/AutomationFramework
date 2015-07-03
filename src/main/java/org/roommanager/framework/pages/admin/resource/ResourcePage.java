@@ -61,8 +61,9 @@ public class ResourcePage extends LeftMenu {
 		//Log.info("Remove Resource button was clicked");
 		return new RemoveResourcePage(driver);
 	}
-
-	public ResourceInfoPage doubleClickOnResourceFromTable(String resourceName) {
+//changes CreateResourcePage-ResourceInfoPage
+	
+	public CreateResourcePage doubleClickOnResourceFromTable(String resourceName) {
 		WebElement resource = getResourceFromAllPagesByName(resourceName,
 				getResourcesTableNumberOfPages());
 		String resourceItemName = resource.findElement(By.xpath(resourceListItem)).getText();
@@ -70,7 +71,7 @@ public class ResourcePage extends LeftMenu {
 		action.doubleClick(resource);
 		action.perform();
 		//Log.info("Double Click on Resource: <" + resourceItemName+ "> from Resources Table");
-		return new ResourceInfoPage(driver);
+		return new CreateResourcePage(driver);
 	}
 
 	public ResourcePage clickOnResourceFromTable(String resourceName) {

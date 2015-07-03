@@ -1,19 +1,16 @@
 package org.roommanager.test.admin.resource;
 
-import org.apache.log4j.Logger;
 import org.roommanager.framework.pages.admin.home.HomePage;
 import org.roommanager.framework.pages.admin.login.LoginPage;
 import org.roommanager.framework.pages.admin.resource.CreateResourcePage;
-import org.roommanager.framework.pages.admin.resource.ResourceInfoPage;
 import org.roommanager.framework.pages.admin.resource.ResourcePage;
 import org.roommanager.framework.utilities.api.admin.ResourceApi;
 import org.roommanager.framework.utilities.common.PropertiesReader;
 import org.roommanager.framework.utilities.common.TestBase;
-import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
-import org.roommanager.framework.pages.admin.resource.*;
+import static org.junit.Assert.assertEquals;
 
 public class VerifyResourceNameUpdate extends TestBase{
 	
@@ -21,7 +18,7 @@ public class VerifyResourceNameUpdate extends TestBase{
      private String resourceDisplayName = "Resource01";
      private String resourceDescription = "Description Resource01";
      private String resourceIcon = "";
-	 private String ResourceNameUpdate = "NewTestResource";
+	 private String resourceNameUpdate = "NewTestResource";
      
 @BeforeTest
  public void BeforeTest(){
@@ -30,13 +27,13 @@ public class VerifyResourceNameUpdate extends TestBase{
 
 @AfterTest
 public void AfterTest(){
-	ResourceApi.deleteResourceByName(ResourceNameUpdate);
+	ResourceApi.deleteResourceByName(resourceNameUpdate);
 }
 	
 	
   @Test  (groups = {"ACCEPTANCE"})
 	public void verifyResourceNameUpdate() throws Exception {
-		String errormessage = "The resource name is not changed";
+		String errorMessage = "The resource name is not changed";
 		driver.get(PropertiesReader.getLoginUrlAdminModule());
 		driver.manage().window().maximize();
 
@@ -44,35 +41,11 @@ public void AfterTest(){
 		HomePage homePage = login
 				.clickSignInButton();
 		ResourcePage resource =  homePage
-				.selectResourcesLink()
-				;
-		resource.getResourceNameInTable(resourceName);
-		resource.clickOnResourceFromTable(resourceName);
-		//CreateResourcePage resourceNew = 
-		//System.out.println(resourceNew);
-		
-		
-				
-				
-		
-		
-		
-		
-		/*
-		 * 		
-
-		AddResourcesPage resourceNewRes = resourceNew.
-				doubleClickTableElement();
-		AddResourcesPage resourceNewResEd = resourceNewRes
-				.enterResourceName(newResourceName)
-				.enterResourceDisplayName(newResourceDisplayName)
-				.enterResourceDescription(newResourceDescription);
-		resources = resourceNewResEd
-				.clickSaveResourceButton();
-		 */
-		
+				.selectResourcesLink();
+		CreateResourcePage resourcePage = resource.doubleClickOnResourceFromTable(resourceName);
+		resource = resourcePage.enterResourceName(resourceNameUpdate).clickSaveResourceButton();
+		String actualResourceName = resource.getResourceNameInTable(resourceNameUpdate);
+		assertEquals(errorMessage, actualResourceName, resourceNameUpdate);
   }
   
-  /*Ya no se debe incluir BeforeSuite ni AfterSuite*/
-
 }
