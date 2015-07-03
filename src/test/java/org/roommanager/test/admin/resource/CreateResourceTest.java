@@ -14,9 +14,9 @@ import org.testng.annotations.Test;
 
 public class CreateResourceTest {
 	private WebDriver driver;
-	private String resourceName = "ResourcePablo";
-	private String resourceDisplayName = "ResourcePablo";
-	private String resourceDescription = "Description ResourcePablo";
+	private String resourceName = "TestResource";
+	private String resourceDisplayName = "TestResource";
+	private String resourceDescription = "Description TestResource";
 	private String errorMessage = "The test failed because the created Resource was not found";
 
 	@BeforeSuite

@@ -2,6 +2,7 @@ package org.roommanager.framework.pages.admin.resource;
 
 import java.util.List;
 
+import org.apache.commons.lang3.SystemUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -88,6 +89,7 @@ public class ResourcePage extends LeftMenu {
 		String resourceItemName = resource.findElement(By.xpath(resourceListItem))
 				.getText();
 		//Log.info("Resource Name: <" + resourceItemName+ "> was retrieved");
+		System.out.println(resourceItemName);
 		return resourceItemName;
 	}
 
