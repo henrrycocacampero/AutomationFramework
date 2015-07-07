@@ -12,18 +12,17 @@ import org.roommanager.framework.utilities.common.LogManager;
 
 public class CreateResourcePage {
 	private WebDriver driver;
-	public final static String resourceNameTextField = CreateResourceConstant.RESOURCE_NAME_FIELD;
-	public final static String resourceDisplayNameTextField = CreateResourceConstant.RESOURCE_DISPLAY_NAME_FIELD;
-	public final static String resourceDescriptionAreaText = CreateResourceConstant.RESOURCE_DESCRIPTION_AREA;
-	public final static String saveResourceButton = CreateResourceConstant.SAVE_BUTTON;
-	@FindBy(xpath = resourceNameTextField)
-	WebElement resourceName_TextField;
-	@FindBy(xpath = resourceDisplayNameTextField)
-	WebElement resourceDisplayName_TextField;
-	@FindBy(xpath = resourceDescriptionAreaText)
-	WebElement resourceDescription_AreaText;
-	@FindBy(css = saveResourceButton)
-	WebElement saveResource_Button;
+	
+	@FindBy(xpath = CreateResourceConstant.RESOURCE_NAME_FIELD)
+	private WebElement resourceName_TextField;
+	@FindBy(xpath = CreateResourceConstant.RESOURCE_DISPLAY_NAME_FIELD)
+	private WebElement resourceDisplayName_TextField;
+	@FindBy(xpath = CreateResourceConstant.RESOURCE_DESCRIPTION_AREA)
+	private WebElement resourceDescription_AreaText;
+	@FindBy(css = CreateResourceConstant.SAVE_BUTTON)
+	private WebElement saveResource_Button;
+	
+	
 	public CreateResourcePage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
@@ -67,7 +66,7 @@ public class CreateResourcePage {
 						.visibilityOf(saveResource_Button));
 		saveResource_Button.click();
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions
-				.invisibilityOfElementLocated(By.cssSelector(saveResourceButton)));
+				.invisibilityOfElementLocated(By.cssSelector(CreateResourceConstant.SAVE_BUTTON)));
 		LogManager.info("Save Resource button was clicked");
 		return new ResourcePage(driver);
 	}

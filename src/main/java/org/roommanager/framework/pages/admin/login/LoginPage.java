@@ -14,13 +14,13 @@ import org.roommanager.framework.utilities.common.PropertiesReader;
 public class LoginPage {
 
 	WebDriver  driver;
-	public static final String loginButton = LoginConstant.LOGIN_BUTTON;
-	public static final String usernameTextField = LoginConstant.USERNAME_TEXT_FIELD;
-	public static final String passwordTextField = LoginConstant.PASSWORD_TEXT_FIELD;
 	
-	@FindBy (xpath = loginButton) WebElement login_Button;
-	@FindBy (css = usernameTextField) WebElement username_TextField;
-	@FindBy (css = passwordTextField) WebElement password_TextField;
+	@FindBy (xpath = LoginConstant.LOGIN_BUTTON) 
+	private WebElement login_Button;
+	@FindBy (css = LoginConstant.USERNAME_TEXT_FIELD) 
+	private WebElement username_TextField;
+	@FindBy (css = LoginConstant.PASSWORD_TEXT_FIELD) 
+	private WebElement password_TextField;
 
 	public LoginPage(WebDriver driver){
 		this.driver = driver;
