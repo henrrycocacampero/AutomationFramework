@@ -3,7 +3,7 @@ package org.roommanager.framework.models.admin.conferencerooms;
 public class ResourceAssociationsConstant {
     /**
     * Locator Type = Xpath*/
-	public static final String LIST_RESOURCES_AVAILABLE = "div[4]/div/div/div[2]/div/div/div[2]/div[2]/div/div";
+	public static final String LIST_RESOURCES_AVAILABLE = "div[4]/div/div/div[2]/div/div/div[2]/div[1]/div/div";
 	/**
 	 * Locator Type = XPath*/
 	public static final String DIV_ELEMENT = "div";
@@ -21,7 +21,7 @@ public class ResourceAssociationsConstant {
 	public static final String DESASSOCIATE_RESOURCE = "//button[@type='submit']";
 	/**
 	 * Locator Type = XPath*/
-	public static final String LIST_RESOURCE_ASSOCIATED = "div[4]/div/div/div[2]/div/div/div[2]/div[1]/div/div";
+	public static final String LIST_RESOURCE_ASSOCIATED = "div[4]/div/div/div[2]/div/div/div[2]/div[2]/div/div";
 	/**
 	 * Locator Type = Css*/
 	public static final String SAVE_BUTTON = "button.info";
