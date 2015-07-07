@@ -12,8 +12,9 @@ import org.roommanager.framework.utilities.common.LogManager;
 
 public class HomePage extends LeftMenu{
 	private WebDriver driver;
-	public static final String roomManagerTitleText =HomeConstant.ROOM_MANAGER_TEXT;
-	@FindBy (linkText = roomManagerTitleText) WebElement roomManagerTitle_Text;
+	
+	@FindBy (linkText = HomeConstant.ROOM_MANAGER_TEXT) 
+	private WebElement roomManagerTitle_Text;
 	
 	public HomePage(WebDriver driver){
 		super(driver);

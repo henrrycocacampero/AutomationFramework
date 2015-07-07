@@ -4,7 +4,7 @@ public class RoomInfoPageConstant {
 
 	/**
 	 * Locator Type = Css*/
-	public static final String NAME_ROOM = "button.btn.btn-default";
+	public static final String POWER_BUTTON_ROOM = "button.btn.btn-default";
 	/**
 	 * Locator Type = Xpath**/
 	public static final String DISPLAYNAME_ROOM_TEXT_FIELD = "(//input[@type='text'])[4]";

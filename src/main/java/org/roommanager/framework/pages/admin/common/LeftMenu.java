@@ -39,10 +39,10 @@ public class LeftMenu {
 	/**public ImpersonationPage selectImpersonationLink(){
 		selectLink(impersonation_Link, 60);
 		return new ImpersonationPage(driver);
-	}
-	public ConferenceRoomsPage selectConferenceRoomsLink(){
+	}*/
+	/*public ConferenceRoomPage selectConferenceRoomsLink(){
 		selectLink(conferenceRooms_Link, 60);
-		return new ConferenceRoomsPage(driver);
+		return new ConferenceRoomPage(driver);
 	}*/
 	public ResourcePage selectResourcesLink(){
 		selectLink(resources_Link, 60);

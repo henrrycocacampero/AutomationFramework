@@ -15,31 +15,23 @@ import org.roommanager.framework.utilities.common.LogManager;
 
 public class ResourcePage extends LeftMenu {
 	private WebDriver driver;
-	public final static String addResourceButton = ResourceConstant.ADD_RESOURCE_BUTTON;
-	public final static String removeResourceButton = ResourceConstant.REMOVE_RESOURCE_BUTTON;
-	public final static String nextPageButton = ResourceConstant.NEXT_PAGE_BUTTON;
-	public final static String nextPageInput = ResourceConstant.NEXT_PAGE_INPUT;
-	public final static String resourceTableNumberOfPages = ResourceConstant.RESOURCES_TABLE_NUMBER_OF_PAGES;
-	public final static String resourceList = ResourceConstant.RESOURCES_LIST;
-	public final static String resourceListItem = ResourceConstant.RESOURCE_TABLE_ITEM;
-	public final static String divElement = ResourceConstant.DIV_ELEMENT;
 
-	@FindBy(xpath = addResourceButton)
-	WebElement addResource_Button;
-	@FindBy(id = removeResourceButton)
-	WebElement removeResource_Button;
-	@FindBy(xpath = nextPageButton)
-	WebElement nextPage_Button;
-	@FindBy(xpath = nextPageInput)
-	WebElement nextPage_Input;
-	@FindBy(xpath = resourceTableNumberOfPages)
-	WebElement resource_TableNumberOfPages;
-	@FindBy(xpath = resourceList)
-	WebElement resource_List;
-	@FindBy(xpath = resourceListItem)
-	WebElement resource_ListItem;
-	@FindBy(xpath = divElement)
-	WebElement div_Element;
+	@FindBy(xpath = ResourceConstant.ADD_RESOURCE_BUTTON)
+	private WebElement addResource_Button;
+	@FindBy(id = ResourceConstant.REMOVE_RESOURCE_BUTTON)
+	private WebElement removeResource_Button;
+	@FindBy(xpath = ResourceConstant.NEXT_PAGE_BUTTON)
+	private WebElement nextPage_Button;
+	@FindBy(xpath = ResourceConstant.NEXT_PAGE_INPUT)
+	private WebElement nextPage_Input;
+	@FindBy(xpath = ResourceConstant.RESOURCES_TABLE_NUMBER_OF_PAGES)
+	private WebElement resource_TableNumberOfPages;
+	@FindBy(xpath = ResourceConstant.RESOURCES_LIST)
+	private WebElement resource_List;
+	@FindBy(xpath = ResourceConstant.RESOURCE_TABLE_ITEM)
+	private WebElement resource_ListItem;
+	@FindBy(xpath = ResourceConstant.DIV_ELEMENT)
+	private WebElement div_Element;
 
 	public ResourcePage(WebDriver driver) {
 		super(driver);
@@ -57,7 +49,7 @@ public class ResourcePage extends LeftMenu {
 	public CreateResourcePage doubleClickOnResourceFromTable(String resourceName) {
 		WebElement resource = getResourceFromAllPagesByName(resourceName,
 				getResourcesTableNumberOfPages());
-		String resourceItemName = resource.findElement(By.xpath(resourceListItem)).getText();
+		String resourceItemName = resource.findElement(By.xpath(ResourceConstant.RESOURCE_TABLE_ITEM)).getText();
 		Actions action = new Actions(driver);
 		action.doubleClick(resource);
 		action.perform();
@@ -68,7 +60,7 @@ public class ResourcePage extends LeftMenu {
 	public ResourcePage clickOnResourceFromTable(String resourceName) {
 		WebElement resource = getResourceFromAllPagesByName(resourceName,
 				getResourcesTableNumberOfPages());
-		String resourceItemName = resource.findElement(By.xpath(resourceListItem))
+		String resourceItemName = resource.findElement(By.xpath(ResourceConstant.RESOURCE_TABLE_ITEM))
 				.getText();
 		resource.click();
 		LogManager.info("Click on Resource: <" + resourceItemName+ "> from Resources Table");
@@ -78,7 +70,7 @@ public class ResourcePage extends LeftMenu {
 	public String getResourceNameInTable(String resourceName) {
 		WebElement resource = getResourceFromAllPagesByName(resourceName,
 				getResourcesTableNumberOfPages());
-		String resourceItemName = resource.findElement(By.xpath(resourceListItem))
+		String resourceItemName = resource.findElement(By.xpath(ResourceConstant.RESOURCE_TABLE_ITEM))
 				.getText();
 		LogManager.info("Resource Name: <" + resourceItemName+ "> was retrieved");
 		System.out.println(resourceItemName);
@@ -130,10 +122,10 @@ public class ResourcePage extends LeftMenu {
 	private WebElement getResourceByName(String resourceName) {
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions.visibilityOf(resource_List));
 		List<WebElement> resourcesTable = resource_List
-				.findElements(By.xpath(divElement));
+				.findElements(By.xpath(ResourceConstant.DIV_ELEMENT));
 		for (WebElement resource : resourcesTable) {
 			String resourceItemName = resource.findElement(
-					By.xpath(resourceListItem)).getText();
+					By.xpath(ResourceConstant.RESOURCE_TABLE_ITEM)).getText();
 			if (resourceItemName.equals(resourceName)) {
 				LogManager.info("Resource: <" + resourceItemName+ "> was retrieved from Resources Table");
 				return resource;
