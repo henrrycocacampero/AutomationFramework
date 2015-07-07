@@ -1,10 +1,12 @@
 package org.roommanager.framework.models.admin.conferencerooms;
 
+import org.openqa.selenium.By;
+
 
 public class ConferenceRoomConstant {
 	/**
 	 * Locator Type = Xpath*/
-	public static final String ROOM_NAME = "div[3]/div[2]/div/span[2]";
+	public static final By ROOM_NAME = By.xpath("div[3]/div[2]/div/span[2]");
 	
 	/**
 	 * Locator Type = Css*/
@@ -16,7 +18,7 @@ public class ConferenceRoomConstant {
 	
 	/**
 	 * Locator Type = Xpath*/
-	public static final String DIV_ELEMENT = "div";
+	public static final By DIV_ELEMENT = By.xpath("div");
 	/**
 	 * Locator Type = Xpath*/
 	public static final String LIST_RESOURCE = "//";
