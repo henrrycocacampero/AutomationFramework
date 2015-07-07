@@ -28,14 +28,10 @@ public class ConferenceRoomConstant {
 	/**
 	 * Locator Type = Xpath*/
 	public static final String PAGE_SIZE = "//div[@id='roomsGrid']/div[3]/div/div[2]/div/select";
-	/**
-	 * Locator Type = Xpath*/
-	public static final String NUMBER_PAGE = "//input[@type='number']";
-	/**
-	 * Locator Type = Xpath*/
+	public static final String PAGE_INDEX = "//input[@type='number']";
 	public static final String ROOM_ENABLED = "div/div[2]/div/div/div/span";
 	public static final String NEXT_PAGE_BUTTON = "(//button[@type='button'])[4]";
-	/*CSS*/
-	public static final String BACK_PAGE_BUTTON ="=button.ngPagerButton.firepath-matching-node";
+	public static final String BACK_PAGE_BUTTON = "=button.ngPagerButton.firepath-matching-node";
+	public static final String NUMBER_OF_PAGE = "//*[@id='roomsGrid']/div[3]/div/div[2]/div[2]/span";
 	
 }
