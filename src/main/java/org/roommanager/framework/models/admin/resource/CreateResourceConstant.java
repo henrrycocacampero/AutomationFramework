@@ -19,5 +19,8 @@ public class CreateResourceConstant {
     
     /** SAVE_BUTTON locator to Save button*/
     public static final String SAVE_BUTTON="button.info";
+    
+    /** NAME_ERROR_MESSAGE locator to error message from name's text field*/
+    public static final String NAME_ERROR_MESSAGE = "//div[4]/div/div/div[2]/div/resource-card/div/div/div[2]/div/form/small[2]";
 }
 	   
