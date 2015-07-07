@@ -7,13 +7,13 @@ public class RoomInfoPageConstant {
 	public static final String NAME_ROOM = "button.btn.btn-default";
 	/**
 	 * Locator Type = Xpath**/
-	public static final String TXTBOX_DISPLAYNAME_ROOM = "(//input[@type='text'])[4]";
+	public static final String DISPLAYNAME_ROOM_TEXT_FIELD = "(//input[@type='text'])[4]";
 	/**
 	 * Locator Type = Xpath*/
-	public static final String TXTBOX_CODE_ROOM = "(//input[@type='text'])[5]";
+	public static final String CODE_ROOM_TEXT_FIELD = "(//input[@type='text'])[5]";
 	/**
 	 * Locator Type = Xpath*/
-	public static final String TXTBOX_CAPACITY_ROOM = "(//input[@type='text'])[6]";
+	public static final String CAPACITY_ROOM_TEXT_FIELD = "(//input[@type='text'])[6]";
 	/**
 	 * Locator Type = Xpath*/
 	public static final String SAVE_BUTTON_ROOM = "//div[3]/div[2]/button";
