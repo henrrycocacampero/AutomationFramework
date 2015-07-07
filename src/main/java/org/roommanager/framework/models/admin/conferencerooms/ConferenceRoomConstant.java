@@ -33,6 +33,9 @@ public class ConferenceRoomConstant {
 	public static final String NUMBER_PAGE = "//input[@type='number']";
 	/**
 	 * Locator Type = Xpath*/
-	public static final String ROOM_ENABLED= "div/div[2]/div/div/div/span";
+	public static final String ROOM_ENABLED = "div/div[2]/div/div/div/span";
+	public static final String NEXT_PAGE_BUTTON = "(//button[@type='button'])[4]";
+	/*CSS*/
+	public static final String BACK_PAGE_BUTTON ="=button.ngPagerButton.firepath-matching-node";
 	
 }
