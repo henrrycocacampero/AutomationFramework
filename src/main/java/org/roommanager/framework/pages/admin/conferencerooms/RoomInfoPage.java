@@ -50,28 +50,7 @@ public class RoomInfoPage{
 		PageFactory.initElements(driver, this);
 	}
 	
-	public RoomInfoPage enterRoomDisplayName(String roomDisplayName){
-		(new webDriverWait(driver, 60))
-			.until(ExpectedConditions
-					.visibilityOf(displaynameRoomText_Field));
-	
-		
-	}
-	
- 
-											
-	
-/*
- * 		public CreateResourcePage enterResourceName(String resourceName) {
-			(new WebDriverWait(driver, 60))
-					.until(ExpectedConditions
-							.visibilityOf(resourceName_TextField));
-			resourceName_TextField.clear();
-			resourceName_TextField.sendKeys(resourceName);
-			LogManager.info("Resource Name: <" + resourceName + "> was entered");
-			return this;
-		}	
- */
+
 
 }
 
