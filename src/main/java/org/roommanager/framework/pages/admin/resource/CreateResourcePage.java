@@ -27,6 +27,8 @@ public class CreateResourcePage {
 	private WebElement displayNameTextFieldErrorMessage;
 	@FindBy(xpath = CreateResourceConstant.EMPTY_NAME_ERROR_MESSAGE)
 	private WebElement emptyNameErrorMessage;
+	@FindBy(xpath = CreateResourceConstant.RESOURCE_DISPLAY_NAME_LABEL)
+	private WebElement resourceDisplayNameLabel;
 	
 	
 	public CreateResourcePage(WebDriver driver) {
@@ -126,5 +128,15 @@ public class CreateResourcePage {
 			.until(ExpectedConditions.visibilityOf(emptyNameErrorMessage));
 		String errorMessage = emptyNameErrorMessage.getText();
 		return errorMessage.equals(expectedErrorMessage);
+	}
+	
+	/**
+	 * The getResourceDisplayName method returns the resource's display name
+	 * @return String 
+	 */
+	public String getResourceDisplayName(){
+		(new WebDriverWait(driver, 30))
+			.until(ExpectedConditions.visibilityOf(resourceDisplayNameLabel));
+		return resourceDisplayNameLabel.getText();
 	}
 }

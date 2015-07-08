@@ -28,5 +28,7 @@ public class CreateResourceConstant {
     
     /** EMPTY_NAME_ERROR_MESSAGE locator to error message from name's text field*/
     public static final String EMPTY_NAME_ERROR_MESSAGE = "//div[4]/div/div/div[2]/div/div/resource-card/div/div/div[2]/div/form/small[1]";
+    
+    public static final String RESOURCE_DISPLAY_NAME_LABEL = "//div[4]/div/div/div[2]/div/div/div/div/h3";
 }
 	   
