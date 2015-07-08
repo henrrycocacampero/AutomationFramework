@@ -22,4 +22,6 @@ public class ResourceConstant {
 	/**Locator Type = xpath*/
 	public static final String DIV_ELEMENT="div";
 
+	/** Locator to the pagination text field*/
+	public static final String PAGINATION_TEXT_FIELD = "//div[@id='resourcesGrid']/div[3]/div/div[2]/div[2]/input";
 }

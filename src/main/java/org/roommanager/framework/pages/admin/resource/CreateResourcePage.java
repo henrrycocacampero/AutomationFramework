@@ -21,8 +21,8 @@ public class CreateResourcePage {
 	private WebElement descriptionTextArea;
 	@FindBy(css = CreateResourceConstant.SAVE_BUTTON)
 	private WebElement saveButton;
-	@FindBy(xpath = CreateResourceConstant.NAME_ERROR_MESSAGE)
-	private WebElement nameTextFieldErrorMessage;
+	@FindBy(xpath = CreateResourceConstant.REPEATED_NAME_ERROR_MESSAGE)
+	private WebElement repeatedNameErrorMessage;
 	@FindBy(xpath = CreateResourceConstant.DISPLAY_NAME_ERROR_MESSAGE)
 	private WebElement displayNameTextFieldErrorMessage;
 	
@@ -91,12 +91,12 @@ public class CreateResourcePage {
 	 * is present above the name text field.
 	 * @return boolean
 	 */
-	public boolean isNameFieldErrorMessagePresent(){
+	public boolean isRepeatedNameErrorMessagePresent(){
 		String expectedErrorMessage = "A resource with the same name already exists, "
 				+ "please choose another name";
 		(new WebDriverWait(driver, 20))
-			.until(ExpectedConditions.visibilityOf(nameTextFieldErrorMessage));
-		String errorMessage = nameTextFieldErrorMessage.getText();
+			.until(ExpectedConditions.visibilityOf(repeatedNameErrorMessage));
+		String errorMessage = repeatedNameErrorMessage.getText();
 		return errorMessage.equals(expectedErrorMessage);
 	}
 	
