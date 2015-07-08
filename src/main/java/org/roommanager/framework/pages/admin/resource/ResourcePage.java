@@ -32,6 +32,9 @@ public class ResourcePage extends LeftMenu {
 	private WebElement resource_ListItem;
 	@FindBy(xpath = ResourceConstant.DIV_ELEMENT)
 	private WebElement div_Element;
+	
+	private String propertyName = "Name";
+	private String propertyDisplayName = "DisplayName";
 
 	public ResourcePage(WebDriver driver) {
 		super(driver);
@@ -47,7 +50,7 @@ public class ResourcePage extends LeftMenu {
 	}
 	
 	public CreateResourcePage doubleClickOnResourceFromTable(String resourceName) {
-		WebElement resource = getResourceFromAllPagesByName(resourceName,
+		WebElement resource = getResourceFromAllPagesByName(propertyName,resourceName,
 				getResourcesTableNumberOfPages());
 		String resourceItemName = resource.findElement(By.xpath(ResourceConstant.RESOURCE_TABLE_ITEM)).getText();
 		Actions action = new Actions(driver);
@@ -58,7 +61,7 @@ public class ResourcePage extends LeftMenu {
 	}
 
 	public ResourcePage clickOnResourceFromTable(String resourceName) {
-		WebElement resource = getResourceFromAllPagesByName(resourceName,
+		WebElement resource = getResourceFromAllPagesByName(propertyName,resourceName,
 				getResourcesTableNumberOfPages());
 		String resourceItemName = resource.findElement(By.xpath(ResourceConstant.RESOURCE_TABLE_ITEM))
 				.getText();
@@ -68,7 +71,7 @@ public class ResourcePage extends LeftMenu {
 	}
 
 	public String getResourceNameInTable(String resourceName) {
-		WebElement resource = getResourceFromAllPagesByName(resourceName,
+		WebElement resource = getResourceFromAllPagesByName(propertyName,resourceName,
 				getResourcesTableNumberOfPages());
 		String resourceItemName = resource.findElement(By.xpath(ResourceConstant.RESOURCE_TABLE_ITEM))
 				.getText();
@@ -76,20 +79,30 @@ public class ResourcePage extends LeftMenu {
 		System.out.println(resourceItemName);
 		return resourceItemName;
 	}
+	
+	public String getResourceDisplayNameInTable(String resourceDisplayName) {
+		WebElement resource = getResourceFromAllPagesByName(propertyDisplayName,resourceDisplayName,
+				getResourcesTableNumberOfPages());
+		String resourceItemName = resource.findElement(By.xpath(ResourceConstant.DISPLAYNAMERESOURCE_TABLE_ITEM))
+				.getText();
+		LogManager.info("Resource Name: <" + resourceItemName+ "> was retrieved");
+		System.out.println(resourceItemName);
+		return resourceItemName;
+	}
 
 	public boolean verifyElementDoesNotExist(String resourceName) {
-		WebElement resource = getResourceFromAllPagesByName(resourceName,
+		WebElement resource = getResourceFromAllPagesByName(propertyName,resourceName,
 				getResourcesTableNumberOfPages());
 		return resource == null ? true : false;
 	}
 
-	private WebElement getResourceFromAllPagesByName(String resourceName,
+	private WebElement getResourceFromAllPagesByName(String property,String propertyValue,
 			int numberOfPages) {
 		WebElement resource = null;
 		for (int index = 1; index <= numberOfPages; index++) {
-			resource = getResourceByName(resourceName);
+			resource = getResourceByAttribute(property,propertyValue);
 			if (resource != null) {
-				LogManager.info("Resource: <" + resourceName+ "> was found in page:" + index);
+				LogManager.info("Resource: <" + propertyValue+ "> was found in page:" + index);
 				return resource;
 			}
 			clickNextPageButton(index + 1, numberOfPages);
@@ -119,19 +132,29 @@ public class ResourcePage extends LeftMenu {
 		return Integer.parseInt(pages);
 	}
 
-	private WebElement getResourceByName(String resourceName) {
+	private WebElement getResourceByAttribute(String property,String propertyValue) {
+		String itemInTable = "";
+		
+		if(property == propertyName){
+			itemInTable = ResourceConstant.RESOURCE_TABLE_ITEM;
+		}
+		else if(property == propertyDisplayName){
+			itemInTable = ResourceConstant.DISPLAYNAMERESOURCE_TABLE_ITEM;
+		}			
+		 System.out.println(itemInTable);
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions.visibilityOf(resource_List));
 		List<WebElement> resourcesTable = resource_List
 				.findElements(By.xpath(ResourceConstant.DIV_ELEMENT));
 		for (WebElement resource : resourcesTable) {
 			String resourceItemName = resource.findElement(
-					By.xpath(ResourceConstant.RESOURCE_TABLE_ITEM)).getText();
-			if (resourceItemName.equals(resourceName)) {
+					By.xpath(itemInTable)).getText();
+			System.out.println(resourceItemName);
+			if (resourceItemName.equals(propertyValue)) {
 				LogManager.info("Resource: <" + resourceItemName+ "> was retrieved from Resources Table");
 				return resource;
 			}
 		}
-		LogManager.info("Resource: <" + resourceName + "> wasn't found");
+		LogManager.info("Resource: <" + propertyValue + "> wasn't found");
 		return null;
 	}
 
