@@ -141,4 +141,14 @@ public class ResourceAssociationsPage {
 		return resource == null ? true : false;
 
 	}
+	
+	/**
+	 * isResourceAvailableOnTheRoom: It verifies if the Resource is Available
+	 * in the Room.
+	 * @return boolean
+	 */
+	public boolean isResourceAvailableOnTheRoom(String resourceName){
+		return getResourceByName(resourceName) == null? false : true;
+	}
 }
+
