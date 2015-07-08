@@ -19,6 +19,8 @@ public class ResourceAssociationsPage {
 	WebElement cancelButton;
 	@FindBy (css = ResourceAssociationsConstant.SAVE_BUTTON) 
 	WebElement saveButton;
+	@FindBy (xpath = ResourceAssociationsConstant.CLOSE_BUTTON) 
+	WebElement closeButton;
 	@FindBy (xpath = ResourceAssociationsConstant.LIST_RESOURCES_AVAILABLE) 
 	WebElement resourceAvailableList;
 	@FindBy (xpath = ResourceAssociationsConstant.LIST_RESOURCE_ASSOCIATED) 
@@ -45,6 +47,12 @@ public class ResourceAssociationsPage {
 		LogManager.info("Cancel button was clicked");
 		return new ConferenceRoomPage(driver);
 	}
+	public ConferenceRoomPage clickCloseButton() {
+		(new WebDriverWait(driver, 60)).until(ExpectedConditions.visibilityOf(closeButton));
+		closeButton.click();
+		LogManager.info("Close button was clicked");
+		return new ConferenceRoomPage(driver);
+	}
 	
 	public ConferenceRoomPage clickSaveButton() {
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions.visibilityOf(saveButton));
@@ -56,7 +64,7 @@ public class ResourceAssociationsPage {
 	public ResourceAssociationsPage clickOnAddResourceButton(String resourceName) {
 		WebElement resourceAssociationButton = getResourceByName(resourceName);
 		resourceAssociationButton.click();
-		//LogManager.info("Double Click on Resource: <" + resourceItemName+ "> from Resources Table");
+		LogManager.info("The Resource: <" + resourceName+ "> was associated to the room");
 		return this;
 	}
 	
@@ -75,17 +83,17 @@ public class ResourceAssociationsPage {
 				String associationButtonLocator = ResourceAssociationsConstant.LIST_RESOURCES_AVAILABLE+"/"+
 						ResourceAssociationsConstant.DIV_ELEMENT + "[" + position +"]/" +
 						ResourceAssociationsConstant.ASSOCIATE_BUTTON;
-				
+				LogManager.info("Resource: <" + resourceName + "> in the Available table was found");
 				return driver.findElement(By.xpath(associationButtonLocator));	
 			}
 		}
-		LogManager.info("Resource: <" + resourceName + "> wasn't found");
+		LogManager.info("Resource: <" + resourceName + "> in the Available table wasn't found");
 		return null;
 	}
 	public ResourceAssociationsPage clickOnDesassociatedResourceButton(String resourceName) {
 		WebElement resourceDesassociationButton = getResourceAssociatedByName(resourceName);
 		resourceDesassociationButton.click();
-		//LogManager.info("Double Click on Resource: <" + resourceItemName+ "> from Resources Table");
+		LogManager.info("Resource: <" + resourceName + "> was dissasociate from the room");
 		return this;
 	}
 	
@@ -104,11 +112,17 @@ public class ResourceAssociationsPage {
 				String desassociationButtonLocator = ResourceAssociationsConstant.LIST_RESOURCE_ASSOCIATED+"/"+
 						ResourceAssociationsConstant.DIV_ELEMENT + "[" + position +"]/" +
 						ResourceAssociationsConstant.DESASSOCIATE_RESOURCE;
-				
+				LogManager.info("Resource: <" + resourceName + "> in the Associated table was found");
 				return driver.findElement(By.xpath(desassociationButtonLocator));	
 			}
 		}
-		LogManager.info("Resource: <" + resourceName + "> wasn't found");
+		LogManager.info("Resource: <" + resourceName + "> in the Associated table wasn't found");
 		return null;
+	}
+	public boolean verifyElementDoesNotExistOnAssociated(String resourceName) {
+		WebElement resource = getResourceAssociatedByName(resourceName);	
+		LogManager.info("Resource: <" + resourceName + "> was disassociated succefully");
+		return resource == null ? true : false;
+		
 	}
 }
