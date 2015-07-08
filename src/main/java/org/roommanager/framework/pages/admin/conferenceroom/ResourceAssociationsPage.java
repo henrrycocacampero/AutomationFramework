@@ -111,4 +111,20 @@ public class ResourceAssociationsPage {
 		LogManager.info("Resource: <" + resourceName + "> wasn't found");
 		return null;
 	}
+	public String getResourceAssociatedByNameInTable(String resourceName) {
+		(new WebDriverWait(driver, 60))
+			.until(ExpectedConditions.visibilityOf(resourceAssociatedList));
+		List<WebElement> resourcesTable = resourceAssociatedList
+				.findElements(By.xpath(ResourceAssociationsConstant.DIV_ELEMENT));
+		for (WebElement resource : resourcesTable){
+			String resourceItemName = resource.findElement(
+					By.xpath(ResourceAssociationsConstant.NAME_RESOURCE)).getText();
+			if (resourceItemName.equals(resourceName)) {
+				LogManager.info("Resource: <" + resourceItemName+ "> was retrieved from Resources Table");
+				return resourceName;	
+			}
+		}
+		LogManager.info("Resource: <" + resourceName + "> wasn't found");
+		return null;
+	}
 }
