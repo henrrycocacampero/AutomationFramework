@@ -38,7 +38,7 @@ public class VerifyResourceRepeatedName extends TestBase{
 	 * if test case fails
 	 */
 	private String errorMessage = "The test failed because the error "
-			+ "message was not desplayed";
+			+ "message was not displayed";
 
 	/**
 	 * This method performs the test case: Verify if is possible create 
@@ -60,7 +60,7 @@ public class VerifyResourceRepeatedName extends TestBase{
 		
 		create.clickSaveButtonInvalidData();
 		
-		Assert.assertTrue(create.isNameFieldErrorMessagePresent()
+		Assert.assertTrue(create.isRepeatedNameErrorMessagePresent()
 				,errorMessage);
     }
     
