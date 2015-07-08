@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.admin.common.LeftMenuConstant;
+import org.roommanager.framework.pages.admin.conferenceroom.ConferenceRoomPage;
 import org.roommanager.framework.pages.admin.emailserver.EmailServerPage;
 import org.roommanager.framework.pages.admin.resource.ResourcePage;
 import org.roommanager.framework.utilities.common.LogManager;
@@ -40,10 +41,10 @@ public class LeftMenu {
 		selectLink(impersonation_Link, 60);
 		return new ImpersonationPage(driver);
 	}*/
-	/*public ConferenceRoomPage selectConferenceRoomsLink(){
+	public ConferenceRoomPage selectConferenceRoomsLink(){
 		selectLink(conferenceRooms_Link, 60);
 		return new ConferenceRoomPage(driver);
-	}*/
+	}
 	public ResourcePage selectResourcesLink(){
 		selectLink(resources_Link, 60);
 		LogManager.info("Resource Page Link was clicked");
