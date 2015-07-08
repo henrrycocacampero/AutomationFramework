@@ -1,7 +1,6 @@
 package org.roommanager.framework.pages.admin.conferenceroom;
 
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,7 +13,9 @@ import org.roommanager.framework.utilities.common.LogManager;
 
 public class ResourceAssociationsPage {
 	WebDriver driver;
+	
 	WebElement associate;
+	
 	@FindBy (css = ResourceAssociationsConstant.CANCEL_BUTTON) 
 	WebElement cancelButton;
 	@FindBy (css = ResourceAssociationsConstant.SAVE_BUTTON) 
@@ -90,6 +91,7 @@ public class ResourceAssociationsPage {
 		LogManager.info("Resource: <" + resourceName + "> in the Available table wasn't found");
 		return null;
 	}
+	
 	public ResourceAssociationsPage clickOnDesassociatedResourceButton(String resourceName) {
 		WebElement resourceDesassociationButton = getResourceAssociatedByName(resourceName);
 		resourceDesassociationButton.click();
@@ -119,6 +121,12 @@ public class ResourceAssociationsPage {
 		LogManager.info("Resource: <" + resourceName + "> in the Associated table wasn't found");
 		return null;
 	}
+	
+	/**
+	 * getResourceAssociatedByNameInTable: It returns the name of the resource
+	 * @param String resourceName
+	 * @return String
+	 */
 	public String getResourceAssociatedByNameInTable(String resourceName) {
 		(new WebDriverWait(driver, 60))
 			.until(ExpectedConditions.visibilityOf(resourceAssociatedList));
@@ -135,16 +143,23 @@ public class ResourceAssociationsPage {
 		LogManager.info("Resource: <" + resourceName + "> wasn't found");
 		return null;
 	}
+	
+	/**
+	 * verifyElementDoesNotExistOnAssociated: It verifies if the Resource does
+	 * not exist on associated in the Room.
+	 * @param String resourceName
+	 * @return boolean
+	 */
 	public boolean verifyElementDoesNotExistOnAssociated(String resourceName) {
 		WebElement resource = getResourceAssociatedByName(resourceName);	
 		LogManager.info("Resource: <" + resourceName + "> was disassociated succefully");
 		return resource == null ? true : false;
-
 	}
 	
 	/**
 	 * isResourceAvailableOnTheRoom: It verifies if the Resource is Available
 	 * in the Room.
+	 * @param String resourceName
 	 * @return boolean
 	 */
 	public boolean isResourceAvailableOnTheRoom(String resourceName){

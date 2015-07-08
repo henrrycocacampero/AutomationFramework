@@ -11,33 +11,77 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+/**
+ * The VerifyAssociateResourceRoom class contains the test case 
+ * (with pre and post conditions): Verify that an available resource 
+ * can be associated to a room.
+ * 
+ * @author Milenca Ventura
+ *
+ */
+
 public class VerifyAssociateResourceToRoom extends TestBase {
-	 private String resourceName = "Resource01";
-     private String resourceDisplayName = "Resource01";
-     private String resourceDescription = "Description Resource01";
-     private String resourceIcon = "";
-     private String roomName = "SM-Room1";
-	 
-	 @BeforeTest
-	  public void beforeTest(){
-		ResourceApi.createResource(resourceName, resourceDisplayName, resourceIcon, resourceDescription);
-	  }
+	
+	  /** resourceName: Name of resource to be created*/
+	  private String resourceName = "Resource01";
+	  
+	  /** resourceDisplayName: Display name of resource to be created*/
+      private String resourceDisplayName = "Resource01";
+      
+      /** resourceDescription: Description of resource to be created*/
+      private String resourceDescription = "Description Resource01";
+      
+      /** resourceIcon: Icon of resource to be created*/
+ 	  private String resourceIcon = "fa fa-desktop";
+ 	  
+ 	  /** roomName: Name of the room*/
+      private String roomName = "SM-Room1";
+      /** 
+ 	  * errorMessage: It contains the error message that would appear 
+ 	  * if test case fails.
+ 	  */
+	  private String errorMessage = "The Resource"+resourceName+"is not associated"; 
+	  /**
+	  * This method performs the test case:Verify that an available resource 
+      * can be associated to a room.
+	  */
 	  @Test
 	  public void associateResourceToRoom() {
-		  String errorMessage = "The Resource"+resourceName+"is not associated";  
 		  LoginPage login = new LoginPage(driver);
+		  
 		  HomePage home = login.clickSignInButton(); 
-		  ConferenceRoomPage conferenceRoom = home.selectConferenceRoomsLink();	
-		  ResourceAssociationsPage association = conferenceRoom.doubleClickOnRoom(roomName).
-				  clickOnResourceAssociations(roomName);
-		  association.clickOnAddResourceButton(resourceDisplayName).clickSaveButton();
+		  
+		  ConferenceRoomPage conferenceRoom = home.selectConferenceRoomsLink();
+		  
+		  ResourceAssociationsPage resourceAssociation = conferenceRoom
+				  .doubleClickOnRoom(roomName)
+				  .clickOnResourceAssociations(roomName);
+		  
+		  resourceAssociation.clickOnAddResourceButton(resourceDisplayName)
+		  		  .clickSaveButton();
 		  conferenceRoom.doubleClickOnRoom(roomName).
 		  clickOnResourceAssociations(roomName);
-		  String associatedResourceName = association
+		  
+		  String associatedResourceName = resourceAssociation
 					.getResourceAssociatedByNameInTable(resourceDisplayName);
-		  Assert.assertEquals( associatedResourceName, resourceDisplayName,errorMessage);
-		  association.clickCancelButton();
+		  Assert.assertEquals( associatedResourceName, 
+				  resourceDisplayName,errorMessage);
+		  
+		  resourceAssociation.clickCancelButton();
 	  }
+	  /**
+	  * beforeTest: This method creates a resource that will be used 
+	  * in the test case.
+	  */
+	  @BeforeTest
+	  public void beforeTest(){
+		ResourceApi.createResource(resourceName, resourceDisplayName, 
+				resourceIcon, resourceDescription);
+	  }
+	  /**
+	  * afterTest: This method deletes the created resource in the 
+	  * beforeTest method.
+	  */
 	  @AfterTest
 	  public void afterTest(){
 		 ResourceApi.deleteResourceByName(resourceName);
