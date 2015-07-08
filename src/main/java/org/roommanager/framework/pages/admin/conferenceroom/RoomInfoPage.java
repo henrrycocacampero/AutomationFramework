@@ -1,21 +1,12 @@
-package org.roommanager.framework.pages.admin.conferencerooms;
+package org.roommanager.framework.pages.admin.conferenceroom;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.admin.conferencerooms.RoomInfoPageConstant;
-import org.roommanager.framework.pages.admin.common.LeftMenu;
-import org.roommanager.framework.pages.admin.resource.CreateResourcePage;
-import org.roommanager.framework.utilities.common.LogManager;
 
-public class RoomInfoPage{
+public class RoomInfoPage extends ConferenceRoomTopMenu{
 	private WebDriver driver;
 	public final static String saveButtonRoom= RoomInfoPageConstant.SAVE_BUTTON_ROOM;
 	public final static String saveCancelRoom = RoomInfoPageConstant.SAVE_CANCEL_ROOM;
