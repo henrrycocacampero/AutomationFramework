@@ -30,4 +30,12 @@ public class ConferenceRoomTopMenu {
 		LogManager.info("Click on Resource: Room Info Link");
 		return new RoomInfoPage(driver);
 	}
+	
+	public ResourceAssociationsPage clickOnResourceAssociations(String roomName){
+		(new WebDriverWait(driver, 60))
+			.until(ExpectedConditions.visibilityOf(resourceAssociationLink));
+		resourceAssociationLink.click();
+		LogManager.info("Click on Resource: Resource Associations Link");
+		return new ResourceAssociationsPage(driver);
+	}
 }
