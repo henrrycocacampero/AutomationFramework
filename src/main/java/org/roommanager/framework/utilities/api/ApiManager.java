@@ -7,6 +7,7 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -97,6 +98,30 @@ public class ApiManager {
             CloseableHttpResponse response = httpClient.execute(request);
             try {
             	LogManager.info("The Status of the POST Request to Room Manager API is: " + response.getStatusLine());
+                EntityUtils.consume(response.getEntity());
+            } finally {
+                response.close();
+            }
+        } catch (IOException ex) {
+        	LogManager.info(ex.getMessage());
+        }
+	}
+	
+	public static void putHttpMethod(String url, String body){
+		String contentTypeHeader = CONTENT_TYPE_HEADER;
+		String contentType = APPLICATION_CONTENT_TYPE;
+		String authorizationHeader = AUTHORIZATION_HEADER;
+		String authorizationValue = PropertiesReader.getBasicAuthentication();
+		
+		try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
+			HttpPut request = new HttpPut(url);
+            StringEntity params = new StringEntity(body);
+            request.addHeader(contentTypeHeader, contentType);
+            request.addHeader(authorizationHeader, authorizationValue);
+            request.setEntity(params);
+            CloseableHttpResponse response = httpClient.execute(request);
+            try {
+            	LogManager.info("The Status of the PUT Request to Room Manager API is: " + response.getStatusLine());
                 EntityUtils.consume(response.getEntity());
             } finally {
                 response.close();

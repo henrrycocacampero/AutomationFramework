@@ -24,10 +24,8 @@ public class ConferenceRoomPage {
 	private WebElement pageNumber;
 	@FindBy (xpath  = ConferenceRoomConstant.NUMBER_OF_PAGE) 
 	private WebElement numberOfPages;
-
 	private By divElementLocator = ConferenceRoomConstant.DIV_ELEMENT;
 	private By roomNameLocator = ConferenceRoomConstant.ROOM_NAME;
-	
 	private WebDriver driver;
 	
 	public ConferenceRoomPage(WebDriver driver){
@@ -35,8 +33,15 @@ public class ConferenceRoomPage {
 		PageFactory.initElements(driver, this);
 	}
 	
+	/**
+	 * doubleClickOnRoom: It double clicks on the specified Room.
+	 * @param roomName: It represents the Room's Name
+	 * @return RoomInfoPage
+	 */
 	public RoomInfoPage doubleClickOnRoom(String roomName){
-		WebElement room = getRoomFromAllPagesByName(roomName, getRoomsTableNumberOfPages());
+		WebElement room = getRoomFromAllPagesByName(roomName, 
+				          getRoomsTableNumberOfPages());
+		
 		Actions action = new Actions(driver);
 		action.doubleClick(room);
 		action.perform();
@@ -44,6 +49,11 @@ public class ConferenceRoomPage {
 		return new RoomInfoPage(driver);
 	}
 	
+	/**
+	 * getRoomByName: It retrieves the specified Room.
+	 * @param roomName: It represents the Room's Name
+	 * @return WebElement
+	 */
 	private WebElement getRoomByName(String roomName){
 		(new WebDriverWait(driver, 60))
 			.until(ExpectedConditions.visibilityOf(roomsList));
@@ -52,20 +62,29 @@ public class ConferenceRoomPage {
 		for (WebElement room : rooms) {
 			String roomItemName = room.findElement(roomNameLocator).getText();
 			if(roomItemName.equals(roomName)){
-				LogManager.info("Room: <"+ roomItemName +"> was found on the Available Rooms List");
+				LogManager.info("Room: <"+ roomItemName +
+						        "> was found on the Available Rooms List");
 				return room;
 			}
 		}
-		LogManager.info("Room: <"+ roomName +"> wasn't found on the Available Rooms List");
+		LogManager.info("Room: <"+ roomName +
+				        "> wasn't found on the Available Rooms List");
 		return null;
 	}
 	
+	/**
+	 * getRoomByName: It retrieves the specified Room from all the available pages.
+	 * @param roomName: It represents the Room's Name
+	 * @param numberOfPages: It represents the available number of Pages
+	 * @return WebElement
+	 */
 	private WebElement getRoomFromAllPagesByName(String resourceName, int numberOfPages){
 		WebElement resource = null;
 		for(int index = 1; index <= numberOfPages; index++){
 			 resource = getRoomByName(resourceName);
 			 if(resource != null){
-				 LogManager.info("Resource: <" +resourceName+ "> was found in page:" + index);
+				 LogManager.info("Resource: <" +resourceName+ 
+						         "> was found in page:" + index);
 				 return resource;
 			 }
 			 clickNextPageButton(index + 1, numberOfPages);
@@ -74,6 +93,11 @@ public class ConferenceRoomPage {
 		return resource;
 	}
 	
+	/**
+	 * clickNextPageButton: It clicks on the Next Page Button.
+	 * @param actualPage: It represents the current Page Number
+	 * @param numberOfPages: It represents the available number of Pages
+	 */
 	private void clickNextPageButton(int actualPage, int numberOfPages){
 		(new WebDriverWait(driver, 60))
 			.until(ExpectedConditions.visibilityOf(nextPageButton));
@@ -81,17 +105,23 @@ public class ConferenceRoomPage {
 		(new WebDriverWait(driver, 60))
 			.until(ExpectedConditions.visibilityOf(pageNumber));
 		String nextPageinput = pageNumber.getAttribute("value");
-		while(Integer.parseInt(nextPageinput)!= actualPage && actualPage <= numberOfPages){
+		while(Integer.parseInt(nextPageinput)!= actualPage 
+		      && actualPage <= numberOfPages){
 			nextPageinput = pageNumber.getAttribute("value");
 		}
 		LogManager.info("The Next Page button was clicked");
 	}
 	
+	/**
+	 * getRoomsTableNumberOfPages: It retrieves Rooms Table's Number of Pages.
+	 * @return int
+	 */
 	private int getRoomsTableNumberOfPages(){
 		(new WebDriverWait(driver, 60))
 			.until(ExpectedConditions.visibilityOf(numberOfPages));
 		String pages = numberOfPages.getText().replace("/ ", "");
-		LogManager.info("The number of Pages of the Rooms Table is: " + Integer.parseInt(pages));
+		LogManager.info("The number of Pages of the Rooms Table is: " 
+		                + Integer.parseInt(pages));
 		return Integer.parseInt(pages);
 	}
 }
