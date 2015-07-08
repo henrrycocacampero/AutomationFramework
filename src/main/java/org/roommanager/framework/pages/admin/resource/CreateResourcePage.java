@@ -23,6 +23,9 @@ public class CreateResourcePage {
 	private WebElement saveButton;
 	@FindBy(xpath = CreateResourceConstant.NAME_ERROR_MESSAGE)
 	private WebElement nameTextFieldErrorMessage;
+	@FindBy(xpath = CreateResourceConstant.DISPLAY_NAME_ERROR_MESSAGE)
+	private WebElement displayNameTextFieldErrorMessage;
+	
 	
 	public CreateResourcePage(WebDriver driver) {
 		this.driver = driver;
@@ -94,6 +97,19 @@ public class CreateResourcePage {
 		(new WebDriverWait(driver, 20))
 			.until(ExpectedConditions.visibilityOf(nameTextFieldErrorMessage));
 		String errorMessage = nameTextFieldErrorMessage.getText();
+		return errorMessage.equals(expectedErrorMessage);
+	}
+	
+	/**
+	 * isDisplayNameFieldErrorMessagePresent: It returns true if the error message
+	 * is present above the DisplayName text field.
+	 * @return boolean
+	 */
+	public boolean isDisplayNameFieldErrorMessagePresent(){
+		String expectedErrorMessage = "Display name must not be empty";
+		(new WebDriverWait(driver, 20))
+			.until(ExpectedConditions.visibilityOf(displayNameTextFieldErrorMessage));
+		String errorMessage = displayNameTextFieldErrorMessage.getText();
 		return errorMessage.equals(expectedErrorMessage);
 	}
 }

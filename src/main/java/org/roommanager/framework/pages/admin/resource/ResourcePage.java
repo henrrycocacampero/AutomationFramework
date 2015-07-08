@@ -50,7 +50,7 @@ public class ResourcePage extends LeftMenu {
 	}
 	
 	public CreateResourcePage doubleClickOnResourceFromTable(String resourceName) {
-		WebElement resource = getResourceFromAllPagesByName(propertyName,resourceName,
+		WebElement resource = getResourceFromAllPages(propertyName,resourceName,
 				getResourcesTableNumberOfPages());
 		String resourceItemName = resource.findElement(By.xpath(ResourceConstant.RESOURCE_TABLE_ITEM)).getText();
 		Actions action = new Actions(driver);
@@ -61,7 +61,7 @@ public class ResourcePage extends LeftMenu {
 	}
 
 	public ResourcePage clickOnResourceFromTable(String resourceName) {
-		WebElement resource = getResourceFromAllPagesByName(propertyName,resourceName,
+		WebElement resource = getResourceFromAllPages(propertyName,resourceName,
 				getResourcesTableNumberOfPages());
 		String resourceItemName = resource.findElement(By.xpath(ResourceConstant.RESOURCE_TABLE_ITEM))
 				.getText();
@@ -71,7 +71,7 @@ public class ResourcePage extends LeftMenu {
 	}
 
 	public String getResourceNameInTable(String resourceName) {
-		WebElement resource = getResourceFromAllPagesByName(propertyName,resourceName,
+		WebElement resource = getResourceFromAllPages(propertyName,resourceName,
 				getResourcesTableNumberOfPages());
 		String resourceItemName = resource.findElement(By.xpath(ResourceConstant.RESOURCE_TABLE_ITEM))
 				.getText();
@@ -81,7 +81,7 @@ public class ResourcePage extends LeftMenu {
 	}
 	
 	public String getResourceDisplayNameInTable(String resourceDisplayName) {
-		WebElement resource = getResourceFromAllPagesByName(propertyDisplayName,resourceDisplayName,
+		WebElement resource = getResourceFromAllPages(propertyDisplayName,resourceDisplayName,
 				getResourcesTableNumberOfPages());
 		String resourceItemName = resource.findElement(By.xpath(ResourceConstant.DISPLAYNAMERESOURCE_TABLE_ITEM))
 				.getText();
@@ -91,12 +91,12 @@ public class ResourcePage extends LeftMenu {
 	}
 
 	public boolean verifyElementDoesNotExist(String resourceName) {
-		WebElement resource = getResourceFromAllPagesByName(propertyName,resourceName,
+		WebElement resource = getResourceFromAllPages(propertyName,resourceName,
 				getResourcesTableNumberOfPages());
 		return resource == null ? true : false;
 	}
 
-	private WebElement getResourceFromAllPagesByName(String property,String propertyValue,
+	private WebElement getResourceFromAllPages(String property,String propertyValue,
 			int numberOfPages) {
 		WebElement resource = null;
 		for (int index = 1; index <= numberOfPages; index++) {
