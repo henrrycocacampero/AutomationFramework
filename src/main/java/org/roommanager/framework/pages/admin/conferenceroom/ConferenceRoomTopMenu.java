@@ -38,4 +38,12 @@ public class ConferenceRoomTopMenu {
 		LogManager.info("Click on Resource: Resource Associations Link");
 		return new ResourceAssociationsPage(driver);
 	}
+	
+	public OutOfOrderPage clickOnOutOfOrderPlanning(String roomName){
+		(new WebDriverWait(driver, 60))
+			.until(ExpectedConditions.visibilityOf(outOfOrderPlanningLink));
+		outOfOrderPlanningLink.click();
+		LogManager.info("Click on Resource: Resource Associations Link");
+		return new OutOfOrderPage(driver);
+	}
 }
