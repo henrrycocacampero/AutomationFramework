@@ -1,8 +1,5 @@
-package org.roommanager.framework.pages.admin.conferenceRooms;
+package org.roommanager.framework.pages.admin.conferenceroom;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,7 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.admin.conferencerooms.ResourceAssociationsConstant;
-import org.roommanager.framework.pages.admin.resource.CreateResourcePage;
 import org.roommanager.framework.utilities.common.LogManager;
 
 public class ResourceAssociationsPage {
@@ -39,16 +35,16 @@ public class ResourceAssociationsPage {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
-	public ResourceAssociationsPage clickCancelButton() {
+	public ConferenceRoomPage clickCancelButton() {
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions.visibilityOf(cancelButton));
 		cancelButton.click();
 		LogManager.info("Cancel button was clicked");
-		return new conferenceRoomPage(driver);
+		return new ConferenceRoomPage(driver);
 	}
-	public ResourceAssociationsPage clickSaveButton() {
+	public ConferenceRoomPage clickSaveButton() {
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions.visibilityOf(saveButton));
 		saveButton.click();
 		LogManager.info("Save button was clicked");
-		return new conferenceRoomPage(driver);
+		return new ConferenceRoomPage(driver);
 	}
 }
