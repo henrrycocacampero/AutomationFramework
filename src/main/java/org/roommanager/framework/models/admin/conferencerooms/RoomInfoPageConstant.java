@@ -41,4 +41,7 @@ public class RoomInfoPageConstant {
 	/**
 	 * Locator Type = Xpath*/
 	public static final String LOCATION_LIST = "//";
+	/**
+	 * Locator Type = Xpath*/
+	public static final String ROOM_NAME_TEXT_FIELD = "//div[4]/div/div/div[2]/div/div/div[2]/div/form/div[1]/input";
 }

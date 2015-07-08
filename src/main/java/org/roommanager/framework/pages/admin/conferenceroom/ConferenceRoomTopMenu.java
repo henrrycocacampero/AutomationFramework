@@ -23,7 +23,11 @@ public class ConferenceRoomTopMenu {
 		PageFactory.initElements(driver, this);
 	}
 	
-	public RoomInfoPage clickOnRoomInfoLink(String roomName){
+	/**
+	 * clickOnRoomInfoLink: It clicks on Room Info Link.
+	 * @return RoomInfoPage
+	 */
+	public RoomInfoPage clickOnRoomInfoLink(){
 		(new WebDriverWait(driver, 60))
 			.until(ExpectedConditions.visibilityOf(roomInfoLink));
 		roomInfoLink.click();
@@ -31,7 +35,11 @@ public class ConferenceRoomTopMenu {
 		return new RoomInfoPage(driver);
 	}
 	
-	public ResourceAssociationsPage clickOnResourceAssociations(String roomName){
+	/**
+	 * clickOnResourceAssociations: It clicks on Resource Association Link.
+	 * @return ResourceAssociationsPage
+	 */
+	public ResourceAssociationsPage clickOnResourceAssociations(){
 		(new WebDriverWait(driver, 60))
 			.until(ExpectedConditions.visibilityOf(resourceAssociationLink));
 		resourceAssociationLink.click();
@@ -39,7 +47,11 @@ public class ConferenceRoomTopMenu {
 		return new ResourceAssociationsPage(driver);
 	}
 	
-	public OutOfOrderPage clickOnOutOfOrderPlanning(String roomName){
+	/**
+	 * clickOnOutOfOrderPlanning: It clicks on Out Of Order Planning Link.
+	 * @return OutOfOrderPage
+	 */
+	public OutOfOrderPage clickOnOutOfOrderPlanning(){
 		(new WebDriverWait(driver, 60))
 			.until(ExpectedConditions.visibilityOf(outOfOrderPlanningLink));
 		outOfOrderPlanningLink.click();

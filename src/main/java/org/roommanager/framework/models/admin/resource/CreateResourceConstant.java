@@ -21,6 +21,14 @@ public class CreateResourceConstant {
     public static final String SAVE_BUTTON="button.info";
     
     /** NAME_ERROR_MESSAGE locator to error message from name's text field*/
-    public static final String NAME_ERROR_MESSAGE = "//div[4]/div/div/div[2]/div/resource-card/div/div/div[2]/div/form/small[2]";
+    public static final String REPEATED_NAME_ERROR_MESSAGE = "//div[4]/div/div/div[2]/div/resource-card/div/div/div[2]/div/form/small[2]";
+    
+    /** DISPLAY_NAME_ERROR_MESSAGE locator to error message from display name text field*/
+    public static final String DISPLAY_NAME_ERROR_MESSAGE = "//div[4]/div/div/div[2]/div/div/resource-card/div/div/div[2]/div/form/small[5]";
+    
+    /** EMPTY_NAME_ERROR_MESSAGE locator to error message from name's text field*/
+    public static final String EMPTY_NAME_ERROR_MESSAGE = "//div[4]/div/div/div[2]/div/div/resource-card/div/div/div[2]/div/form/small[1]";
+    
+    public static final String RESOURCE_DISPLAY_NAME_LABEL = "//div[4]/div/div/div[2]/div/div/div/div/h3";
 }
 	   
