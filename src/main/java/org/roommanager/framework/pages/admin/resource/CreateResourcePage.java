@@ -25,6 +25,8 @@ public class CreateResourcePage {
 	private WebElement repeatedNameErrorMessage;
 	@FindBy(xpath = CreateResourceConstant.DISPLAY_NAME_ERROR_MESSAGE)
 	private WebElement displayNameTextFieldErrorMessage;
+	@FindBy(xpath = CreateResourceConstant.EMPTY_NAME_ERROR_MESSAGE)
+	private WebElement emptyNameErrorMessage;
 	
 	
 	public CreateResourcePage(WebDriver driver) {
@@ -110,6 +112,19 @@ public class CreateResourcePage {
 		(new WebDriverWait(driver, 20))
 			.until(ExpectedConditions.visibilityOf(displayNameTextFieldErrorMessage));
 		String errorMessage = displayNameTextFieldErrorMessage.getText();
+		return errorMessage.equals(expectedErrorMessage);
+	}
+	
+	/**
+	 * isEmptyNameFieldErrorMessagePresent: It returns true if the error message
+	 * is present above the DisplayName text field.
+	 * @return boolean
+	 */
+	public boolean isEmptyNameFieldErrorMessagePresent(){
+		String expectedErrorMessage = "Name must not be empty";
+		(new WebDriverWait(driver, 20))
+			.until(ExpectedConditions.visibilityOf(emptyNameErrorMessage));
+		String errorMessage = emptyNameErrorMessage.getText();
 		return errorMessage.equals(expectedErrorMessage);
 	}
 }

@@ -33,7 +33,10 @@ public class ResourcePage extends LeftMenu {
 	@FindBy(xpath = ResourceConstant.DIV_ELEMENT)
 	private WebElement div_Element;
 	
+	/** propertyName Name of the Property to be searched*/
 	private String propertyName = "Name";
+	
+	/** propertyDisplayName Display Name of the Property to be searched*/
 	private String propertyDisplayName = "DisplayName";
 
 	public ResourcePage(WebDriver driver) {
@@ -80,13 +83,15 @@ public class ResourcePage extends LeftMenu {
 		return resourceItemName;
 	}
 	
+	/**
+	 * Method getResourceDisplayNameInTable Get the Display Name of the resource 
+	 * */
 	public String getResourceDisplayNameInTable(String resourceDisplayName) {
 		WebElement resource = getResourceFromAllPages(propertyDisplayName,resourceDisplayName,
 				getResourcesTableNumberOfPages());
 		String resourceItemName = resource.findElement(By.xpath(ResourceConstant.DISPLAYNAMERESOURCE_TABLE_ITEM))
 				.getText();
 		LogManager.info("Resource Name: <" + resourceItemName+ "> was retrieved");
-		System.out.println(resourceItemName);
 		return resourceItemName;
 	}
 

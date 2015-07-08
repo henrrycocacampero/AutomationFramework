@@ -9,15 +9,31 @@ import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
-
+/**
+ * 
+ * The class is a test that verify if a resource was created
+ * 
+ */
 public class VerifyResourceIsCreated extends TestBase {
-	private String resourceName = "TestResource";
+	
+	/** resourceName value the resource to be created*/
+	private String resourceName = "TestResource";	
+	
+	/** resourceDisplayName property value of the resource to be created */
 	private String resourceDisplayName = "TestResource";
+	
+	/** resourceDescription property value of the resource to be created*/
 	private String resourceDescription = "Description TestResource";
+	
+	/** errorMessage error value that is displayed on the report if the test case is failed*/
 	private String errorMessage = "The test failed because the created Resource was not found";
 
+	/**
+	 * Method that execute the test case to verify that a resource can be created
+	 */
 	@Test
-	public void verifyAResourceIsCreated() {
+    public void verifyAResourceIsCreated() {
+		
 		LoginPage login = new LoginPage(driver);
 		HomePage adminHome = login.clickSignInButton();
 		ResourcePage resources = adminHome.selectResourcesLink();
@@ -31,6 +47,9 @@ public class VerifyResourceIsCreated extends TestBase {
 		Assert.assertEquals( actualResourceName, resourceName,errorMessage);
 	}
 
+	/**
+	 * Method testTearDown delete the resource created in the Test
+	 */
 	@AfterTest
 	public void testTearDown() {
 		ResourceApi.deleteResourceByName(resourceName);
