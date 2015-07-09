@@ -36,6 +36,11 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
+
+	/**
+	 * RoomNameIsDisable: It double clicks on the specified Room.
+	 * @return isRoomNameTextFieldDisabled
+	 */	
 	public boolean RoomNameIsDisable(){
 		new WebDriverWait(driver,60)
 			.until(ExpectedConditions.visibilityOf(roomNameTextField));
@@ -44,14 +49,14 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 		LogManager.info("RoomInfoPage - Room Name is Disable: "+isRoomNameTextFieldDisabled);
 		return isRoomNameTextFieldDisabled;
 	}
-	public ConferenceRoomPage clickButtonSaveUpdateInfoRoom(){
+	public ConferenceRoomPage clickButtonSaveInfoRoom(){
 		(new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(saveButtonRoom));
 		saveButtonRoom.click();
 		LogManager.info("RoomInfoPage - click on the Save Button");
 		return new ConferenceRoomPage(driver); 
 	}
 
-	public ConferenceRoomPage clickButtonCancelUpdateInfoRoom(){
+	public ConferenceRoomPage clickButtonCancelInfoRoom(){
 		(new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(saveCancelRoom));
 		saveCancelRoom.click();
 		LogManager.info("RoomInfoPage - click on the Cancel Button");
@@ -61,7 +66,7 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 	public String getDisplayNameRoom(){
 		WebElement textFieldDisplayNameRoom = new WebDriverWait(driver,60).
 				until(ExpectedConditions.visibilityOf(displaynameRoomTextField));
-		String getNameRoom = textFieldDisplayNameRoom.getAttribute("Value");
+		String getNameRoom = textFieldDisplayNameRoom.getAttribute("value");
 		LogManager.info("RoomInfoPage - get the room display name: "+getNameRoom);
 		return getNameRoom ;
 	}
