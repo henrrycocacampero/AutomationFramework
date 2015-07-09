@@ -4,11 +4,8 @@ import org.roommanager.framework.pages.admin.conferenceroom.ConferenceRoomPage;
 import org.roommanager.framework.pages.admin.conferenceroom.RoomInfoPage;
 import org.roommanager.framework.pages.admin.home.HomePage;
 import org.roommanager.framework.pages.admin.login.LoginPage;
-import org.roommanager.framework.utilities.api.admin.LocationApi;
 import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class VerifyRoomCanBeCanceled extends TestBase{
@@ -17,7 +14,7 @@ public class VerifyRoomCanBeCanceled extends TestBase{
 	private String roomName = "SM-Room1";
 	
 	/** displayName: Display name of room to be changed*/
-	private String displayName = "locationDisplayName";
+	private String displayName = "DisplayName-Updated";
 	 
 	/***/
 	private String getDisplayName;

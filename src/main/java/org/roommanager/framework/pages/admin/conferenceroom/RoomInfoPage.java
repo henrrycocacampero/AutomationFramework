@@ -36,6 +36,8 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 	private WebElement locationTypeButton;
 	@FindBy (xpath = RoomInfoPageConstant.LOCATION_TEXT_FIELD)
 	private WebElement locationTextField;
+	@FindBy (xpath = RoomInfoPageConstant.ERROR_MESSAGE_DISPLAY_NAME)
+	private WebElement errorMessageDisplayName;
 	private WebDriver driver;
 	
 	public RoomInfoPage(WebDriver driver) {
@@ -230,6 +232,17 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 		return getLocationRoom.contains(location);
 	}
 
+	/**
+	 * verificationRoomWithoutDisplayName: This method is for verify the message.
+	 * @param customName
+	 * @return text of the element
+	 */
+	public String verificationRoomWithoutDisplayName(String expectedResult){
+			String message = driver.findElement(By.xpath(RoomInfoPageConstant
+					.ERROR_MESSAGE_DISPLAY_NAME)).getText();
+			LogManager.info("The message of display name of the Room is displayed");
+			return message;
+	}
 }
 
 

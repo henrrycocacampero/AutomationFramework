@@ -43,7 +43,7 @@ public class RoomInfoPageConstant {
 	 * Locator Type = Xpath*/
 	public static final String LOCATION_LIST = "//div[4]/div/div/div[2]/div/div/div[2]/div/form/div[5]/div[2]/div/treeview/div[2]";
 	public static final String LOCATION_TEXT_FIELD = "//div[4]/div/div/div[2]/div/div/div[2]/div/form/div[5]/div[1]/div";
-
+	public static final String ERROR_MESSAGE_DISPLAY_NAME ="//div[4]/div/div/div[2]/div/div/div[2]/div/form/small";
 	/**
 	 * Locator Type = Xpath*/
 	public static final String ROOM_NAME_TEXT_FIELD = "//div[4]/div/div/div[2]/div/div/div[2]/div/form/div[1]/input";
