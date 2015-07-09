@@ -8,17 +8,17 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.admin.resource.CreateResourceConstant;
+import org.roommanager.framework.models.admin.resource.RemoveResourceConstant;
 import org.roommanager.framework.utilities.common.LogManager;
 
 public class RemoveResourcePage {
 	private WebDriver driver;
 	
-	@FindBy(xpath = CreateResourceConstant.RESOURCE_NAME_FIELD)
+	@FindBy(xpath = RemoveResourceConstant.RESOURCE_NAME_FIELD)
 	private WebElement nameTextField;
-	@FindBy(css = CreateResourceConstant.SAVE_BUTTON)
-	private WebElement saveButton;
-	@FindBy(xpath = CreateResourceConstant.RESOURCE_DISPLAY_NAME_LABEL)
-	private WebElement resourceDisplayNameLabel;
+	@FindBy(css = RemoveResourceConstant.REMOVE_BUTTON)
+	private WebElement removeButton;
+	
 	
 	
 	public RemoveResourcePage(WebDriver driver) {
@@ -33,8 +33,8 @@ public class RemoveResourcePage {
 	 */
 	public ResourcePage clickRemoveResourceButton() {
 		(new WebDriverWait(driver, 60))
-				.until(ExpectedConditions.visibilityOf(saveButton));
-		saveButton.click();
+				.until(ExpectedConditions.visibilityOf(removeButton));
+		removeButton.click();
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions
 				.invisibilityOfElementLocated(By.cssSelector(CreateResourceConstant.SAVE_BUTTON)));
 		LogManager.info("Save button was clicked");
