@@ -3,8 +3,11 @@ package org.roommanager.framework.models.admin.conferencerooms;
 public class RoomInfoPageConstant {
 
 	/**
-	 * Locator Type = Css*/
-	public static final String POWER_BUTTON_ROOM = "button.btn.btn-default";
+	 * Locator Type = Xpath*/
+	public static final String POWER_ON_BUTTON_ROOM = "//div[4]/div/div/div[2]/div/div/div[1]/div[2]/button[1]";
+	/**
+	 * Locator Type = Xpath*/
+	public static final String POWER_OFF_BUTTON_ROOM = "//div[4]/div/div/div[2]/div/div/div[1]/div[2]/button[2]";
 	/**
 	 * Locator Type = Xpath**/
 	public static final String DISPLAYNAME_ROOM_TEXT_FIELD = "(//input[@type='text'])[4]";
