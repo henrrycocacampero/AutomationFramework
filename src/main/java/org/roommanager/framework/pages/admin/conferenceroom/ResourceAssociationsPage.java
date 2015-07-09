@@ -20,8 +20,6 @@ public class ResourceAssociationsPage {
 	private WebElement cancelButton;
 	@FindBy(css = ResourceAssociationsConstant.SAVE_BUTTON)
 	private WebElement saveButton;
-	@FindBy(xpath = ResourceAssociationsConstant.CLOSE_BUTTON)
-	private WebElement closeButton;
 	@FindBy(xpath = ResourceAssociationsConstant.LIST_RESOURCES_AVAILABLE)
 	private WebElement resourceAvailableList;
 	@FindBy(xpath = ResourceAssociationsConstant.LIST_RESOURCE_ASSOCIATED)
@@ -56,20 +54,7 @@ public class ResourceAssociationsPage {
 		return new ConferenceRoomPage(driver);
 	}
 
-	/**
-	 * clickCloseButton: It clicks on the Close Button on the Resource
-	 * Associations Page.
-	 * 
-	 * @return ConferenceRoomPage
-	 */
-	public ConferenceRoomPage clickCloseButton() {
-		(new WebDriverWait(driver, 60)).until(ExpectedConditions
-				.visibilityOf(closeButton));
-		closeButton.click();
-		LogManager.info("Close button was clicked");
-		return new ConferenceRoomPage(driver);
-	}
-
+	
 	/**
 	 * clickSaveButton: It clicks on the Save Button on the Resource
 	 * Associations Page.

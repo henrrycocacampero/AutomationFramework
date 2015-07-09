@@ -10,5 +10,4 @@ public class ResourceAssociationsConstant {
 	public static final String LIST_RESOURCE_ASSOCIATED = "//div[4]/div/div/div[2]/div/div/div[2]/div[2]/div/div";
 	public static final String SAVE_BUTTON = "button.info";
 	public static final String CANCEL_BUTTON= "div.pull-right.ng-scope > button.btn-clear";
-	public static final String CLOSE_BUTTON= "//div[4]/div/div/div/div/div/span/i";
 }
