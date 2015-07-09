@@ -201,4 +201,16 @@ public class ResourcePage extends LeftMenu {
 		filterTextField.sendKeys(resourceName);
 		return this;
 	}
+	
+	/**
+	 * clickRemoveResourceButton click on the remote button a resource by name
+	 * @return RemoveResourcePage
+	 */
+	public RemoveResourcePage clickRemoveResourceButton() {
+		(new WebDriverWait(driver, 60)).until(ExpectedConditions.visibilityOf(removeResource_Button));
+		removeResource_Button.click();
+		LogManager.info("Remove Resource button was clicked");
+		
+		return new RemoveResourcePage(driver);
+	}
 }

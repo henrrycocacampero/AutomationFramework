@@ -6,6 +6,11 @@ public class ConferenceRoomConstant {
 	/**
 	 * Locator Type = Xpath*/
 	public static final By ROOM_NAME = By.xpath("div[3]/div[2]/div/span[2]");
+	
+	/**
+	 * Locator Type = Xpath*/
+	public static final By DISABLED_ROOM_NAME = By.xpath("div[3]/div[2]/div/span[1]");
+	
 	/**
 	 * Locator Type = Css*/
 	public static final String TITLE_TABLE_ROOMS = "div.ngGroupPanelDescription.ng-binding";	
@@ -18,6 +23,9 @@ public class ConferenceRoomConstant {
 	/**
 	 * Locator Type = Xpath*/
 	public static final By DIV_ELEMENT = By.xpath("div");
+	/**
+	 * Locator Type = Xpath*/
+	public static final String ONOFF_BUTTON = "div[1]/div[2]/div/div/div/span";
 	/**
 	 * Locator Type = Xpath*/
 	public static final String LIST_RESOURCE = "//";

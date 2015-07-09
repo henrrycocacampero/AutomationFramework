@@ -26,6 +26,7 @@ public class ConferenceRoomPage {
 	private WebElement numberOfPages;
 	private By divElementLocator = ConferenceRoomConstant.DIV_ELEMENT;
 	private By roomNameLocator = ConferenceRoomConstant.ROOM_NAME;
+	private By disabledRoomNameLocator = ConferenceRoomConstant.DISABLED_ROOM_NAME;
 	private WebDriver driver;
 	@FindBy (css = ConferenceRoomConstant.TITLE_TABLE_ROOMS) 
 	private WebElement titleTableRooms;
@@ -42,7 +43,7 @@ public class ConferenceRoomPage {
 	 */
 	public RoomInfoPage doubleClickOnRoom(String roomName){
 		WebElement room = getRoomFromAllPagesByName(roomName, 
-				          getRoomsTableNumberOfPages());
+				          getRoomsTableNumberOfPages(),true);
 		
 		Actions action = new Actions(driver);
 		action.doubleClick(room);
@@ -52,17 +53,83 @@ public class ConferenceRoomPage {
 	}
 	
 	/**
+	 * doubleClickOnDisabledRoom: It double clicks on the specified disabled Room.
+	 * @param roomName: It represents the Disabled Room's Name
+	 * @return RoomInfoPage
+	 */
+	public RoomInfoPage doubleClickOnDisabledRoom(String roomName){
+		WebElement room = getRoomFromAllPagesByName(roomName, 
+				          getRoomsTableNumberOfPages(),false);
+		Actions action = new Actions(driver);
+		action.doubleClick(room);
+		action.perform();
+		LogManager.info("Double Click on Resource: <"+roomName+"> from Resources Table");
+		return new RoomInfoPage(driver);
+	}
+	
+	/**
+	 * getStateColorOnDisabledRoom: It retrieves the state color of the button ON/OFF 
+	 * on an specific Disabled Room.
+	 * @param roomName: It represents the Disabled Room's Name
+	 * @return String
+	 */
+	public String getStateColorOnDisabledRoom(String roomName){
+		String stateOnButton=getStateColorRoomByName(roomName,false);
+		return stateOnButton;
+	}
+	
+	/**
+	 * getStateColorOnEnabledRoom: It retrieves the state color of the button ON/OFF 
+	 * on an specific Enabled Room.
+	 * @param roomName: It represents the Enabled Room's Name
+	 * @return String
+	 */
+	public String getStateColorOnEnabledRoom(String roomName){
+		String stateOffButton=getStateColorRoomByName(roomName,true);
+		return stateOffButton;
+	}
+	
+	/**
+	 * getStateColorRoomByName: It retrieves the state color of the button ON/OFF 
+	 * on an specified Room.
+	 * @param roomName: It represents the Room's Name
+	 * @param enabledRoom: It represents the Room's Enabled state
+	 * @return String
+	 */
+	private String getStateColorRoomByName(String roomName, Boolean enabledRoom){
+		(new WebDriverWait(driver, 60))
+			.until(ExpectedConditions.visibilityOf(roomsList));
+		List <WebElement> rooms = roomsList.findElements(divElementLocator);
+		String stateRoom="";
+		Integer i=1;
+		for (WebElement room : rooms) {
+			String roomItemName =enabledRoom==true ? 
+					room.findElement(roomNameLocator).getText():
+					room.findElement(disabledRoomNameLocator).getText();
+			if(roomItemName.equals(roomName)){
+				String c=ConferenceRoomConstant.LIST_ROOM+"/div["+i+"]/"+ConferenceRoomConstant.ONOFF_BUTTON;	
+				stateRoom=driver.findElement(By.xpath(c)).getAttribute("class");
+			}
+			i=i+1;
+		}
+		LogManager.info("The state color of Room is: "+ stateRoom.split(" ")[0]);
+		return stateRoom;
+	}
+	
+	/**
 	 * getRoomByName: It retrieves the specified Room.
 	 * @param roomName: It represents the Room's Name
 	 * @return WebElement
 	 */
-	private WebElement getRoomByName(String roomName){
+	private WebElement getRoomByName(String roomName, boolean enabledRoom){
 		(new WebDriverWait(driver, 60))
 			.until(ExpectedConditions.visibilityOf(roomsList));
 		List <WebElement> rooms = roomsList.findElements(divElementLocator);
 		
 		for (WebElement room : rooms) {
-			String roomItemName = room.findElement(roomNameLocator).getText();
+			String roomItemName =enabledRoom==true ? 
+				room.findElement(roomNameLocator).getText():
+				room.findElement(disabledRoomNameLocator).getText();
 			if(roomItemName.equals(roomName)){
 				LogManager.info("Room: <"+ roomItemName +
 						        "> was found on the Available Rooms List");
@@ -80,10 +147,10 @@ public class ConferenceRoomPage {
 	 * @param numberOfPages: It represents the available number of Pages
 	 * @return WebElement
 	 */
-	private WebElement getRoomFromAllPagesByName(String resourceName, int numberOfPages){
+	private WebElement getRoomFromAllPagesByName(String resourceName, int numberOfPages,boolean enabledRoom){
 		WebElement resource = null;
 		for(int index = 1; index <= numberOfPages; index++){
-			 resource = getRoomByName(resourceName);
+			 resource = getRoomByName(resourceName,enabledRoom);
 			 if(resource != null){
 				 LogManager.info("Resource: <" +resourceName+ 
 						         "> was found in page:" + index);

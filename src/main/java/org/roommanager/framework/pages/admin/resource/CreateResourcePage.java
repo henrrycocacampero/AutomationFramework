@@ -139,4 +139,28 @@ public class CreateResourcePage {
 			.until(ExpectedConditions.visibilityOf(resourceDisplayNameLabel));
 		return resourceDisplayNameLabel.getText();
 	}
+	
+	/**
+	 * isCreateResourcePagePresent It returns true if the CreateResource Page
+	 * is displayed.
+	 * @return boolean
+	 */
+	public boolean isCreateResourcePagePresent(){
+		boolean isPresent = true;
+		
+		boolean nameTextFieldPresent = (new WebDriverWait(driver, 20))
+			.until(ExpectedConditions.visibilityOf(nameTextField)).isDisplayed();
+		LogManager.info("Name TextField is Present");
+		
+		boolean displayNameTextFieldPresent = (new WebDriverWait(driver, 20))
+				.until(ExpectedConditions.visibilityOf(displayNameTextField)).isDisplayed();
+		LogManager.info("Display Name TextField is Present");
+		
+		boolean descriptionTextFieldPresent = (new WebDriverWait(driver, 20))
+				.until(ExpectedConditions.visibilityOf(descriptionTextArea)).isDisplayed();
+		LogManager.info("Description TextArea is Present");
+		
+		return nameTextFieldPresent == isPresent && displayNameTextFieldPresent == isPresent
+				&& descriptionTextFieldPresent == isPresent ? true : false;
+	}
 }
