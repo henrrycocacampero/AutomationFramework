@@ -176,9 +176,6 @@ public class ResourcePage extends LeftMenu {
 			.until(ExpectedConditions.visibilityOf(paginationTextField));
 		paginationTextField.clear();
 		paginationTextField.sendKeys(page);
-		(new WebDriverWait(driver, 30))
-			.until(ExpectedConditions.visibilityOf(filterTextField));
-		filterTextField.click();
 		return this;
 	}
 	
@@ -189,7 +186,7 @@ public class ResourcePage extends LeftMenu {
 	public String getPaginationTextField(){
 		(new WebDriverWait(driver, 30))
 			.until(ExpectedConditions.visibilityOf(paginationTextField));
-		return paginationTextField.getAttribute("text");
+		return paginationTextField.getAttribute("value");
 	}
 	
 	/**
