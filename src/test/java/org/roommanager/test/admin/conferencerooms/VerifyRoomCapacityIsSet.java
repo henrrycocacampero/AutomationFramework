@@ -16,10 +16,10 @@ import org.testng.annotations.Test;
  */
 public class VerifyRoomCapacityIsSet extends TestBase {
 	
-	/** roomName: Name of the room*/ 
+	/** roomSelected: Name of the room*/ 
 	private String roomSelected =  "SM-Room1";
 	
-	/***/
+	/**capacityRoomUpdated: Capacity of the room*/
     private String capacityRoomUpdated = "100";
         
 	/** 
@@ -30,6 +30,7 @@ public class VerifyRoomCapacityIsSet extends TestBase {
 	
 	  /**
 	  * This method performs the test case:
+	  * Verify that the capacity of a room is set
 	  */
 	@Test
 	public void verifyRoomDisplayNameIsSet() {
@@ -49,7 +50,7 @@ public class VerifyRoomCapacityIsSet extends TestBase {
 		
 		String capacity = updateRoomName.getCapacityRoom();
 		
-		updateRoomName.clickButtonSaveUpdateInfoRoom();
+		updateRoomName.clickButtonCancelInfoRoom();
 		
 		Assert.assertEquals( capacityRoomUpdated, 
 				capacity,msgError);

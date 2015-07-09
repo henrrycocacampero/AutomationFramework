@@ -49,7 +49,7 @@ public class VerifyRoomDisplayNameIsSet extends TestBase {
 		
 		String DisplayName = updateRoomName.getDisplayNameRoom();
 		
-		updateRoomName.clickButtonCancelUpdateInfoRoom();
+		updateRoomName.clickButtonCancelInfoRoom();
 		
 		Assert.assertEquals( displayNameRoomUpdated, 
 				DisplayName,msgError);
