@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
  * @author Paulo Ormachea
  *
  */
-public class VerifyRooCodeIsSet extends TestBase {
+public class VerifyRoomCodeIsSet extends TestBase {
 	
 	/** roomSelected: Name of the room*/ 
 	private String roomSelected =  "SM-Room1";
@@ -44,13 +44,11 @@ public class VerifyRooCodeIsSet extends TestBase {
 				.selectConferenceRoomsLink();
 		
 		RoomInfoPage updateRoomName = conferenceRoomPage
-				.doubleClickOnRoom(roomSelected);
-		
-		updateRoomName.setCodeRoom(codeRoomUpdated);
+				.doubleClickOnRoom(roomSelected).setCodeRoom(codeRoomUpdated);
 		
 		String code = updateRoomName.getCodeRoom();
 		
-		updateRoomName.clickButtonCancelInfoRoom();
+		conferenceRoomPage = updateRoomName.clickButtonCancelInfoRoom();
 		
 		Assert.assertEquals( codeRoomUpdated, 
 				code,msgError);

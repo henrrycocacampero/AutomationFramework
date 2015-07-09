@@ -43,13 +43,12 @@ public class VerifyRoomDisplayNameIsSet extends TestBase {
 				.selectConferenceRoomsLink();
 		
 		RoomInfoPage updateRoomName = conferenceRoomPage
-				.doubleClickOnRoom(roomSelected);
-		
-		updateRoomName.setDisplayNameRoom(displayNameRoomUpdated);
+				.doubleClickOnRoom(roomSelected)
+				.setDisplayNameRoom(displayNameRoomUpdated);
 		
 		String DisplayName = updateRoomName.getDisplayNameRoom();
-		
-		updateRoomName.clickButtonCancelInfoRoom();
+	
+		conferenceRoomPage = updateRoomName.clickButtonCancelInfoRoom();
 		
 		Assert.assertEquals( displayNameRoomUpdated, 
 				DisplayName,msgError);
