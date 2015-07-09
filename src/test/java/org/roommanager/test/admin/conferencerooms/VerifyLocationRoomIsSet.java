@@ -29,8 +29,8 @@ public class VerifyLocationRoomIsSet extends TestBase{
 	  * errorMessage: It contains the error message that would appear 
 	  * if test case fails.
 	  */
-	private String errorMessage = "The test cases failed: the capacity"
-			+ "of the room can be empty.";
+	private String errorMessage = "The test cases failed: the location"
+			+ "of the room does not set.";
 	
 	  /**
 	  * This method performs the test case:Verify that the rename of 
@@ -59,13 +59,21 @@ public class VerifyLocationRoomIsSet extends TestBase{
 		
 		Assert.assertEquals( IsFill, true,errorMessage);
 		
-		//roomInfoPage.clickButtonCancelInfoRoom();
+		roomInfoPage.clickButtonCancelInfoRoom();
 	}
+	
+	/**
+	 * Method BeforeTest: Create the location that was used in the Test.
+	 */
 	@BeforeTest
 	public void beforeTesr(){
 		LocationApi.createLocation(locationName, locationDisplayName, 
 				 locationDescription);
 	}
+	
+	/**
+	 * Method AfterTest Delete the location that was created in the Test.
+	 */
 	@AfterTest
 	public void afterTest(){
 		LocationApi.deleteLocationByName(locationName);
