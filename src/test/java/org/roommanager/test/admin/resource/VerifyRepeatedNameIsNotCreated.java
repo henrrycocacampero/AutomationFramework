@@ -12,14 +12,14 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
- * The VerifyResourceRepeatName class contains the test case 
+ * The VerifyRepeatedNameIsNotCreated class contains the test case 
  * (with pre and post conditions): Verify that is not possible 
  * to create a resource with the repeated [Name] value.
  * 
  * @author Jimmy Maldonado
  *
  */
-public class VerifyResourceRepeatedName extends TestBase{
+public class VerifyRepeatedNameIsNotCreated extends TestBase{
 	
 	/** resourceName: Name of resource to be created*/
 	private String resourceName = "TestResource";
@@ -45,7 +45,7 @@ public class VerifyResourceRepeatedName extends TestBase{
 	 * a resource with the repeated [Name] value.
 	 */
     @Test
-    public void verifyAResourceRepeatedName() {
+    public void verifyRepeatedNameIsNotCreated() {
     	
     	LoginPage login = new LoginPage(driver);
     	

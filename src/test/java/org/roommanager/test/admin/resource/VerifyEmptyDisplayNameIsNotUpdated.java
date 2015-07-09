@@ -2,19 +2,19 @@ package org.roommanager.test.admin.resource;
 
 import org.roommanager.framework.pages.admin.home.HomePage;
 import org.roommanager.framework.pages.admin.login.LoginPage;
-import org.roommanager.framework.pages.admin.resource.CreateResourcePage;
+import org.roommanager.framework.pages.admin.resource.ResourceInfoPage;
 import org.roommanager.framework.pages.admin.resource.ResourcePage;
 import org.roommanager.framework.utilities.api.admin.ResourceApi;
 import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.Assert;
-
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class VerifyResourceDisplayNameIsNotEmpty extends TestBase{
+public class VerifyEmptyDisplayNameIsNotUpdated extends TestBase{
 	/**
 	 * The VerifyResourceResourceDisplayName class contains the test case 
-	 * (with pre ): Verify that edit a [Display Name] text_box field does 
+	 * (with pre and post conditions): Verify that edit a [Display Name] text_box field does 
 	 * not allow empty value.
 	 * 
 	 * @author Samuel Vargas A.
@@ -44,24 +44,33 @@ public class VerifyResourceDisplayNameIsNotEmpty extends TestBase{
 				+ "message was not desplayed";
 	 
 	 @BeforeTest
-	 	public void BeforeTest(){
+	 public void beforeTest(){
 	    ResourceApi.createResource(resourceName, resourceDisplayName, resourceIcon, resourceDescription);
 	 }
 	 
 	 @Test
-		public void VerifyResDisplayNameIsNotEmpty() throws Exception {
+	 public void verifyEmptyDisplayNameIsNotUpdated (){
 			
-			LoginPage login = new LoginPage(driver);
-			HomePage homePage = login
-					.clickSignInButton();
-			ResourcePage resource =  homePage
-					.selectResourcesLink();
-			CreateResourcePage resourcePage = resource.doubleClickOnResourceFromTable(resourceDisplayName);			
-			resourcePage.enterResourceDisplayName(resourceNameUpdate);
-			resourcePage.clickSaveButtonInvalidData();
-						
-			Assert.assertTrue(resourcePage.isDisplayNameFieldErrorMessagePresent() 
-					,errorMessage);												
-	  	}
+		LoginPage login = new LoginPage(driver);
 		
+		HomePage homePage = login
+				.clickSignInButton();
+		
+		ResourcePage resource =  homePage
+				.selectResourcesLink();
+		
+		ResourceInfoPage resourcePage = resource
+				.doubleClickOnResourceFromTable(resourceDisplayName);
+		
+		resourcePage.enterDisplayName(resourceNameUpdate);
+		resourcePage.clickSaveButtonInvalidData();
+						
+		Assert.assertTrue(resourcePage.isEmptyDisplayNameErrorMessagePresent() 
+				,errorMessage);												
+	 }
+	
+	 @AfterTest
+	 public void afterTest(){
+	    ResourceApi.deleteResourceByName(resourceName);
+	 }
 }

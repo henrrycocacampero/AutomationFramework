@@ -2,13 +2,14 @@ package org.roommanager.test.admin.resource;
 
 import org.roommanager.framework.pages.admin.home.HomePage;
 import org.roommanager.framework.pages.admin.login.LoginPage;
-import org.roommanager.framework.pages.admin.resource.CreateResourcePage;
+import org.roommanager.framework.pages.admin.resource.ResourceInfoPage;
 import org.roommanager.framework.pages.admin.resource.ResourcePage;
 import org.roommanager.framework.utilities.api.admin.ResourceApi;
 import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
+
 import static org.junit.Assert.assertEquals;
 
 public class VerifyResourceNameUpdate extends TestBase{
@@ -27,9 +28,15 @@ public class VerifyResourceNameUpdate extends TestBase{
 				.clickSignInButton();
 		ResourcePage resource =  homePage
 				.selectResourcesLink();
-		CreateResourcePage resourcePage = resource.doubleClickOnResourceFromTable(resourceName);
-		resource = resourcePage.enterResourceName(resourceNameUpdate).clickSaveResourceButton();
-		String actualResourceName = resource.getResourceNameInTable(resourceNameUpdate);
+		
+		ResourceInfoPage resourcePage = resource
+				.doubleClickOnResourceFromTable(resourceName);
+		
+		resource = resourcePage.enterResourceName(resourceNameUpdate)
+				.clickSaveButton();
+		String actualResourceName = resource
+				.getResourceNameInTable(resourceNameUpdate);
+		
 		assertEquals(errorMessage, actualResourceName, resourceNameUpdate);
   	}
   	
