@@ -17,25 +17,25 @@ public class ResourceAssociationsPage {
 	WebElement associate;
 	
 	@FindBy (css = ResourceAssociationsConstant.CANCEL_BUTTON) 
-	WebElement cancelButton;
+	private WebElement cancelButton;
 	@FindBy (css = ResourceAssociationsConstant.SAVE_BUTTON) 
-	WebElement saveButton;
+	private WebElement saveButton;
 	@FindBy (xpath = ResourceAssociationsConstant.CLOSE_BUTTON) 
-	WebElement closeButton;
+	private WebElement closeButton;
 	@FindBy (xpath = ResourceAssociationsConstant.LIST_RESOURCES_AVAILABLE) 
-	WebElement resourceAvailableList;
+	private WebElement resourceAvailableList;
 	@FindBy (xpath = ResourceAssociationsConstant.LIST_RESOURCE_ASSOCIATED) 
-	WebElement resourceAssociatedList;
+	private WebElement resourceAssociatedList;
 	@FindBy (xpath = ResourceAssociationsConstant.DIV_ELEMENT ) 
-	WebElement divElement;
+	private WebElement divElement;
 	@FindBy (xpath = ResourceAssociationsConstant.NAME_RESOURCE ) 
-	WebElement nameResource;
+	private WebElement nameResource;
 	@FindBy (xpath = ResourceAssociationsConstant.ASSOCIATE_BUTTON)
-	WebElement associateButton;
+	private WebElement associateButton;
 	@FindBy (css = ResourceAssociationsConstant.DESASSOCIATE_RESOURCE ) 
-	WebElement desassociateButton;
+	private WebElement desassociateButton;
 	@FindBy (xpath = ResourceAssociationsConstant.QUANTITY_ASSOCIATE_TEXT_FIELD ) 
-	WebElement quantityAssociateTextField;
+	private WebElement quantityAssociateTextField;
 	
 	public ResourceAssociationsPage(WebDriver driver){
 		this.driver = driver;
