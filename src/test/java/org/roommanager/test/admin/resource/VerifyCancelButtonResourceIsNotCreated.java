@@ -9,34 +9,30 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * The VerifyResourceResourceDisplayName class contains the test case 
- * (with pre ):Verify that the save a name in [Name] text_box field this 
- * does not allow empty value
+ * The VerifyCancelButtonResourceIsNotCreated class contains the test case 
+ * Verify that after clicking on the Cancel button 
+ * the resource is not created
  * 
  * @author Samuel Vargas A.
  *
  */ 
 
-public class VerifyEmptyNameIsNotCreated extends TestBase {
+public class VerifyCancelButtonResourceIsNotCreated extends TestBase{
+
+	private String errorMessage = "The test failed because the Resource "
+			+ "is created";
+	/** resourceName value the resource to be created*/
+	private String resourceName = "TestResource";	
 	
-	/** resourceName: Name of resource with empty values to be created*/
-	private String resourceName = " ";
-	
-	/** resourceDisplayName: Display name of resource to be created*/
+	/** resourceDisplayName property value of the resource to be created */
 	private String resourceDisplayName = "TestResource";
 	
-	/** resourceDescription: Description of resource to be created*/
+	/** resourceDescription property value of the resource to be created*/
 	private String resourceDescription = "Description TestResource";
-	
-	 /** 
-	 * errorMessage: It contains the error message that would appear 
-	 * if test case fails
-	 */
-	private String errorMessage = "The test failed because the error "
-			+ "message was not desplayed";
+		
 
 	@Test
-	public void verifyEmptyNameIsNotCreated() {
+    public void verifyAResourceIsCreated() {
 		
 		LoginPage login = new LoginPage(driver);
 		
@@ -47,11 +43,10 @@ public class VerifyEmptyNameIsNotCreated extends TestBase {
 		CreateResourcePage createResource = resources.clickAddResourceButton()
 				.enterResourceName(resourceName)
 				.enterResourceDisplayName(resourceDisplayName)
-				.enterResourceDescription(resourceDescription);				
-				createResource.clickSaveButtonInvalidData();
-				
-		Assert.assertTrue(createResource.isEmptyNameErrorMessagePresent()
-				,errorMessage);
+				.enterResourceDescription(resourceDescription);		
+		resources = createResource.clickCancelResourceButton();
+						
+		Assert.assertTrue(resources.verifyElementDoesNotExist(resourceName), errorMessage);
 	}
-
+	
 }
