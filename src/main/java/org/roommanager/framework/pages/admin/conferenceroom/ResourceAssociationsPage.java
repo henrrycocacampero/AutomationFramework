@@ -177,6 +177,43 @@ public class ResourceAssociationsPage {
 	}
 
 	/**
+	 * getResourceAssociatedQuantityByName: It returns the name of the resource 
+	 * for set the quantity.
+	 * @param String resourceName
+	 * @return String
+	 */
+	private WebElement getResourceAssociatedQuantity(String resourceName, String quantity) {
+		(new WebDriverWait(driver, 60))
+			.until(ExpectedConditions.visibilityOf(resourceAssociatedList));
+		List<WebElement> resourcesTable = resourceAssociatedList
+				.findElements(By.xpath(ResourceAssociationsConstant.DIV_ELEMENT));
+		for (WebElement resource : resourcesTable){
+			String resourceItemName = resource.findElement(
+					By.xpath(ResourceAssociationsConstant.NAME_RESOURCE)).getText();
+			if (resourceItemName.equals(resourceName)) {
+				LogManager.info("Resource: <" + resourceItemName+ "> was retrieved from Resources Table");
+				int position = resourcesTable.indexOf(resource)+ 1;
+
+				String desassociationButtonLocator = ResourceAssociationsConstant.LIST_RESOURCE_ASSOCIATED+"/"+
+						ResourceAssociationsConstant.DIV_ELEMENT + "[" + position +"]/" +
+						ResourceAssociationsConstant.QUANTITY_ASSOCIATE_TEXT_FIELD;
+				LogManager.info("Resource: <" + resourceName + "> in the Associated table was found");
+				return driver.findElement(By.xpath(desassociationButtonLocator));	
+			}
+		}
+		LogManager.info("Resource: <" + resourceName + "> in the Associated table wasn't found");
+		return null;
+	}
+	
+	public ResourceAssociationsPage setQuantityOfResource(String resourceName, String quantity) {
+		WebElement quantityResource = getResourceAssociatedQuantity(resourceName, quantity);
+		quantityResource.clear();
+		quantityResource.sendKeys(quantity);
+		LogManager.info("Resource: <" + resourceName + "> was dissasociate from the room");
+		return this;
+	}
+	
+	/**
 	 * getResourceAssociatedByNameInTable: It returns the name of the resource
 	 * 
 	 * @param resourceName: It represents the Resource's Name
@@ -214,10 +251,29 @@ public class ResourceAssociationsPage {
 	}
 
 	/**
+<<<<<<< HEAD
+	 * isQuantityResourceDisplayed: It verifies if the quantity of the
+	 * Resource is displayed on associated in the Room.
+	 * @param String resourceName
+	 * @param String quantity
+	 * @return boolean
+	 */
+	public boolean isQuantityResourceDisplayed(String resourceName, String quantity) {
+		WebElement quantityResource = getResourceAssociatedQuantity(resourceName, quantity);	
+		LogManager.info("Resource: <" + resourceName + "> has <"+ quantity + "> of the resource");
+		return (quantityResource.getAttribute("value")).equals(quantity);
+	}
+	
+	/**
+	 * isResourceAvailableOnTheRoom: It verifies if the Resource is Available
+	 * in the Room.
+	 * @param String resourceName
+=======
 	 * isResourceAvailableOnTheRoom: It verifies if the Resource is Available in
 	 * the Room.
 	 * 
 	 * @param resourceName: It represents the Resource's Name
+>>>>>>> origin/dev
 	 * @return boolean
 	 */
 	public boolean isResourceAvailableOnTheRoom(String resourceName) {
