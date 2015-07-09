@@ -8,6 +8,13 @@ import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+/**
+ * The VerifyCreateResourcesPageIsDisplayed class contains the test case 
+ * Verify that CreateResource Page  is displayed 
+ * 
+ * @author Rodrigo Zarate
+ *
+ */
 public class VerifyCreateResourcesPageIsDisplayed extends TestBase {
 	
 	private String errorMessage = "The test failed because the CreateResource Page "

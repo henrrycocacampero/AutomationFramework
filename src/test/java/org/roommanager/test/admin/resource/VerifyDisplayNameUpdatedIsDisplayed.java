@@ -13,9 +13,12 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
+ * The VerifyDisplayNameUpdatedIsDisplayed class contains the test case 
+ * (with pre and post conditions): Verify that display name is displayed 
+ * when it is updated
  * 
- * The class is a test that verify DisplayName updated is displayed
- * 
+ * @author Rodrigo Zarate
+ *
  */
 public class VerifyDisplayNameUpdatedIsDisplayed extends TestBase{
 
