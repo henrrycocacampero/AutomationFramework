@@ -1,5 +1,8 @@
 package org.roommanager.framework.pages.admin.conferenceroom;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,12 +26,16 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 	private WebElement codeRoomTextField;
 	@FindBy(xpath = RoomInfoPageConstant.CAPACITY_ROOM_TEXT_FIELD)
 	private WebElement capacityRoomTextField;
-	@FindBy(css = RoomInfoPageConstant.LOCATION_BUTTON)
+	@FindBy(xpath = RoomInfoPageConstant.LOCATION_BUTTON)
 	private WebElement locationButton;
 	@FindBy(xpath = RoomInfoPageConstant.LOCATION_LIST)
-	private WebElement LocationList;
+	private WebElement locationList;
 	@FindBy(xpath = RoomInfoPageConstant.ROOM_NAME_TEXT_FIELD)
 	private WebElement roomNameTextField;
+	@FindBy (xpath = RoomInfoPageConstant.LOCATION_TYPE_BUTTTON)
+	private WebElement locationTypeButton;
+	@FindBy (xpath = RoomInfoPageConstant.LOCATION_TEXT_FIELD)
+	private WebElement locationTextField;
 	private WebDriver driver;
 	
 	public RoomInfoPage(WebDriver driver) {
@@ -51,13 +58,24 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 		return new ConferenceRoomPage(driver); 
 	}
 
-	public ConferenceRoomPage clickButtonCancelUpdateInfoRoom(){
+	public ConferenceRoomPage locationName(){
 		(new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(saveCancelRoom));
 		saveCancelRoom.click();
 		LogManager.info("RoomInfoPage - click on the Cancel Button");
 		return new ConferenceRoomPage(driver); 
 	}
-
+	public RoomInfoPage clickLocationButton (){
+		(new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(locationButton));
+		locationButton.click();
+		LogManager.info("RoomInfoPage - click on the Location Button");
+		return this;
+	}
+	public RoomInfoPage clickLocationTypeButton (){
+		(new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(locationTypeButton));
+		locationTypeButton.click();
+		LogManager.info("RoomInfoPage - click on the Location Type Button");
+		return this;
+	}
 	public String getDisplayNameRoom(){
 		WebElement textFieldDisplayNameRoom = new WebDriverWait(driver,60).
 				until(ExpectedConditions.visibilityOf(displaynameRoomTextField));
@@ -97,11 +115,43 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 	}
 	
 	public void setCapacityRoom(String CapacityRoom){
+
 		new WebDriverWait(driver,60).until(ExpectedConditions.visibilityOf(capacityRoomTextField));
 		capacityRoomTextField.clear();
 		capacityRoomTextField.sendKeys(CapacityRoom);
 		LogManager.info("RoomInfoPage - set the room capacity");
 	}	
+
+	public WebElement getLocationByName(String location) {
+		(new WebDriverWait(driver, 60))
+			.until(ExpectedConditions.visibilityOf(locationList));
+		List<WebElement> locationTable = locationList
+				.findElements(By.xpath(RoomInfoPageConstant.DIV_ELEMENT));
+		for (WebElement locationElement : locationTable){
+			String locationName = locationElement.findElement(
+					By.xpath(RoomInfoPageConstant.NAME_LOCATION)).getText();
+			if (locationName.equals(location)) {
+				LogManager.info("Location: <" + locationName+ "> was retrieved from Location Table");
+				return locationElement;	
+			}
+		}
+		LogManager.info("Location: <" + location + "> wasn't found");
+		return null;
+	}
+	public RoomInfoPage clickOnLocation(String location) {
+		WebElement locationName = getLocationByName(location);
+		locationName.click();
+		LogManager.info("Location: <" + location + "> was selected");
+		return this;
+	}
+	
+	public boolean IsLocationTextFieldFilled(String location){
+		WebElement organization = new WebDriverWait(driver,60).
+				until(ExpectedConditions.visibilityOf(locationTextField));			
+		String getLocationRoom = organization.getText();
+		LogManager.info("Location: <" + location + "> is set in text field");
+		return getLocationRoom.contains(location);
+	}
 }
 
 
