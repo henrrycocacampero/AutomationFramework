@@ -14,13 +14,13 @@ import org.testng.annotations.Test;
  * @author Paulo Ormachea
  *
  */
-public class VerifyRooCodeIsSet extends TestBase {
+public class VerifyRoomCodeIsSet extends TestBase {
 	
-	/** roomName: Name of the room*/ 
+	/** roomSelected: Name of the room*/ 
 	private String roomSelected =  "SM-Room1";
 	
-	/***/
-    private String codeRoomUpdated;
+	/**codeRoomUpdated: Code of the room*/
+    private String codeRoomUpdated = "Micode";
         
 	/** 
 	  * errorMessage: It contains the error message that would appear 
@@ -30,6 +30,7 @@ public class VerifyRooCodeIsSet extends TestBase {
 	
 	  /**
 	  * This method performs the test case:
+	  * Verify that the code of a room is set
 	  */
 	@Test
 	public void verifyRoomDisplayNameIsSet() {
@@ -43,13 +44,11 @@ public class VerifyRooCodeIsSet extends TestBase {
 				.selectConferenceRoomsLink();
 		
 		RoomInfoPage updateRoomName = conferenceRoomPage
-				.doubleClickOnRoom(roomSelected);
-		
-		updateRoomName.setCodeRoom(codeRoomUpdated);
+				.doubleClickOnRoom(roomSelected).setCodeRoom(codeRoomUpdated);
 		
 		String code = updateRoomName.getCodeRoom();
 		
-		updateRoomName.clickButtonSaveUpdateInfoRoom();
+		conferenceRoomPage = updateRoomName.clickButtonCancelInfoRoom();
 		
 		Assert.assertEquals( codeRoomUpdated, 
 				code,msgError);

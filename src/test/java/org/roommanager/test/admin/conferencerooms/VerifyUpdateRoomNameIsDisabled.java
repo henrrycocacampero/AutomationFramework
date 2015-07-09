@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
  */
 public class VerifyUpdateRoomNameIsDisabled extends TestBase {
 	
-	/** roomName: Name of the room*/ 
+	/** roomSelected: Name of the room*/ 
 	private String roomSelected =  "SM-Room1";
     
 	/** 
@@ -49,7 +49,7 @@ public class VerifyUpdateRoomNameIsDisabled extends TestBase {
 		
 		Assert.assertEquals( IsDisabled, true,msgError);
 		
-		updateRoomName.clickButtonCancelUpdateInfoRoom();
+		updateRoomName.clickButtonCancelInfoRoom();
 	}
 }
 

@@ -176,9 +176,6 @@ public class ResourcePage extends LeftMenu {
 			.until(ExpectedConditions.visibilityOf(paginationTextField));
 		paginationTextField.clear();
 		paginationTextField.sendKeys(page);
-		(new WebDriverWait(driver, 30))
-			.until(ExpectedConditions.visibilityOf(filterTextField));
-		filterTextField.click();
 		return this;
 	}
 	
@@ -189,7 +186,7 @@ public class ResourcePage extends LeftMenu {
 	public String getPaginationTextField(){
 		(new WebDriverWait(driver, 30))
 			.until(ExpectedConditions.visibilityOf(paginationTextField));
-		return paginationTextField.getAttribute("text");
+		return paginationTextField.getAttribute("value");
 	}
 	
 	/**
@@ -203,5 +200,17 @@ public class ResourcePage extends LeftMenu {
 		filterTextField.clear();
 		filterTextField.sendKeys(resourceName);
 		return this;
+	}
+	
+	/**
+	 * clickRemoveResourceButton click on the remote button a resource by name
+	 * @return RemoveResourcePage
+	 */
+	public RemoveResourcePage clickRemoveResourceButton() {
+		(new WebDriverWait(driver, 60)).until(ExpectedConditions.visibilityOf(removeResource_Button));
+		removeResource_Button.click();
+		LogManager.info("Remove Resource button was clicked");
+		
+		return new RemoveResourcePage(driver);
 	}
 }

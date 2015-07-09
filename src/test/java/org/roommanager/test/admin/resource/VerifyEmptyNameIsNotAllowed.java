@@ -33,7 +33,7 @@ public class VerifyEmptyNameIsNotAllowed extends TestBase {
 	 * if test case fails
 	 */
 	private String errorMessage = "The test failed because the error "
-			+ "message was not desplayed";
+			+ "message was not displayed";
 	
 	
 	 /**
