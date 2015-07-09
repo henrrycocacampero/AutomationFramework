@@ -15,8 +15,10 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 	private WebElement saveButtonRoom;
 	@FindBy(css = RoomInfoPageConstant.SAVE_CANCEL_ROOM)
 	private WebElement saveCancelRoom;
-	@FindBy(xpath = RoomInfoPageConstant.POWER_BUTTON_ROOM)
-	private WebElement powerButton_Room;
+	@FindBy(xpath = RoomInfoPageConstant.POWER_ON_BUTTON_ROOM)
+	private WebElement powerOnButtonRoom;
+	@FindBy(xpath = RoomInfoPageConstant.POWER_OFF_BUTTON_ROOM)
+	private WebElement powerOffButtonRoom;
 	@FindBy(xpath = RoomInfoPageConstant.DISPLAYNAME_ROOM_TEXT_FIELD)
 	private WebElement displaynameRoomTextField;
 	@FindBy(xpath = RoomInfoPageConstant.CODE_ROOM_TEXT_FIELD)
@@ -50,7 +52,27 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 				+isRoomNameTextFieldDisabled);
 		return isRoomNameTextFieldDisabled;
 	}
-	
+	/**
+	 * clickPowerOnButton: It clicks on the PowerOnButton on the Page Info.
+	 * @return RoomInfoPage
+	 */
+	public RoomInfoPage clickPowerOnButton(){
+		(new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(powerOnButtonRoom));
+		powerOnButtonRoom.click();
+		LogManager.info("RoomInfoPage - click on the Power Button");
+		return this; 
+	}
+	/**
+	 * clickPowerOffButton: It clicks on the PowerOffButton on the Page Info.
+	 * @return RoomInfoPage
+	 */
+	public RoomInfoPage clickPowerOffButton(){
+		(new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(powerOffButtonRoom));
+		powerOffButtonRoom.click();
+		LogManager.info("RoomInfoPage - click on the Power Button");
+		return this; 
+	}
+
 	/**
 	 * clickButtonSaveInfoRoom: It clicks on the Save button on the Page Info.
 	 * @return ConferenceRoomPage

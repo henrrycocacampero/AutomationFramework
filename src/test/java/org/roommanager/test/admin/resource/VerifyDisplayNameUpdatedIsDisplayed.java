@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.roommanager.framework.pages.admin.home.HomePage;
 import org.roommanager.framework.pages.admin.login.LoginPage;
-import org.roommanager.framework.pages.admin.resource.CreateResourcePage;
+import org.roommanager.framework.pages.admin.resource.ResourceInfoPage;
 import org.roommanager.framework.pages.admin.resource.ResourcePage;
 import org.roommanager.framework.utilities.api.admin.ResourceApi;
 import org.roommanager.framework.utilities.common.TestBase;
@@ -47,19 +47,27 @@ public class VerifyDisplayNameUpdatedIsDisplayed extends TestBase{
 	 * Resource is updated
 	 */
   	@Test
-	public void verifyDisplayNameUpdatedIsDisplayed() throws Exception {
+	public void verifyResourceDisplayNameUpdatedIsDisplayed() throws Exception {
 		String errorMessage = "The resource name is not changed";
 		
 		LoginPage login = new LoginPage(driver);
-		HomePage homePage = login
-				.clickSignInButton();
-		ResourcePage resource =  homePage.selectResourcesLink();
-		CreateResourcePage resourcePage = resource.doubleClickOnResourceFromTable(resourceName);
-		resource = resourcePage.enterResourceDisplayName(resourceDisplayNameUpdated)
-				.clickSaveResourceButton();
-		String actualResourceName = resource.getResourceDisplayNameInTable(resourceDisplayNameUpdated);
 		
-		assertEquals(errorMessage, actualResourceName, resourceDisplayNameUpdated);
+		HomePage homePage = login.clickSignInButton();
+		
+		ResourcePage resource =  homePage.selectResourcesLink();
+		
+		ResourceInfoPage resourcePage = resource
+				.doubleClickOnResourceFromTable(resourceName);
+		
+		resource = resourcePage
+				.enterDisplayName(resourceDisplayNameUpdated)
+				.clickSaveButton();
+		
+		String actualResourceName = resource
+				.getResourceDisplayNameInTable(resourceDisplayNameUpdated);
+		
+		assertEquals(errorMessage, actualResourceName
+				, resourceDisplayNameUpdated);
   	}
   	
   	/**

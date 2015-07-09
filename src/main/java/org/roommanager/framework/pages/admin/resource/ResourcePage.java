@@ -55,7 +55,7 @@ public class ResourcePage extends LeftMenu {
 		return new CreateResourcePage(driver);
 	}
 	
-	public CreateResourcePage doubleClickOnResourceFromTable(String resourceName) {
+	public ResourceInfoPage doubleClickOnResourceFromTable(String resourceName) {
 		WebElement resource = getResourceFromAllPages(propertyName,resourceName,
 				getResourcesTableNumberOfPages());
 		String resourceItemName = resource.findElement(By.xpath(ResourceConstant.RESOURCE_TABLE_ITEM)).getText();
@@ -63,7 +63,7 @@ public class ResourcePage extends LeftMenu {
 		action.doubleClick(resource);
 		action.perform();
 		LogManager.info("Double Click on Resource: <" + resourceItemName+ "> from Resources Table");
-		return new CreateResourcePage(driver);
+		return new ResourceInfoPage(driver);
 	}
 
 	public ResourcePage clickOnResourceFromTable(String resourceName) {
@@ -82,7 +82,6 @@ public class ResourcePage extends LeftMenu {
 		String resourceItemName = resource.findElement(By.xpath(ResourceConstant.RESOURCE_TABLE_ITEM))
 				.getText();
 		LogManager.info("Resource Name: <" + resourceItemName+ "> was retrieved");
-		System.out.println(resourceItemName);
 		return resourceItemName;
 	}
 	
@@ -142,21 +141,18 @@ public class ResourcePage extends LeftMenu {
 
 	private WebElement getResourceByAttribute(String property,String propertyValue) {
 		String itemInTable = "";
-		
 		if(property == propertyName){
 			itemInTable = ResourceConstant.RESOURCE_TABLE_ITEM;
 		}
 		else if(property == propertyDisplayName){
 			itemInTable = ResourceConstant.DISPLAYNAMERESOURCE_TABLE_ITEM;
 		}			
-		 System.out.println(itemInTable);
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions.visibilityOf(resource_List));
 		List<WebElement> resourcesTable = resource_List
 				.findElements(By.xpath(ResourceConstant.DIV_ELEMENT));
 		for (WebElement resource : resourcesTable) {
 			String resourceItemName = resource.findElement(
 					By.xpath(itemInTable)).getText();
-			System.out.println(resourceItemName);
 			if (resourceItemName.equals(propertyValue)) {
 				LogManager.info("Resource: <" + resourceItemName+ "> was retrieved from Resources Table");
 				return resource;
@@ -210,7 +206,6 @@ public class ResourcePage extends LeftMenu {
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions.visibilityOf(removeResource_Button));
 		removeResource_Button.click();
 		LogManager.info("Remove Resource button was clicked");
-		
 		return new RemoveResourcePage(driver);
 	}
 }

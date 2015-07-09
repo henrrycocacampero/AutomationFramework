@@ -1,7 +1,5 @@
 package org.roommanager.test.admin.resource;
 
-import static org.junit.Assert.assertEquals;
-
 import org.roommanager.framework.pages.admin.home.HomePage;
 import org.roommanager.framework.pages.admin.login.LoginPage;
 import org.roommanager.framework.pages.admin.resource.RemoveResourcePage;
@@ -59,7 +57,6 @@ public class VerifyResourceIsDeleted extends TestBase{
 		RemoveResourcePage removeResource = resources.clickRemoveResourceButton();
 							removeResource.clickRemoveResourceButton();
 										
-					
 		Assert.assertTrue(resources.verifyElementDoesNotExist(resourceName)
 						,errorMessage);
   	}

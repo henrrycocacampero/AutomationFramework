@@ -8,7 +8,7 @@ import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class VerifyResourceIsNotCreatedEmptyName extends TestBase {
+public class VerifyEmptyNameIsNotCreated extends TestBase {
 	
 	/**
 	 * The VerifyResourceResourceDisplayName class contains the test case 
@@ -36,16 +36,21 @@ public class VerifyResourceIsNotCreatedEmptyName extends TestBase {
 			+ "message was not desplayed";
 
 	@Test
-	public void VerifyResourceIsNotCreatedWithEmptyName() {
+	public void verifyEmptyNameIsNotCreated() {
+		
 		LoginPage login = new LoginPage(driver);
+		
 		HomePage adminHome = login.clickSignInButton();
+		
 		ResourcePage resources = adminHome.selectResourcesLink();
+		
 		CreateResourcePage createResource = resources.clickAddResourceButton()
 				.enterResourceName(resourceName)
 				.enterResourceDisplayName(resourceDisplayName)
 				.enterResourceDescription(resourceDescription);				
-				createResource.clickSaveButtonInvalidData();				
-		Assert.assertTrue(createResource.isEmptyNameFieldErrorMessagePresent()
+				createResource.clickSaveButtonInvalidData();
+				
+		Assert.assertTrue(createResource.isEmptyNameErrorMessagePresent()
 				,errorMessage);
 	}
 

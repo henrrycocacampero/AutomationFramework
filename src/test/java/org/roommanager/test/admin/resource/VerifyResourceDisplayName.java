@@ -2,7 +2,7 @@ package org.roommanager.test.admin.resource;
 
 import org.roommanager.framework.pages.admin.home.HomePage;
 import org.roommanager.framework.pages.admin.login.LoginPage;
-import org.roommanager.framework.pages.admin.resource.CreateResourcePage;
+import org.roommanager.framework.pages.admin.resource.ResourceInfoPage;
 import org.roommanager.framework.pages.admin.resource.ResourcePage;
 import org.roommanager.framework.utilities.api.admin.ResourceApi;
 import org.roommanager.framework.utilities.common.TestBase;
@@ -50,7 +50,7 @@ public class VerifyResourceDisplayName extends TestBase{
 		
 		ResourcePage resources = home.selectResourcesLink();
 		
-		CreateResourcePage create = resources
+		ResourceInfoPage create = resources
 				.doubleClickOnResourceFromTable(resourceName);
 
 		String displayName = create.getResourceDisplayName();

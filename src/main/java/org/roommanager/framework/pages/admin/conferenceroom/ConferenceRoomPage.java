@@ -55,6 +55,12 @@ public class ConferenceRoomPage {
 		LogManager.info("Double Click on Resource: <"+roomName+"> from Resources Table");
 		return new RoomInfoPage(driver);
 	}
+	
+	/**
+	 * doubleClickOnDisabledRoom: It double clicks on the specified disabled Room.
+	 * @param roomName: It represents the Disabled Room's Name
+	 * @return RoomInfoPage
+	 */
 	public RoomInfoPage doubleClickOnDisabledRoom(String roomName){
 		WebElement room = getRoomFromAllPagesByName(roomName, 
 				          getRoomsTableNumberOfPages(),false);
@@ -64,14 +70,36 @@ public class ConferenceRoomPage {
 		LogManager.info("Double Click on Resource: <"+roomName+"> from Resources Table");
 		return new RoomInfoPage(driver);
 	}
+	
+	/**
+	 * getStateColorOnDisabledRoom: It retrieves the state color of the button ON/OFF 
+	 * on an specific Disabled Room.
+	 * @param roomName: It represents the Disabled Room's Name
+	 * @return String
+	 */
 	public String getStateColorOnDisabledRoom(String roomName){
 		String stateOnButton=getStateColorRoomByName(roomName,false);
 		return stateOnButton;
 	}
+	
+	/**
+	 * getStateColorOnEnabledRoom: It retrieves the state color of the button ON/OFF 
+	 * on an specific Enabled Room.
+	 * @param roomName: It represents the Enabled Room's Name
+	 * @return String
+	 */
 	public String getStateColorOnEnabledRoom(String roomName){
 		String stateOffButton=getStateColorRoomByName(roomName,true);
 		return stateOffButton;
 	}
+	
+	/**
+	 * getStateColorRoomByName: It retrieves the state color of the button ON/OFF 
+	 * on an specified Room.
+	 * @param roomName: It represents the Room's Name
+	 * @param enabledRoom: It represents the Room's Enabled state
+	 * @return String
+	 */
 	private String getStateColorRoomByName(String roomName, Boolean enabledRoom){
 		(new WebDriverWait(driver, 60))
 			.until(ExpectedConditions.visibilityOf(roomsList));
