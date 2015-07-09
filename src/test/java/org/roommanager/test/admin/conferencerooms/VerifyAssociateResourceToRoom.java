@@ -36,11 +36,13 @@ public class VerifyAssociateResourceToRoom extends TestBase {
  	  
  	  /** roomName: Name of the room*/
       private String roomName = "SM-Room1";
+      
       /** 
  	  * errorMessage: It contains the error message that would appear 
  	  * if test case fails.
  	  */
 	  private String errorMessage = "The Resource"+resourceName+"is not associated"; 
+	  
 	  /**
 	  * This method performs the test case:Verify that an available resource 
       * can be associated to a room.
@@ -55,12 +57,13 @@ public class VerifyAssociateResourceToRoom extends TestBase {
 		  
 		  ResourceAssociationsPage resourceAssociation = conferenceRoom
 				  .doubleClickOnRoom(roomName)
-				  .clickOnResourceAssociations(roomName);
+				  .clickOnResourceAssociations();
 		  
 		  resourceAssociation.clickOnAddResourceButton(resourceDisplayName)
 		  		  .clickSaveButton();
+
 		  conferenceRoom.doubleClickOnRoom(roomName).
-		  clickOnResourceAssociations(roomName);
+		  clickOnResourceAssociations();
 		  
 		  String associatedResourceName = resourceAssociation
 					.getResourceAssociatedByNameInTable(resourceDisplayName);
@@ -69,6 +72,7 @@ public class VerifyAssociateResourceToRoom extends TestBase {
 		  
 		  resourceAssociation.clickCancelButton();
 	  }
+	  
 	  /**
 	  * beforeTest: This method creates a resource that will be used 
 	  * in the test case.
@@ -78,6 +82,7 @@ public class VerifyAssociateResourceToRoom extends TestBase {
 		ResourceApi.createResource(resourceName, resourceDisplayName, 
 				resourceIcon, resourceDescription);
 	  }
+	  
 	  /**
 	  * afterTest: This method deletes the created resource in the 
 	  * beforeTest method.
