@@ -12,6 +12,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+
 /**
  * The VerifyDisassociateResourceFromRoom class contains the test case: 
  * "Verify that is possible to dissociate a resource from a room".
@@ -70,9 +71,9 @@ public class VerifyDisassociateResourceFromRoom extends TestBase {
 				.clickOnDesassociatedResourceButton(resourceDisplayName)
 				.clickSaveButton().doubleClickOnRoom(roomName)
 				.clickOnResourceAssociations();
-		Assert.assertTrue(errorMessage, resourceAssociation
-				.verifyElementDoesNotExistOnAssociated(resourceDisplayName));
-		resourceAssociation.clickCloseButton();
+		boolean resourceIsAvailable = resourceAssociation.isResourceAvailableOnTheRoom(resourceName);
+		Assert.assertTrue(errorMessage, resourceIsAvailable);
+		
 	}
 
 	/**
