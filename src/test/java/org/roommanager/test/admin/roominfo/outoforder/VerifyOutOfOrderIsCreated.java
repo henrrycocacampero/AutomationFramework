@@ -52,7 +52,7 @@ public class VerifyOutOfOrderIsCreated extends TestBase{
 	outOfOrderPage.setRandomTitle();
 	outOfOrderPage.setDescription();
 	outOfOrderPage.clickSaveButtonOutOfOrder();
-	isPresentOutOfOrder = outOfOrderPage.existOutOfOrder(roomSelected);
+	isPresentOutOfOrder = conferenceRoom.existOutOfOrder(roomSelected);
 	/*Asserts*/	  
 	Assert.assertTrue( isPresentOutOfOrder,msgError );
 	LogManager.info("Assert Test Create Out Of Order Planing was created:"+ isPresentOutOfOrder);
