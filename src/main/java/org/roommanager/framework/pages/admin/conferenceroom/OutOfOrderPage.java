@@ -1,4 +1,4 @@
-package org.roommanager.framework.pages.admin.conferencerooms;
+package org.roommanager.framework.pages.admin.conferenceroom;
 
 import java.util.ArrayList;
 import java.util.Calendar;
