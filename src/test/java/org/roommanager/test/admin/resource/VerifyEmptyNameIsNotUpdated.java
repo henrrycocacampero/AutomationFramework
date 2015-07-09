@@ -11,6 +11,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+/**
+ * The VerifyEmptyNameIsNotUpdated class contains the test case 
+ * (with pre and post conditions): Verify that is not possible 
+ * to update a resource with the empty name.
+ * 
+ * @author Rodrigo Zarate
+ *
+ */
 public class VerifyEmptyNameIsNotUpdated extends TestBase {
 
 	/** resourceName Name of the resource to be Created*/
@@ -37,7 +45,7 @@ public class VerifyEmptyNameIsNotUpdated extends TestBase {
 	
 	
 	 /**
-	 * Method BeforeTest Create a resource to be updated in the test.
+	 * Method BeforeTest Create a resource to be updated in the test by API.
 	 */
 	@BeforeTest
 	 public void BeforeTest(){
@@ -67,6 +75,9 @@ public class VerifyEmptyNameIsNotUpdated extends TestBase {
 				,errorMessage);
     }
 	
+	/**
+	 * Method AfterTest delete a created resource in the test by API.
+	 */
 	@AfterTest
 	public void AfterTest(){
 		ResourceApi.deleteResourceByName(resourceName);
