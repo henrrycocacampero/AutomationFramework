@@ -32,7 +32,10 @@ public class ResourcePage extends LeftMenu {
 	private WebElement resource_ListItem;
 	@FindBy(xpath = ResourceConstant.DIV_ELEMENT)
 	private WebElement div_Element;
-	
+	@FindBy(xpath = ResourceConstant.PAGINATION_TEXT_FIELD)
+	private WebElement paginationTextField;
+	@FindBy(xpath = ResourceConstant.FILTER_TEXT_FIELD)
+	private WebElement filterTextField;
 	/** propertyName Name of the Property to be searched*/
 	private String propertyName = "Name";
 	
@@ -162,5 +165,43 @@ public class ResourcePage extends LeftMenu {
 		LogManager.info("Resource: <" + propertyValue + "> wasn't found");
 		return null;
 	}
-
+	
+	/**
+	 * setPaginationTextField sets a value in the Pagination text field
+	 * @param page represents the page's number in the resource table
+	 * @return ResorucePage
+	 */
+	public ResourcePage setPaginationTextField(String page){
+		(new WebDriverWait(driver, 30))
+			.until(ExpectedConditions.visibilityOf(paginationTextField));
+		paginationTextField.clear();
+		paginationTextField.sendKeys(page);
+		(new WebDriverWait(driver, 30))
+			.until(ExpectedConditions.visibilityOf(filterTextField));
+		filterTextField.click();
+		return this;
+	}
+	
+	/**
+	 * getPaginationTextField returns the content of the Pagination text field 
+	 * @return Pagination
+	 */
+	public String getPaginationTextField(){
+		(new WebDriverWait(driver, 30))
+			.until(ExpectedConditions.visibilityOf(paginationTextField));
+		return paginationTextField.getAttribute("text");
+	}
+	
+	/**
+	 * filterResourceByName filters a resource by name
+	 * @param resourceName represents the resource's name to be searched
+	 * @return ResourcePage
+	 */
+	public ResourcePage filterResourceByName(String resourceName){
+		(new WebDriverWait(driver, 30))
+			.until(ExpectedConditions.visibilityOf(filterTextField));
+		filterTextField.clear();
+		filterTextField.sendKeys(resourceName);
+		return this;
+	}
 }
