@@ -59,8 +59,7 @@ public class VerifyAssociateResourceToRoom extends TestBase {
 		  
 		  resourceAssociation.clickOnAddResourceButton(resourceDisplayName)
 		  		  .clickSaveButton();
-		  conferenceRoom.doubleClickOnRoom(roomName).
-		  clickOnResourceAssociations(roomName);
+		  conferenceRoom.doubleClickOnRoom(roomName).clickOnResourceAssociations(roomName);
 		  
 		  String associatedResourceName = resourceAssociation
 					.getResourceAssociatedByNameInTable(resourceDisplayName);

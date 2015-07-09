@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.admin.conferencerooms.RoomInfoPageConstant;
+import org.roommanager.framework.utilities.common.LogManager;
 
 public class RoomInfoPage extends ConferenceRoomTopMenu{
 
@@ -40,17 +41,20 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 			.until(ExpectedConditions.visibilityOf(roomNameTextField));
 		boolean isRoomNameTextFieldDisabled = 
 				roomNameTextField.isEnabled() == true? false:true;
+		LogManager.info("RoomInfoPage - Room Name is Disable: "+isRoomNameTextFieldDisabled);
 		return isRoomNameTextFieldDisabled;
 	}
 	public ConferenceRoomPage clickButtonSaveUpdateInfoRoom(){
 		(new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(saveButtonRoom));
 		saveButtonRoom.click();
+		LogManager.info("RoomInfoPage - click on the Save Button");
 		return new ConferenceRoomPage(driver); 
 	}
 
 	public ConferenceRoomPage clickButtonCancelUpdateInfoRoom(){
 		(new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(saveCancelRoom));
 		saveCancelRoom.click();
+		LogManager.info("RoomInfoPage - click on the Cancel Button");
 		return new ConferenceRoomPage(driver); 
 	}
 
@@ -58,6 +62,7 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 		WebElement textFieldDisplayNameRoom = new WebDriverWait(driver,60).
 				until(ExpectedConditions.visibilityOf(displaynameRoomTextField));
 		String getNameRoom = textFieldDisplayNameRoom.getAttribute("Value");
+		LogManager.info("RoomInfoPage - get the room display name: "+getNameRoom);
 		return getNameRoom ;
 	}
 	
@@ -65,12 +70,14 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 		new WebDriverWait(driver,60).until(ExpectedConditions.visibilityOf(displaynameRoomTextField));	
 		displaynameRoomTextField.clear();
 		displaynameRoomTextField.sendKeys(DisplayNameRoom);
+		LogManager.info("RoomInfoPage - set the room display name");
 	}
 	
 	public String getCodeRoom(){
 		WebElement textFieldCodeRoom = new WebDriverWait(driver,60).
 				until(ExpectedConditions.visibilityOf(codeRoomTextField));
 		String getCodeRoom = textFieldCodeRoom.getAttribute("Value");
+		LogManager.info("RoomInfoPage - get the room code: "+getCodeRoom);
 		return getCodeRoom ;
 	}
 	
@@ -78,12 +85,14 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 		new WebDriverWait(driver,60).until(ExpectedConditions.visibilityOf(codeRoomTextField));	
 		codeRoomTextField.clear();
 		codeRoomTextField.sendKeys(CodeRoom);
+		LogManager.info("RoomInfoPage - set the room code");
 	}
 	
 	public String getCapacityRoom(){
 		WebElement textFieldCapacityRoom = new WebDriverWait(driver,60).
 				until(ExpectedConditions.visibilityOf(capacityRoomTextField));			
 		String getCapacityRoom = textFieldCapacityRoom.getAttribute("Value");
+		LogManager.info("RoomInfoPage - get the room capacity: "+getCapacityRoom);
 		return getCapacityRoom ;
 	}
 	
@@ -91,6 +100,7 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 		new WebDriverWait(driver,60).until(ExpectedConditions.visibilityOf(capacityRoomTextField));
 		capacityRoomTextField.clear();
 		capacityRoomTextField.sendKeys(CapacityRoom);
+		LogManager.info("RoomInfoPage - set the room capacity");
 	}	
 }
 

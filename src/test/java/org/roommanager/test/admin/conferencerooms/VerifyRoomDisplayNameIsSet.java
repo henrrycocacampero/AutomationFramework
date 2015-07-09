@@ -8,29 +8,31 @@ import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 /**
- * VerifyRoomNameUpdateIsDisable class contains the test case:  
- * Verify that is not possible to update the Name of a room.
+ * VerifyRoomDisplayNameIsSet class contains the test case:  
+ * Verify that the display name of a room is set
  * 
  * @author Paulo Ormachea
  *
  */
-public class VerifyUpdateRoomNameIsDisabled extends TestBase {
+public class VerifyRoomDisplayNameIsSet extends TestBase {
 	
 	/** roomName: Name of the room*/ 
 	private String roomSelected =  "SM-Room1";
-    
+	
+	/***/
+    private String displayNameRoomUpdated = "SM-Room1-Update";
+       
 	/** 
 	  * errorMessage: It contains the error message that would appear 
 	  * if test case fails.
 	  */
-	private String msgError = "Conferece Room Page - The room Name is Enabled";
+	private String msgError = "Conferece Room Page - The room name is not set";
 	
 	  /**
-	  * This method performs the test case:Verify that the rename of a room 
-	  * is disabled
+	  * This method performs the test case:
 	  */
 	@Test
-	public void VerifyRoomNameUpdateIsDisable() {
+	public void verifyRoomDisplayNameIsSet() {
 				
 		LoginPage loginPage = new LoginPage(driver);
 		
@@ -43,14 +45,14 @@ public class VerifyUpdateRoomNameIsDisabled extends TestBase {
 		RoomInfoPage updateRoomName = conferenceRoomPage
 				.doubleClickOnRoom(roomSelected);
 		
-		updateRoomName.setDisplayNameRoom(roomSelected);
+		updateRoomName.setDisplayNameRoom(displayNameRoomUpdated);
 		
-		boolean IsDisabled = updateRoomName.RoomNameIsDisable();
+		String DisplayName = updateRoomName.getDisplayNameRoom();
 		
-		Assert.assertEquals( IsDisabled, true,msgError);
+		updateRoomName.clickButtonSaveUpdateInfoRoom();
 		
-		updateRoomName.clickButtonCancelUpdateInfoRoom();
+		Assert.assertEquals( displayNameRoomUpdated, 
+				DisplayName,msgError);
+				
 	}
 }
-
-
