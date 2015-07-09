@@ -31,6 +31,8 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 	private WebElement LocationList;
 	@FindBy(xpath = RoomInfoPageConstant.ROOM_NAME_TEXT_FIELD)
 	private WebElement roomNameTextField;
+	@FindBy(xpath = RoomInfoPageConstant.ROOM_NAME_TITLE)
+	private WebElement roomNameTitle;
 	private WebDriver driver;
 	
 	public RoomInfoPage(WebDriver driver) {
@@ -171,7 +173,21 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 		capacityRoomTextField.sendKeys(capacityRoom);
 		LogManager.info("RoomInfoPage - set the room capacity");
 		return this;
-	}	
+	}
+	
+	/**
+	 * isRoomInPageTitlePresent: It verifies the Room Info Page Title is Present. 
+	 * @param roomName: It represents the value of the Room Info Page Title.
+	 */
+	public boolean isRoomInPageTitlePresent(String roomName){
+		new WebDriverWait(driver, 60)
+			.until(ExpectedConditions.visibilityOf(roomNameTitle));
+		String roomTitle = roomNameTitle.getText();
+		
+		LogManager.info("The Room Info Page Title: <"+roomTitle+"> was found");
+		return roomTitle.equals(roomName);
+	}
+	
 }
 
 

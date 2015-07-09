@@ -232,6 +232,10 @@ public class ConferenceRoomPage {
 	    return found;	
 	}
 	
+	/**
+	 * isResourceHeaderPresent: It verifies the Resource Header is present.
+	 * @return boolean
+	 */
 	public boolean isResourceHeaderPresent(){
 		(new WebDriverWait(driver, 60))
 			.until(ExpectedConditions.visibilityOf(resourceHeader));
@@ -242,6 +246,10 @@ public class ConferenceRoomPage {
 		return isResourceHeaderPresent;
 	}
 	
+	/**
+	 * isRoomsTableHeaderPresent: It verifies the Room Table Header is present.
+	 * @return boolean
+	 */
 	public boolean isRoomsTableHeaderPresent(){
 		
 		By enabledHeaderLocator = By.xpath(ConferenceRoomConstant.ROOM_TABLE_HEADER
