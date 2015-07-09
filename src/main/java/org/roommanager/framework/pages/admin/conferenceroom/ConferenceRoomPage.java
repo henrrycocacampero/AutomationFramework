@@ -27,6 +27,8 @@ public class ConferenceRoomPage {
 	private By divElementLocator = ConferenceRoomConstant.DIV_ELEMENT;
 	private By roomNameLocator = ConferenceRoomConstant.ROOM_NAME;
 	private WebDriver driver;
+	@FindBy (css = ConferenceRoomConstant.TITLE_TABLE_ROOMS) 
+	private WebElement titleTableRooms;
 	
 	public ConferenceRoomPage(WebDriver driver){
 		this.driver = driver;
@@ -110,8 +112,7 @@ public class ConferenceRoomPage {
 			nextPageinput = pageNumber.getAttribute("value");
 		}
 		LogManager.info("The Next Page button was clicked");
-	}
-	
+	}	
 	/**
 	 * getRoomsTableNumberOfPages: It retrieves Rooms Table's Number of Pages.
 	 * @return int
@@ -123,5 +124,40 @@ public class ConferenceRoomPage {
 		LogManager.info("The number of Pages of the Rooms Table is: " 
 		                + Integer.parseInt(pages));
 		return Integer.parseInt(pages);
+	}
+	/**
+	 * existOutOfOrder: Making the verification of an Out of Order 
+	 * was created on a room.
+	 * @return boolean
+	 */
+	public boolean existOutOfOrder(String roomName){
+
+		/*Looking the room*/		
+		boolean found= false;		
+		
+		new WebDriverWait(driver,80).until(ExpectedConditions.visibilityOf(titleTableRooms));
+		
+		WebElement list = driver.findElement(By.xpath(ConferenceRoomConstant.LIST_ROOM));
+		List<WebElement> subList = list.findElements((ConferenceRoomConstant.SUBLIST_ROOM)); 		
+	    
+		for(int i = 0 ; i < subList.size(); i+=1){
+	    	String valueGet = (subList.get(i).getText()).trim();
+	    	String valueRoom = roomName.trim();	    	
+	    	if(valueGet.equals(valueRoom)){
+	    		System.out.println("Room:" + subList.get(i).getText()+ " Found!");	  
+	    		try{
+	    			subList.get(i).
+	    			findElement(By.xpath("div[2]/div[2]/out-of-order-icon/div/div/div/span"));
+	    			found = true;
+	    		} 
+	    		catch(Exception e)
+	    		{	    			
+	    		}   		 
+	    		break;
+	    	}	    	    	
+	    }	
+		System.out.println(subList.size());
+	    LogManager.info("Out Of Order Planning exist? "+ found);
+	    return found;	
 	}
 }
