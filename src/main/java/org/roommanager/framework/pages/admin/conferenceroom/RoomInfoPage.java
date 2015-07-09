@@ -1,5 +1,8 @@
 package org.roommanager.framework.pages.admin.conferenceroom;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -25,14 +28,20 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 	private WebElement codeRoomTextField;
 	@FindBy(xpath = RoomInfoPageConstant.CAPACITY_ROOM_TEXT_FIELD)
 	private WebElement capacityRoomTextField;
-	@FindBy(css = RoomInfoPageConstant.LOCATION_BUTTON)
+	@FindBy(xpath = RoomInfoPageConstant.LOCATION_BUTTON)
 	private WebElement locationButton;
 	@FindBy(xpath = RoomInfoPageConstant.LOCATION_LIST)
-	private WebElement LocationList;
+	private WebElement locationList;
 	@FindBy(xpath = RoomInfoPageConstant.ROOM_NAME_TEXT_FIELD)
 	private WebElement roomNameTextField;
 	@FindBy(xpath = RoomInfoPageConstant.ROOM_NAME_TITLE)
 	private WebElement roomNameTitle;
+	@FindBy (xpath = RoomInfoPageConstant.LOCATION_TYPE_BUTTTON)
+	private WebElement locationTypeButton;
+	@FindBy (xpath = RoomInfoPageConstant.LOCATION_TEXT_FIELD)
+	private WebElement locationTextField;
+	@FindBy (xpath = RoomInfoPageConstant.ERROR_MESSAGE_DISPLAY_NAME)
+	private WebElement errorMessageDisplayName;
 	private WebDriver driver;
 	
 	public RoomInfoPage(WebDriver driver) {
@@ -97,6 +106,28 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 		saveCancelRoom.click();
 		LogManager.info("RoomInfoPage - click on the Cancel Button");
 		return new ConferenceRoomPage(driver); 
+	}
+	
+	/**
+	 * clickLocationButton: It clicks on the location button on the Page Info.
+	 * @return RoomInfoPage
+	 */
+	public RoomInfoPage clickLocationButton (){
+		(new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(locationButton));
+		locationButton.click();
+		LogManager.info("RoomInfoPage - click on the Location Button");
+		return this;
+	}
+	
+	/**
+	 * clickLocationTypeButton: It clicks on the type of location button on the Page Info.
+	 * @return RoomInfoPage
+	 */
+	public RoomInfoPage clickLocationTypeButton (){
+		(new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(locationTypeButton));
+		locationTypeButton.click();
+		LogManager.info("RoomInfoPage - click on the Location Type Button");
+		return this;
 	}
 
 	/**
@@ -167,6 +198,8 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 	 * setCapacityRoom: It sets the capacity of the Room in the Room Info Page.
 	 * @param capacityRoom: It represents the value for the rooms capacity.
 	 */
+
+
 	public RoomInfoPage setCapacityRoom(String capacityRoom){
 		new WebDriverWait(driver,60).until(ExpectedConditions.visibilityOf(capacityRoomTextField));
 		capacityRoomTextField.clear();
@@ -188,6 +221,65 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 		return roomTitle.equals(roomName);
 	}
 	
+	/**
+	 * getLocationByName: It get a location by name on the Page Info.
+	 * @param location: It represents the location for the rooms.
+	 * @return WebElement
+	 */
+	public WebElement getLocationByName(String location) {
+		(new WebDriverWait(driver, 60))
+			.until(ExpectedConditions.visibilityOf(locationList));
+		List<WebElement> locationTable = locationList
+				.findElements(By.xpath(RoomInfoPageConstant.DIV_ELEMENT));
+		for (WebElement locationElement : locationTable){
+			String locationName = locationElement.findElement(
+					By.xpath(RoomInfoPageConstant.NAME_LOCATION)).getText();
+			if (locationName.equals(location)) {
+				LogManager.info("Location: <" + locationName+ "> was retrieved from Location Table");
+				return locationElement;	
+			}
+		}
+		LogManager.info("Location: <" + location + "> wasn't found");
+		return null;
+	}
+	
+	/**
+	 * clickOnLocation: It does to click in location name on the Page Info.
+	 * @param location: It represents the location for the rooms.
+	 * @return RoomInfoPage
+	 */
+	public RoomInfoPage clickOnLocation(String location) {
+		WebElement locationName = getLocationByName(location);
+		locationName.click();
+		LogManager.info("Location: <" + location + "> was selected");
+		return this;
+	}
+	
+	/**
+	 * IsLocationTextFieldFilled: It verify if the location text field
+	 * on the Page Info has a value.
+	 * @param location: It represents the name of location for the rooms.
+	 * @return true
+	 */
+	public boolean IsLocationTextFieldFilled(String location){
+		WebElement organization = new WebDriverWait(driver,60).
+				until(ExpectedConditions.visibilityOf(locationTextField));			
+		String getLocationRoom = organization.getText();
+		LogManager.info("Location: <" + location + "> is set in text field");
+		return getLocationRoom.contains(location);
+	}
+
+	/**
+	 * verificationRoomWithoutDisplayName: This method is for verify the message.
+	 * @param customName
+	 * @return text of the element
+	 */
+	public String verificationRoomWithoutDisplayName(String expectedResult){
+			String message = driver.findElement(By.xpath(RoomInfoPageConstant
+					.ERROR_MESSAGE_DISPLAY_NAME)).getText();
+			LogManager.info("The message of display name of the Room is displayed");
+			return message;
+	}
 }
 
 

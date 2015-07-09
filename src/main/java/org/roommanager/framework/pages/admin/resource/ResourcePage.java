@@ -36,6 +36,9 @@ public class ResourcePage extends LeftMenu {
 	private WebElement paginationTextField;
 	@FindBy(xpath = ResourceConstant.FILTER_TEXT_FIELD)
 	private WebElement filterTextField;
+    @FindBy(xpath = ResourceConstant.GRID_RESOURCE)
+    private WebElement resourceGrid;
+    
 	/** propertyName Name of the Property to be searched*/
 	private String propertyName = "Name";
 	
@@ -172,6 +175,7 @@ public class ResourcePage extends LeftMenu {
 			.until(ExpectedConditions.visibilityOf(paginationTextField));
 		paginationTextField.clear();
 		paginationTextField.sendKeys(page);
+		LogManager.info("Page: <" + page + "> was entered");
 		return this;
 	}
 	
@@ -182,7 +186,9 @@ public class ResourcePage extends LeftMenu {
 	public String getPaginationTextField(){
 		(new WebDriverWait(driver, 30))
 			.until(ExpectedConditions.visibilityOf(paginationTextField));
-		return paginationTextField.getAttribute("value");
+		String page = paginationTextField.getAttribute("value");
+		LogManager.info("Page: <" + page + "> was retrieved");
+		return page;
 	}
 	
 	/**
@@ -195,6 +201,7 @@ public class ResourcePage extends LeftMenu {
 			.until(ExpectedConditions.visibilityOf(filterTextField));
 		filterTextField.clear();
 		filterTextField.sendKeys(resourceName);
+		LogManager.info("Resource name: <" + resourceName + "> was entered");
 		return this;
 	}
 	
@@ -205,7 +212,21 @@ public class ResourcePage extends LeftMenu {
 	public RemoveResourcePage clickRemoveResourceButton() {
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions.visibilityOf(removeResource_Button));
 		removeResource_Button.click();
-		LogManager.info("Remove Resource button was clicked");
+		LogManager.info("Remove button was clicked");
 		return new RemoveResourcePage(driver);
 	}
+	
+    /**
+    * clickResourceLink click on the Resource link a page of resource should
+    * be displayed
+    * @return ResourcePage
+    */
+    public boolean isResourcePagePresent(){
+    	boolean isPresent = true;     
+    	boolean gridResourcesName = 
+    			(new WebDriverWait(driver, 20))
+                .until(ExpectedConditions.visibilityOf(resourceGrid)).isDisplayed();
+        LogManager.info("The grid of resources is Present");
+        return gridResourcesName == isPresent ? true : false;
+    }
 }

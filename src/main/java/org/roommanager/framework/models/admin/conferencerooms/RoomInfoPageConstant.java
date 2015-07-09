@@ -31,19 +31,22 @@ public class RoomInfoPageConstant {
 	public static final String LINK_RESOURCES_ASSOCIATIONS = "(//a[@onclick='checkBreadCrumb(this)'])[2]";
 	/**
 	 * Locator Type = Css*/
-	public static final String LOCATION_BUTTON= "span.input-group-btn > button.btn.btn-default";
+	public static final String LOCATION_BUTTON= "//div[4]/div/div/div[2]/div/div/div[2]/div/form/div[5]/div[1]/span/button";
+	public static final String LOCATION_TYPE_BUTTTON = "//div[4]/div/div/div[2]/div/div/div[2]/div/form/div[5]/div[2]/div/treeview/div/div[1]/span";
 	/**
 	 * Locatoro Type = Xpath*/
 	public static final String DISPLAY_BUTTON = "//treeview/div/div/span";
 	/**
 	 * Locator Type = Xpath*/
-	public static final String NAME_LOCATION = "treeview/div/div[2]/transclude/div";
+	public static final String NAME_LOCATION = "treeview/div/div[2]/transclude/div[1]";
 	/**
 	 * Locator Type = Xpath*/
 	public static final String DIV_ELEMENT = "div";
 	/**
 	 * Locator Type = Xpath*/
-	public static final String LOCATION_LIST = "//";
+	public static final String LOCATION_LIST = "//div[4]/div/div/div[2]/div/div/div[2]/div/form/div[5]/div[2]/div/treeview/div[2]";
+	public static final String LOCATION_TEXT_FIELD = "//div[4]/div/div/div[2]/div/div/div[2]/div/form/div[5]/div[1]/div";
+	public static final String ERROR_MESSAGE_DISPLAY_NAME ="//div[4]/div/div/div[2]/div/div/div[2]/div/form/small";
 	/**
 	 * Locator Type = Xpath*/
 	public static final String ROOM_NAME_TEXT_FIELD = "//div[4]/div/div/div[2]/div/div/div[2]/div/form/div[1]/input";

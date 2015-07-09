@@ -269,4 +269,30 @@ public class ConferenceRoomPage {
 						+ isRoomTableHeaderPresent);
 		return isRoomTableHeaderPresent;
 	}
+
+	/**
+	 * isDisplayNameUpdated: Making the verification of an DisplayName 
+	 * was created on a room.
+	 * @param displayNameRoom: get a display name of room
+	 * @return boolean
+	 */
+	public boolean isDisplayNameUpdated(String displayNameRoom){
+			(new WebDriverWait(driver, 60))
+			.until(ExpectedConditions.visibilityOf(roomsList));
+		List <WebElement> rooms = roomsList.findElements(divElementLocator);
+		
+		for (WebElement room : rooms) {
+			String roomItemName = room.findElement(roomNameLocator).getText();
+			System.out.print("entroooo"+roomItemName);
+			if(roomItemName.equals(displayNameRoom)){
+				System.out.print("SADSAFDFSDF");
+				LogManager.info("Room: <"+ roomItemName +
+						        "> was found on the Available Rooms List");
+				return true;
+			}
+		}
+		LogManager.info("Room: <"+ displayNameRoom +
+				        "> wasn't found on the Available Rooms List");
+		return false;
+	}
 }

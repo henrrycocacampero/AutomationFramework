@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.admin.conferencerooms.ConferenceRoomTopMenuConstant;
+import org.roommanager.framework.models.admin.conferencerooms.ResourceAssociationsConstant;
 import org.roommanager.framework.utilities.common.LogManager;
 
 public class ConferenceRoomTopMenu {
@@ -16,6 +17,8 @@ public class ConferenceRoomTopMenu {
 	private WebElement resourceAssociationLink;
 	@FindBy (xpath = ConferenceRoomTopMenuConstant.OUT_ORDER_PLANNING) 
 	private WebElement outOfOrderPlanningLink;
+	@FindBy(xpath = ConferenceRoomTopMenuConstant.CLOSE_BUTTON)
+	private WebElement closeButton;
 	private WebDriver driver;
 	
 	public ConferenceRoomTopMenu(WebDriver driver){
@@ -58,4 +61,17 @@ public class ConferenceRoomTopMenu {
 		LogManager.info("Click on Resource: Resource Associations Link");
 		return new OutOfOrderPage(driver);
 	}
+	/**
+	 * clickCloseButton: It clicks on the Close Button 
+	 * 
+	 * @return ConferenceRoomPage
+	 */
+	public ConferenceRoomPage clickCloseButton() {
+		(new WebDriverWait(driver, 60)).until(ExpectedConditions
+				.visibilityOf(closeButton));
+		closeButton.click();
+		LogManager.info("Close button was clicked");
+		return new ConferenceRoomPage(driver);
+	}
+
 }
