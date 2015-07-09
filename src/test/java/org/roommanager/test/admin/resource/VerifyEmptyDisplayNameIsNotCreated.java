@@ -9,7 +9,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * This class contains the a Negative test case
+ * This class contains the a Negative test case for the 
+ * Resources feature
  * @author Jimmy Maldonado
  *
  */
