@@ -2,7 +2,7 @@ package org.roommanager.test.admin.resource;
 
 import org.roommanager.framework.pages.admin.home.HomePage;
 import org.roommanager.framework.pages.admin.login.LoginPage;
-import org.roommanager.framework.pages.admin.resource.CreateResourcePage;
+import org.roommanager.framework.pages.admin.resource.ResourceInfoPage;
 import org.roommanager.framework.pages.admin.resource.ResourcePage;
 import org.roommanager.framework.utilities.api.admin.ResourceApi;
 import org.roommanager.framework.utilities.common.TestBase;
@@ -11,7 +11,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class VerifyEmptyNameIsNotAllowed extends TestBase {
+public class VerifyEmptyNameIsNotUpdated extends TestBase {
 
 	/** resourceName Name of the resource to be Created*/
 	 private String resourceName = "Resource01";
@@ -49,7 +49,7 @@ public class VerifyEmptyNameIsNotAllowed extends TestBase {
 	 * Resource is updated
 	 */
 	@Test
-    public void verifyEmptyNameIsNotAllowed() {
+    public void verifyEmptyNameIsNotUpdated() {
     	
     	LoginPage login = new LoginPage(driver);
     	
@@ -57,7 +57,8 @@ public class VerifyEmptyNameIsNotAllowed extends TestBase {
 		
 		ResourcePage resources = home.selectResourcesLink();
 		
-		CreateResourcePage create = resources.doubleClickOnResourceFromTable(resourceName)
+		ResourceInfoPage create = resources
+				.doubleClickOnResourceFromTable(resourceName)
 				.enterResourceName(resourceNameEmpty);
 		
 		create.clickSaveButtonInvalidData();

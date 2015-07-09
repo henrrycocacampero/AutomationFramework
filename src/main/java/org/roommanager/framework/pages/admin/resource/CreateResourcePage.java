@@ -19,52 +19,46 @@ public class CreateResourcePage {
 	private WebElement displayNameTextField;
 	@FindBy(xpath = CreateResourceConstant.RESOURCE_DESCRIPTION_AREA)
 	private WebElement descriptionTextArea;
-	@FindBy(css = CreateResourceConstant.SAVE_BUTTON)
+	@FindBy(xpath = CreateResourceConstant.SAVE_BUTTON)
 	private WebElement saveButton;
 	@FindBy(xpath = CreateResourceConstant.REPEATED_NAME_ERROR_MESSAGE)
 	private WebElement repeatedNameErrorMessage;
-	@FindBy(xpath = CreateResourceConstant.DISPLAY_NAME_ERROR_MESSAGE)
-	private WebElement displayNameTextFieldErrorMessage;
+	@FindBy(xpath = CreateResourceConstant.EMPTY_DISPLAY_NAME_ERROR_MESSAGE)
+	private WebElement emptydisplayNameErrorMessage;
 	@FindBy(xpath = CreateResourceConstant.EMPTY_NAME_ERROR_MESSAGE)
 	private WebElement emptyNameErrorMessage;
-	@FindBy(xpath = CreateResourceConstant.RESOURCE_DISPLAY_NAME_LABEL)
-	private WebElement resourceDisplayNameLabel;
-	
-	
+
 	public CreateResourcePage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 
-		public CreateResourcePage enterResourceName(String resourceName) {
-			(new WebDriverWait(driver, 60))
-					.until(ExpectedConditions
-							.visibilityOf(nameTextField));
-			nameTextField.clear();
-			nameTextField.sendKeys(resourceName);
-			LogManager.info("Resource Name: <" + resourceName + "> was entered");
-			return this;
-		}
+	public CreateResourcePage enterResourceName(String resourceName) {
+		(new WebDriverWait(driver, 60))
+				.until(ExpectedConditions.visibilityOf(nameTextField));
+		nameTextField.clear();
+		nameTextField.sendKeys(resourceName);
+		LogManager.info("Name: <" + resourceName + "> was entered");
+		return this;
+	}
 
 	public CreateResourcePage enterResourceDisplayName(
 			String resourceDisplayName) {
 		(new WebDriverWait(driver, 60))
-				.until(ExpectedConditions
-						.visibilityOf(displayNameTextField));
+				.until(ExpectedConditions.visibilityOf(displayNameTextField));
 		displayNameTextField.clear();
 		displayNameTextField.sendKeys(resourceDisplayName);
-		LogManager.info("Resource Display Name: <" + resourceDisplayName+ "> was entered");
+		LogManager.info("Display Name: <" + resourceDisplayName+ "> was entered");
 		return this;
 	}
 
 	public CreateResourcePage enterResourceDescription(
 			String resourceDescription) {
 		(new WebDriverWait(driver, 60))
-				.until(ExpectedConditions
-						.visibilityOf(descriptionTextArea));
+				.until(ExpectedConditions.visibilityOf(descriptionTextArea));
 		descriptionTextArea.clear();
 		descriptionTextArea.sendKeys(resourceDescription);
-		LogManager.info("Resource Description: <" + resourceDescription+ "> was entered");
+		LogManager.info("Description: <" + resourceDescription+ "> was entered");
 		return this;
 	}
 
@@ -101,6 +95,7 @@ public class CreateResourcePage {
 		(new WebDriverWait(driver, 20))
 			.until(ExpectedConditions.visibilityOf(repeatedNameErrorMessage));
 		String errorMessage = repeatedNameErrorMessage.getText();
+		LogManager.info("Error Message: <" + errorMessage + "> was found");
 		return errorMessage.equals(expectedErrorMessage);
 	}
 	
@@ -109,11 +104,12 @@ public class CreateResourcePage {
 	 * is present above the DisplayName text field.
 	 * @return boolean
 	 */
-	public boolean isDisplayNameFieldErrorMessagePresent(){
+	public boolean isEmptyDisplayNameMessagePresent(){
 		String expectedErrorMessage = "Display name must not be empty";
 		(new WebDriverWait(driver, 20))
-			.until(ExpectedConditions.visibilityOf(displayNameTextFieldErrorMessage));
-		String errorMessage = displayNameTextFieldErrorMessage.getText();
+			.until(ExpectedConditions.visibilityOf(emptydisplayNameErrorMessage));
+		String errorMessage = emptydisplayNameErrorMessage.getText();
+		LogManager.info("Error Message: <" + errorMessage + "> was found");
 		return errorMessage.equals(expectedErrorMessage);
 	}
 	
@@ -122,22 +118,13 @@ public class CreateResourcePage {
 	 * is present above the DisplayName text field.
 	 * @return boolean
 	 */
-	public boolean isEmptyNameFieldErrorMessagePresent(){
+	public boolean isEmptyNameErrorMessagePresent(){
 		String expectedErrorMessage = "Name must not be empty";
 		(new WebDriverWait(driver, 20))
 			.until(ExpectedConditions.visibilityOf(emptyNameErrorMessage));
 		String errorMessage = emptyNameErrorMessage.getText();
+		LogManager.info("Error Message: <" + errorMessage + "> was found");
 		return errorMessage.equals(expectedErrorMessage);
-	}
-	
-	/**
-	 * The getResourceDisplayName method returns the resource's display name
-	 * @return String 
-	 */
-	public String getResourceDisplayName(){
-		(new WebDriverWait(driver, 30))
-			.until(ExpectedConditions.visibilityOf(resourceDisplayNameLabel));
-		return resourceDisplayNameLabel.getText();
 	}
 	
 	/**

@@ -35,15 +35,21 @@ public class VerifyResourceIsCreated extends TestBase {
     public void verifyAResourceIsCreated() {
 		
 		LoginPage login = new LoginPage(driver);
+		
 		HomePage adminHome = login.clickSignInButton();
+		
 		ResourcePage resources = adminHome.selectResourcesLink();
+		
 		CreateResourcePage createResource = resources.clickAddResourceButton()
 				.enterResourceName(resourceName)
 				.enterResourceDisplayName(resourceDisplayName)
 				.enterResourceDescription(resourceDescription);
+		
 		resources = createResource.clickSaveResourceButton();
+		
 		String actualResourceName = resources
 				.getResourceNameInTable(resourceName);
+		
 		Assert.assertEquals( actualResourceName, resourceName,errorMessage);
 	}
 
