@@ -75,12 +75,14 @@ public class RoomApi {
 	 */
 	public static void deleteAllOutOfOrders(String roomName){
 		String url = PropertiesReader.getRoomManagerApi() 
-				     + "rooms/[roomId]/out-of-orders";
+				     + "services/[serviceId]/rooms/[roomId]/out-of-orders";
 		String roomId = RoomApi.getRoomIdByName(roomName);
+		String serviceId = EmailServerApi.getEmailServiceId();
 		String propertyName = "_id";
-		url = url.replace("[roomId]", roomId);
+		url = url.replace("[roomId]", roomId)
+			  .replace("[serviceId]", serviceId);
 		String response = ApiManager.getHttpMethod(url);
-		
+		System.out.println(response);
 		Object outOfOrdersAsJson = ApiManager.jsonRequest(response);
 		if (outOfOrdersAsJson instanceof JSONArray) {
             JSONArray outOfOrders =(JSONArray)outOfOrdersAsJson;
