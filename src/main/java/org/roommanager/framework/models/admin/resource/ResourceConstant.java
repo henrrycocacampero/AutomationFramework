@@ -24,4 +24,7 @@ public class ResourceConstant {
 
 	/** Locator to the pagination text field*/
 	public static final String PAGINATION_TEXT_FIELD = "//div[@id='resourcesGrid']/div[3]/div/div[2]/div[2]/input";
+	
+	/** Locator to the filter text field*/
+	public static final String FILTER_TEXT_FIELD = "//div[2]/div/div[2]/div[1]/div/label/input";
 }

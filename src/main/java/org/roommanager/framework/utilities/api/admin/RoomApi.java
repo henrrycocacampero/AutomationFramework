@@ -127,7 +127,7 @@ public class RoomApi {
 					  .replace("[resourceIcon]", resourceIcon)
 					  .replace("[quantity]", quantity);
 		
-		ApiManager.putHttpMethod(url, requestBody);
+		ApiManager.postHttpMethod(url, requestBody);
 	}
 	
 	/**

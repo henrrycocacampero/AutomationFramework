@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 public class VerifyRoomDisplayNameIsSet extends TestBase {
 	
 	/** roomName: Name of the room*/ 
-	private String roomSelected =  "SM-Room1";
+	private String roomSelected =  "SM-Room11";
 	
 	/***/
     private String displayNameRoomUpdated = "SM-Room1-Update";
@@ -49,7 +49,7 @@ public class VerifyRoomDisplayNameIsSet extends TestBase {
 		
 		String DisplayName = updateRoomName.getDisplayNameRoom();
 		
-		updateRoomName.clickButtonSaveUpdateInfoRoom();
+		updateRoomName.clickButtonCancelInfoRoom();
 		
 		Assert.assertEquals( displayNameRoomUpdated, 
 				DisplayName,msgError);
