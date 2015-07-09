@@ -49,7 +49,7 @@ public class ResourceInfoPage {
 				.until(ExpectedConditions.visibilityOf(saveButton));
 		saveButton.click();
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions
-				.invisibilityOfElementLocated(By.cssSelector(ResourceInfoConstant.SAVE_BUTTON)));
+				.invisibilityOfElementLocated(By.xpath(ResourceInfoConstant.SAVE_BUTTON)));
 		LogManager.info("Save button was clicked");
 		return new ResourcePage(driver);
 	}
