@@ -11,6 +11,16 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+/**
+ * The VerifyResourceAssociationQuantity class contains the test case 
+ * (with pre and post conditions): Verify that the configuration on 
+ * the “ResourceAssociations” Tab is saved with a quantity of the 
+ * resource  between 1-3 characters.
+ * 
+ * @author Milenca Ventura
+ *
+ */
+
 public class VerifyResourceAssociationQuantity extends TestBase{
 	/** resourceName: Name of resource to be created*/
 	private String resourceName = "Resource01";
@@ -37,8 +47,9 @@ public class VerifyResourceAssociationQuantity extends TestBase{
 	  private String errorMessage = "The Resource"+resourceName+"is not associated"; 
 	  
 	  /**
-	  * This method performs the test case:Verify that an available resource 
-    * can be associated to a room.
+	  * This method performs the test case: Verify that the configuration on the 
+	  * “ResourceAssociations” Tab is saved with a quantity of the resource 
+	  * between 1-3 characters
 	  */
 	  
 	  @Test

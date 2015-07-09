@@ -11,9 +11,12 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
+ * The VerifyResourceIsDeleted class contains the test case 
+ * with PRE - POST Conditions by API
+ * Verify that a Resource is removed 
  * 
- * The class is a test that verify a Resource  is deleted
- * 
+ * @author Rodrigo Zarate
+ *
  */
 public class VerifyResourceIsDeleted extends TestBase{
 	

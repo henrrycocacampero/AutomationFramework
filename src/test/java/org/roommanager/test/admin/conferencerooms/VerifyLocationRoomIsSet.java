@@ -11,6 +11,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+/**
+ * The VerifyLocationRoomIsSet class contains the test case 
+ * (with pre and post conditions): Verify that the location 
+ * of a room is set.
+ * @author Milenca Ventura
+ *
+ */
+
 public class VerifyLocationRoomIsSet extends TestBase{
 	
 	/** locationName: Name of location to be created*/
@@ -33,8 +41,8 @@ public class VerifyLocationRoomIsSet extends TestBase{
 			+ "of the room does not set.";
 	
 	  /**
-	  * This method performs the test case:Verify that the rename of 
-	  * a room is disabled
+	  * This method performs the test case:Verify that the location of 
+	  * a room is set.
 	  */
 	@Test
 	public void VerifyRoomNameUpdateIsDisable() {

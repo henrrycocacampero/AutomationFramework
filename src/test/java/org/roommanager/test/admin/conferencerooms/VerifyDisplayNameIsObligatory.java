@@ -8,6 +8,15 @@ import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+/**
+ * The VerifyAssociateResourceRoom class contains the test case 
+ * (with pre and post conditions): Verify that the Display Name 
+ * text field is an obligatory field.
+ * 
+ * @author Milenca Ventura
+ *
+ */
+
 public class VerifyDisplayNameIsObligatory extends TestBase{
 	
 	/** roomName: Name of room to be changed*/
@@ -20,8 +29,8 @@ public class VerifyDisplayNameIsObligatory extends TestBase{
 	private String expectedResult = "Display Name must not be empty";
 	
 	  /**
-	  * This method performs the test case:Verify that the rename of 
-	  * a room is disabled
+	  * This method performs the test case:Verify that the Display Name 
+	  * text field is an obligatory field
 	  */
 	@Test
 	public void VerifyRoomIsCanceled() {
@@ -42,6 +51,7 @@ public class VerifyDisplayNameIsObligatory extends TestBase{
 		
 		String errorMessageDisplayName = roomInfoPage
 				.verificationRoomWithoutDisplayName(expectedResult);
+		
 		Assert.assertEquals(errorMessageDisplayName, expectedResult);
 	}
 }

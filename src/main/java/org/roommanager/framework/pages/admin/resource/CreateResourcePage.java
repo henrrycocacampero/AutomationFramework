@@ -21,6 +21,8 @@ public class CreateResourcePage {
 	private WebElement descriptionTextArea;
 	@FindBy(xpath = CreateResourceConstant.SAVE_BUTTON)
 	private WebElement saveButton;
+	@FindBy (xpath = CreateResourceConstant.CANCEL_BUTTON)
+	private WebElement cancelButton;
 	@FindBy(xpath = CreateResourceConstant.REPEATED_NAME_ERROR_MESSAGE)
 	private WebElement repeatedNameErrorMessage;
 	@FindBy(xpath = CreateResourceConstant.EMPTY_DISPLAY_NAME_ERROR_MESSAGE)
@@ -82,6 +84,16 @@ public class CreateResourcePage {
 		saveButton.click();
 		LogManager.info("Save button was clicked");
 		return this;
+	}
+	
+	public ResourcePage clickCancelResourceButton() {
+		(new WebDriverWait(driver, 60))
+				.until(ExpectedConditions.visibilityOf(cancelButton));
+		cancelButton.click();
+		(new WebDriverWait(driver, 60)).until(ExpectedConditions
+				.invisibilityOfElementLocated(By.cssSelector(CreateResourceConstant.SAVE_BUTTON)));
+		LogManager.info("Cancel button was clicked");
+		return new ResourcePage(driver);
 	}
 	
 	/**

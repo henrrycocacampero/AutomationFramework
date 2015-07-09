@@ -11,15 +11,16 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+/**
+ * The VerifyResourceResourceDisplayName class contains the test case 
+ * (with pre and post conditions): Verify that edit a [Display Name] text_box field does 
+ * not allow empty value.
+ * 
+ * @author Samuel Vargas A.
+ *
+ */ 
+
 public class VerifyEmptyDisplayNameIsNotUpdated extends TestBase{
-	/**
-	 * The VerifyResourceResourceDisplayName class contains the test case 
-	 * (with pre and post conditions): Verify that edit a [Display Name] text_box field does 
-	 * not allow empty value.
-	 * 
-	 * @author Samuel Vargas A.
-	 *
-	 */ 
 	
 	 /** resourceName: Name of resource to be created*/
 	 private String resourceName = "Resource01";

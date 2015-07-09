@@ -13,115 +13,184 @@ import org.roommanager.framework.utilities.common.LogManager;
 
 public class ResourceAssociationsPage {
 	WebDriver driver;
-	
+
 	WebElement associate;
-	
-	@FindBy (css = ResourceAssociationsConstant.CANCEL_BUTTON) 
+
+	@FindBy(css = ResourceAssociationsConstant.CANCEL_BUTTON)
 	private WebElement cancelButton;
-	@FindBy (css = ResourceAssociationsConstant.SAVE_BUTTON) 
+	@FindBy(css = ResourceAssociationsConstant.SAVE_BUTTON)
 	private WebElement saveButton;
-	@FindBy (xpath = ResourceAssociationsConstant.CLOSE_BUTTON) 
+	@FindBy(xpath = ResourceAssociationsConstant.CLOSE_BUTTON)
 	private WebElement closeButton;
-	@FindBy (xpath = ResourceAssociationsConstant.LIST_RESOURCES_AVAILABLE) 
+	@FindBy(xpath = ResourceAssociationsConstant.LIST_RESOURCES_AVAILABLE)
 	private WebElement resourceAvailableList;
-	@FindBy (xpath = ResourceAssociationsConstant.LIST_RESOURCE_ASSOCIATED) 
+	@FindBy(xpath = ResourceAssociationsConstant.LIST_RESOURCE_ASSOCIATED)
 	private WebElement resourceAssociatedList;
-	@FindBy (xpath = ResourceAssociationsConstant.DIV_ELEMENT ) 
+	@FindBy(xpath = ResourceAssociationsConstant.DIV_ELEMENT)
 	private WebElement divElement;
-	@FindBy (xpath = ResourceAssociationsConstant.NAME_RESOURCE ) 
+	@FindBy(xpath = ResourceAssociationsConstant.NAME_RESOURCE)
 	private WebElement nameResource;
-	@FindBy (xpath = ResourceAssociationsConstant.ASSOCIATE_BUTTON)
+	@FindBy(xpath = ResourceAssociationsConstant.ASSOCIATE_BUTTON)
 	private WebElement associateButton;
-	@FindBy (css = ResourceAssociationsConstant.DESASSOCIATE_RESOURCE ) 
+	@FindBy(css = ResourceAssociationsConstant.DESASSOCIATE_RESOURCE)
 	private WebElement desassociateButton;
-	@FindBy (xpath = ResourceAssociationsConstant.QUANTITY_ASSOCIATE_TEXT_FIELD ) 
+	@FindBy(xpath = ResourceAssociationsConstant.QUANTITY_ASSOCIATE_TEXT_FIELD)
 	private WebElement quantityAssociateTextField;
-	
-	public ResourceAssociationsPage(WebDriver driver){
+
+	public ResourceAssociationsPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
-	
+
+	/**
+	 * clickCancelButton: It clicks on the Cancel Button on the Resource
+	 * Associations Page.
+	 * 
+	 * @return ConferenceRoomPage
+	 */
 	public ConferenceRoomPage clickCancelButton() {
-		(new WebDriverWait(driver, 60)).until(ExpectedConditions.visibilityOf(cancelButton));
+		(new WebDriverWait(driver, 60)).until(ExpectedConditions
+				.visibilityOf(cancelButton));
 		cancelButton.click();
 		LogManager.info("Cancel button was clicked");
 		return new ConferenceRoomPage(driver);
 	}
+
+	/**
+	 * clickCloseButton: It clicks on the Close Button on the Resource
+	 * Associations Page.
+	 * 
+	 * @return ConferenceRoomPage
+	 */
 	public ConferenceRoomPage clickCloseButton() {
-		(new WebDriverWait(driver, 60)).until(ExpectedConditions.visibilityOf(closeButton));
+		(new WebDriverWait(driver, 60)).until(ExpectedConditions
+				.visibilityOf(closeButton));
 		closeButton.click();
 		LogManager.info("Close button was clicked");
 		return new ConferenceRoomPage(driver);
 	}
-	
+
+	/**
+	 * clickSaveButton: It clicks on the Save Button on the Resource
+	 * Associations Page.
+	 * 
+	 * @return ConferenceRoomPage
+	 */
 	public ConferenceRoomPage clickSaveButton() {
-		(new WebDriverWait(driver, 60)).until(ExpectedConditions.visibilityOf(saveButton));
+		(new WebDriverWait(driver, 60)).until(ExpectedConditions
+				.visibilityOf(saveButton));
 		saveButton.click();
 		LogManager.info("Save button was clicked");
 		return new ConferenceRoomPage(driver);
 	}
-	
+
+	/**
+	 * clickOnAddResourceButton: It clicks on the Add(+) on an specific resource
+	 * Button on the Resource Associations Page.
+	 * 
+	 * @return ResourceAssociationsPage
+	 */
 	public ResourceAssociationsPage clickOnAddResourceButton(String resourceName) {
 		WebElement resourceAssociationButton = getResourceByName(resourceName);
 		resourceAssociationButton.click();
-		LogManager.info("The Resource: <" + resourceName+ "> was associated to the room");
+		LogManager.info("The Resource: <" + resourceName
+				+ "> was associated to the room");
 		return this;
 	}
-	
-	private WebElement getResourceByName(String resourceName) {
-		(new WebDriverWait(driver, 60))
-			.until(ExpectedConditions.visibilityOf(resourceAvailableList));
-		List<WebElement> resourcesTable = resourceAvailableList
-				.findElements(By.xpath(ResourceAssociationsConstant.DIV_ELEMENT));
-		for (WebElement resource : resourcesTable){
-			String resourceItemName = resource.findElement(
-					By.xpath(ResourceAssociationsConstant.NAME_RESOURCE)).getText();
-			if (resourceItemName.equals(resourceName)) {
-				LogManager.info("Resource: <" + resourceItemName+ "> was retrieved from Resources Table");
-				int position = resourcesTable.indexOf(resource)+ 1;
 
-				String associationButtonLocator = ResourceAssociationsConstant.LIST_RESOURCES_AVAILABLE+"/"+
-						ResourceAssociationsConstant.DIV_ELEMENT + "[" + position +"]/" +
-						ResourceAssociationsConstant.ASSOCIATE_BUTTON;
-				LogManager.info("Resource: <" + resourceName + "> in the Available table was found");
-				return driver.findElement(By.xpath(associationButtonLocator));	
+	/**
+	 * getResourceByName: It retrieves a specified Resource in the
+	 * Available Table.
+	 * 
+	 * @param resourceName: It represents the Resource's Name
+	 * @return WebElement
+	 */
+	private WebElement getResourceByName(String resourceName) {
+		(new WebDriverWait(driver, 60)).until(ExpectedConditions
+				.visibilityOf(resourceAvailableList));
+		List<WebElement> resourcesTable = resourceAvailableList.findElements(By
+				.xpath(ResourceAssociationsConstant.DIV_ELEMENT));
+		for (WebElement resource : resourcesTable) {
+			String resourceItemName = resource.findElement(
+					By.xpath(ResourceAssociationsConstant.NAME_RESOURCE))
+					.getText();
+			if (resourceItemName.equals(resourceName)) {
+				LogManager.info("Resource: <" + resourceItemName
+						+ "> was retrieved from Resources Table");
+				int position = resourcesTable.indexOf(resource) + 1;
+
+				String associationButtonLocator = ResourceAssociationsConstant.LIST_RESOURCES_AVAILABLE
+						+ "/"
+						+ ResourceAssociationsConstant.DIV_ELEMENT
+						+ "["
+						+ position
+						+ "]/"
+						+ ResourceAssociationsConstant.ASSOCIATE_BUTTON;
+				LogManager.info("Resource: <" + resourceName
+						+ "> in the Available table was found");
+				return driver.findElement(By.xpath(associationButtonLocator));
 			}
 		}
-		LogManager.info("Resource: <" + resourceName + "> in the Available table wasn't found");
+		LogManager.info("Resource: <" + resourceName
+				+ "> in the Available table wasn't found");
 		return null;
 	}
-	
-	public ResourceAssociationsPage clickOnDesassociatedResourceButton(String resourceName) {
+
+	/**
+	 * clickOnDesassociatedResourceButton: It clicks on the Dissociate(-) on an
+	 * specific resource Button on the Resource Associations Page.
+	 * 
+	 * @return ResourceAssociationsPage
+	 */
+	public ResourceAssociationsPage clickOnDesassociatedResourceButton(
+			String resourceName) {
 		WebElement resourceDesassociationButton = getResourceAssociatedByName(resourceName);
 		resourceDesassociationButton.click();
-		LogManager.info("Resource: <" + resourceName + "> was dissasociate from the room");
+		LogManager.info("Resource: <" + resourceName
+				+ "> was dissasociate from the room");
 		return this;
 	}
-	
-	private WebElement getResourceAssociatedByName(String resourceName) {
-		(new WebDriverWait(driver, 60))
-			.until(ExpectedConditions.visibilityOf(resourceAssociatedList));
-		List<WebElement> resourcesTable = resourceAssociatedList
-				.findElements(By.xpath(ResourceAssociationsConstant.DIV_ELEMENT));
-		for (WebElement resource : resourcesTable){
-			String resourceItemName = resource.findElement(
-					By.xpath(ResourceAssociationsConstant.NAME_RESOURCE)).getText();
-			if (resourceItemName.equals(resourceName)) {
-				LogManager.info("Resource: <" + resourceItemName+ "> was retrieved from Resources Table");
-				int position = resourcesTable.indexOf(resource)+ 1;
 
-				String desassociationButtonLocator = ResourceAssociationsConstant.LIST_RESOURCE_ASSOCIATED+"/"+
-						ResourceAssociationsConstant.DIV_ELEMENT + "[" + position +"]/" +
-						ResourceAssociationsConstant.DESASSOCIATE_RESOURCE;
-				LogManager.info("Resource: <" + resourceName + "> in the Associated table was found");
-				return driver.findElement(By.xpath(desassociationButtonLocator));	
+	/**
+	 * getResourceAssociatedByName: It retrieves a specified Resource in the
+	 * Associated Table.
+	 * 
+	 * @param resourceName: It represents the Resource's Name
+	 * @return WebElement
+	 */
+	private WebElement getResourceAssociatedByName(String resourceName) {
+		(new WebDriverWait(driver, 60)).until(ExpectedConditions
+				.visibilityOf(resourceAssociatedList));
+		List<WebElement> resourcesTable = resourceAssociatedList
+				.findElements(By
+						.xpath(ResourceAssociationsConstant.DIV_ELEMENT));
+		for (WebElement resource : resourcesTable) {
+			String resourceItemName = resource.findElement(
+					By.xpath(ResourceAssociationsConstant.NAME_RESOURCE))
+					.getText();
+			if (resourceItemName.equals(resourceName)) {
+				LogManager.info("Resource: <" + resourceItemName
+						+ "> was retrieved from Resources Table");
+				int position = resourcesTable.indexOf(resource) + 1;
+
+				String desassociationButtonLocator = ResourceAssociationsConstant.LIST_RESOURCE_ASSOCIATED
+						+ "/"
+						+ ResourceAssociationsConstant.DIV_ELEMENT
+						+ "["
+						+ position
+						+ "]/"
+						+ ResourceAssociationsConstant.DESASSOCIATE_RESOURCE;
+				LogManager.info("Resource: <" + resourceName
+						+ "> in the Associated table was found");
+				return driver
+						.findElement(By.xpath(desassociationButtonLocator));
 			}
 		}
-		LogManager.info("Resource: <" + resourceName + "> in the Associated table wasn't found");
+		LogManager.info("Resource: <" + resourceName
+				+ "> in the Associated table wasn't found");
 		return null;
 	}
-	
+
 	/**
 	 * getResourceAssociatedQuantityByName: It returns the name of the resource 
 	 * for set the quantity.
@@ -161,39 +230,43 @@ public class ResourceAssociationsPage {
 	
 	/**
 	 * getResourceAssociatedByNameInTable: It returns the name of the resource
-	 * @param String resourceName
+	 * 
+	 * @param resourceName: It represents the Resource's Name
 	 * @return String
 	 */
 	public String getResourceAssociatedByNameInTable(String resourceName) {
-		(new WebDriverWait(driver, 60))
-			.until(ExpectedConditions.visibilityOf(resourceAssociatedList));
+		(new WebDriverWait(driver, 60)).until(ExpectedConditions
+				.visibilityOf(resourceAssociatedList));
 		List<WebElement> resourcesTable = resourceAssociatedList
-				.findElements(By.xpath(ResourceAssociationsConstant.DIV_ELEMENT));
-		for (WebElement resource : resourcesTable){
+				.findElements(By
+						.xpath(ResourceAssociationsConstant.DIV_ELEMENT));
+		for (WebElement resource : resourcesTable) {
 			String resourceItemName = resource.findElement(
-					By.xpath(ResourceAssociationsConstant.NAME_RESOURCE)).getText();
+					By.xpath(ResourceAssociationsConstant.NAME_RESOURCE))
+					.getText();
 			if (resourceItemName.equals(resourceName)) {
-				LogManager.info("Resource: <" + resourceItemName+ "> was retrieved from Resources Table");
-				return resourceName;	
+				LogManager.info("Resource: <" + resourceItemName
+						+ "> was retrieved from Resources Table");
+				return resourceName;
 			}
 		}
 		LogManager.info("Resource: <" + resourceName + "> wasn't found");
 		return null;
 	}
-	
+
 	/**
 	 * verifyElementDoesNotExistOnAssociated: It verifies if the Resource does
 	 * not exist on associated in the Room.
-	 * @param String resourceName
+	 * 
+	 * @param resourceName: It represents the Resource's Name
 	 * @return boolean
 	 */
-	public boolean verifyElementDoesNotExistOnAssociated(String resourceName) {
-		WebElement resource = getResourceAssociatedByName(resourceName);	
-		LogManager.info("Resource: <" + resourceName + "> was disassociated succefully");
-		return resource == null ? true : false;
+	public boolean isResourceAssociatedOnTheRoom(String resourceName) {
+		return getResourceAssociatedByName(resourceName) == null ? false : true;
 	}
-	
+
 	/**
+<<<<<<< HEAD
 	 * isQuantityResourceDisplayed: It verifies if the quantity of the
 	 * Resource is displayed on associated in the Room.
 	 * @param String resourceName
@@ -210,10 +283,15 @@ public class ResourceAssociationsPage {
 	 * isResourceAvailableOnTheRoom: It verifies if the Resource is Available
 	 * in the Room.
 	 * @param String resourceName
+=======
+	 * isResourceAvailableOnTheRoom: It verifies if the Resource is Available in
+	 * the Room.
+	 * 
+	 * @param resourceName: It represents the Resource's Name
+>>>>>>> origin/dev
 	 * @return boolean
 	 */
-	public boolean isResourceAvailableOnTheRoom(String resourceName){
-		return getResourceByName(resourceName) == null? false : true;
+	public boolean isResourceAvailableOnTheRoom(String resourceName) {
+		return getResourceByName(resourceName) == null ? false : true;
 	}
 }
-
