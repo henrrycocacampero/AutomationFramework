@@ -93,12 +93,13 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 	 * Room Info Page.
 	 * @param DisplayNameRoom: It represents the value for the rooms display name.
 	 */
-	public void setDisplayNameRoom(String DisplayNameRoom){
+	public RoomInfoPage setDisplayNameRoom(String DisplayNameRoom){
 		new WebDriverWait(driver,60).until(ExpectedConditions
 				.visibilityOf(displaynameRoomTextField));	
 		displaynameRoomTextField.clear();
 		displaynameRoomTextField.sendKeys(DisplayNameRoom);
 		LogManager.info("RoomInfoPage - set the room display name");
+		return this;
 	}
 	
 	/**
@@ -115,14 +116,15 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 	
 	/**
 	 * setCodeRoom: It sets the code of the Room in the Room Info Page.
-	 * @param CodeRoom: It represents the value for the rooms code.
+	 * @param codeRoom: It represents the value for the rooms code.
 	 */
-	public void setCodeRoom(String CodeRoom){
+	public RoomInfoPage setCodeRoom(String codeRoom){
 		new WebDriverWait(driver,60).until(ExpectedConditions
 				.visibilityOf(codeRoomTextField));	
 		codeRoomTextField.clear();
-		codeRoomTextField.sendKeys(CodeRoom);
+		codeRoomTextField.sendKeys(codeRoom);
 		LogManager.info("RoomInfoPage - set the room code");
+		return this;
 	}
 	
 	/**
@@ -139,13 +141,14 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 	
 	/**
 	 * setCapacityRoom: It sets the capacity of the Room in the Room Info Page.
-	 * @param CapacityRoom: It represents the value for the rooms capacity.
+	 * @param capacityRoom: It represents the value for the rooms capacity.
 	 */
-	public void setCapacityRoom(String CapacityRoom){
+	public RoomInfoPage setCapacityRoom(String capacityRoom){
 		new WebDriverWait(driver,60).until(ExpectedConditions.visibilityOf(capacityRoomTextField));
 		capacityRoomTextField.clear();
-		capacityRoomTextField.sendKeys(CapacityRoom);
+		capacityRoomTextField.sendKeys(capacityRoom);
 		LogManager.info("RoomInfoPage - set the room capacity");
+		return this;
 	}	
 }
 

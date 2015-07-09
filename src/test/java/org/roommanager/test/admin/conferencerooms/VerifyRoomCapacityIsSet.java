@@ -44,13 +44,11 @@ public class VerifyRoomCapacityIsSet extends TestBase {
 				.selectConferenceRoomsLink();
 		
 		RoomInfoPage updateRoomName = conferenceRoomPage
-				.doubleClickOnRoom(roomSelected);
-		
-		updateRoomName.setCapacityRoom(capacityRoomUpdated);
+				.doubleClickOnRoom(roomSelected).setCapacityRoom(capacityRoomUpdated);
 		
 		String capacity = updateRoomName.getCapacityRoom();
 		
-		updateRoomName.clickButtonCancelInfoRoom();
+		conferenceRoomPage = updateRoomName.clickButtonCancelInfoRoom();
 		
 		Assert.assertEquals( capacityRoomUpdated, 
 				capacity,msgError);
