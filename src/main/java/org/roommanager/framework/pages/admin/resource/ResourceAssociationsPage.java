@@ -86,4 +86,19 @@ public class ResourceAssociationsPage extends PageFactory{
 		String expected = "x " + quantity;
 		return expected.equals(actual);
 	}
+	
+	/**
+	 * verifyAssociatedRoomExist get the room associated if it exist 
+	 * @param roomName represents the room that is associated to a resource
+	 * @return It returns a String that it is the room Name.
+	 * 
+	 */
+	public String getRoomNameAssociated(String roomName){
+		
+		WebElement association = getResourceAssociation(roomName);
+		String roomAssociated = association
+				.findElement(By.xpath(ResourceAssociationsConstant.ROOM_NAME))
+				.getText();
+		return roomAssociated;
+	}
 }

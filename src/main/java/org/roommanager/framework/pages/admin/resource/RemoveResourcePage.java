@@ -11,6 +11,12 @@ import org.roommanager.framework.models.admin.resource.CreateResourceConstant;
 import org.roommanager.framework.models.admin.resource.RemoveResourceConstant;
 import org.roommanager.framework.utilities.common.LogManager;
 
+/**
+ * This class represents to the Remove Resource Page
+ * feature
+ * @author Rodrigo Zarate
+ *
+ */
 public class RemoveResourcePage {
 	private WebDriver driver;
 	
