@@ -35,7 +35,8 @@ public class VerifyRoomInfoFormIsclosed extends TestBase {
 				.doubleClickOnRoom(roomName)
 				.clickOnRoomInfoLink()
 				.clickCloseButton();
-		//Assert.assertEquals(errorMessage,);
+		
+		Assert.assertTrue(errorMessage,conferenceRoom.isRoomFormClosed());
 				
 	}
 }

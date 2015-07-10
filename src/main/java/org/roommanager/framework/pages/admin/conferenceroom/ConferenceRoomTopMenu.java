@@ -73,5 +73,4 @@ public class ConferenceRoomTopMenu {
 		LogManager.info("Close button was clicked");
 		return new ConferenceRoomPage(driver);
 	}
-
 }

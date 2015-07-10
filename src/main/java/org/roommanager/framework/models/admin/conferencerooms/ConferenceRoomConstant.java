@@ -32,8 +32,7 @@ public class ConferenceRoomConstant {
 	/**
 	 * Locator Type = Xpath**/
 	public static final String RESOURCE_NAME = "span/i";
-	/**
-	 * Locator Type = Xpath*/
+
 	public static final String PAGE_SIZE = "//div[@id='roomsGrid']/div[3]/div/div[2]/div/select";
 	public static final String PAGE_INDEX = "//input[@type='number']";
 	public static final String ROOM_ENABLED = "div/div[2]/div/div/div/span";
