@@ -13,6 +13,11 @@ import org.testng.annotations.Test;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.AfterTest;
 
+/**
+ * This class contains a test case to Resources feature 
+ * @author Jimmy Maldonado
+ *
+ */
 public class VerifyResourceAssociationQuantity extends TestBase{
 	
 	/** resourceName: Name of resource to be created*/
@@ -27,9 +32,18 @@ public class VerifyResourceAssociationQuantity extends TestBase{
 	/** resourceIcon: Icon of resource to be created*/
 	private String resourceIcon = "fa fa-desktop";
 	
+	/** 
+	 * roomName represents the conference room to be associated to 
+	 * a resource
+	 * */
 	private String roomName = "SM-Room1";
 	
+	/**
+	 * quantity represents the resource's quantity associated to 
+	 * the conference room
+	 * */
 	private String quantity = "10";
+	
 	/** 
 	 * errorMessage: It contains the error message that would appear 
 	 * if test case fails
@@ -58,6 +72,10 @@ public class VerifyResourceAssociationQuantity extends TestBase{
 		Assert.assertTrue(correctQuantity, errorMessage);
     }
     
+    /**
+     * This method creates a resource and associate it with a conference
+     * room
+     * */
     @BeforeTest
     public void beforeTest() {
     	ResourceApi.createResource(resourceName, resourceDisplayName
@@ -65,6 +83,10 @@ public class VerifyResourceAssociationQuantity extends TestBase{
     	RoomApi.associateResourceToRoom(roomName, resourceName, quantity);
     }
 
+    /**
+     * This method removes the resource's association and the resource
+     * created
+     */
     @AfterTest
     public void afterTest() {
     	RoomApi.dissociateAllResourceFromRoom(roomName);
