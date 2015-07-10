@@ -63,9 +63,6 @@ public class VerifyOutOfOrderNotSavedWithInvalidTimes extends TestBase{
 													  .clickSaveButtonOutOfOrder();
 		isPresentErrorMessage = outOfOrderPage.errorMessageToGreaterFrom();
 		/*Asserts*/
-		Assert.assertTrue( isPresentErrorMessage,msgError);
-		LogManager.info(" Assert Test Verify Out Of Order Not Saved "
-						+ "With Invalid Times: "+ isPresentErrorMessage);
-				
+		Assert.assertTrue( isPresentErrorMessage,msgError);		
 	}
 }

@@ -34,5 +34,5 @@ public class OutOfOrderConstant {
 	/** Locator Type = Xpath*/
 	public static final String ON_OFF_SCHEDULE_BUTTON = "//div[4]/div/div/div[2]/div/div/div/div[2]/div[1]/div[1]/div/label";
 	/** Locator Type = Xpath*/
-	public static final String SEND_MAIL_CHECKBOX = "/div[4]/div/div/div[2]/div/div/div/div[2]/div[1]/div[3]/form/div[4]/div/label/span";
+	public static final String SEND_MAIL_CHECKBOX = "//div[4]/div/div/div[2]/div/div/div/div[2]/div[1]/div[3]/form/div[4]/div/label/span";
 }

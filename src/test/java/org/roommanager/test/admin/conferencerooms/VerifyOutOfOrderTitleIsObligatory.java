@@ -55,8 +55,6 @@ public class VerifyOutOfOrderTitleIsObligatory extends TestBase{
 													  .clickSaveButtonOutOfOrder();
 	    isPresentErrorMessage = outOfOrderPage.existErrorMessageWhithoutTitle();
 	    /*Asserts*/
-	    Assert.assertTrue( isPresentErrorMessage,msgError);
-	    LogManager.info("Assert Test Verify Out Of Order Planning Title "
-	    				+ "Is Obligatory: " + isPresentErrorMessage);			
+	    Assert.assertTrue( isPresentErrorMessage,msgError);			
 	  }
 }
