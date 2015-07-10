@@ -1,4 +1,4 @@
-package org.roommanager.test.admin.resource;
+package org.roommanager.test.admin.conferencerooms;
 
 import org.roommanager.framework.pages.admin.conferenceroom.ConferenceRoomPage;
 import org.roommanager.framework.pages.admin.home.HomePage;
