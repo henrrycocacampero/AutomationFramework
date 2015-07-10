@@ -315,9 +315,7 @@ public class ConferenceRoomPage {
 		List<WebElement> rooms = roomsList.findElements(divElementLocator);
 		for (WebElement room : rooms) {
 			String roomItemName = room.findElement(roomNameLocator).getText();
-			System.out.print("entroooo" + roomItemName);
 			if (roomItemName.equals(displayNameRoom)) {
-				System.out.print("SADSAFDFSDF");
 				LogManager.info("Room: <" + roomItemName
 						+ "> was found on the Available Rooms List");
 				return true;
@@ -327,15 +325,16 @@ public class ConferenceRoomPage {
 				+ "> wasn't found on the Available Rooms List");
 		return false;
 	}
-	
+
 	/**
 	 * isRoomFormClosed: Making the verification of an Room Form was closed.
 	 * 
 	 * @return boolean
 	 */
 	public boolean isRoomFormClosed() {
-		Boolean RoomForm =(new WebDriverWait(driver, 60))
-				.until(ExpectedConditions.invisibilityOfElementLocated(roomForm));
+		Boolean RoomForm = (new WebDriverWait(driver, 60))
+				.until(ExpectedConditions
+						.invisibilityOfElementLocated(roomForm));
 		return RoomForm;
 	}
 

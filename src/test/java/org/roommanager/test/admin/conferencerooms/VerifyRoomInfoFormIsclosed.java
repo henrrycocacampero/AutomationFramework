@@ -4,10 +4,7 @@ import org.junit.Assert;
 import org.roommanager.framework.pages.admin.conferenceroom.ConferenceRoomPage;
 import org.roommanager.framework.pages.admin.home.HomePage;
 import org.roommanager.framework.pages.admin.login.LoginPage;
-import org.roommanager.framework.utilities.api.admin.RoomApi;
 import org.roommanager.framework.utilities.common.TestBase;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class VerifyRoomInfoFormIsclosed extends TestBase {

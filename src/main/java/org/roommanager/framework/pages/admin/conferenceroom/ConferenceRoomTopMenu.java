@@ -7,7 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.admin.conferencerooms.ConferenceRoomTopMenuConstant;
-import org.roommanager.framework.models.admin.conferencerooms.ResourceAssociationsConstant;
 import org.roommanager.framework.utilities.common.LogManager;
 
 public class ConferenceRoomTopMenu {
