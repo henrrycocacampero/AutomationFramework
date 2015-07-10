@@ -25,13 +25,16 @@ public class ConferenceRoomPage {
 	private WebElement pageNumber;
 	@FindBy(xpath = ConferenceRoomConstant.NUMBER_OF_PAGE)
 	private WebElement numberOfPages;
+	@FindBy(css = ConferenceRoomConstant.TITLE_TABLE_ROOMS)
+	private WebElement titleTableRooms;
+	@FindBy(xpath = ConferenceRoomConstant.RESOURCE_HEADER)
+	private WebElement resourceHeader;
 	private By divElementLocator = ConferenceRoomConstant.DIV_ELEMENT;
 	private By roomNameLocator = ConferenceRoomConstant.ROOM_NAME;
 	private By disabledRoomNameLocator = ConferenceRoomConstant.DISABLED_ROOM_NAME;
-	private WebDriver driver;
-	@FindBy(css = ConferenceRoomConstant.TITLE_TABLE_ROOMS)
-	private WebElement titleTableRooms;
+	private By resourceHeaderLocator = ConferenceRoomConstant.RESOURCE_HEADER_LOCATOR;
 	private By roomForm = ConferenceRoomTopMenuConstant.TOP_MENU_BAR;
+	private WebDriver driver;
 
 	public ConferenceRoomPage(WebDriver driver) {
 		this.driver = driver;
@@ -48,7 +51,6 @@ public class ConferenceRoomPage {
 	public RoomInfoPage doubleClickOnRoom(String roomName) {
 		WebElement room = getRoomFromAllPagesByName(roomName,
 				getRoomsTableNumberOfPages(), true);
-
 		Actions action = new Actions(driver);
 		action.doubleClick(room);
 		action.perform();
@@ -146,7 +148,6 @@ public class ConferenceRoomPage {
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions
 				.visibilityOf(roomsList));
 		List<WebElement> rooms = roomsList.findElements(divElementLocator);
-
 		for (WebElement room : rooms) {
 			String roomItemName = enabledRoom == true ? room.findElement(
 					roomNameLocator).getText() : room.findElement(
@@ -231,18 +232,14 @@ public class ConferenceRoomPage {
 	 * @return boolean
 	 */
 	public boolean existOutOfOrder(String roomName) {
-
 		/* Looking the room */
 		boolean found = false;
-
 		new WebDriverWait(driver, 80).until(ExpectedConditions
 				.visibilityOf(titleTableRooms));
-
 		WebElement list = driver.findElement(By
 				.xpath(ConferenceRoomConstant.LIST_ROOM));
 		List<WebElement> subList = list
 				.findElements((ConferenceRoomConstant.SUBLIST_ROOM));
-
 		for (int i = 0; i < subList.size(); i += 1) {
 			String valueGet = (subList.get(i).getText()).trim();
 			String valueRoom = roomName.trim();
@@ -265,6 +262,46 @@ public class ConferenceRoomPage {
 	}
 
 	/**
+	 * isResourceHeaderPresent: It verifies the Resource Header is present.
+	 * 
+	 * @return boolean
+	 */
+	public boolean isResourceHeaderPresent() {
+		(new WebDriverWait(driver, 60)).until(ExpectedConditions
+				.visibilityOf(resourceHeader));
+		boolean isResourceHeaderPresent = driver
+				.findElement(resourceHeaderLocator) != null ? true : false;
+		LogManager.info("Is Resource Header Present? : "
+				+ isResourceHeaderPresent);
+		return isResourceHeaderPresent;
+	}
+
+	/**
+	 * isRoomsTableHeaderPresent: It verifies the Room Table Header is present.
+	 * 
+	 * @return boolean
+	 */
+	public boolean isRoomsTableHeaderPresent() {
+		By enabledHeaderLocator = By
+				.xpath(ConferenceRoomConstant.ROOM_TABLE_HEADER.replace(
+						"position", "1"));
+		By outOfOrderHeaderLocator = By
+				.xpath(ConferenceRoomConstant.ROOM_TABLE_HEADER.replace(
+						"position", "2"));
+		By roomHeaderLocator = By
+				.xpath(ConferenceRoomConstant.ROOM_TABLE_HEADER.replace(
+						"position", "3"));
+		WebElement outOfOrder = driver.findElement(enabledHeaderLocator);
+		WebElement enabledHeader = driver.findElement(outOfOrderHeaderLocator);
+		WebElement roomHeader = driver.findElement(roomHeaderLocator);
+		boolean isRoomTableHeaderPresent = outOfOrder != null
+				&& enabledHeader != null && roomHeader != null;
+		LogManager.info("Is Room Table Header Present? : "
+				+ isRoomTableHeaderPresent);
+		return isRoomTableHeaderPresent;
+	}
+
+	/**
 	 * isDisplayNameUpdated: Making the verification of an DisplayName was
 	 * created on a room.
 	 * 
@@ -276,7 +313,6 @@ public class ConferenceRoomPage {
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions
 				.visibilityOf(roomsList));
 		List<WebElement> rooms = roomsList.findElements(divElementLocator);
-
 		for (WebElement room : rooms) {
 			String roomItemName = room.findElement(roomNameLocator).getText();
 			System.out.print("entroooo" + roomItemName);
@@ -291,7 +327,7 @@ public class ConferenceRoomPage {
 				+ "> wasn't found on the Available Rooms List");
 		return false;
 	}
-
+	
 	/**
 	 * isRoomFormClosed: Making the verification of an Room Form was closed.
 	 * 
@@ -302,4 +338,5 @@ public class ConferenceRoomPage {
 				.until(ExpectedConditions.invisibilityOfElementLocated(roomForm));
 		return RoomForm;
 	}
+
 }

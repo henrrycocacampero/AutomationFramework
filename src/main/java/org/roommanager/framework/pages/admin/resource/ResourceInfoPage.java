@@ -28,7 +28,8 @@ public class ResourceInfoPage {
 	private WebElement emptyNameErrorMessage;
 	@FindBy(xpath = ResourceInfoConstant.RESOURCE_DISPLAY_NAME_LABEL)
 	private WebElement displayNameLabel;
-	
+	@FindBy(xpath = ResourceInfoConstant.RESOURCE_ASSOCIATION_LINK)
+	private WebElement resourceAssociationLink;
 
 	public ResourceInfoPage(WebDriver driver) {
 		this.driver = driver;
@@ -126,4 +127,16 @@ public class ResourceInfoPage {
 		return displayName;
 	}
 
+	/**
+	 * The clickResourceAssociationLink method clicks on Resource Associations
+	 * link.
+	 * @return ResourceAssociationsPage 
+	 */
+	public ResourceAssociationsPage clickResourceAssociationLink(){
+		(new WebDriverWait(driver, 30))
+			.until(ExpectedConditions.visibilityOf(resourceAssociationLink));
+		resourceAssociationLink.click();
+		LogManager.info("Resouce Associations link was clicked");
+		return new ResourceAssociationsPage(driver);
+	}
 }

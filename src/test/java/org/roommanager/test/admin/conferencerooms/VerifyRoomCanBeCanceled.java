@@ -57,11 +57,9 @@ public class VerifyRoomCanBeCanceled extends TestBase{
 		roomInfoPage.setDisplayNameRoom(displayName);
 
 		roomInfoPage.clickButtonCancelInfoRoom();
-				
-		boolean isDisplayNameUpdated = conferenceRoomPage
-				.isDisplayNameUpdated(getDisplayName);
 
-		Assert.assertTrue( isDisplayNameUpdated,errorMessage);
+		Assert.assertTrue( conferenceRoomPage
+				.isDisplayNameUpdated(getDisplayName),errorMessage);
 	}
 	
 }

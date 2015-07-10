@@ -24,4 +24,7 @@ public class ResourceInfoConstant {
     
     /** RESOURCE_DISPLAY_NAME_LABEL locator to resource's display name*/
     public static final String RESOURCE_DISPLAY_NAME_LABEL = "//div[4]/div/div/div[2]/div/div/div/div/h3";
+    
+    /** RESOURCE_ASSOCIATION_LINK locator to resource association link*/
+    public static final String RESOURCE_ASSOCIATION_LINK = "//div[@id='breadcrumb']/a[2]";
 }
