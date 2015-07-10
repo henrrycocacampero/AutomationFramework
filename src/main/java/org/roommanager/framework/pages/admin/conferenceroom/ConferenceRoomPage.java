@@ -24,12 +24,16 @@ public class ConferenceRoomPage {
 	private WebElement pageNumber;
 	@FindBy (xpath  = ConferenceRoomConstant.NUMBER_OF_PAGE) 
 	private WebElement numberOfPages;
+	@FindBy (css = ConferenceRoomConstant.TITLE_TABLE_ROOMS) 
+	private WebElement titleTableRooms;
+	@FindBy (xpath = ConferenceRoomConstant.RESOURCE_HEADER) 
+	private WebElement resourceHeader;
 	private By divElementLocator = ConferenceRoomConstant.DIV_ELEMENT;
 	private By roomNameLocator = ConferenceRoomConstant.ROOM_NAME;
 	private By disabledRoomNameLocator = ConferenceRoomConstant.DISABLED_ROOM_NAME;
+	private By resourceHeaderLocator = ConferenceRoomConstant.RESOURCE_HEADER_LOCATOR;
 	private WebDriver driver;
-	@FindBy (css = ConferenceRoomConstant.TITLE_TABLE_ROOMS) 
-	private WebElement titleTableRooms;
+	
 	
 	public ConferenceRoomPage(WebDriver driver){
 		this.driver = driver;
@@ -229,28 +233,66 @@ public class ConferenceRoomPage {
 	}
 	
 	/**
+	 * isResourceHeaderPresent: It verifies the Resource Header is present.
+	 * @return boolean
+	 */
+	public boolean isResourceHeaderPresent(){
+		(new WebDriverWait(driver, 60))
+			.until(ExpectedConditions.visibilityOf(resourceHeader));
+		boolean isResourceHeaderPresent = driver.
+				findElement(resourceHeaderLocator) != null? true:false;
+		LogManager.info("Is Resource Header Present? : "
+						+ isResourceHeaderPresent);
+		return isResourceHeaderPresent;
+	}
+	
+	/**
+	 * isRoomsTableHeaderPresent: It verifies the Room Table Header is present.
+	 * @return boolean
+	 */
+	public boolean isRoomsTableHeaderPresent(){
+		
+		By enabledHeaderLocator = By.xpath(ConferenceRoomConstant.ROOM_TABLE_HEADER
+										   .replace("position", "1"));
+		By outOfOrderHeaderLocator = By.xpath(ConferenceRoomConstant.ROOM_TABLE_HEADER
+				   						      .replace("position", "2"));
+		By roomHeaderLocator = By.xpath(ConferenceRoomConstant.ROOM_TABLE_HEADER
+				   						.replace("position", "3"));
+		WebElement outOfOrder = driver.findElement(enabledHeaderLocator);
+		WebElement enabledHeader = driver.findElement(outOfOrderHeaderLocator);
+		WebElement roomHeader = driver.findElement(roomHeaderLocator);
+		
+		boolean isRoomTableHeaderPresent = outOfOrder != null &&
+										   enabledHeader != null &&
+										   roomHeader != null;
+		LogManager.info("Is Room Table Header Present? : "
+						+ isRoomTableHeaderPresent);
+		return isRoomTableHeaderPresent;
+	}
+
+	/**
 	 * isDisplayNameUpdated: Making the verification of an DisplayName 
 	 * was created on a room.
 	 * @param displayNameRoom: get a display name of room
 	 * @return boolean
 	 */
 	public boolean isDisplayNameUpdated(String displayNameRoom){
-		(new WebDriverWait(driver, 60))
-		.until(ExpectedConditions.visibilityOf(roomsList));
-	List <WebElement> rooms = roomsList.findElements(divElementLocator);
-	
-	for (WebElement room : rooms) {
-		String roomItemName = room.findElement(roomNameLocator).getText();
-		System.out.print("entroooo"+roomItemName);
-		if(roomItemName.equals(displayNameRoom)){
-			System.out.print("SADSAFDFSDF");
-			LogManager.info("Room: <"+ roomItemName +
-					        "> was found on the Available Rooms List");
-			return true;
+			(new WebDriverWait(driver, 60))
+			.until(ExpectedConditions.visibilityOf(roomsList));
+		List <WebElement> rooms = roomsList.findElements(divElementLocator);
+		
+		for (WebElement room : rooms) {
+			String roomItemName = room.findElement(roomNameLocator).getText();
+			System.out.print("entroooo"+roomItemName);
+			if(roomItemName.equals(displayNameRoom)){
+				System.out.print("SADSAFDFSDF");
+				LogManager.info("Room: <"+ roomItemName +
+						        "> was found on the Available Rooms List");
+				return true;
+			}
 		}
-	}
-	LogManager.info("Room: <"+ displayNameRoom +
-			        "> wasn't found on the Available Rooms List");
-	return false;
+		LogManager.info("Room: <"+ displayNameRoom +
+				        "> wasn't found on the Available Rooms List");
+		return false;
 	}
 }

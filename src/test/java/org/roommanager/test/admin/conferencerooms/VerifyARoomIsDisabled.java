@@ -2,7 +2,6 @@ package org.roommanager.test.admin.conferencerooms;
 
 import org.junit.Assert;
 import org.roommanager.framework.pages.admin.conferenceroom.ConferenceRoomPage;
-import org.roommanager.framework.pages.admin.conferenceroom.RoomInfoPage;
 import org.roommanager.framework.pages.admin.home.HomePage;
 import org.roommanager.framework.pages.admin.login.LoginPage;
 import org.roommanager.framework.utilities.api.admin.RoomApi;

@@ -41,16 +41,16 @@ public class VerifyResourceAssociationQuantity extends TestBase{
     private String roomName = "SM-Room1";
     
      /** 
-	  * errorMessage: It contains the error message that would appear 
-	  * if test case fails.
-	  */
-	  private String errorMessage = "The Resource"+resourceName+"is not associated"; 
+	 * errorMessage: It contains the error message that would appear 
+	 * if test case fails.
+	 */
+	 private String errorMessage = "The Resource"+resourceName+"is not associated"; 
 	  
-	  /**
-	  * This method performs the test case: Verify that the configuration on the 
-	  * “ResourceAssociations” Tab is saved with a quantity of the resource 
-	  * between 1-3 characters
-	  */
+	 /**
+	 * This method performs the test case: Verify that the configuration on the 
+	 * “ResourceAssociations” Tab is saved with a quantity of the resource 
+	 * between 1-3 characters
+	 */
 	  
 	  @Test
 	  public void associateResourceToRoom() {
