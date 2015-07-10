@@ -44,6 +44,7 @@ public class VerifyOutOfOrderIsCreated extends TestBase{
     	String setDescription = "Out-Of-Order in the room";
     	/** roomSelected: It contains Title for a Out-Of-Order*/
     	String nameTitle ="Temporarily Out of Order";
+    	
     	LoginPage login = new LoginPage(driver);
     	HomePage adminHome = login.clickSignInButton();
 		
@@ -57,9 +58,6 @@ public class VerifyOutOfOrderIsCreated extends TestBase{
 		isPresentOutOfOrder = conferenceRoom.existOutOfOrder(roomSelected);
 		/*Asserts*/	  
 		Assert.assertTrue( isPresentOutOfOrder,msgError );
-		LogManager.info("Assert Test Create Out Of Order "
-						+ "Planing was created:"+ isPresentOutOfOrder);
-		LogManager.info(" Test Create Out Of Order");	  
     }
    
     /**

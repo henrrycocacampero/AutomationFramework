@@ -19,34 +19,49 @@ public class OutOfOrderPage {
 	
 	@FindBy (xpath = OutOfOrderConstant.START_HOUR_OUT_OF_ORDER) 
 	private WebElement startHourOutOfOrder;
+	
 	@FindBy (xpath = OutOfOrderConstant.START_MINS_OUT_OF_ORDER) 
 	private WebElement startMinsOutOfOrder  ;
+	
 	@FindBy (xpath = OutOfOrderConstant.START_AM_PM_OUT_OF_ORDER) 
 	private WebElement startAmPmOutOfOrder;
+	
 	@FindBy (xpath = OutOfOrderConstant.END_HOUR_OUT_OF_ORDER) 
 	private WebElement endHourOutOfOrder;
+	
 	@FindBy (xpath = OutOfOrderConstant.END_MINS_OUT_OF_ORDER) 
 	private WebElement endMinsOutOfOrder;
+	
 	@FindBy (xpath = OutOfOrderConstant.END_AM_PM_OUT_OF_ORDER) 
 	private WebElement endAmPmOutOfOrder;
+	
 	@FindBy (xpath = OutOfOrderConstant.TITLE_OUT_OF_ORDER) 
 	private WebElement titleOutOfOrder;
+	
 	@FindBy (xpath = OutOfOrderConstant.DESCRIPTIOM_OUT_OF_ORDER) 
 	private WebElement descriptionOutOfOrder;
+	
 	@FindBy (xpath = OutOfOrderConstant.SAVE_BUTTON_OUT_OF_ORDER) 
 	private WebElement saveButtonOutOfOrder;
+	
 	@FindBy (css = ConferenceRoomConstant.TITLE_TABLE_ROOMS) 
 	private WebElement titleTableRooms;
+	
 	@FindBy (xpath= OutOfOrderConstant.ERROR_MESSAGE_WITHOUT_TITLE)
-	private WebElement errorMessageWhitOutTitle;	
+	private WebElement errorMessageWhitOutTitle;
+	
 	@FindBy (xpath= OutOfOrderConstant.TOP_ARROW_START_HOUR)
 	private WebElement topArrowStartHour;
+	
 	@FindBy (xpath= OutOfOrderConstant.TOP_LOWER_START_HOUR)
 	private WebElement lowerArrowStartHour;
+	
 	@FindBy (xpath = OutOfOrderConstant.ERROR_MESSAGE_TO_GREATER_FROM)
-	private WebElement onOfScheduelButton;
-	@FindBy (xpath = OutOfOrderConstant.ON_OFF_SCHEDULE_BUTTON)
 	private WebElement errorMessageToGreaterFrom;
+
+	@FindBy (xpath = OutOfOrderConstant.ON_OFF_SCHEDULE_BUTTON)
+	private WebElement onOfScheduelButton;
+	
 	@FindBy (xpath = OutOfOrderConstant.SEND_MAIL_CHECKBOX)
 	private WebElement sendMailCheckBox;
 	
@@ -183,13 +198,25 @@ public class OutOfOrderPage {
 	/**
 	 * clickCalendarButton: It clicks on the Calendar Button 
 	 * 
-	 * @return ConferenceRoomPage
+	 * @return OutOfOrderPage
 	 */
 	public OutOfOrderPage  clickScheduleButton() {
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions
 				.visibilityOf(onOfScheduelButton));
 		onOfScheduelButton.click();
-		LogManager.info("Close button was clicked");
+		LogManager.info("O/OffSchedule button was clicked");
+		return this;
+	}
+	/**
+	 * checkSendMailCheckbox: It check in the SendMailCheckbox
+	 *   
+	 * @return OutOfOrderPage
+	 */
+	public OutOfOrderPage checkSendMailCheckbox() {
+		(new WebDriverWait(driver, 60)).until(ExpectedConditions
+				.visibilityOf(sendMailCheckBox));
+		sendMailCheckBox.click();
+		LogManager.info("Send mail was checked");
 		return this;
 	}
 }

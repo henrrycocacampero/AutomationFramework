@@ -1,7 +1,6 @@
-package org.roommanager.test.admin.roominfo.outoforder;
+package org.roommanager.test.admin.conferencerooms;
 
 import org.roommanager.framework.pages.admin.conferenceroom.ConferenceRoomPage;
-import org.roommanager.framework.pages.admin.conferenceroom.OutOfOrderPage;
 import org.roommanager.framework.pages.admin.home.HomePage;
 import org.roommanager.framework.pages.admin.login.LoginPage;
 import org.roommanager.framework.utilities.api.admin.EmailServerApi;
@@ -15,7 +14,16 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+/**
+ * The VerifyOptionSendingMailsEnabledWithMeeting class contains the test case: 
+ * Create a Out Of Order in the Room<Value> when click on On/Off ScheduleButton and 
+ * VErify if check on, in send mail checkbox 
+ *
+ * @author Daneiva Gamboa
+ *
+ */
 public class VerifyOptionSendingMailsEnabledWithMeeting extends TestBase{
+	/** meetingSubject: It contains Subject for a Meeting*/
 	private String meetingSubject = "Subject Meeting";
 	/** setDescription: It contains Description for a Out-Of-Order*/
 	String setDescription = "Out-Of-Order in the room";
@@ -33,7 +41,7 @@ public class VerifyOptionSendingMailsEnabledWithMeeting extends TestBase{
 	String msgError= "The Out Of Order was not created!";
     	  
 	/** roomSelected: Name of room to be selected for create a Out-Of-Order*/	  
-    String roomSelected = "SM-Room8";
+    String roomSelected = "SM-Room10";
     
     /** isPresentErrorMessage: Boolean value, that indicates whether or not 
      * that indicates whether or not there is Error Message, 
@@ -43,26 +51,25 @@ public class VerifyOptionSendingMailsEnabledWithMeeting extends TestBase{
         
     /**
 	* This method performs the test case: Verify if is possible create 
-	* a Out-Of-Order with correct values("From" field is less than "To").
+	* a Out-Of-Order if check on, in send mail checkbox .
 	*/
 	@Test
 	public void verifyOptionSendingMailsEnabledWithMeeting() {
 		LoginPage login = new LoginPage(driver);
 		HomePage adminHome = login.clickSignInButton();
 			
-	    ConferenceRoomPage conferenceRoom = adminHome.selectConferenceRoomsLink();
-		  
-		OutOfOrderPage outOfOrderPage = conferenceRoom.doubleClickOnRoom(roomSelected)
-										.clickOnOutOfOrderPlanning()
-										.setTitle(nameTitle)										
-										.setDescription(setDescription)
-										
-										.clickSaveButtonOutOfOrder();
-		isPresentErrorMessage = outOfOrderPage.errorMessageToGreaterFrom();
+    	ConferenceRoomPage conferenceRoom = adminHome.selectConferenceRoomsLink();
+	  
+    	conferenceRoom.doubleClickOnRoom(roomSelected)
+			.clickOnOutOfOrderPlanning()
+			.setTitle(nameTitle)										
+			.setDescription(setDescription)
+			.clickScheduleButton()
+			.checkSendMailCheckbox()
+			.clickSaveButtonOutOfOrder();
+    	isPresentOutOfOrder = conferenceRoom.existOutOfOrder(roomSelected);
 		/*Asserts*/
-		Assert.assertTrue(isPresentErrorMessage,msgError);
-		LogManager.info("Assert Test Verify Out Of OrderNot Saved With "
-						+ "Invalid Times:"+ isPresentErrorMessage);			
+		Assert.assertTrue( isPresentOutOfOrder,msgError );		
 	}
 	@AfterTest
 	public void testTearDown(){
