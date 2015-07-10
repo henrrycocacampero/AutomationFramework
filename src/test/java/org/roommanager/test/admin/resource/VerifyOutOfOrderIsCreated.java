@@ -1,7 +1,6 @@
-package org.roommanager.test.admin.roominfo.outoforder;
+package org.roommanager.test.admin.resource;
 
 import org.roommanager.framework.pages.admin.conferenceroom.ConferenceRoomPage;
-import org.roommanager.framework.pages.admin.conferenceroom.OutOfOrderPage;
 import org.roommanager.framework.pages.admin.home.HomePage;
 import org.roommanager.framework.pages.admin.login.LoginPage;
 import org.roommanager.framework.utilities.api.admin.RoomApi;
@@ -9,7 +8,6 @@ import org.roommanager.framework.utilities.common.LogManager;
 import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
@@ -42,31 +40,28 @@ public class VerifyOutOfOrderIsCreated extends TestBase{
 	*/
     @Test
     public void verifyOutOfOrderIsCreated() {	    
-	LoginPage login = new LoginPage(driver);
-	HomePage adminHome = login.clickSignInButton();
+    	/** setDescription: It contains Description for a Out-Of-Order*/
+    	String setDescription = "Out-Of-Order in the room";
+    	/** roomSelected: It contains Title for a Out-Of-Order*/
+    	String nameTitle ="Temporarily Out of Order";
+    	LoginPage login = new LoginPage(driver);
+    	HomePage adminHome = login.clickSignInButton();
 		
-    ConferenceRoomPage conferenceRoom = adminHome.selectConferenceRoomsLink();
+    	ConferenceRoomPage conferenceRoom = adminHome.selectConferenceRoomsLink();
 	  
-	OutOfOrderPage outOfOrderPage = conferenceRoom.doubleClickOnRoom(roomSelected)
-			.clickOnOutOfOrderPlanning();
-	outOfOrderPage.setRandomTitle();
-	outOfOrderPage.setDescription();
-	outOfOrderPage.clickSaveButtonOutOfOrder();
-	isPresentOutOfOrder = conferenceRoom.existOutOfOrder(roomSelected);
-	/*Asserts*/	  
-	Assert.assertTrue( isPresentOutOfOrder,msgError );
-	LogManager.info("Assert Test Create Out Of Order Planing was created:"+ isPresentOutOfOrder);
-	LogManager.info(" Test Create Out Of Order");	  
-  }
-    /**
-     * beforeTest: This method creates a Out-Of-Order that will be used 
-     * in the test case.
-     */
-    @BeforeTest
-    public void beforeTest(){
-    	 
+    	conferenceRoom.doubleClickOnRoom(roomSelected)
+    		.clickOnOutOfOrderPlanning()
+			.setTitle(nameTitle)
+			.setDescription(setDescription)
+			.clickSaveButtonOutOfOrder();
+		isPresentOutOfOrder = conferenceRoom.existOutOfOrder(roomSelected);
+		/*Asserts*/	  
+		Assert.assertTrue( isPresentOutOfOrder,msgError );
+		LogManager.info("Assert Test Create Out Of Order "
+						+ "Planing was created:"+ isPresentOutOfOrder);
+		LogManager.info(" Test Create Out Of Order");	  
     }
-    
+   
     /**
      * afterTest: This method deletes the created Out-Of-Order in the 
      * beforeTest method.
