@@ -44,7 +44,8 @@ public class VerifyResourceAssociationQuantity extends TestBase{
 	 * errorMessage: It contains the error message that would appear 
 	 * if test case fails.
 	 */
-	 private String errorMessage = "The Resource"+resourceName+"is not associated"; 
+	 private String errorMessage = "The Resource"+resourceName+"with:"
+			 +quantity+ " resources is not displayed"; 
 	  
 	 /**
 	 * This method performs the test case: Verify that the configuration on the 
@@ -53,7 +54,7 @@ public class VerifyResourceAssociationQuantity extends TestBase{
 	 */
 	  
 	  @Test
-	  public void associateResourceToRoom() {
+	  public void resourceAssociationQuantity() {
 		  LoginPage login = new LoginPage(driver);
 		  
 		  HomePage home = login.clickSignInButton(); 

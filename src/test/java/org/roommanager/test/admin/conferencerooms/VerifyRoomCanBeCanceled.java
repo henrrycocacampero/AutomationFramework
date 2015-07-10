@@ -40,7 +40,7 @@ public class VerifyRoomCanBeCanceled extends TestBase{
 	* of a room can be canceled when pressing the Cancel button.
 	*/
 	@Test
-	public void VerifyRoomIsCanceled() {
+	public void verifyRoomCanBeCanceled() {
 				
 		LoginPage loginPage = new LoginPage(driver);
 		
