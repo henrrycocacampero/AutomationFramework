@@ -32,7 +32,7 @@ public class VerifyRoomInfoPageIsDisplayed extends TestBase{
 		RoomInfoPage roomInfo = conferenceRoom
 			.doubleClickOnRoom(roomName);
 		
-		boolean isRoomTitlePresent = roomInfo.isRoomInPageTitlePresent(roomName);
+		boolean isRoomTitlePresent = roomInfo.isRoomInfoPageTitlePresent(roomName);
 		
 		Assert.assertTrue(isRoomTitlePresent, errorMessage);
 	} 

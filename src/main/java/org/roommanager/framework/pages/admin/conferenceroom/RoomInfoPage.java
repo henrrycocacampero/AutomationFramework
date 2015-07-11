@@ -211,14 +211,28 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 	/**
 	 * isRoomInPageTitlePresent: It verifies the Room Info Page Title is Present. 
 	 * @param roomName: It represents the value of the Room Info Page Title.
+	 * @return boolean
 	 */
-	public boolean isRoomInPageTitlePresent(String roomName){
+	public boolean isRoomInfoPageTitlePresent(String roomName){
 		new WebDriverWait(driver, 60)
 			.until(ExpectedConditions.visibilityOf(roomNameTitle));
 		String roomTitle = roomNameTitle.getText();
 		
 		LogManager.info("The Room Info Page Title: <"+roomTitle+"> was found");
 		return roomTitle.equals(roomName);
+	}
+	
+	/**
+	 * isRoomInfoPageLinkPresent: It verifies the Room Info Page Link is Present. 
+	 * @return boolean
+	 */
+	public boolean isRoomInfoPageLinkPresent(){
+		new WebDriverWait(driver, 60)
+			.until(ExpectedConditions.visibilityOf(roomInfoLink));
+		String roomInfoLink = roomNameTitle.getText();
+		
+		LogManager.info("The Room Info Page Link: <"+roomInfoLink+"> was found");
+		return roomInfoLink != null;
 	}
 	
 	/**

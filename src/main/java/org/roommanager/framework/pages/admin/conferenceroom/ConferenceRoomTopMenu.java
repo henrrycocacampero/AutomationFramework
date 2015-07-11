@@ -11,7 +11,7 @@ import org.roommanager.framework.utilities.common.LogManager;
 
 public class ConferenceRoomTopMenu {
 	@FindBy (xpath = ConferenceRoomTopMenuConstant.ROOM_INFO) 
-	private WebElement roomInfoLink;
+	protected WebElement roomInfoLink;
 	@FindBy (xpath = ConferenceRoomTopMenuConstant.RESOURCE_ASSOCIATION) 
 	private WebElement resourceAssociationLink;
 	@FindBy (xpath = ConferenceRoomTopMenuConstant.OUT_ORDER_PLANNING) 
