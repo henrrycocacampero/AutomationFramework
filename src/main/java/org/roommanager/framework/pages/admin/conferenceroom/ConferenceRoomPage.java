@@ -17,8 +17,6 @@ import org.roommanager.framework.utilities.common.LogManager;
 public class ConferenceRoomPage {
 	@FindBy(xpath = ConferenceRoomConstant.LIST_ROOM)
 	private WebElement roomsList;
-	@FindBy(xpath = ConferenceRoomConstant.LIST_RESOURCE)
-	private WebElement resourcesList;
 	@FindBy(xpath = ConferenceRoomConstant.NEXT_PAGE_BUTTON)
 	private WebElement nextPageButton;
 	@FindBy(xpath = ConferenceRoomConstant.PAGE_INDEX)
@@ -29,6 +27,8 @@ public class ConferenceRoomPage {
 	private WebElement titleTableRooms;
 	@FindBy(xpath = ConferenceRoomConstant.RESOURCE_HEADER)
 	private WebElement resourceHeader;
+	@FindBy(xpath = ConferenceRoomConstant.ROOM_TABLE_RESOURCE_HEADERS)
+	private WebElement roomTableResourcesHeader;
 	private By divElementLocator = ConferenceRoomConstant.DIV_ELEMENT;
 	private By roomNameLocator = ConferenceRoomConstant.ROOM_NAME;
 	private By disabledRoomNameLocator = ConferenceRoomConstant.DISABLED_ROOM_NAME;
@@ -150,16 +150,16 @@ public class ConferenceRoomPage {
 		List<WebElement> rooms = roomsList.findElements(divElementLocator);
 		for (WebElement room : rooms) {
 			String roomItemName = enabledRoom == true ? room.findElement(
-					roomNameLocator).getText() : room.findElement(
-					disabledRoomNameLocator).getText();
+								  roomNameLocator).getText() : room.findElement(
+								  disabledRoomNameLocator).getText();
 			if (roomItemName.equals(roomName)) {
 				LogManager.info("Room: <" + roomItemName
-						+ "> was found on the Available Rooms List");
+								+ "> was found on the Available Rooms List");
 				return room;
 			}
 		}
 		LogManager.info("Room: <" + roomName
-				+ "> wasn't found on the Available Rooms List");
+						+ "> wasn't found on the Available Rooms List");
 		return null;
 	}
 
@@ -180,7 +180,7 @@ public class ConferenceRoomPage {
 			resource = getRoomByName(resourceName, enabledRoom);
 			if (resource != null) {
 				LogManager.info("Resource: <" + resourceName
-						+ "> was found in page:" + index);
+								+ "> was found in page:" + index);
 				return resource;
 			}
 			clickNextPageButton(index + 1, numberOfPages);
@@ -205,7 +205,7 @@ public class ConferenceRoomPage {
 				.visibilityOf(pageNumber));
 		String nextPageinput = pageNumber.getAttribute("value");
 		while (Integer.parseInt(nextPageinput) != actualPage
-				&& actualPage <= numberOfPages) {
+			   && actualPage <= numberOfPages) {
 			nextPageinput = pageNumber.getAttribute("value");
 		}
 		LogManager.info("The Next Page button was clicked");
@@ -221,7 +221,7 @@ public class ConferenceRoomPage {
 				.visibilityOf(numberOfPages));
 		String pages = numberOfPages.getText().replace("/ ", "");
 		LogManager.info("The number of Pages of the Rooms Table is: "
-				+ Integer.parseInt(pages));
+						+ Integer.parseInt(pages));
 		return Integer.parseInt(pages);
 	}
 
@@ -277,8 +277,8 @@ public class ConferenceRoomPage {
 	}
 
 	/**
-	 * isRoomsTableHeaderPresent: It verifies the Room Table Header is present.
-	 * 
+	 * isRoomsTableHeaderPresent: It verifies the Room Table Header 
+	 * is present.
 	 * @return boolean
 	 */
 	public boolean isRoomsTableHeaderPresent() {
@@ -295,9 +295,10 @@ public class ConferenceRoomPage {
 		WebElement enabledHeader = driver.findElement(outOfOrderHeaderLocator);
 		WebElement roomHeader = driver.findElement(roomHeaderLocator);
 		boolean isRoomTableHeaderPresent = outOfOrder != null
-				&& enabledHeader != null && roomHeader != null;
+											&& enabledHeader != null 
+											&& roomHeader != null;
 		LogManager.info("Is Room Table Header Present? : "
-				+ isRoomTableHeaderPresent);
+						+ isRoomTableHeaderPresent);
 		return isRoomTableHeaderPresent;
 	}
 
@@ -317,7 +318,7 @@ public class ConferenceRoomPage {
 			String roomItemName = room.findElement(roomNameLocator).getText();
 			if (roomItemName.equals(displayNameRoom)) {
 				LogManager.info("Room: <" + roomItemName
-						+ "> was found on the Available Rooms List");
+								+ "> was found on the Available Rooms List");
 				return true;
 			}
 		}
@@ -337,5 +338,77 @@ public class ConferenceRoomPage {
 						.invisibilityOfElementLocated(roomForm));
 		return RoomForm;
 	}
-
+	
+	/**
+	 * getRoomByName: It retrieves the specified Room.
+	 * @param resourceName: It represents the Resource's Name
+	 * @return WebElement
+	 */
+	private WebElement getResourceByName(String resourceName) {
+		(new WebDriverWait(driver, 60)).until(ExpectedConditions
+			.visibilityOf(resourceHeader));
+		List<WebElement> rooms = resourceHeader.findElements(divElementLocator);
+		for (WebElement room : rooms) {
+			(new WebDriverWait(driver, 60)).until(ExpectedConditions
+				.visibilityOf(room));
+			String resourceItemName = room.findElement(ConferenceRoomConstant
+									  .RESOURCE_NAME_LOCATOR).getText();
+			if (resourceItemName.equals(resourceName)) {
+				LogManager.info("Resource: <" + resourceItemName
+								+ "> was found on Resources Filter");
+				return room;
+			}
+		}
+		LogManager.info("Resource: <" + resourceName
+						+ "> wasn't found on Resources Filter");
+		return null;
+	}
+	
+	/**
+	 * clickOnResource: It clicks on a Resource from the Filter
+	 * @param resourceName: It represents the Resource's Name
+	 * @return ConferenceRoomPage
+	 */
+	public ConferenceRoomPage clickOnResource(String resourceName) {
+		WebElement resource = getResourceByName(resourceName);
+		resource.click();
+		LogManager.info("Resource: <"+ resourceName + "> was clicked");
+		return this;
+	}
+	
+	/**
+	 * getResourceHeaderName: It retrieves the specified Resource
+	 * from Resources Filter.
+	 * @param resourceName: It represents the Resource's Name
+	 * @return String
+	 */
+	public String getResourceHeaderName(String resourceName) {
+		(new WebDriverWait(driver, 60)).until(ExpectedConditions
+			.visibilityOf(roomTableResourcesHeader));
+		
+		int numberOfHeaders = 0;
+		
+		while(numberOfHeaders < 4){
+			numberOfHeaders = roomTableResourcesHeader
+							  .findElements(divElementLocator)
+							  .size();
+		}
+		
+		for (int i = 4; i < numberOfHeaders; i++) {
+			By resourceHeader = By.xpath(
+								ConferenceRoomConstant.ROOM_TABLE_HEADER
+								.replace("position", i+""));
+			WebElement resource = driver.findElement(resourceHeader);
+			String actualResourceName = resource.getText();
+			if(actualResourceName.equals(resourceName)){
+				LogManager.info("Resource Header: <" + actualResourceName
+								+ "> was retrieved");
+				return actualResourceName;
+			}
+			
+		}
+		LogManager.info("Resource Header: <" + resourceName
+						+ "> wasn't found");
+		return null;
+	}
 }

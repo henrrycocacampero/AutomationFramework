@@ -41,6 +41,8 @@ public class ConferenceRoomConstant {
 	public static final String NUMBER_OF_PAGE = "//*[@id='roomsGrid']/div[3]/div/div[2]/div[2]/span";
 	public static final String RESOURCE_HEADER = "//div[2]/div/div[2]/div[1]/div/div";
 	public static final String ROOM_TABLE_HEADER = "//*[@id='roomsGrid']/div[1]/div[2]/div/div[position]/div[2]/div[1]/div[1]";
+	public static final String ROOM_TABLE_RESOURCE_HEADERS = "//*[@id='roomsGrid']/div[1]/div[2]/div";
 	public static final By RESOURCE_HEADER_LOCATOR = By.xpath(RESOURCE_HEADER);
 	public static final By ROOM_TABLE_HEADER_LOCATOR = By.xpath(ROOM_TABLE_HEADER);
+	public static final By RESOURCE_NAME_LOCATOR = By.xpath("span/span");
 }
