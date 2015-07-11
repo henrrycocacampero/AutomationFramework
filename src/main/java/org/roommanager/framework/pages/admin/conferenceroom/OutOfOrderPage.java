@@ -172,7 +172,8 @@ public class OutOfOrderPage {
 	}
 	
 	/**
-	 * clickLowerArrowStartHour: It click on Top Arrow Start of Start Hour Button Button*/
+	 * clickLowerArrowStartHour: It click on Top Arrow Start of Start Hour Button Button
+	 */
 	public OutOfOrderPage clickLowerArrowStartHour(){
 		(new WebDriverWait(driver,60)).until(ExpectedConditions
 									  .visibilityOf(topArrowStartHour));
@@ -194,29 +195,46 @@ public class OutOfOrderPage {
 		}	
 		LogManager.info("Error Message: <" + errorMessageToGreaterFrom.getText()+ ">");
 		return errorMessageExist;
-	}	
+	}
+	
 	/**
 	 * clickCalendarButton: It clicks on the Calendar Button 
 	 * 
 	 * @return OutOfOrderPage
 	 */
-	public OutOfOrderPage  clickScheduleButton() {
+	public OutOfOrderPage clickScheduleButton() {
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions
 				.visibilityOf(onOfScheduelButton));
 		onOfScheduelButton.click();
 		LogManager.info("O/OffSchedule button was clicked");
 		return this;
 	}
-	/**
-	 * checkSendMailCheckbox: It check in the SendMailCheckbox
+	
+	/** checkSendMailCheckbox: It checked in the SendMailCheckbox
 	 *   
 	 * @return OutOfOrderPage
 	 */
 	public OutOfOrderPage checkSendMailCheckbox() {
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions
 				.visibilityOf(sendMailCheckBox));
-		sendMailCheckBox.click();
+		sendMailCheckBox.click();		
 		LogManager.info("Send mail was checked");
 		return this;
+	}
+	
+	/**
+	 * enabledSendMailCheckbox: It verify IF enabled the  SendMail Checkbox 
+	 *   
+	 * @return OutOfOrderPage
+	 */
+	public boolean enabledSendMailCheckbox() {
+		boolean enabledCheckSendMailCheckbox = false;
+		(new WebDriverWait(driver, 60)).until(ExpectedConditions
+									   .visibilityOf(sendMailCheckBox));
+			if (sendMailCheckBox.isEnabled()){
+				enabledCheckSendMailCheckbox=true;
+			}		
+		LogManager.info("Send mail chexbox enabled: "+enabledCheckSendMailCheckbox);
+		return enabledCheckSendMailCheckbox;
 	}
 }
