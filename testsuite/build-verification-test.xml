@@ -4,6 +4,7 @@
 	<suite-files>
     	<suite-file path="testsuite/admin/email-server-suite.xml"/>
         <suite-file path="testsuite/admin/resources-suite.xml"/>
+        <suite-file path="testsuite/admin/conference-rooms-suite.xml"/>
         <suite-file path="testsuite/tablet/meetings-suite.xml"/>
 	</suite-files>
 </suite>
