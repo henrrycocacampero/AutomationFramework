@@ -60,7 +60,7 @@ public class OutOfOrderPage {
 	private WebElement errorMessageToGreaterFrom;
 
 	@FindBy (xpath = OutOfOrderConstant.ON_OFF_SCHEDULE_BUTTON)
-	private WebElement onOfScheduelButton;
+	private WebElement onOffScheduleButton;
 	
 	@FindBy (xpath = OutOfOrderConstant.SEND_MAIL_CHECKBOX)
 	private WebElement sendMailCheckBox;
@@ -195,6 +195,7 @@ public class OutOfOrderPage {
 		LogManager.info("Error Message: <" + errorMessageToGreaterFrom.getText()+ ">");
 		return errorMessageExist;
 	}	
+	
 	/**
 	 * clickCalendarButton: It clicks on the Calendar Button 
 	 * 
@@ -202,11 +203,12 @@ public class OutOfOrderPage {
 	 */
 	public OutOfOrderPage  clickScheduleButton() {
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions
-				.visibilityOf(onOfScheduelButton));
-		onOfScheduelButton.click();
+				.visibilityOf(onOffScheduleButton));
+		onOffScheduleButton.click();
 		LogManager.info("O/OffSchedule button was clicked");
 		return this;
 	}
+	
 	/**
 	 * checkSendMailCheckbox: It check in the SendMailCheckbox
 	 *   
@@ -218,5 +220,19 @@ public class OutOfOrderPage {
 		sendMailCheckBox.click();
 		LogManager.info("Send mail was checked");
 		return this;
+	}
+	
+	/**
+	 * isOutOfOrderPageIsAvailable: It verifies Out Of Order Page is 
+	 * Available
+	 * @return boolean
+	 */
+	public boolean isOutOfOrderPageIsAvailable() {
+		(new WebDriverWait(driver, 60)).until(ExpectedConditions
+			.visibilityOf(onOffScheduleButton));
+		boolean isOutOfOrderPageAvailable = onOffScheduleButton
+											.isDisplayed();
+		LogManager.info("Out Of Order Page is Available");
+		return isOutOfOrderPageAvailable;
 	}
 }
