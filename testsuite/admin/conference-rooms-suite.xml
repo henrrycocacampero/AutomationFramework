@@ -50,7 +50,30 @@
             <classes>
                   <class name="org.roommanager.test.admin.conferencerooms.VerifyOptionSendingMailsEnabledWithoutMeetingOnOfEnabled"/>
       </classes>
-      </test>      
+      </test> 
+      <test name="Create a Out Of Order in the Room when the values of 
+      From(date and hour) field is less than To(date and hour), to be saved.">
+            <classes>
+                  <class name="org.roommanager.test.admin.conferencerooms.VerifyOutOfOrderIsCreated"/>
+      </classes>
+      </test>
+      <test name="Verify OutOfOrder not saved with invalid hours in the room.">
+            <classes>
+                  <class name="org.roommanager.test.admin.conferencerooms.VerifyOutOfOrderNotSavedWithInvalidTimes"/>
+      </classes>
+      </test>
+
+      <test name="Check that after clicking on Out of Order tab in the Room Form, page is displayed.">
+            <classes>
+                  <class name="org.roommanager.test.admin.conferencerooms.VerifyOutOfOrderPageIsDisplayed"/>
+      </classes>
+      </test>
+      <test name="Verify OutOfOrder Title Is Obligatory for Create a Out Of Order in the Room.">
+            <classes>
+                  <class name="org.roommanager.test.admin.conferencerooms.VerifyOutOfOrderTitleIsObligatory"/>
+      </classes>
+      </test>
+
       <test name="Verify that the configuration on the “ResourceAssociations” Tab is saved with a quantity of the resource  between 1-3 characters.">
             <classes>
                   <class name="org.roommanager.test.admin.conferencerooms.VerifyResourceAssociationQuantity"/>
@@ -81,26 +104,19 @@
                   <class name="org.roommanager.test.admin.conferencerooms.VerifyRoomInfoFormIsclosed"/>
       </classes>
       </test>
-      <test name="Verify that the rename of a room is disabled">
-            <classes>
-                  <class name="org.roommanager.test.admin.conferencerooms.VerifyUpdateRoomNameIsDisabled"/>
-      </classes>
-      </test>
-      <test name="Verify that a resource is displayed as Rooms table when it is icon is selected in Resources Header">
-            <classes>
-                  <class name="org.roommanager.test.admin.conferencerooms.VerifyRoomResourcesFilter"/>
-      </classes>
-      </test>
-      
-	<test name="Check that after clicking on Room Info tab in the Room Form, page is displayed.">
+      <test name="Check that after clicking on Room Info tab in the Room Form, page is displayed.">
             <classes>
                   <class name="org.roommanager.test.admin.conferencerooms.VerifyRoomInfoLinkIsDisplayed"/>
       </classes>
       </test>
-	<test name="Check that after clicking on Out of Order tab in the Room Form, page is displayed.">
+       <test name="Verify that a resource is displayed as Rooms table when it is icon is selected in Resources Header">
             <classes>
-                  <class name="org.roommanager.test.admin.conferencerooms.VerifyOutOfOrderPageIsDisplayed"/>
+                  <class name="org.roommanager.test.admin.conferencerooms.VerifyRoomResourcesFilter"/>
       </classes>
       </test>
-      
+      <test name="Verify that the rename of a room is disabled">
+            <classes>
+                  <class name="org.roommanager.test.admin.conferencerooms.VerifyUpdateRoomNameIsDisabled"/>
+      </classes>
+      </test>      
 </suite>
