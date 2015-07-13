@@ -3,8 +3,11 @@ package org.roommanager.test.admin.conferencerooms;
 import org.roommanager.framework.pages.admin.conferenceroom.ConferenceRoomPage;
 import org.roommanager.framework.pages.admin.conferenceroom.RoomInfoPage;
 import org.roommanager.framework.pages.admin.login.LoginPage;
+import org.roommanager.framework.utilities.api.admin.EmailServerApi;
+import org.roommanager.framework.utilities.common.PropertiesReader;
 import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class VerifyRoomInfoLinkIsDisplayed extends TestBase{
@@ -14,6 +17,15 @@ public class VerifyRoomInfoLinkIsDisplayed extends TestBase{
 	 * if test case fails
 	 */
 	private String errorMessage = "The test failed because Room Info Link wasn't displayed";
+	
+	@BeforeTest
+	public void beforeTest() {
+		if(EmailServerApi.getEmailServiceId() == null){
+			EmailServerApi.createEmailServer(PropertiesReader.getExchangeUserName(),
+											 PropertiesReader.getExchangePassWord(),
+											 PropertiesReader.getExchangeHostName());
+		}
+	}
 	
 	/**
 	 * verifyRoomInfoPageLinkIsDisplayed: Check that after clicking on 

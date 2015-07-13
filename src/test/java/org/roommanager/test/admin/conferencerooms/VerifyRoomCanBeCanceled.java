@@ -4,8 +4,11 @@ import org.roommanager.framework.pages.admin.conferenceroom.ConferenceRoomPage;
 import org.roommanager.framework.pages.admin.conferenceroom.RoomInfoPage;
 import org.roommanager.framework.pages.admin.home.HomePage;
 import org.roommanager.framework.pages.admin.login.LoginPage;
+import org.roommanager.framework.utilities.api.admin.EmailServerApi;
+import org.roommanager.framework.utilities.common.PropertiesReader;
 import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
@@ -34,6 +37,15 @@ public class VerifyRoomCanBeCanceled extends TestBase{
 	*/
 	private String errorMessage = "The test cases failed: the datas"
 			+ "does not cancel.";
+	
+	@BeforeTest
+	public void beforeTest() {
+		if(EmailServerApi.getEmailServiceId() == null){
+			EmailServerApi.createEmailServer(PropertiesReader.getExchangeUserName(),
+											 PropertiesReader.getExchangePassWord(),
+											 PropertiesReader.getExchangeHostName());
+		}
+	}
 	
 	/**
 	* This method performs the test case: Verify that the configuration 
