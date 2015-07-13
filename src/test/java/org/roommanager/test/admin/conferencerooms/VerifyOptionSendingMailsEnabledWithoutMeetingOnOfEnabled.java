@@ -4,8 +4,10 @@ import org.roommanager.framework.pages.admin.conferenceroom.ConferenceRoomPage;
 import org.roommanager.framework.pages.admin.conferenceroom.OutOfOrderPage;
 import org.roommanager.framework.pages.admin.home.HomePage;
 import org.roommanager.framework.pages.admin.login.LoginPage;
+import org.roommanager.framework.utilities.api.admin.EmailServerApi;
 import org.roommanager.framework.utilities.api.admin.RoomApi;
 import org.roommanager.framework.utilities.api.tablet.MeetingApi;
+import org.roommanager.framework.utilities.common.PropertiesReader;
 import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -57,6 +59,11 @@ public class VerifyOptionSendingMailsEnabledWithoutMeetingOnOfEnabled extends Te
 	
 	@BeforeTest
 	public void beforeTest(){
+		if(EmailServerApi.getEmailServiceId() == null){
+			EmailServerApi.createEmailServer(PropertiesReader.getUsername(), 
+											PropertiesReader.getPassword(), 
+											PropertiesReader.getExchangeHostName());
+		}
 		MeetingApi.deleteAllRoomMeetings(roomSelected);
 	}
 }

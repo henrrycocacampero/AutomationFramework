@@ -84,9 +84,7 @@ public class VerifyOptionSendingMailsEnabledWithMeetingOnOffEnabled extends Test
 											PropertiesReader.getExchangeHostName());
 		}
 		
-		 if(EmailServerApi.getEmailServiceId() == null)
-				EmailServerApi.createEmailServer(PropertiesReader.getUsername(), PropertiesReader.getPassword(), PropertiesReader.getExchangeHostName());
-		   MeetingApi.createMeeting(organizer, subject, startTime, endTime, roomSelected, attendee);
+		MeetingApi.createMeeting(organizer, subject, startTime, endTime, roomSelected, attendee);
 		MeetingApi.deleteAllRoomMeetings(roomSelected);
 	}
 }

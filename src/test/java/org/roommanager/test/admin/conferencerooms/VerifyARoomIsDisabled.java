@@ -4,7 +4,9 @@ import org.junit.Assert;
 import org.roommanager.framework.pages.admin.conferenceroom.ConferenceRoomPage;
 import org.roommanager.framework.pages.admin.home.HomePage;
 import org.roommanager.framework.pages.admin.login.LoginPage;
+import org.roommanager.framework.utilities.api.admin.EmailServerApi;
 import org.roommanager.framework.utilities.api.admin.RoomApi;
+import org.roommanager.framework.utilities.common.PropertiesReader;
 import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -27,6 +29,11 @@ public class VerifyARoomIsDisabled extends TestBase {
 	 */
 	@BeforeTest
 	public void beforeTest() {
+		if(EmailServerApi.getEmailServiceId() == null){
+			EmailServerApi.createEmailServer(PropertiesReader.getExchangeUserName(),
+											 PropertiesReader.getExchangePassWord(),
+											 PropertiesReader.getExchangeHostName());
+		}
 		RoomApi.enableRoom(roomName);	
 	}
 	
