@@ -52,24 +52,18 @@ public class VerifyAssociateResourceToRoom extends TestBase {
 		  LoginPage login = new LoginPage(driver);
 		  
 		  HomePage home = login.clickSignInButton(); 
-		  
 		  ConferenceRoomPage conferenceRoom = home.selectConferenceRoomsLink();
-		  
 		  ResourceAssociationsPage resourceAssociation = conferenceRoom
 				  .doubleClickOnRoom(roomName)
 				  .clickOnResourceAssociations();
-		  
 		  resourceAssociation.clickOnAddResourceButton(resourceDisplayName)
 		  		  .clickSaveButton();
-
 		  conferenceRoom.doubleClickOnRoom(roomName).
 		  clickOnResourceAssociations();
-		  
 		  String associatedResourceName = resourceAssociation
 					.getResourceAssociatedByNameInTable(resourceDisplayName);
 		  Assert.assertEquals( associatedResourceName, 
 				  resourceDisplayName,errorMessage);
-		  
 		  resourceAssociation.clickCancelButton();
 	  }
 	  
