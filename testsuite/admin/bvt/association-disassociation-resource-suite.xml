@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<suite name="BVT - Test Suite For Association / Dissasociation Resource to Room"
+<suite
+	name="BVT - Test Suite For Association / Dissasociation Resource to Room"
 	parallel="false">
 	<test name="Verify that an available resource can be associated to a room.">
 		<classes>
