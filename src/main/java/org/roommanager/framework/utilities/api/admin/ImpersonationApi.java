@@ -17,9 +17,18 @@ import org.roommanager.framework.utilities.common.PropertiesReader;
 
 public class ImpersonationApi {
 	
+	/** json: Json of the impersonation*/
     private static String json;
+    
+    /** IMPERSONATION_BODY: Body of the location*/
     private static final String IMPERSONATION_BODY = "{\"impersonate\": \"[impersonation]\"}";
 	
+    /**
+	 * jsonRequest: It does the request of impersonation
+	 * json.
+	 * @param json: It represents the Json of impersonation.
+	 * @return Object
+	 */
 	public static Object jsonRequest(String json){
 		Object resultObject = null; 
 		try {
@@ -32,6 +41,12 @@ public class ImpersonationApi {
 		 return resultObject;
 	}
 	
+	/**
+	 * getRequest: It get the request of impersonation
+	 * json.
+	 * @param urlRequest: It represents the URL of request the impersonation.
+	 * @return String Json.
+	 */
 	public static String getRequest(String urlRequest) {	 
 		try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
             HttpGet request = new HttpGet(urlRequest);
@@ -45,23 +60,28 @@ public class ImpersonationApi {
 		return json;
     }
 	
+	/**
+	 * getImpersonation: It get impersonation.
+	 * @param name: It represents the Impersonation's Name
+	 * @return String id.
+	 */
 	public static String getImpersonation(String name) {
 		String id = null;
 		String url = PropertiesReader.getRoomManagerApi() + "services";
 		String propertyName = "name";
 		String propertyId = "_id";		
 		String json = getRequest(url);
-		Object resourcesAsJson = jsonRequest(json);
-		if (resourcesAsJson instanceof JSONArray) {
-            JSONArray array=(JSONArray)resourcesAsJson;
+		Object ImpersonationJson = jsonRequest(json);
+		if (ImpersonationJson instanceof JSONArray) {
+            JSONArray array=(JSONArray)ImpersonationJson;
             for (Object object : array) {
                 JSONObject obj =(JSONObject)object;
                 if(obj.get(propertyName).toString().equals(name)){
                 	return obj.get(propertyId).toString();
                 }
             }
-        }else if (resourcesAsJson instanceof JSONObject) {
-            JSONObject obj =(JSONObject)resourcesAsJson;
+        }else if (ImpersonationJson instanceof JSONObject) {
+            JSONObject obj =(JSONObject)ImpersonationJson;
             if(obj.get(propertyName).toString().equals(name)){
             	return obj.get(propertyId).toString();
             }
@@ -69,6 +89,11 @@ public class ImpersonationApi {
 		return id;
     }
 	
+	/**
+	 * setImpersonation: It change the status of the impersonation.
+	 * @param impersonation: It represents the Impersonation's status.
+	 * @param name: It represents the Impersonation's Name.
+	 */
 	public static void setImpersonation(String impersonation, String name){
 		String id = getImpersonation(name);
 		String impersonationBody = IMPERSONATION_BODY;

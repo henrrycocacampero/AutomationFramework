@@ -10,6 +10,14 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.Assert;
 
+/**
+ * The VerifyImpersonationCanBeEnabled class contains the test case: 
+ * "Check if the Impersonation can be enabled."
+ * 
+ * @author Milenca Ventura
+ * 
+ */
+
 public class VerifyImpersonationCanBeEnabled extends TestBase{
 	
 	/** 
@@ -23,6 +31,19 @@ public class VerifyImpersonationCanBeEnabled extends TestBase{
 	*/
 	private String errorMessage = "Impersonate was not enabled";
 	
+	/** 
+	 * impersonation: It change the status of the impersonation
+	 */
+	private String impersonation = "false";
+	
+	/** name: It represent the name of the email server.
+	 */
+	private String name = "Microsoft Exchange Server 2010 SP3";
+	
+	/**
+	 * The verifyImpersonationCanBeDisabled method performs the test case:
+	 * "Check if the impersonation can be enabled.".
+	 */
 	@Test
 	public void verifyImpersonationCanBeEnabled (){
 		LoginPage login = new LoginPage(driver);
@@ -37,6 +58,10 @@ public class VerifyImpersonationCanBeEnabled extends TestBase{
 		
 	}
 	
+	/**
+	 * BeforeTest: This method verify the status of the impersonation
+	 * and verify if exists an email server in Room manager.
+	 */
 	@BeforeTest
 	public void beforeTest(){
 		
@@ -45,6 +70,6 @@ public class VerifyImpersonationCanBeEnabled extends TestBase{
 											 PropertiesReader.getExchangePassWord(),
 											 PropertiesReader.getExchangeHostName());
 		}	
-			ImpersonationApi.setImpersonation("false","Microsoft Exchange Server 2010 SP3");
+			ImpersonationApi.setImpersonation(impersonation,name);
 	}
 }
