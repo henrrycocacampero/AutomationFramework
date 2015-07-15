@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.admin.locations.LocationsInfoConstant;
 
-public class LocationsInfoPage extends PageFactory{
+public class LocationsInfoPage extends LocationsTopMenu{
 	WebDriver driver;
 	@FindBy (xpath = LocationsInfoConstant.SAVE_BUTTON) 
 	private WebElement saveButton;
@@ -27,6 +27,7 @@ public class LocationsInfoPage extends PageFactory{
 	private WebElement expandButton;
 		
 	public LocationsInfoPage(WebDriver driver){
+		super(driver);
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
