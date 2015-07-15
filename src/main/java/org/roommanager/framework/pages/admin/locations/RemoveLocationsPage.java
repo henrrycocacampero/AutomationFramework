@@ -24,6 +24,7 @@ public class RemoveLocationsPage extends PageFactory{
 	public LocationsPage clickRemoveButton(){
 		(new WebDriverWait(driver,30))
 			.until(ExpectedConditions.visibilityOf(removeButton));
+		removeButton.click();
 		driver.navigate().refresh();
 		return new LocationsPage(driver);
 	}
