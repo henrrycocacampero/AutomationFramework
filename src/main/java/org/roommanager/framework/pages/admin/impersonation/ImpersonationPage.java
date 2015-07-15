@@ -27,6 +27,12 @@ public class ImpersonationPage {
 		PageFactory.initElements(driver, this);
 	}
 	
+	/**
+	 * clickImpersonationCheckBox: It click and check on
+	 * check box.
+	 * 
+	 * @return ImpersonationPage
+	 */
 	public ImpersonationPage clickImpersonationCheckBox(){
 		(new WebDriverWait(driver,20)).until(ExpectedConditions.textToBePresentInElement(impersonationTitle,"Exchange Server Account"));
 		impersonationCheckbox.click();
@@ -34,6 +40,11 @@ public class ImpersonationPage {
 		return this;
 	}
 	
+	/**
+	 * clickSaveButton: It click on save button.
+	 * 
+	 * @return ImpersonationPage
+	 */
 	public ImpersonationPage clickSaveButton(){
 		(new WebDriverWait(driver,20)).until(ExpectedConditions.visibilityOf(saveButton));
 		saveButton.click();
@@ -41,12 +52,15 @@ public class ImpersonationPage {
 		return this;
 	}
 	
+	/**
+	 * getConfirmationMessage: It obtains the value of
+	 * confirmation message.
+	 * 
+	 * @return String
+	 */
 	public String getConfirmationMessage(){
 		(new WebDriverWait(driver,20)).until(ExpectedConditions.visibilityOf(confirmationMessage));
 		LogManager.info("Retrieve text of confirmation message: Impersonation now is enabled.");
 		return driver.findElement(By.xpath(ImpersonationConstant.CONFIRMATION_MESSAGE)).getText();
 	}
-	
-	
-	
 }

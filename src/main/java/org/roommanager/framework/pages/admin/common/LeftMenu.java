@@ -9,11 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.admin.common.LeftMenuConstant;
 import org.roommanager.framework.pages.admin.conferenceroom.ConferenceRoomPage;
 import org.roommanager.framework.pages.admin.emailserver.EmailServerPage;
-<<<<<<< HEAD
 import org.roommanager.framework.pages.admin.impersonation.ImpersonationPage;
-=======
 import org.roommanager.framework.pages.admin.locations.LocationsPage;
->>>>>>> origin/dev
 import org.roommanager.framework.pages.admin.resource.ResourcePage;
 import org.roommanager.framework.utilities.common.LogManager;
 
