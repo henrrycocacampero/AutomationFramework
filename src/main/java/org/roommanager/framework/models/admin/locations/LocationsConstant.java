@@ -14,6 +14,9 @@ public class LocationsConstant {
     /** LOCATIONS_TABLE locator to Locations table*/
     public static final String LOCATIONS_TABLE="//div[@id='locationGrid']/div[2]/div";
     
-    public static final String LOCATION_NAME = "div[2]/div[2]/div";
+    public static final String LOCATION_CHECK_BOX = "div[1]/div[2]/div";
     
+    public static final String LOCATION_DISPLAY_NAME = "div[2]/div[2]/div";
+    
+    public static final String LOCATION_NAME = "div[3]/div[2]/div";
 }

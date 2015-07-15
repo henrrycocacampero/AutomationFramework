@@ -5,11 +5,13 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.admin.locations.LocationsConstant;
+import org.roommanager.framework.utilities.common.LogManager;
 
 public class LocationsPage extends PageFactory{
 	
@@ -33,7 +35,21 @@ public class LocationsPage extends PageFactory{
 		return new LocationsInfoPage(driver);
 	}
 	
-	public WebElement getLocation(String name){
+	public RemoveLocationsPage clickRemoveButton(){
+		(new WebDriverWait(driver,30))
+			.until(ExpectedConditions.elementToBeClickable(removeButton));
+		removeButton.click();
+		return new RemoveLocationsPage(driver);
+	}
+	
+	public LocationsPage checkLocation(String name){
+		WebElement locationCheckBox = getLocationByName(name)
+				.findElement(By.xpath(LocationsConstant.LOCATION_CHECK_BOX));
+		locationCheckBox.click();
+		return this;
+	}
+	
+	private WebElement getLocationByName(String name){
 		(new WebDriverWait(driver,30))
 			.until(ExpectedConditions.visibilityOf(locationsTable));
 		List<WebElement> locations = locationsTable.findElements(By.xpath("div"));
@@ -46,4 +62,13 @@ public class LocationsPage extends PageFactory{
 		}
 		return null;
 	}
+	
+	public LocationsInfoPage doubleClickOnLocation(String name){
+		WebElement location = getLocationByName(name).findElement(By
+				.xpath(LocationsConstant.LOCATION_DISPLAY_NAME));
+		(new Actions(driver)).doubleClick(location).perform();
+		LogManager.info("Double Click on Location: <" + 
+				name + "> from Locations Table");
+		return new LocationsInfoPage(driver);
+	} 
 }
