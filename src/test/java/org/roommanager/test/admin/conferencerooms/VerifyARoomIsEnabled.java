@@ -12,7 +12,11 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-
+/**
+ * This class contains a test case about verify
+ * that a room is enabled
+ *
+ */
 public class VerifyARoomIsEnabled extends TestBase {
 	
 	/** roomName: Name of the room  */
