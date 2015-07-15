@@ -10,6 +10,9 @@ public class LocationApi {
 	private static final String LOCATION_BODY = 
 			"{ \"name\": \"[name]\", \"customName\": \"[displayName]\",\"description\": \"[description]\", \"parentId\":\"\", \"roomIds\": []}";
 	
+	/** LOCATION_ASSOCIATION_BODY: Location association request body*/
+	private static final String LOCATION_ASSOCIATION_BODY = "{\"name\":\"[locationName]\",\"customName\":\"[locationDisplayName]\",\"description\":\"[locationDescription]\",\"parentId\":\"\",\"roomIds\":[\"[roomId]\"]}";
+	
 	/**
 	 * deleteLocationByName: It delete a location by name
 	 * @param name: It represents the Location's Name
@@ -55,10 +58,25 @@ public class LocationApi {
 	public static JSONObject getLocationByName(String locationName) {
 		String url = PropertiesReader.getRoomManagerApi() + "locations";
 		String propertyName = "name";
-		String loactionId = ApiManager.getObejctPropertyByGivenPropertyValue("_id", propertyName, locationName, url);
-		url = url + "/" + loactionId;
+		String locationId = ApiManager.getObejctPropertyByGivenPropertyValue("_id", propertyName, locationName, url);
+		url = url + "/" + locationId;
 		JSONObject location = (JSONObject)ApiManager.jsonRequest(ApiManager.getHttpMethod(url));
 		return location;
     }
 
+	public static void associateLocation(String locationName, String roomName){
+		String url = PropertiesReader.getRoomManagerApi() + "locations";
+		JSONObject location = getLocationByName(locationName);
+		String locationId = location.get("_id").toString();
+		String locationDisplayName = location.get("customName").toString();
+		String locationDescription = location.get("description").toString();
+		String roomId = RoomApi.getRoomIdByName(roomName);
+		url = url + "/" + locationId;
+		String locationAssociationBody = LOCATION_ASSOCIATION_BODY
+										 .replace("[locationName]", locationName)
+										 .replace("[locationDisplayName]", locationDisplayName)
+										 .replace("[locationDescription]", locationDescription)
+										 .replace("[roomId]", roomId);
+		ApiManager.putHttpMethod(url, locationAssociationBody);
+	}
 }
