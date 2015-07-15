@@ -1,6 +1,6 @@
 package org.roommanager.test.admin.conferencerooms;
 
-import org.junit.Assert;
+import org.testng.Assert;
 import org.roommanager.framework.pages.admin.conferenceroom.ConferenceRoomPage;
 import org.roommanager.framework.pages.admin.home.HomePage;
 import org.roommanager.framework.pages.admin.login.LoginPage;
@@ -12,7 +12,11 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-
+/**
+ * This class contains a test case about verify
+ * that a room is disabled
+ *
+ */
 public class VerifyARoomIsDisabled extends TestBase {
 	
 	/** roomName: Name of the room  */
@@ -51,7 +55,7 @@ public class VerifyARoomIsDisabled extends TestBase {
 				.clickOnRoomInfoLink()
 				.clickPowerOnButton()
 				.clickButtonSaveInfoRoom();
-		Assert.assertEquals(errorMessage,conferenceRoom.getStateColorOnDisabledRoom(roomName),stateGray
+		Assert.assertEquals(conferenceRoom.getStateColorOnDisabledRoom(roomName),stateGray, errorMessage
 				);
 
 	}
