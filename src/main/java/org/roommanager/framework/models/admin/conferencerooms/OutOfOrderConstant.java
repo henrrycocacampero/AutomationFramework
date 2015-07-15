@@ -26,10 +26,14 @@ public class OutOfOrderConstant {
 	/** Locator Type = Xpath*/
 	public static final String ERROR_MESSAGE_WITHOUT_TITLE = "//div[2]/small";
 	/** Locator Type = Xpath*/
-	public static final String TOP_LOWER_START_HOUR = "//tr[3]/td/a/span";
+	public static final String BOTTOM_ARROW_START_HOUR_FROM_FIELD = "//tr[3]/td/a/span";
 	/** Locator Type = Xpath*/
-	public static final String TOP_ARROW_START_HOUR = "//a/span";
+	public static final String BOTTOM_ARROW_START_HOUR_TO_FIELD = "//div[2]/div/div[2]/table/tbody/tr[3]/td/a/span";
 	/** Locator Type = Xpath*/
+	public static final String TOP_ARROW_START_HOUR_FROM_FIELD = "//a/span";
+	/** Locator Type = Xpath*/
+	public static final String TOP_ARROW_START_HOUR_TO_FIELD="//div[2]/div/div[2]/table/tbody/tr/td/a/span";
+	/** Locator Type = Xpath*/  
 	public static final String ERROR_MESSAGE_TO_GREATER_FROM = "//div[3]/small";
 	/** Locator Type = Xpath*/
 	public static final String ON_OFF_SCHEDULE_BUTTON = "//div[4]/div/div/div[2]/div/div/div/div[2]/div[1]/div[1]/div/label";
