@@ -2,6 +2,9 @@
 
 <suite name="Test Suite Room Manager Application" parallel="false">
 	<suite-files>
-    	<suite-file path="testsuite/admin/enabledDisabledRoom.xml"/>      
+    	<suite-file path="testsuite/admin/bvt/enabled-disabled-room-suite.xml"/>
+    	<suite-file path="testsuite/admin/bvt/association-disassociation-resource-suite.xml"/> 
+    	<suite-file path="testsuite/admin/bvt/create-update-remove-resource-suite.xml"/> 
+    	<suite-file path="testsuite/admin/bvt/create-update-enabled-disabled-out-of-order-suite.xml"/>       	
 	</suite-files>
 </suite>

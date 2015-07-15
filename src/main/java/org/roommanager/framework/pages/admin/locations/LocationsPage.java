@@ -70,5 +70,10 @@ public class LocationsPage extends PageFactory{
 		LogManager.info("Double Click on Location: <" + 
 				name + "> from Locations Table");
 		return new LocationsInfoPage(driver);
-	} 
+	}
+	
+	public boolean isLocationPresent(String name){
+		return getLocationByName(name) != null ? true : false; 
+	}
 }
+
