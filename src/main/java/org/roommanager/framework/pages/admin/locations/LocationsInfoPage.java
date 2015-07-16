@@ -15,7 +15,8 @@ import org.roommanager.framework.utilities.common.LogManager;
  * @author Jimmy Maldonado
  *
  */
-public class LocationsInfoPage extends PageFactory{
+public class LocationsInfoPage extends LocationsTopMenu{
+
 	WebDriver driver;
 	@FindBy (xpath = LocationsInfoConstant.SAVE_BUTTON) 
 	private WebElement saveButton;
@@ -37,6 +38,7 @@ public class LocationsInfoPage extends PageFactory{
 	 * @param driver
 	 */
 	public LocationsInfoPage(WebDriver driver){
+		super(driver);
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
