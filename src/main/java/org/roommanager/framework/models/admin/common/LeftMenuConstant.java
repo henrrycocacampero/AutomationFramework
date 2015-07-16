@@ -4,7 +4,7 @@ public class LeftMenuConstant {
 	/**Locator Type = linkText*/
     public static final String EMAIL_SERVER_LINK = "Email Servers";
     /**Locator Type = linkText*/
-    public static final String IMPERSONATION_LINK = "Resources";
+    public static final String IMPERSONATION_LINK = "Impersonation";
     /**Locator Type = linkText*/
     public static final String CONFERENCE_ROOMS_LINK = "Conference Rooms";
     /**Locator Type = linkText*/

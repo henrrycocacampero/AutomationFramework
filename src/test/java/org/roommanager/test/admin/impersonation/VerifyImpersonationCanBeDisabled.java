@@ -6,42 +6,43 @@ import org.roommanager.framework.utilities.api.admin.EmailServerApi;
 import org.roommanager.framework.utilities.api.admin.ImpersonationApi;
 import org.roommanager.framework.utilities.common.PropertiesReader;
 import org.roommanager.framework.utilities.common.TestBase;
+import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import org.testng.Assert;
 
 /**
- * The VerifyImpersonationCanBeEnabled class contains the test case: 
- * "Check if the Impersonation can be enabled."
+ * The VerifyImpersonationCanBeDisabled class contains the test case: 
+ * "Check if the impersonation can be disabled."
  * 
  * @author Milenca Ventura
  * 
  */
 
-public class VerifyImpersonationCanBeEnabled extends TestBase{
-	
+public class VerifyImpersonationCanBeDisabled extends TestBase{
+
 	/** 
 	* expected: It contains the result expected.
 	*/
-	private String expected = "Impersonation is now enabled.";
+	private String expected = "Impersonation is now disabled.";
 	
 	/** 
 	* errorMessage: It contains the error message that is displayed 
 	* if test case fails
 	*/
-	private String errorMessage = "Impersonate was not enabled";
+	private String errorMessage = "Impersonate was not disabled";
 	
 	/** 
 	 * impersonation: It change the status of the impersonation
 	 */
-	private String impersonation = "false";
+	private String impersonation = "true";
 	
 	/**
 	 * The verifyImpersonationCanBeDisabled method performs the test case:
-	 * "Check if the impersonation can be enabled.".
+	 * "Check if the impersonation can be disabled.".
 	 */
 	@Test
-	public void verifyImpersonationCanBeEnabled (){
+	public void verifyImpersonationCanBeDisabled (){
+		
 		LoginPage login = new LoginPage(driver);
 		
 		ImpersonationPage impersonation = login.clickSignInButton()
@@ -50,8 +51,7 @@ public class VerifyImpersonationCanBeEnabled extends TestBase{
 		impersonation.clickImpersonationCheckBox().clickSaveButton();
 		
 		Assert.assertEquals(impersonation.getConfirmationMessage(), 
-							expected,errorMessage);
-		
+				expected,errorMessage);
 	}
 	
 	/**
@@ -60,12 +60,11 @@ public class VerifyImpersonationCanBeEnabled extends TestBase{
 	 */
 	@BeforeTest
 	public void beforeTest(){
-		
 		if(EmailServerApi.getEmailServiceId() == null){
 			EmailServerApi.createEmailServer(PropertiesReader.getExchangeUserName(),
 											 PropertiesReader.getExchangePassWord(),
 											 PropertiesReader.getExchangeHostName());
-		}	
-			ImpersonationApi.setImpersonation(impersonation,PropertiesReader.getExchangeServerDescription());
+		}
+		ImpersonationApi.setImpersonation(impersonation, PropertiesReader.getExchangeServerDescription());
 	}
 }
