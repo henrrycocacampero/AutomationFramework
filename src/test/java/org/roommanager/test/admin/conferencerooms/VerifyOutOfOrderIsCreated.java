@@ -14,9 +14,9 @@ import org.testng.annotations.Test;
 
 /**
  * The VerifyOutOfOrderIsCreated class contains the test case: 
- * Create a Out Of Order in the Room<Value> when the values of 
- * "From"(date and hour) field is less than "To"(date and hour),
- * to be saved  
+ * Verify that created an OutOfOrder for a specific room with values
+ * -From- field equals -To- field and the range of hours of -From- must be 
+ * less than -To-, to be saved
  * @author Daneiva Gamboa
  *
  */
