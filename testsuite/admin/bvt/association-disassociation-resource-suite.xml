@@ -19,14 +19,14 @@
 		name="Verify if name of rooms associated to a resource are displayed on [Name] column in [Resource Associations] form when it is selected">
 		<classes>
 			<class
-				name="org.roommanager.test.admin.resource.VerifyResourceAssociatedToRoomIsDisplayed" />
+				name="org.roommanager.test.admin.resource.VerifyIfRoomAppearsAssociatedToResource" />
 		</classes>
 	</test>
 	<test
 		name="Verify if resource quantity associated to a room is displayed on [Quantity] column in [Resource Associations] form when it is selected">
 		<classes>
 			<class
-				name="org.roommanager.test.admin.resource.VerifyResourceAssociationQuantity" />
+				name="org.roommanager.test.admin.resource.VerifyIfResourceQuantityAssociatedToRoomAppears" />
 		</classes>
 	</test>
 </suite>
