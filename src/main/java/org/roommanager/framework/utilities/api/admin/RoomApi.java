@@ -29,8 +29,7 @@ public class RoomApi {
 	 */
 	public static String getRoomIdByName(String roomName){
 		String url = PropertiesReader.getRoomManagerApi() + "rooms";
-		String propertyName = "displayName";
-		
+		String propertyName = "displayName";		
 		String roomId = ApiManager
 			.getObejctPropertyByGivenPropertyValue("_id", propertyName, 
 				        						   roomName, url);
@@ -70,6 +69,33 @@ public class RoomApi {
 	}
 	
 	/**
+	 * createOutOfOrder: It created an OutOfOrder in the specified Room 
+	 * @param roomName: It represents the Room's Name
+	 * @param startTime: It start Time for out of order
+	 * @param endTime: It end Time for out of order
+	 */	
+	public static void createOutOfOrder(String startTime, String endTime,String roomName){
+
+		String outOfOrderBody = "{\"from\": \"[startTime]\","
+								+ "\"to\": \"[endTime]\","
+								+ "\"roomId\": \"[roomName]\","
+								+ "\"title\": \"[subject]\"}";
+		
+		String url = PropertiesReader.getRoomManagerApi() 
+				     + "services/[serviceId]/rooms/[roomId]/out-of-orders?active=false&email=true";
+		String roomId = RoomApi.getRoomIdByName(roomName);
+		String serviceId = EmailServerApi.getEmailServiceId();
+		String title = "Temporarily Out of Order";
+		url = url.replace("[roomId]", roomId)
+				 .replace("[serviceId]", serviceId);
+		outOfOrderBody = outOfOrderBody.replace("[startTime]", startTime)
+									   .replace("[endTime]", endTime)
+									   .replace("[roomName]", roomId)
+									   .replace("[subject]",title );
+		ApiManager.postHttpMethod(url,outOfOrderBody);		
+	}
+	
+	/**
 	 * deleteAllOutOfOrders: It deletes all Out Of Orders from the specified Room
 	 * @param roomName: It represents the Room's Name
 	 */
@@ -82,7 +108,6 @@ public class RoomApi {
 		url = url.replace("[roomId]", roomId)
 			  .replace("[serviceId]", serviceId);
 		String response = ApiManager.getHttpMethod(url);
-		System.out.println(response);
 		Object outOfOrdersAsJson = ApiManager.jsonRequest(response);
 		if (outOfOrdersAsJson instanceof JSONArray) {
             JSONArray outOfOrders =(JSONArray)outOfOrdersAsJson;

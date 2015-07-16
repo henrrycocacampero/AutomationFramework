@@ -36,7 +36,7 @@
             </properties>
         	<reportsDirectory>${basedir}/reports</reportsDirectory>
             <suiteXmlFiles>
-                <suiteXmlFile>testsuite/build-verification-test.xml</suiteXmlFile>
+                <suiteXmlFile>testsuite/${suiteXmlFile}.xml</suiteXmlFile>
             </suiteXmlFiles>
         </configuration>
       </plugin>

@@ -45,7 +45,7 @@ public class VerifyRoomCapacityIsSet extends TestBase {
 	  * Verify that the capacity of a room is set
 	  */
 	@Test
-	public void verifyRoomDisplayNameIsSet() {
+	public void verifyCapacityRoomIsSet() {
 				
 		LoginPage loginPage = new LoginPage(driver);
 		

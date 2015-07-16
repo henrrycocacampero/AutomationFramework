@@ -50,11 +50,17 @@ public class OutOfOrderPage {
 	@FindBy (xpath= OutOfOrderConstant.ERROR_MESSAGE_WITHOUT_TITLE)
 	private WebElement errorMessageWhitOutTitle;
 	
-	@FindBy (xpath= OutOfOrderConstant.TOP_ARROW_START_HOUR)
-	private WebElement topArrowStartHour;
+	@FindBy (xpath= OutOfOrderConstant.TOP_ARROW_START_HOUR_TO_FIELD)
+	private WebElement topArrowStartHourToField;
 	
-	@FindBy (xpath= OutOfOrderConstant.TOP_LOWER_START_HOUR)
-	private WebElement lowerArrowStartHour;
+	@FindBy (xpath= OutOfOrderConstant.BOTTOM_ARROW_START_HOUR_TO_FIELD)
+	private WebElement bottomArrowStartHourToField;
+	
+	@FindBy (xpath= OutOfOrderConstant.BOTTOM_ARROW_START_HOUR_FROM_FIELD)
+	private WebElement bottomArrowStartHourFromField;
+	
+	@FindBy (xpath= OutOfOrderConstant.TOP_ARROW_START_HOUR_FROM_FIELD)
+	private WebElement topArrowStartHourFromField;
 	
 	@FindBy (xpath = OutOfOrderConstant.ERROR_MESSAGE_TO_GREATER_FROM)
 	private WebElement errorMessageToGreaterFrom;
@@ -95,7 +101,7 @@ public class OutOfOrderPage {
 	}
 	
 	/**
-	 * setDescription: It enters empty title in an Out Of Order. 
+	 * setDescription: It enters title in an Out Of Order. 
 	 * @return String
 	 */
 	public OutOfOrderPage setTitle(String nameTitle){
@@ -104,7 +110,7 @@ public class OutOfOrderPage {
 				 					 .visibilityOf(titleOutOfOrder));        		            
 		titleOutOfOrder.clear();    
 		titleOutOfOrder.sendKeys(nameTitle);
-		LogManager.info("It enters empty title in an Out Of Order");
+		LogManager.info("It enters title in an Out Of Order");
 		return this;
 	}
 	
@@ -136,6 +142,28 @@ public class OutOfOrderPage {
 	}
 	
 	/**
+	 * getStartHourToField: It retrieves the specified Start HOur a OutOfOrder.
+	 * @return String
+	 */
+	public String getStartHourToField(){
+		new WebDriverWait(driver,60).until(ExpectedConditions
+									.visibilityOf(startHourOutOfOrder));
+		String getTitle = startHourOutOfOrder.getAttribute("value");
+		return getTitle ;
+	}
+	
+	/**
+	 * getStartHourToField: It retrieves the specified Start HOur a OutOfOrder.
+	 * @return String
+	 */
+	public String getEndHourFromField(){
+		new WebDriverWait(driver,60).until(ExpectedConditions
+									.visibilityOf(endHourOutOfOrder));
+		String getTitle = endHourOutOfOrder.getAttribute("value");
+		return getTitle ;
+	}
+	
+	/**
 	 * intervalTime: Returns a start<Hour> and end<Hour> with an hour intervalod
 	 * @return array
 	 */
@@ -162,23 +190,44 @@ public class OutOfOrderPage {
 	}
 	
 	/**
-	 *clickTopArrowStartHour: It click on Low Arrow Start of Start Hour Button Button */
-	public OutOfOrderPage clickTopArrowStartHour(){
+	 *clickTopArrowStartHourToField: It click on Low Arrow Start of Start Hour Button Button */
+	public OutOfOrderPage clickTopArrowStartHourToField(){
 		(new WebDriverWait(driver,60)).until(ExpectedConditions
-									  .visibilityOf(lowerArrowStartHour));
-		lowerArrowStartHour.click();
-		LogManager.info("Was Clicking Low Arrow Start of Start Hour Button");
+									  .visibilityOf(topArrowStartHourToField));
+		topArrowStartHourToField.click();
+		LogManager.info("Was Clicking Top Arrow Start of Start Hour Button - To Field");
 		return this;
 	}
 	
 	/**
-	 * clickLowerArrowStartHour: It click on Top Arrow Start of Start Hour Button Button
+	 * clickTopArrowStartHourFromField: It click on Top Arrow Start of Start Hour Button Button
 	 */
-	public OutOfOrderPage clickLowerArrowStartHour(){
+	public OutOfOrderPage clickTopArrowStartHourFromField(){
 		(new WebDriverWait(driver,60)).until(ExpectedConditions
-									  .visibilityOf(topArrowStartHour));
-		topArrowStartHour.click();
-		LogManager.info("Was Clicking Top Arrow Start of Start Hour Button");
+									  .visibilityOf(topArrowStartHourFromField));
+		topArrowStartHourFromField.click();
+		LogManager.info("Was Clicking Top Arrow Start of Start Hour Button - From Field");
+		return this;
+	}
+	
+	/**
+	 *clickBottomArrowStartHourToField: It click on Low Arrow Start of Start Hour Button Button */
+	public OutOfOrderPage clickBottomArrowStartHourToField(){
+		(new WebDriverWait(driver,60)).until(ExpectedConditions
+									  .visibilityOf(bottomArrowStartHourToField));
+		bottomArrowStartHourToField.click();
+		LogManager.info("Was Clicking Bottom Arrow Start of Start Hour Button - To Field");
+		return this;
+	}
+	
+	/**
+	 * clickBottomArrowStartHourFromField: It click on Top Arrow Start of Start Hour Button Button
+	 */
+	public OutOfOrderPage clickBottomArrowStartHourFromField(){
+		(new WebDriverWait(driver,60)).until(ExpectedConditions
+									  .visibilityOf(bottomArrowStartHourFromField));
+		bottomArrowStartHourFromField.click();
+		LogManager.info("Was Clicking Top Arrow Start of Start Hour Button - From Field");
 		return this;
 	}
 	
@@ -234,6 +283,31 @@ public class OutOfOrderPage {
 											.isDisplayed();
 		LogManager.info("Out Of Order Page is Available");
 		return isOutOfOrderPageAvailable;
+	}
+	
+	/**
+	 * isOutOfOrderPageIsAvailable: It verifies Out Of Order Page is 
+	 * Available
+	 * @return boolean
+	 */
+	public boolean isOutOfOrderUpdated(String StartHourActual,
+									   String EndHourActual,
+									   String StartHourExpected,
+									   String EndHourExpeted) {
+		boolean isOutOfOrderUpdated;
+		
+		if ((StartHourActual.equals(StartHourExpected))||(EndHourActual.equals(EndHourExpeted))){			
+			isOutOfOrderUpdated = false;
+			LogManager.info("Out Of Order Page not updated ");
+		}
+		else {
+			isOutOfOrderUpdated = true;
+			LogManager.info("Out Of Order Page updated ");
+		}
+		
+		
+
+		return isOutOfOrderUpdated;
 	}
 	
 	/**

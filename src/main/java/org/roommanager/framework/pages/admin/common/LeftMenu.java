@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.admin.common.LeftMenuConstant;
 import org.roommanager.framework.pages.admin.conferenceroom.ConferenceRoomPage;
 import org.roommanager.framework.pages.admin.emailserver.EmailServerPage;
+import org.roommanager.framework.pages.admin.impersonation.ImpersonationPage;
 import org.roommanager.framework.pages.admin.locations.LocationsPage;
 import org.roommanager.framework.pages.admin.resource.ResourcePage;
 import org.roommanager.framework.utilities.common.LogManager;
@@ -38,10 +39,10 @@ public class LeftMenu {
 		return new EmailServerPage(driver);
 	}
 
-	/**public ImpersonationPage selectImpersonationLink(){
+	public ImpersonationPage selectImpersonationLink(){
 		selectLink(impersonation_Link, 60);
 		return new ImpersonationPage(driver);
-	}*/
+	}
 	public ConferenceRoomPage selectConferenceRoomsLink(){
 		selectLink(conferenceRooms_Link, 60);
 		return new ConferenceRoomPage(driver);
