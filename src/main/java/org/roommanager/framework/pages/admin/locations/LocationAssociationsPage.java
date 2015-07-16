@@ -29,6 +29,11 @@ public class LocationAssociationsPage extends LocationsTopMenu {
 		PageFactory.initElements(driver, this);
 	}
 	
+	/**
+	 * This method clicks on the specified Room Association Button
+	 * @param roomName
+	 * @return LocationAssociationsPage
+	 */
 	public LocationAssociationsPage clickOnAssociateRoomButton(String roomName){
 		WebElement room = getRoomByNameFromAvailableRooms(roomName);
 		WebElement addRoomButton = room
@@ -39,6 +44,11 @@ public class LocationAssociationsPage extends LocationsTopMenu {
 		return this;
 	}
 	
+	/**
+	 * This method clicks on the specified Room Dissociation Button
+	 * @param roomName
+	 * @return LocationAssociationsPage
+	 */
 	public LocationAssociationsPage clickOnDissociateRoomButton(String roomName){
 		WebElement room = getRoomByNameFromAssociatedRooms(roomName);
 		WebElement removeRoomButton = room
@@ -49,6 +59,11 @@ public class LocationAssociationsPage extends LocationsTopMenu {
 		return this;
 	}
 	
+	/**
+	 * This method gets specified Room from Associated Room List
+	 * @param roomName
+	 * @return String 
+	 */
 	public String getAssociatedRoomName(String roomName){
 		WebElement room = getRoomByNameFromAssociatedRooms(roomName);
 		String actualRoomName = room.findElement(LocationAssociationsConstant
@@ -57,6 +72,12 @@ public class LocationAssociationsPage extends LocationsTopMenu {
 		return actualRoomName; 
 	}
 	
+	/**
+	 * This method verifies if the specified Room is present in the 
+	 * Associated Room List
+	 * @param roomName
+	 * @return boolean
+	 */
 	public boolean isRoomInAssociatedRooms(String roomName){
 		WebElement room = getRoomByNameFromAssociatedRooms(roomName);
 		boolean isRoomAssociated = room != null;
@@ -67,10 +88,13 @@ public class LocationAssociationsPage extends LocationsTopMenu {
 			LogManager.info("Room: <"+ roomName +"> wasn't found "
 							+ "in Associated Rooms List");
 		}
-		
 		return isRoomAssociated;
 	}
 	
+	/**
+	 * This method clicks on Save Button.
+	 * @return LocationsPage
+	 */
 	public LocationsPage clickOnSaveButton(){
 		new WebDriverWait(driver, 30)
 			.until(ExpectedConditions.visibilityOf(saveButton));
@@ -84,6 +108,11 @@ public class LocationAssociationsPage extends LocationsTopMenu {
 		return new LocationsPage(driver);
 	}
 	
+	/**
+	 * This method retrieves the specified Room from Available Rooms List
+	 * @param roomName
+	 * @return WebElement
+	 */
 	private WebElement getRoomByNameFromAvailableRooms(String roomName){
 		new WebDriverWait(driver, 30)
 			.until(ExpectedConditions.visibilityOf(availableRoomsList));
@@ -105,6 +134,11 @@ public class LocationAssociationsPage extends LocationsTopMenu {
 		return null;
 	}
 	
+	/**
+	 * This method retrieves the specified Room from Associated Rooms List
+	 * @param roomName
+	 * @return WebElement
+	 */
 	private WebElement getRoomByNameFromAssociatedRooms(String roomName){
 		new WebDriverWait(driver, 30)
 			.until(ExpectedConditions.visibilityOf(associatedRoomsTable));
