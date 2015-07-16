@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.admin.locations.RemoveLocationsConstant;
+import org.roommanager.framework.utilities.common.LogManager;
 
 /**
  * This class contains the actions about Remove Locations page 
@@ -39,6 +40,7 @@ public class RemoveLocationsPage extends PageFactory{
 			.until(ExpectedConditions.visibilityOf(removeButton));
 		removeButton.click();
 		driver.navigate().refresh();
+		LogManager.info("Remove button was clicked");
 		return new LocationsPage(driver);
 	}
 }

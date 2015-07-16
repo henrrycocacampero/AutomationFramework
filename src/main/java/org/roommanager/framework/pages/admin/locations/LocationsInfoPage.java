@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.admin.locations.LocationsInfoConstant;
+import org.roommanager.framework.utilities.common.LogManager;
 
 /**
  * This method contains the actions about Locations Info Page
@@ -52,6 +53,7 @@ public class LocationsInfoPage extends PageFactory{
 			.until(ExpectedConditions.invisibilityOfElementLocated(By
 					.xpath(LocationsInfoConstant.SAVE_BUTTON)));
 		driver.navigate().refresh();
+		LogManager.info("Save button was clicked");
 		return new LocationsPage(driver);
 	}
 	
@@ -65,6 +67,7 @@ public class LocationsInfoPage extends PageFactory{
 			.until(ExpectedConditions.visibilityOf(nameTextField));
 		nameTextField.clear();
 		nameTextField.sendKeys(name);
+		LogManager.info("Location Name: <" + name + "> was entered");
 		return this;
 	}
 	
@@ -78,6 +81,8 @@ public class LocationsInfoPage extends PageFactory{
 			.until(ExpectedConditions.visibilityOf(displayNameTextField));
 		displayNameTextField.clear();
 		displayNameTextField.sendKeys(displayName);
+		LogManager.info("Location Display Name: <" + displayName + 
+				"> was entered");
 		return this;
 	}
 	
@@ -91,6 +96,8 @@ public class LocationsInfoPage extends PageFactory{
 			.until(ExpectedConditions.visibilityOf(descriptionTextArea));
 		descriptionTextArea.clear();
 		descriptionTextArea.sendKeys(description);
+		LogManager.info("Location Description: <" + description + 
+				"> was entered");
 		return this;
 	}
 	

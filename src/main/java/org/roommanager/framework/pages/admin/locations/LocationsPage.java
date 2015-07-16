@@ -44,6 +44,7 @@ public class LocationsPage extends PageFactory{
 		(new WebDriverWait(driver,30))
 			.until(ExpectedConditions.visibilityOf(addButton));
 		addButton.click();
+		LogManager.info("Add button was clicked");
 		return new LocationsInfoPage(driver);
 	}
 	
@@ -55,6 +56,7 @@ public class LocationsPage extends PageFactory{
 		(new WebDriverWait(driver,30))
 			.until(ExpectedConditions.elementToBeClickable(removeButton));
 		removeButton.click();
+		LogManager.info("Remove button was clicked");
 		return new RemoveLocationsPage(driver);
 	}
 	
@@ -67,6 +69,7 @@ public class LocationsPage extends PageFactory{
 		WebElement locationCheckBox = getLocationByName(name)
 				.findElement(By.xpath(LocationsConstant.LOCATION_CHECK_BOX));
 		locationCheckBox.click();
+		LogManager.info("Location: < " + name + " > was checked");
 		return this;
 	}
 	
@@ -84,9 +87,11 @@ public class LocationsPage extends PageFactory{
 			String locationName = location.findElement(By
 					.xpath(LocationsConstant.LOCATION_NAME)).getText();
 			if(locationName.equals(name)){
+				LogManager.info("Location: < " + locationName + " > was found");
 				return location;
 			}
 		}
+		LogManager.info("Location: < " + name + " > was not found");
 		return null;
 	}
 	
@@ -111,7 +116,9 @@ public class LocationsPage extends PageFactory{
 	 * @return true if the location exists 
 	 */
 	public boolean isLocationPresent(String name){
-		return getLocationByName(name) != null ? true : false; 
+		boolean exist = getLocationByName(name) != null ? true : false;
+		LogManager.info("Exist location: < " + exist + " >");
+		return exist;
 	}
 }
 
