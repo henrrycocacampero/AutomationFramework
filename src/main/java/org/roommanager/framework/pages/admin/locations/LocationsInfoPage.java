@@ -11,7 +11,7 @@ import org.roommanager.framework.models.admin.locations.LocationsInfoConstant;
 import org.roommanager.framework.utilities.common.LogManager;
 
 /**
- * This method contains the actions about Locations Info Page
+ * This class contains the actions about Locations Info Page
  * @author Jimmy Maldonado
  *
  */
