@@ -9,6 +9,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.admin.locations.LocationsInfoConstant;
 
+/**
+ * This method contains the actions about Locations Info Page
+ * @author Jimmy Maldonado
+ *
+ */
 public class LocationsInfoPage extends PageFactory{
 	WebDriver driver;
 	@FindBy (xpath = LocationsInfoConstant.SAVE_BUTTON) 
@@ -25,12 +30,20 @@ public class LocationsInfoPage extends PageFactory{
 	private WebElement addParentLocationButton;
 	@FindBy (xpath = LocationsInfoConstant.EXPAND_BUTTON) 
 	private WebElement expandButton;
-		
+	
+	/**
+	 * Constructor
+	 * @param driver
+	 */
 	public LocationsInfoPage(WebDriver driver){
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 	
+	/**
+	 * This method performs a click on the Save button
+	 * @return LocationsPage
+	 */
 	public LocationsPage clickSaveButton(){
 		(new WebDriverWait(driver,30))
 			.until(ExpectedConditions.visibilityOf(saveButton));
@@ -42,6 +55,11 @@ public class LocationsInfoPage extends PageFactory{
 		return new LocationsPage(driver);
 	}
 	
+	/**
+	 * This method enters a text on the Name text field
+	 * @param name
+	 * @return LocationsInfoPage
+	 */
 	public LocationsInfoPage setNameTextField(String name){
 		(new WebDriverWait(driver,30))
 			.until(ExpectedConditions.visibilityOf(nameTextField));
@@ -50,6 +68,11 @@ public class LocationsInfoPage extends PageFactory{
 		return this;
 	}
 	
+	/**
+	 * This method enters a text on the Display Name text field
+	 * @param displayName
+	 * @return LocationsInfoPage
+	 */
 	public LocationsInfoPage setDisplayNameTextField(String displayName){
 		(new WebDriverWait(driver,30))
 			.until(ExpectedConditions.visibilityOf(displayNameTextField));
@@ -58,6 +81,11 @@ public class LocationsInfoPage extends PageFactory{
 		return this;
 	}
 	
+	/**
+	 * This method enters a text on the Description text area
+	 * @param description
+	 * @return LocationsInfoPage
+	 */
 	public LocationsInfoPage setDescriptionTextArea(String description){
 		(new WebDriverWait(driver,30))
 			.until(ExpectedConditions.visibilityOf(descriptionTextArea));

@@ -1,29 +1,35 @@
 package org.roommanager.test.admin.locations;
 
 import org.roommanager.framework.pages.admin.home.HomePage;
-import org.roommanager.framework.pages.admin.locations.LocationsInfoPage;
 import org.roommanager.framework.pages.admin.locations.LocationsPage;
+import org.roommanager.framework.pages.admin.locations.RemoveLocationsPage;
 import org.roommanager.framework.pages.admin.login.LoginPage;
 import org.roommanager.framework.utilities.api.admin.LocationApi;
 import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
+import org.testng.annotations.BeforeTest;
 
 /**
  * This class contains a test case of Locations feature
  * @author Jimmy Maldonado
  *
  */
-public class VerifyLocationCreated extends TestBase{
+public class VerifyLocationDeleted extends TestBase{
 	
 	/** name represents the location's name to be created*/
 	private String name = "Location Test";
 	
-	/** displayName represents the location's display name to be created*/
+	/** 
+	 * displayName represents the location's display name 
+	 * to be created
+	 */
 	private String displayName = "Location Display Name";
 	
-	/** description represents the location's description to be created*/
+	/** 
+	 * description represents the location's description 
+	 * to be created
+	 */
 	private String description = "Location Description";
 	
 	/** 
@@ -31,38 +37,38 @@ public class VerifyLocationCreated extends TestBase{
 	 * if test case fails
 	 */
 	private String errorMessage = "The test failed because the location "
-			+ "was not found";
+			+ "was found";
 	
 	/**
-	 * Test method: Verify than a new location can be created
+	 * Test case: The application must allow to delete of a Locations 
+	 * in the locations Forms by selecting a location.
 	 */
     @Test
-    public void verifyLocationCreated() {
+    public void verifyLocationDeleted() {
     	
     	LoginPage login = new LoginPage(driver);
-	  
+  	  
     	HomePage home = login.clickSignInButton();
 	  
     	LocationsPage locations = home.selectLocationsLink();
 	  
-    	LocationsInfoPage locationInfo = locations.clickAddButton();
+    	RemoveLocationsPage removeLocation = locations
+    			.checkLocation(name)
+    			.clickRemoveButton();
     	
-    	locations = locationInfo
-    			.setNameTextField(name)
-    			.setDisplayNameTextField(displayName)
-    			.setDescriptionTextArea(description)
-    			.clickSaveButton();
+    	locations = removeLocation.clickRemoveButton();
     	
     	boolean existLocation = locations.isLocationPresent(name);
     	
-    	Assert.assertTrue(existLocation, errorMessage);
+    	Assert.assertFalse(existLocation, errorMessage);
     }
-  
+    
     /**
-     * This method removes the created location by the test
+     * This method creates a new locations in order to use it 
+     * in the test case
      */
-    @AfterTest
-    public void afterTest(){
-    	LocationApi.deleteLocationByName(name);
+    @BeforeTest
+    public void beforeTest() {
+    	LocationApi.createLocation(name, displayName, description);
     }
 }
