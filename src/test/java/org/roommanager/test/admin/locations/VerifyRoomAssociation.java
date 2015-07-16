@@ -34,7 +34,7 @@ public class VerifyRoomAssociation extends TestBase {
 								  + "couldn't be associated a the specified Room";
 	
 	/**
-     * This method creates the created location by the test
+     * This method creates a Location
      */
     @BeforeTest
     public void beforeTest(){
@@ -78,7 +78,7 @@ public class VerifyRoomAssociation extends TestBase {
     }
   
     /**
-     * This method removes the created location by the test
+     * This method removes the Location that was created by the test
      */
     @AfterTest
     public void afterTest(){

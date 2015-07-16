@@ -20,6 +20,10 @@ public class LocationsTopMenu {
 		PageFactory.initElements(driver, this);
 	}
 	
+	/**
+	 * This method clicks on Location Info Link
+	 * @return LocationsInfoPage
+	 */
 	public LocationsInfoPage clickOnLocationInfoLink(){
 		(new WebDriverWait(driver, 30))
 			.until(ExpectedConditions.visibilityOf(locationInfoLink));
@@ -27,6 +31,10 @@ public class LocationsTopMenu {
 		return new LocationsInfoPage(driver);
 	}
 	
+	/**
+	 * This method clicks on Location Associations Link
+	 * @return LocationAssociationsPage
+	 */
 	public LocationAssociationsPage clickOnLocationAssociationsInfoLink(){
 		(new WebDriverWait(driver, 30))
 			.until(ExpectedConditions.visibilityOf(locationAssociationsLink));
