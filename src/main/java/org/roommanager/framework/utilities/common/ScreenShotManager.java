@@ -22,15 +22,8 @@ public class ScreenShotManager {
 		new File(destDir).mkdirs(); 
 		String destFile = testName +"-"+dateFormat.format(new Date()) + ".png"; 
 		saveFile(scrFile, destFile, destDir);
-		File directory = new File(".");
 		
-		try {
-			filePath =directory.getCanonicalPath() + "\\reports\\screenshots\\" + destFile;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("--->"+filePath);
+		filePath ="..\\screenshots\\" + destFile;
 		
 		return filePath;
 	}
@@ -41,7 +34,6 @@ public class ScreenShotManager {
 		} 
 		catch (IOException e) { 
 			e.printStackTrace();
-			System.out.println("Test Failure - Screenshoot saved!");	
 		} 
 	}
 }
