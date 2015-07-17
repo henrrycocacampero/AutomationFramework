@@ -59,9 +59,7 @@ public class VerifyLocationUpdated extends TestBase {
 	  
     	LocationsPage locations = home.selectLocationsLink();
 	  
-    	System.out.println("probando antes del double clicking");
     	LocationsInfoPage locationInfo = locations.doubleClickOnLocation(name);
-    	System.out.println("probando despues del double clicking");
     	locations = locationInfo
     			.setNameTextField(nameUpdated)
     			.setDisplayNameTextField(displayNameUpdated)

@@ -33,7 +33,7 @@ public class VerifyRoomDissociation extends TestBase{
 								  + "couldn't be dissociated from the specified Room";
 	
 	/**
-     * This method creates the created location by the test
+     * This method creates a Location and associates it to a Room
      */
     @BeforeTest
     public void beforeTest(){
@@ -78,7 +78,7 @@ public class VerifyRoomDissociation extends TestBase{
     }
   
     /**
-     * This method removes the created location by the test
+     * This method removes the Location that was created by the test
      */
     @AfterTest
     public void afterTest(){

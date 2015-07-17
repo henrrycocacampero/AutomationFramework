@@ -9,7 +9,7 @@ public class ReportManager {
 		System.setProperty(REPORTNG_PROPERTY , "false");
 		String failedTestImageLinkTag = "<b>Screenshot: </b><br/>"
 			+ "<a href=\"[filePath]"
-	        + "\"><img src=\"file:///[filePath]"
+	        + "\"><img src=\"[filePath]"
 	        + "\" alt=\"\"" + "height='100' width='100'/><br/>";
 		failedTestImageLinkTag = failedTestImageLinkTag
 			.replace("[filePath]", filePath);
