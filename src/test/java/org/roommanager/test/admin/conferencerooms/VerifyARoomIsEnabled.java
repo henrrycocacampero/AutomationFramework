@@ -1,6 +1,6 @@
 package org.roommanager.test.admin.conferencerooms;
 
-import org.junit.Assert;
+import org.testng.Assert;
 import org.roommanager.framework.pages.admin.conferenceroom.ConferenceRoomPage;
 import org.roommanager.framework.pages.admin.home.HomePage;
 import org.roommanager.framework.pages.admin.login.LoginPage;
@@ -53,8 +53,8 @@ public class VerifyARoomIsEnabled extends TestBase {
 				.clickOnRoomInfoLink()
 				.clickPowerOffButton()
 				.clickButtonSaveInfoRoom();	
-		Assert.assertEquals(errorMessage,conferenceRoom.getStateColorOnEnabledRoom(roomName),stateGreen
-				);
+		Assert.assertEquals(conferenceRoom.getStateColorOnEnabledRoom(roomName),
+				stateGreen, errorMessage);
 	}
 	/**
 	 * After Test: This method enables the room .

@@ -55,8 +55,8 @@ public class VerifyARoomIsDisabled extends TestBase {
 				.clickOnRoomInfoLink()
 				.clickPowerOnButton()
 				.clickButtonSaveInfoRoom();
-		Assert.assertEquals(conferenceRoom.getStateColorOnDisabledRoom(roomName),stateGray, errorMessage
-				);
+		Assert.assertEquals(conferenceRoom.getStateColorOnDisabledRoom(roomName),
+				stateGray, errorMessage);
 
 	}
 	
