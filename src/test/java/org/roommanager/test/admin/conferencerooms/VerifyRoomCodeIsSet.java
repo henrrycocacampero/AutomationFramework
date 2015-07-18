@@ -45,7 +45,7 @@ public class VerifyRoomCodeIsSet extends TestBase {
 	  * Verify that the code of a room is set
 	  */
 	@Test
-	public void verifyRoomDisplayNameIsSet() {
+	public void verifyRoomCodeIsSet() {
 				
 		LoginPage loginPage = new LoginPage(driver);
 		
@@ -64,6 +64,7 @@ public class VerifyRoomCodeIsSet extends TestBase {
 		
 		Assert.assertEquals(codeRoomUpdated, 
 							code, msgError);
+		
 				
 	}
 }
