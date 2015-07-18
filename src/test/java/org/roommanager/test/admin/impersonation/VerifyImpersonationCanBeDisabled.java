@@ -17,7 +17,6 @@ import org.testng.annotations.Test;
  * @author Milenca Ventura
  * 
  */
-
 public class VerifyImpersonationCanBeDisabled extends TestBase{
 
 	/** 
