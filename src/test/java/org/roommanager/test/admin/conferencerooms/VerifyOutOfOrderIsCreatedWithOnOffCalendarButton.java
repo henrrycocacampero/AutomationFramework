@@ -15,13 +15,23 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
- * The VerifyOptionSendingMailsEnabledWithMeeting class contains the test case: 
- * In the Room without meeting created, when click on On/Off ScheduleButton, 
- * it verify IF enabled the  SendMail Checkbox
+ * The Verify Out Of Order Is Created With OnOff Calendar Button class contains 
+ * the test case: Check if saved the state of the room when the OnOff Calendar 
+ * button this pressed
  * @author Daneiva Gamboa
  *
  */
-public class VerifyOptionSendingMailsEnabledWithoutMeetingOnOfEnabled extends TestBase{
+public class VerifyOutOfOrderIsCreatedWithOnOffCalendarButton extends TestBase{
+    
+	/** 
+	 * isPresentOutOfOrder: Boolean value, that indicates whether or 
+	 * not there is an Out-Of-Order is created 
+	 */
+	boolean isPresentOutOfOrder= false;
+	
+	/** meetingSubject: It contains meetingSubject for a Meeting*/
+	private String meetingSubject = "Subject Meeting";
+	
 	/** setDescription: It contains Description for a Out-Of-Order*/
 	private String setDescription = "Out-Of-Order in the room";
 	
@@ -30,58 +40,55 @@ public class VerifyOptionSendingMailsEnabledWithoutMeetingOnOfEnabled extends Te
 	
 	/** 
 	 * isPresentOutOfOrder: Boolean value, that indicates whether or 
-	 * not there is an Out-Of-Order is Enabled SendMailCheckbox.
+	 * not there is an Out-Of-Order is Enabled SendMailCheckbox
 	 */	
-	boolean isEnabledSendMailCheckbox= false; 
-	
-	/** errorMessage: It contains the error message that would appear 
-	 * if test case fails*/	
+    boolean isEnabledSendMailCheckbox= false; 
+    
+	/** 
+	 * errorMessage: It contains the error message that would appear 
+	 * if test case fails
+	 */     
 	private String msgError= "The Out Of Order was not created!";	  
 	
 	/** roomSelected: Name of room to be selected for create a Out-Of-Order*/	  
-	private String roomSelected = "SM-Room10";	
-	
-	/**
-	 * This method performs the test case:
-	 * It verify if enabled the SendMail Checkbox
-	 */
+	private String roomSelected = "SM-Room7";
+        
 	@Test
-	public void verifyOptionSendingMailsEnabledWithoutMeeting() {
+	public void verifyOutOfOrderIsCreatedWithOnOffCalendarButton() {
 		LoginPage login = new LoginPage(driver);
 		HomePage adminHome = login.clickSignInButton();			
-    	ConferenceRoomPage conferenceRoom = 
-    			adminHome.selectConferenceRoomsLink();
-    	OutOfOrderPage outOfOrderPage = 
-    			conferenceRoom.doubleClickOnRoom(roomSelected)
-					  		  .clickOnOutOfOrderPlanning();
-    	outOfOrderPage.setTitle(nameTitle)										
-					  .setDescription(setDescription)
-				      .clickScheduleButton()
-					  .checkSendMailCheckbox();
-    	isEnabledSendMailCheckbox = outOfOrderPage.enabledSendMailCheckbox();	    	
-    	/*Asserts*/
-		Assert.assertTrue(isEnabledSendMailCheckbox,msgError);
+	  	ConferenceRoomPage conferenceRoom = 
+	  			adminHome.selectConferenceRoomsLink();
+	  	OutOfOrderPage outOfOrderPage = 
+	  			conferenceRoom.doubleClickOnRoom(roomSelected)
+						  	  .clickOnOutOfOrderPlanning();
+	  	outOfOrderPage.setTitle(nameTitle)										
+						  .setDescription(setDescription)
+					      .clickScheduleButton()	  	
+					      .clickSaveButtonOutOfOrder();	
+	  	
+	  	Assert.assertTrue( isPresentOutOfOrder,msgError);
 	}
 	
 	 /**
-     * afterTest: This method deletes the Out-Of-Order created.
+     * afterTest: This method deletes the: Out-Of-Order and Meetings, 
+     * created in the beforeTest method.
      */
 	@AfterTest
-	public void testTearDown(){		
+	public void testTearDown(){
+		MeetingApi.deleteMeetingBySubjectName(roomSelected, meetingSubject);
 		RoomApi.deleteAllOutOfOrders(roomSelected);
 	}
 	
 	 /**
      * beforeTest: This method verify for the Email service was created.
-     * Delete all meetings created.
-     */
+     */	
 	@BeforeTest
 	public void beforeTest(){
 		if(EmailServerApi.getEmailServiceId() == null){
 			EmailServerApi.createEmailServer(PropertiesReader.getUsername(), 
-								PropertiesReader.getPassword(), 
-								PropertiesReader.getExchangeHostName());
+							PropertiesReader.getPassword(), 
+							PropertiesReader.getExchangeHostName());
 		}
-		MeetingApi.deleteAllRoomMeetings(roomSelected);
 	}
-}
+  }

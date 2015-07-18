@@ -17,12 +17,18 @@ import org.testng.annotations.Test;
 
 /**
  * The VerifyOptionSendingMailsEnabledWithMeeting class contains the test case: 
- * In the Room with meeting created, when click on On/Off ScheduleButton, 
- * it verify if enabled the SendMail Checkbox
+ * Check if saved the state of the room when the OnOff Calendar button this 
+ * pressed with Meeting created
  * @author Daneiva Gamboa
  *
  */
-public class VerifyOptionSendingMailsEnabledWithMeetingOnOffEnabled extends TestBase{
+public class VerifyOutOfOrderIsCreatedWithOnOffCalendarButtonWithMeeting extends TestBase {
+	/** 
+	 * isPresentOutOfOrder: Boolean value, that indicates whether or
+	 * not there is an Out-Of-Order is created.
+	*/
+	boolean isPresentOutOfOrder= false;
+	
 	/** username: It contains Username for a Meeting*/
 	private String username = PropertiesReader.getUsername();
 	
@@ -46,51 +52,54 @@ public class VerifyOptionSendingMailsEnabledWithMeetingOnOffEnabled extends Test
 	
 	/** setDescription: It contains Description for a Out-Of-Order*/
 	private String setDescription = "Out-Of-Order in the room";
-	
 	/** roomSelected: It contains Title for a Out-Of-Order*/
 	private String nameTitle ="Temporarily Out of Order";
 	
-	/** 
+	/**
 	 * isPresentOutOfOrder: Boolean value, that indicates whether or 
 	 * not there is an Out-Of-Order is Enabled SendMailCheckbox.
 	 */
     boolean isEnabledSendMailCheckbox= false; 
-	
-    /** 
-     * errorMessage: It contains the error message that would appear 
+    
+	/** 
+	 * errorMessage: It contains the error message that would appear 
 	 * if test case fails
 	 */	  
-	private String msgError= "The Out Of Order was not created!";	  
+	private String msgError= "The Out Of Order was not created!";
 	
-	/** roomSelected: Name of room to be selected for create a Out-Of-Order*/	  
-	private String roomSelected = "SM-Room10";
+	/**roomSelected: Name of room to be selected for create a Out-Of-Order*/	  
+	private String roomSelected = "SM-Room8";
         
     /**
-	* This method performs the test case: It verify if enabled the SendMail 
-	* Checkbox,when is enabled On/Off ScheduleButton with created meeting.
+	* This method performs the test case: Check if saved the state of the room 
+	* when the OnOff Calendar button this pressed with Meeting created
 	*/
 	@Test
-	public void verifyOptionSendingMailsEnabledWithMeeting() {
-		
+	public void  verifyOutOfOrderIsCreatedWithOnOffCalendarButtonWithMeeting() {
 		LoginPage login = new LoginPage(driver);
 		HomePage adminHome = login.clickSignInButton();			
-    	ConferenceRoomPage conferenceRoom = 
-    					adminHome.selectConferenceRoomsLink();
-    	OutOfOrderPage outOfOrderPage = 
-    					conferenceRoom.doubleClickOnRoom(roomSelected)
-					  				  .clickOnOutOfOrderPlanning();
-    	outOfOrderPage.setTitle(nameTitle)										
-					  .setDescription(setDescription)
-				      .clickScheduleButton()
-					  .checkSendMailCheckbox();
-    	isEnabledSendMailCheckbox = outOfOrderPage.enabledSendMailCheckbox();	    	
-    	/*Asserts*/
-		Assert.assertTrue(isEnabledSendMailCheckbox,msgError);	
+	  	ConferenceRoomPage conferenceRoom = 
+	  					adminHome.selectConferenceRoomsLink();
+	  	OutOfOrderPage outOfOrderPage = 
+	  					conferenceRoom.doubleClickOnRoom(roomSelected)
+						  			  .clickOnOutOfOrderPlanning();
+	  	outOfOrderPage.setTitle(nameTitle)										
+						  .setDescription(setDescription)
+					      .clickScheduleButton()
+						  .checkSendMailCheckbox();				  
+	  	
+	  	isEnabledSendMailCheckbox = outOfOrderPage.enabledSendMailCheckbox();
+	  	
+	  	outOfOrderPage.checkSendMailCheckbox()
+	  				  .clickSaveButtonOutOfOrder();
+	  	if (isEnabledSendMailCheckbox==true){
+	  		Assert.assertTrue( isPresentOutOfOrder,msgError );
+	  	}
 	}
 	
 	 /**
-     * afterTest: This method deletes the created Out-Of-Order and Meetings in the 
-     * beforeTest method.
+     * afterTest: This method deletes the: Out-Of-Order and Meetings, 
+     * created in the beforeTest method.
      */
 	@AfterTest
 	public void testTearDown(){
@@ -100,7 +109,8 @@ public class VerifyOptionSendingMailsEnabledWithMeetingOnOffEnabled extends Test
 	
 	 /**
      * beforeTest: This method verify for the Email service was created.
-     * Delete all meetings and created a new Meeting.
+     * Delete all meetings.
+     * Create new Meeting.
      */
 	@BeforeTest
 	public void beforeTest(){
@@ -115,6 +125,7 @@ public class VerifyOptionSendingMailsEnabledWithMeetingOnOffEnabled extends Test
 								 startTime, 
 								 endTime, 
 								 roomSelected, 
-								 attendee);		
+								 attendee);
+	
 	}
-}
+  }
