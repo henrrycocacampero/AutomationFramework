@@ -5,7 +5,9 @@ import org.roommanager.framework.pages.admin.locations.LocationAssociationsPage;
 import org.roommanager.framework.pages.admin.locations.LocationsInfoPage;
 import org.roommanager.framework.pages.admin.locations.LocationsPage;
 import org.roommanager.framework.pages.admin.login.LoginPage;
+import org.roommanager.framework.utilities.api.admin.EmailServerApi;
 import org.roommanager.framework.utilities.api.admin.LocationApi;
+import org.roommanager.framework.utilities.common.PropertiesReader;
 import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -37,6 +39,11 @@ public class VerifyRoomDissociation extends TestBase{
      */
     @BeforeTest
     public void beforeTest(){
+    	if(EmailServerApi.getEmailServiceId() == null){
+			EmailServerApi.createEmailServer(PropertiesReader.getExchangeUserName(),
+											 PropertiesReader.getExchangePassWord(),
+											 PropertiesReader.getExchangeHostName());
+		}
     	LocationApi.createLocation(locationName, locationDisplayName, 
     							   locationDescription);
     	LocationApi.associateLocation(locationName, roomName);
