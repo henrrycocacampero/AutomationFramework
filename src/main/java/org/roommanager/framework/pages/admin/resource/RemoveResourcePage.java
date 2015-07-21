@@ -55,7 +55,7 @@ public class RemoveResourcePage {
 	 * @return RemoveResourcePage
 	 */
 	public RemoveResourcePage verifyIfRemoveResourcePageIsDisplayed(String resourceName){
-		(new WebDriverWait(driver, 20))
+		(new WebDriverWait(driver, 90))
 		.until(ExpectedConditions.visibilityOf(nameTextField));
 		
 		if(resourceName == nameTextField.getText()){

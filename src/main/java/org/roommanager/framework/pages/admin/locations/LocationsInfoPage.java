@@ -1,6 +1,7 @@
 package org.roommanager.framework.pages.admin.locations;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -48,15 +49,36 @@ public class LocationsInfoPage extends LocationsTopMenu{
 	 * @return LocationsPage
 	 */
 	public LocationsPage clickSaveButton(){
+		zoomOutPage(50);
 		(new WebDriverWait(driver,30))
-			.until(ExpectedConditions.visibilityOf(saveButton));
-		saveButton.click();
+			.until(ExpectedConditions.presenceOfElementLocated(By
+					.xpath(LocationsInfoConstant.SAVE_BUTTON)));
+		((JavascriptExecutor) driver)
+			.executeScript("arguments[0].click();", saveButton);
+		restoreZoomPage();
+		LogManager.info("Click on Save button");
 		(new WebDriverWait(driver,30))
 			.until(ExpectedConditions.invisibilityOfElementLocated(By
 					.xpath(LocationsInfoConstant.SAVE_BUTTON)));
 		driver.navigate().refresh();
-		LogManager.info("Save button was clicked");
 		return new LocationsPage(driver);
+	}
+	
+	/**
+	 * This method performs a zoom out to the page
+	 * @param percentage
+	 */
+	public void zoomOutPage(int percentage){
+		((JavascriptExecutor) driver)
+			.executeScript("document.body.style.zoom='" + percentage + "%'");
+	}
+	
+	/**
+	 * This method restores the zoom page (100%)
+	 */
+	public void restoreZoomPage(){
+		((JavascriptExecutor) driver)
+			.executeScript("document.body.style.zoom='100%'");
 	}
 	
 	/**
