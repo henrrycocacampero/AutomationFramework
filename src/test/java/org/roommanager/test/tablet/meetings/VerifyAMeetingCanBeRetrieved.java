@@ -1,6 +1,5 @@
 package org.roommanager.test.tablet.meetings;
 
-import org.roommanager.framework.pages.tablet.scheduler.CredentialsPage;
 import org.roommanager.framework.pages.tablet.scheduler.SchedulerPage;
 import org.roommanager.framework.pages.tablet.settings.ConnectionPage;
 import org.roommanager.framework.pages.tablet.settings.NavigationPage;
@@ -9,16 +8,13 @@ import org.roommanager.framework.utilities.common.Generator;
 import org.roommanager.framework.utilities.common.PropertiesReader;
 import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
-public class VerifyMeetingIsRemoved extends TestBase{
-
+public class VerifyAMeetingCanBeRetrieved extends TestBase {
 	/** username: It represents the name of the Current User*/
 	private String username = PropertiesReader.getUsername();
-	
-	/** password: It represents the password of the Current User*/
-	private String password = PropertiesReader.getPassword();
 	
 	/** organizer: It represents the name of the Meeting's Organizer*/
 	private String organizer = username;
@@ -40,7 +36,7 @@ public class VerifyMeetingIsRemoved extends TestBase{
 	
 	/** errorMessage: It represents the Error Message 
 	 * that will be displayed if the test fails*/
-	private String errorMessage = "The Test failed because the deleted meeting could be found in the Scheduler Page";
+	private String errorMessage = "The Test failed because the Meeting's data couldn't be retrieved";
 	
 	/**
      * beforeTest: It creates a Meeting is created. 
@@ -53,30 +49,38 @@ public class VerifyMeetingIsRemoved extends TestBase{
     }
 	
 	/**
-	 * VerifyAMeetingIsRemoved: Verifies that a Room can be removed from a Room.
+	 * VerifyAMeetingIsRemoved: Verifies the Meeting's data is retrieved.
 	 */
     @Test
     public void VerifyAMeetingIsRemoved() {
     	
     	ConnectionPage connection = new ConnectionPage(driver);
-		connection.enterServiceUrl("http://172.20.208.84:4040/")
-		.clickSaveButton();
 		
-		NavigationPage navigation = connection.clickNavigationLink()
+		
+		NavigationPage navigation = connection
+									.enterServiceUrl("http://172.20.208.84:4040/")
+									.clickSaveButton()
+									.clickNavigationLink()
 									.clickDefaultRoomComboBox()
 									.selectConferenceRoomByName(conferenceRoom)
 									.clickSaveButton();
 		
-		SchedulerPage scheduler = navigation.clickOnSchedulerPageLink();
-			
-		CredentialsPage credential = scheduler
-									 .clickOnMeetingBox(subject)
-									 .clickRemoveButton();
+		SchedulerPage scheduler = navigation
+								  .clickOnSchedulerPageLink()
+								  .clickOnMeetingBox(subject);
 		
-		scheduler = credential
-					.enterPassword(password)
-					.clickOkButton();
+		boolean isMeetingDataCorrect = scheduler.compareMeetingData(organizer, 
+																	subject, 
+																	attendee);
 		
-		Assert.assertFalse(scheduler.existSubjectOnTimeline(subject), errorMessage);
+		Assert.assertTrue(isMeetingDataCorrect, errorMessage);
     }
+    
+    /**
+     * afterTest: It deletes the Meeting that was created by the test. 
+     */
+    @AfterTest
+	  public void afterTest(){
+		  MeetingApi.deleteMeetingBySubjectName(conferenceRoom, subject);
+	  }	
 }
