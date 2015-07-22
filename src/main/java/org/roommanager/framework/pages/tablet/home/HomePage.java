@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.admin.resource.CreateResourceConstant;
 import org.roommanager.framework.models.tablet.home.HomeConstant;
 import org.roommanager.framework.pages.tablet.scheduler.SchedulerPage;
+import org.roommanager.framework.pages.tablet.search.SearchPage;
 import org.roommanager.framework.pages.tablet.setting.SettingsPage;
 
 public class HomePage extends PageFactory {
@@ -26,12 +27,11 @@ public class HomePage extends PageFactory {
 	@FindBy(xpath = HomeConstant.SEARCH_BUTTON)
 	private WebElement button_search;
 
-	
-	
+
 	public HomePage(WebDriver driver){
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
-	}
+		}
 	
 	 public SchedulerPage clickSchedulerLink(){
 		    (new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(button_scheduler));
