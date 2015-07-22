@@ -188,11 +188,6 @@ public class SchedulerPage extends PageFactory{
 		(new Actions(driver)).dragAndDropBy(roomTimeline, xDirection, 0).perform();
 	}
 	
-	public String getOrganizer(){
-		
-		return null;
-	}
-	
 	public boolean compareMeetingData(String organizer, String subject, String attendee){
 		String actualOrganizer = organizerTextField.getAttribute("value");
 		String actualSubject = subjectTextField.getAttribute("value");
