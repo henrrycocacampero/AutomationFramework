@@ -9,7 +9,7 @@ import org.roommanager.framework.models.tablet.common.TopMenuConstant;
 import org.roommanager.framework.pages.tablet.home.HomePage;
 import org.roommanager.framework.pages.tablet.scheduler.SchedulerPage;
 import org.roommanager.framework.pages.tablet.search.SearchPage;
-import org.roommanager.framework.pages.tablet.setting.ConnectionPage;
+import org.roommanager.framework.pages.tablet.settings.ConnectionPage;
 
 public class TopMenuPage {
 	@FindBy (xpath = TopMenuConstant.HOME_PAGE_LINK)
