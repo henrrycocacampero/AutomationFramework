@@ -1,10 +1,11 @@
 package org.roommanager.test.tablet.search;
 
-import junit.framework.Assert;
-
 import org.roommanager.framework.pages.tablet.search.SearchPage;
+import org.roommanager.framework.pages.tablet.settings.ConnectionPage;
+import org.roommanager.framework.pages.tablet.settings.NavigationPage;
 import org.roommanager.framework.utilities.api.admin.LocationApi;
 import org.roommanager.framework.utilities.common.TestBase;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -44,13 +45,20 @@ public class VerifySearchByLocation extends TestBase{
 	 */
     @Test
 	public void verifySearchByLocation() throws InterruptedException{
-		SearchPage search = new SearchPage(driver);
+    	ConnectionPage connection = new ConnectionPage(driver);
+		connection.enterServiceUrl("http://172.20.208.84:4040/")
+		.clickSaveButton();
 		
-		Thread.sleep(20000);
+		NavigationPage navigation = connection.clickNavigationLink()
+									.clickDefaultRoomComboBox()
+									.selectConferenceRoomByName(roomName)
+									.clickSaveButton();
+		
+		SearchPage search = navigation.clickOnSearchPageLink();
+		
 		search.clickSearchIcon().clickAdvancedButton().selectLocation()
 		.clickOnSelectLocation(locationDisplayName);
-		Thread.sleep(10000);
-		Assert.assertTrue(search.isRoomPresent(roomName));
+		Assert.assertTrue(search.isRoomPresent(roomName), errorMessage);
 	}
     
     /**

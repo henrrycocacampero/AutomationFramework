@@ -1,10 +1,11 @@
 package org.roommanager.test.tablet.search;
 
-import junit.framework.Assert;
-
 import org.roommanager.framework.pages.tablet.search.SearchPage;
+import org.roommanager.framework.pages.tablet.settings.ConnectionPage;
+import org.roommanager.framework.pages.tablet.settings.NavigationPage;
 import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.annotations.Test;
+import org.testng.Assert;
 
 public class VerifySearchByRoomName extends TestBase{
 	/** roomName: Name of room to be used*/
@@ -25,11 +26,19 @@ public class VerifySearchByRoomName extends TestBase{
 	 */
 	@Test
 	public void verifySearchByName() throws InterruptedException{
-		SearchPage search = new SearchPage(driver);
+		ConnectionPage connection = new ConnectionPage(driver);
+		connection.enterServiceUrl("http://172.20.208.84:4040/")
+		.clickSaveButton();
 		
-		Thread.sleep(20000);
+		NavigationPage navigation = connection.clickNavigationLink()
+									.clickDefaultRoomComboBox()
+									.selectConferenceRoomByName(roomName)
+									.clickSaveButton();
+		
+		SearchPage search = navigation.clickOnSearchPageLink();
+		
 		search.clickSearchIcon().clickAdvancedButton().enterRoomName(roomName);
 		
-		Assert.assertTrue(search.isRoomPresent(roomName));
+		Assert.assertTrue(search.isRoomPresent(roomName), errorMessage);
 	}
 }
