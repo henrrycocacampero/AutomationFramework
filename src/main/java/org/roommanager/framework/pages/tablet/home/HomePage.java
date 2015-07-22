@@ -26,12 +26,11 @@ public class HomePage extends PageFactory {
 	@FindBy(xpath = HomeConstant.SEARCH_BUTTON)
 	private WebElement button_search;
 
-	
-	
+
 	public HomePage(WebDriver driver){
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
-	}
+		}
 	
 	 public SchedulerPage clickSchedulerLink(){
 		    (new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(button_scheduler));

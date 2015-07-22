@@ -3,7 +3,7 @@ package org.roommanager.test.tablet.meetings;
 import org.roommanager.framework.pages.tablet.home.HomePage;
 import org.roommanager.framework.pages.tablet.scheduler.CredentialsPage;
 import org.roommanager.framework.pages.tablet.scheduler.SchedulerPage;
-import org.roommanager.framework.pages.tablet.setting.SettingsPage;
+import org.roommanager.framework.pages.tablet.settings.SettingsPage;
 import org.roommanager.framework.utilities.api.admin.EmailServerApi;
 import org.roommanager.framework.utilities.api.tablet.MeetingApi;
 import org.roommanager.framework.utilities.common.TestBase;
@@ -16,7 +16,7 @@ import org.roommanager.framework.utilities.common.PropertiesReader;
 public class VerifyMeetingIsCreated extends TestBase{
 	private String username = PropertiesReader.getUsername();
 	private String password = PropertiesReader.getPassword();
-	private String roomName = "SM-Room9";
+	private String roomName = "Room07";
 	private String meetingSubject = "Subject Meeting Pablo";
 	private String errorMessage = "The Test failed because the created couldn't be found in the Scheduler Page";
 	

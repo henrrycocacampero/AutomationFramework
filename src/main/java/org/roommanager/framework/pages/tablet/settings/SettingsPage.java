@@ -1,4 +1,4 @@
-package org.roommanager.framework.pages.tablet.setting;
+package org.roommanager.framework.pages.tablet.settings;
 
 import java.util.List;
 

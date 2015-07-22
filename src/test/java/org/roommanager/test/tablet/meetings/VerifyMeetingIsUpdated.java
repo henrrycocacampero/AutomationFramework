@@ -3,7 +3,7 @@ package org.roommanager.test.tablet.meetings;
 import org.roommanager.framework.pages.tablet.home.HomePage;
 import org.roommanager.framework.pages.tablet.scheduler.CredentialsPage;
 import org.roommanager.framework.pages.tablet.scheduler.SchedulerPage;
-import org.roommanager.framework.pages.tablet.setting.SettingsPage;
+import org.roommanager.framework.pages.tablet.settings.SettingsPage;
 import org.roommanager.framework.utilities.api.admin.EmailServerApi;
 import org.roommanager.framework.utilities.api.tablet.MeetingApi;
 import org.roommanager.framework.utilities.common.Generator;
