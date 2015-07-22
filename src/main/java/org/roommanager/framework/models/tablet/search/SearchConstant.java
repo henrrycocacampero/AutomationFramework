@@ -7,5 +7,7 @@ public class SearchConstant {
 	public static final String ROOM_NAME_TEXT_FIELD = "//input[@id='txtRoomName']";
 	public static final String ROOM_LIST = "//div[2]/div/div/div[3]/div[2]/div/div[2]/div/rm-timeline/div/div[5]/div[1]/div";
 	public static final String DIV_ELEMENT = "div";
-	public static final String ROOM_NAME = "//div/button";
+	public static final String ROOM_NAME = "div/button";
+	public static final String SELECT_LOCATION = "//div[2]/div/div/div[3]/div[2]/div/div[1]/div/div/div/div/form/div[2]/select";
+	public static final String LOCATION_NAME = "option";
 }
