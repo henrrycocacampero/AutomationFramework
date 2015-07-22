@@ -147,7 +147,7 @@ public class SchedulerPage extends PageFactory{
 		List<WebElement> attendees = list.findElements(By.xpath(SchedulerConstant.ATTENDEE_TEXT));
 		for(WebElement element : attendees){
 			if(element.getText().equals(attendee)){
-				LogManager.info("Attendee <" + attendee + "> was not found");
+				LogManager.info("Attendee <" + attendee + "> was found");
 				return element;
 			}
 		}
@@ -175,7 +175,7 @@ public class SchedulerPage extends PageFactory{
 	}
 	
 	public boolean existAttendee(String attendee){
-		return getAttendee(attendee) != null ? true : false;
+		return getAttendee(attendee) != null;
 	}
 	
 	@SuppressWarnings("unused")
@@ -186,5 +186,22 @@ public class SchedulerPage extends PageFactory{
 		else if(Calendar.HOUR_OF_DAY < 7)
 			xDirection = 800;
 		(new Actions(driver)).dragAndDropBy(roomTimeline, xDirection, 0).perform();
+	}
+	
+	public String getOrganizer(){
+		
+		return null;
+	}
+	
+	public boolean compareMeetingData(String organizer, String subject, String attendee){
+		String actualOrganizer = organizerTextField.getAttribute("value");
+		String actualSubject = subjectTextField.getAttribute("value");
+		attendee = attendee.replace("\"", "");
+		
+		boolean organizerComparison = actualOrganizer.equals(organizer);
+		boolean subjectComparision = actualSubject.equals(subject);
+		boolean isAttendeePresent = existAttendee(attendee);
+
+		return organizerComparison && subjectComparision && isAttendeePresent;
 	}
 }
