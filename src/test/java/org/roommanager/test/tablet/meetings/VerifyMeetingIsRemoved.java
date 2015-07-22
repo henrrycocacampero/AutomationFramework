@@ -42,6 +42,19 @@ public class VerifyMeetingIsRemoved extends TestBase{
 	 * that will be displayed if the test fails*/
 	private String errorMessage = "The Test failed because the deleted meeting could be found in the Scheduler Page";
 	
+	/**
+     * beforeTest: It creates a Meeting is created. 
+     */
+	@BeforeTest
+    public void beforeTest() {
+
+    	MeetingApi.createMeeting(organizer, subject, startTime, 
+    							 endTime, conferenceRoom, attendee);
+    }
+	
+	/**
+	 * VerifyAMeetingIsRemoved: Verifies that a Room can be removed from a Room.
+	 */
     @Test
     public void VerifyAMeetingIsRemoved() {
     	
@@ -51,7 +64,7 @@ public class VerifyMeetingIsRemoved extends TestBase{
 		
 		NavigationPage navigation = connection.clickNavigationLink()
 									.clickDefaultRoomComboBox()
-									.selectConferenceRoomByName("Room01")
+									.selectConferenceRoomByName(conferenceRoom)
 									.clickSaveButton();
 		
 		SchedulerPage scheduler = navigation.clickOnSchedulerPageLink();
@@ -66,12 +79,4 @@ public class VerifyMeetingIsRemoved extends TestBase{
 		
 		Assert.assertFalse(scheduler.existSubjectOnTimeline(subject), errorMessage);
     }
-    
-    @BeforeTest
-    public void beforeTest() {
-
-    	MeetingApi.createMeeting(organizer, subject, startTime, 
-    							 endTime, conferenceRoom, attendee);
-    }
-
 }
