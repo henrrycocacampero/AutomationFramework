@@ -38,7 +38,7 @@ public class SchedulerPage extends PageFactory{
 	WebElement organizerTextField;
 	@FindBy (xpath = SchedulerConstant.MEETING_SUBJECT_ERROR_MESSAGE) 
 	WebElement meetingSubjectErrorMessage;
-	@FindBy (xpath = SchedulerConstant.ORGANIZER_SUBJECT_ERROR_MESSAGE) 
+	@FindBy (xpath = SchedulerConstant.MEETING_ORGANIZER_ERROR_MESSAGE) 
 	WebElement organizerSubjectErrorMessage;
 	@FindBy (xpath = SchedulerConstant.ROOM_TIMELINE) 
 	WebElement roomTimeline;
