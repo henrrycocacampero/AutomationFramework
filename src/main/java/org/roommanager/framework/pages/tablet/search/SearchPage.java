@@ -24,8 +24,16 @@ public class SearchPage {
 	private WebElement roomList;
 	@FindBy (xpath = SearchConstant.DIV_ELEMENT) 
 	private WebElement divElement;
-	@FindBy (xpath = SearchConstant.ROOM_NAME) 
+	@FindBy (xpath = SearchConstant.ROOM_NAME)
+	private WebElement roomName;
+	@FindBy (xpath = SearchConstant.SELECT_LOCATION) 
+	private WebElement selectLocation;
+	@FindBy (xpath = SearchConstant.LOCATION_LIST) 
+	private WebElement locationList;
+	@FindBy (xpath = SearchConstant.LOCATION_NAME) 
+	private WebElement locationName;
 	private WebDriver driver;
+	WebElement locationElements;
 	
 	public SearchPage(WebDriver driver){
 		driver.get(PropertiesReader.getLoginUrlTabletModule());
@@ -61,12 +69,13 @@ public class SearchPage {
 	public WebElement getRoomByName(String roomName){
 		(new WebDriverWait(driver, 60)).until(ExpectedConditions
 				.visibilityOf(roomList));
-			List<WebElement> rooms = roomList.findElements(By.xpath(SearchConstant.DIV_ELEMENT));
+			List<WebElement> rooms = roomList.findElements(By.xpath(
+					SearchConstant.DIV_ELEMENT));
 			for (WebElement room : rooms) {
 				(new WebDriverWait(driver, 60)).until(ExpectedConditions
 					.visibilityOf(room));
 				String roomItemName = room.findElement(By.xpath(
-														SearchConstant.ROOM_NAME)).getText();
+									SearchConstant.ROOM_NAME)).getText();
 				if (roomItemName.equals(roomName)) {
 					LogManager.info("Room: <" + roomItemName
 									+ "> was found on Room list");
@@ -82,4 +91,42 @@ public class SearchPage {
 		WebElement room = getRoomByName(roomName);
 		return room == null ? true : false;
 	}
+	
+	public SearchPage selectLocation(){
+		(new WebDriverWait(driver, 60))
+		.until(ExpectedConditions.visibilityOf(selectLocation));
+		selectLocation.click();
+		LogManager.info("Click on [Location] combo box");
+		return this;
+	}
+	
+	public WebElement getLocationByName(String locationDisplayName){
+		(new WebDriverWait(driver, 60))
+		.until(ExpectedConditions.visibilityOf(locationList));
+		
+		List<WebElement> locationTable;
+	do{
+		locationTable = locationList
+				.findElements(By.xpath(SearchConstant.LOCATION_NAME));
+	}
+	while(locationTable.size() <= 2);
+		for (WebElement locationElement : locationTable){
+			
+		String location = locationElement.getText();
+		if (location.equals(locationDisplayName)) {
+			LogManager.info("Location: <" + location+ "> was retrieved from Location Table");
+			return locationElement;	
+		}
+	}
+	LogManager.info("Location: <" + locationDisplayName + "> wasn't found");
+	return null;
+	}
+	
+	public SearchPage clickOnSelectLocation(String locationDisplayName){
+		WebElement location = getLocationByName(locationDisplayName);
+		location.click();
+		LogManager.info("Location: <" + locationDisplayName + "> was selected");
+		return this;
+	}
+	
 }
