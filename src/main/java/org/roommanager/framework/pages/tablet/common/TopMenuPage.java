@@ -10,6 +10,7 @@ import org.roommanager.framework.pages.tablet.home.HomePage;
 import org.roommanager.framework.pages.tablet.scheduler.SchedulerPage;
 import org.roommanager.framework.pages.tablet.search.SearchPage;
 import org.roommanager.framework.pages.tablet.settings.ConnectionPage;
+import org.roommanager.framework.utilities.common.LogManager;
 
 public class TopMenuPage {
 	@FindBy (xpath = TopMenuConstant.HOME_PAGE_LINK)
@@ -34,6 +35,7 @@ public class TopMenuPage {
 		(new WebDriverWait(driver, 30))
 			.until(ExpectedConditions.visibilityOf(homePageLink));
 		homePageLink.click();
+		LogManager.info("Home Page Link was clicked");
 		return new HomePage(driver);
 	}
 	
@@ -45,6 +47,7 @@ public class TopMenuPage {
 		(new WebDriverWait(driver, 30))
 			.until(ExpectedConditions.visibilityOf(schedulerPageLink));
 		schedulerPageLink.click();
+		LogManager.info("Scheduler Page Link was clicked");
 		return new SchedulerPage(driver);
 	}
 	
@@ -56,6 +59,7 @@ public class TopMenuPage {
 		(new WebDriverWait(driver, 30))
 			.until(ExpectedConditions.visibilityOf(searchPageLink));
 		searchPageLink.click();
+		LogManager.info("Search Page Link was clicked");
 		return new SearchPage(driver);
 	}
 	
@@ -67,6 +71,7 @@ public class TopMenuPage {
 		(new WebDriverWait(driver, 30))
 			.until(ExpectedConditions.visibilityOf(settingsPageLink));
 		settingsPageLink.click();
+		LogManager.info("Setings Connection Page Link was clicked");
 		return new ConnectionPage(driver);
 	}
 }

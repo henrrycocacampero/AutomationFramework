@@ -49,6 +49,7 @@ public class SchedulerPage extends PageFactory{
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
+	
 	public SchedulerPage setOrganizerTextField(String organizer){
 		(new WebDriverWait(driver, 30))
 			.until(ExpectedConditions.visibilityOf(organizerTextField));
@@ -57,6 +58,7 @@ public class SchedulerPage extends PageFactory{
 		LogManager.info("Organizer: <"+ organizer +"> was entered");
 		return this;
 	}
+	
 	public SchedulerPage setSubjectTextField(String subject){
 		(new WebDriverWait(driver, 30))
 			.until(ExpectedConditions.visibilityOf(subjectTextField));
@@ -65,6 +67,7 @@ public class SchedulerPage extends PageFactory{
 		LogManager.info("Subject: <"+ subject +"> was entered");
 		return this;
 	}
+	
 	public SchedulerPage setAttendeesTextField(String attendee){
 		(new WebDriverWait(driver, 30))
 			.until(ExpectedConditions.visibilityOf(attendeesTextField));
@@ -73,6 +76,7 @@ public class SchedulerPage extends PageFactory{
 		LogManager.info("Attendee: <"+ attendee +"> was entered");
 		return this;
 	}
+	
 	public SchedulerPage setBodyTextArea(String body){
 		(new WebDriverWait(driver, 30))
 			.until(ExpectedConditions.visibilityOf(bodyTextArea));
@@ -81,6 +85,7 @@ public class SchedulerPage extends PageFactory{
 		LogManager.info("Body: <"+ body +"> was entered");
 		return this;
 	}
+	
 	public CredentialsPage clickCreateButton(){
 		(new WebDriverWait(driver, 20))
 			.until(ExpectedConditions.visibilityOf(createButton));
@@ -88,6 +93,7 @@ public class SchedulerPage extends PageFactory{
 		LogManager.info("Create Button was clicked");
 		return new CredentialsPage(driver);
 	}
+	
 	public boolean isSubjectFieldErrorMessagePresent(){
 		String expectedErrorMessage = "Subject is required";
 		(new WebDriverWait(driver,60))
@@ -111,6 +117,7 @@ public class SchedulerPage extends PageFactory{
 			.until(ExpectedConditions.visibilityOf(confirmationMessage));
 		return confirmationMessage.getText();
 	}
+	
 	public SchedulerPage clickOnMeetingBox(String subject){
 		getMeetingBoxBySubject(subject).click();
 		(new WebDriverWait(driver,20))
@@ -118,6 +125,7 @@ public class SchedulerPage extends PageFactory{
 		LogManager.info("Meeting <" + subject + "> was clicked");
 		return this;
 	}
+	
 	public CredentialsPage clickRemoveButton(){
 		(new WebDriverWait(driver,30))
 			.until(ExpectedConditions.visibilityOf(removeButton));
@@ -146,6 +154,7 @@ public class SchedulerPage extends PageFactory{
 		LogManager.info("Attendee <" + attendee + "> was not found");
 		return null;
 	}
+	
 	private WebElement getMeetingBoxBySubject(String subject){
 		(new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(roomTimeline));
 		moveTimeline();
@@ -160,9 +169,11 @@ public class SchedulerPage extends PageFactory{
 		LogManager.info("Subject <" + subject + "> was not found");
 		return null;
 	}
+	
 	public boolean existSubjectOnTimeline(String subject){
 		return getMeetingBoxBySubject(subject) != null ? true : false;
 	}
+	
 	public boolean existAttendee(String attendee){
 		return getAttendee(attendee) != null ? true : false;
 	}
