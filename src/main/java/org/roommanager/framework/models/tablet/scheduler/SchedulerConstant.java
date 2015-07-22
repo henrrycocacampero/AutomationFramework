@@ -1,6 +1,7 @@
 package org.roommanager.framework.models.tablet.scheduler;
 
 public class SchedulerConstant {
+	
 	public static final String ORGANIZER_TEXT_FIELD = "//input[@id='txtOrganizer']";
 	public static final String SUBJECT_TEXT_FIELD = "//input[@id='txtSubject']";
 	public static final String ATTENDEES_TEXT_FIELD = "//rm-tag-input/div/input";
