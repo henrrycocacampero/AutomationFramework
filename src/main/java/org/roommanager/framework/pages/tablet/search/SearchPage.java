@@ -5,7 +5,6 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -141,7 +140,11 @@ public class SearchPage {
 			return false;
 	}
 	
-	
+	/**
+	 * selectLocation: It clicks on the combo-box location.
+	 *           
+	 * @return SearchPage
+	 */
 	public SearchPage selectLocation(){
 		(new WebDriverWait(driver, 60))
 		.until(ExpectedConditions.visibilityOf(selectLocation));
@@ -150,17 +153,20 @@ public class SearchPage {
 		return this;
 	}
 	
+	/**
+	 * getLocationByName: It searches the location by display name.
+	 *        
+	 * @param locationDisplayName
+	 *          : It represents the Location's Display Name
+	 *          
+	 * @return WebElement
+	 */
 	public WebElement getLocationByName(String locationDisplayName){
 		(new WebDriverWait(driver, 60))
 		.until(ExpectedConditions.visibilityOf(selectLocation));
 		
 		List<WebElement> locationTable = selectLocation
 				.findElements(By.xpath(SearchConstant.LOCATION_NAME));
-	/*do{
-		locationTable = selectLocation
-				.findElements(By.xpath(SearchConstant.LOCATION_NAME));
-	}
-	while(locationTable.size() <= 2);*/
 		for (WebElement locationElement : locationTable){
 			
 		String location = locationElement.getText();
@@ -173,15 +179,19 @@ public class SearchPage {
 	return null;
 	}
 	
+	/**
+	 * clickOnSelectLocation: It clicks on the location by display name.
+	 *        
+	 * @param locationDisplayName
+	 *          : It represents the Location's Display Name
+	 *          
+	 * @return SearchPage
+	 */
 	public SearchPage clickOnSelectLocation(String locationDisplayName){
 		WebElement location = getLocationByName(locationDisplayName);
 		location.click();
-		/*Actions action = new Actions(driver);
-		action.doubleClick(location);
-		action.perform();*/
 		LogManager.info("Location: <" + locationDisplayName 
 				+ "> was selected");
 		return this;
 	}
-	
 }

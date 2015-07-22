@@ -18,14 +18,13 @@ public class VerifySearchByRoomName extends TestBase{
 	private String errorMessage = "The test failed because the "
 			+ "Room wasn't available";
 
-	
 	/**
-	 * This method performs the test case: Verify that a resource created
-	 * is shown in the list of Available Resources of a Room.
-	 * @throws InterruptedException 
+	 * This method performs the test case: Verify that an specific room 
+	 * is displayed on [Rooms List] schedule table using the [Room Name] 
+	 * filter.
 	 */
 	@Test
-	public void verifySearchByName() throws InterruptedException{
+	public void verifySearchByName(){
 		ConnectionPage connection = new ConnectionPage(driver);
 		connection.enterServiceUrl("http://172.20.208.84:4040/")
 		.clickSaveButton();

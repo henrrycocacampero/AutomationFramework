@@ -41,7 +41,8 @@ public class VerifySearchByLocation extends TestBase{
     }
     
     /**
-	 * Test method: Verify that........
+	 * Test method: Verify that an specific room is displayed on 
+	 * [Rooms List] schedule table using the [Location] filter.
 	 */
     @Test
 	public void verifySearchByLocation() throws InterruptedException{
@@ -58,6 +59,7 @@ public class VerifySearchByLocation extends TestBase{
 		
 		search.clickSearchIcon().clickAdvancedButton().selectLocation()
 		.clickOnSelectLocation(locationDisplayName);
+		
 		Assert.assertTrue(search.isRoomPresent(roomName), errorMessage);
 	}
     
