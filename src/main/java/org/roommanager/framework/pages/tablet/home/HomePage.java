@@ -7,12 +7,13 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.tablet.home.HomeConstant;
+import org.roommanager.framework.pages.tablet.common.TopMenuPage;
 import org.roommanager.framework.pages.tablet.scheduler.SchedulerPage;
 import org.roommanager.framework.pages.tablet.search.SearchPage;
 import org.roommanager.framework.pages.tablet.settings.SettingsPage;
 import org.roommanager.framework.utilities.common.LogManager;
 
-public class HomePage extends PageFactory {
+public class HomePage extends TopMenuPage {
 	
 	private WebDriver driver;
 	
@@ -44,6 +45,7 @@ public class HomePage extends PageFactory {
 	private WebElement nameRoomLabel;
 	
 	public HomePage(WebDriver driver){
+		super(driver);
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 		}
