@@ -30,7 +30,7 @@ public class VerifyMeetingIsCreated extends TestBase{
 			.clickAcceptButton();
 		
 		SchedulerPage scheduler = home
-			.clickSchedulerLink();
+			.clickOnSchedulerPageLink();
 			
 		CredentialsPage credential = scheduler
 			.setOrganizerTextField(username)

@@ -6,61 +6,254 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.roommanager.framework.models.admin.resource.CreateResourceConstant;
 import org.roommanager.framework.models.tablet.home.HomeConstant;
+import org.roommanager.framework.pages.tablet.common.TopMenuPage;
 import org.roommanager.framework.pages.tablet.scheduler.SchedulerPage;
 import org.roommanager.framework.pages.tablet.search.SearchPage;
-import org.roommanager.framework.pages.tablet.setting.SettingsPage;
+import org.roommanager.framework.pages.tablet.settings.SettingsPage;
+import org.roommanager.framework.utilities.common.LogManager;
 
-public class HomePage extends PageFactory {
+public class HomePage extends TopMenuPage {
 	
 	private WebDriver driver;
 	
 	@FindBy (xpath = HomeConstant.GOTOSETTINGS_BUTTON)
-	private WebElement button_gotosettings;
-	@FindBy(xpath = HomeConstant.AVALIABLE_BUTTON)
-	private WebElement button_available;
-	@FindBy(xpath = HomeConstant.ENDOFDAY_BUTTON)
-	private WebElement button_endofday;
+	private WebElement gotosettingsButton;
+	@FindBy(xpath = HomeConstant.NOW_BUTTON)
+	private WebElement nowButton;
+	@FindBy(xpath = HomeConstant.NEXT_BUTTON)
+	private WebElement nextButton;
 	@FindBy(xpath = HomeConstant.SCHEDULER_BUTTON)
-	private WebElement button_scheduler;
+	private WebElement schedulerButton;
 	@FindBy(xpath = HomeConstant.SEARCH_BUTTON)
-	private WebElement button_search;
+	private WebElement searchButton;	
 
-
+	@FindBy(xpath = HomeConstant.NAME_MEETING_LABEL_IN_NOW_BUTTON)
+	private WebElement nameMeetingLabelInNowButton;
+	@FindBy(xpath = HomeConstant.ORGANIZER_LABEL_IN_NOW_BUTTON)
+	private WebElement organizerMeetingLabelInNowButton;
+	@FindBy(xpath = HomeConstant.DURATION_TIME_LABEL_IN_NOW_BUTTON)
+	private WebElement durationTimeLabelInNowButton;
+	
+	@FindBy(xpath = HomeConstant.NAME_MEETING_LABEL_IN_NEXT_BUTTON)
+	private WebElement nameMeetingLabelInNextButton;
+	@FindBy(xpath = HomeConstant.ORGANIZER_LABEL_IN_NEXT_BUTTON)
+	private WebElement organizerMeetingLabelInNextButton;
+	@FindBy(xpath = HomeConstant.START_END_TIME_LABEL_IN_NEXT_BUTTON)
+	private WebElement startEndTimeLabelInNextButton;
+	@FindBy(xpath = HomeConstant.NAME_ROOM_LABEL)
+	private WebElement nameRoomLabel;
+	
 	public HomePage(WebDriver driver){
+		super(driver);
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 		}
+
+	/**
+	 * clickSchedulerButton: It click on Scheduler Button.
+	 * @return SchedulerPage
+	 */
 	
-	 public SchedulerPage clickSchedulerLink(){
-		    (new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(button_scheduler));
-		    button_scheduler.click();
+	public SchedulerPage clickSchedulerButton(){
+		    (new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(schedulerButton));
+		    schedulerButton.click();
 		    return new SchedulerPage(driver);
-	    }
-	 
-	 public  SettingsPage clickSettingsLink(){
-		    (new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(button_gotosettings));
-		    button_gotosettings.click();
+	}
+
+	/**
+	 * clickSettingsLink: It click on Settings Button.
+	 * @return SettingsPage
+	 */
+	public  SettingsPage clickSettingsButton(){
+		    (new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(gotosettingsButton));
+		    gotosettingsButton.click();
 		    return new SettingsPage(driver);
-	    }
+	}
 
-	 public  SchedulerPage clickAvaliableLink(){
-		    (new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(button_available));
-		    button_available.click();
+	/**
+	 * clickNowButton: It click on Save Button.
+	 * @return SchedulerPage
+	 */
+	public  SchedulerPage clickNowButton(){
+		    (new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(nowButton));
+		    nowButton.click();
 		    return new SchedulerPage(driver);
-	    }
-	 
-	 public  SchedulerPage clickEndOfDayLink(){
-		    (new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(button_endofday));
-		    button_endofday.click();
+	}
+
+	/**
+	 * clickEndOfDayButton: It click on End Of Day Link.
+	 * @return SchedulerPage
+	 */ 
+	public  SchedulerPage clickNextButton(){
+		    (new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(nextButton));
+		    nextButton.click();
 		    return new SchedulerPage(driver);
-	    }
-	 
-	 public  SearchPage clickSearchLink(){
-		    (new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(button_search));
-		    button_search.click();
+	}
+	
+	/**
+	 * clickSearchButton: It click on Search Button
+	 * @return SearchPage
+	 */ 
+	public  SearchPage clickSearchButton(){
+		    (new WebDriverWait(driver,60)).until(ExpectedConditions.visibilityOf(searchButton));
+		    searchButton.click();
 		    return new SearchPage(driver);
-	    }
+	}
 
+	 /**
+	 * getNameMeetingLabelInNowButton: It retrieves the specified Name of a 
+	 * meeting In Now Button.
+	 * @return String
+	 */
+	 public String getNameMeetingLabelInNowButton(){
+		 new WebDriverWait(driver,60).until(ExpectedConditions
+								.visibilityOf(nameMeetingLabelInNowButton));
+		 String getNameMeetingL = nameMeetingLabelInNowButton.getText();
+		 return getNameMeetingL ;
+	 }
+	 
+	 /**
+	 * getOrganizerMeetingLabelInNowButton: It retrieves the specified Organizer
+	 * of a Meeting In Now Button.
+	 * @return String
+	 */
+	 public String getOrganizerMeetingLabelInNowButton(){
+		 new WebDriverWait(driver,60).until(ExpectedConditions
+								.visibilityOf(organizerMeetingLabelInNowButton));
+		 String getOrganizer = organizerMeetingLabelInNowButton.getText();
+		 return getOrganizer ;
+	 }
+
+	 /**
+	 * getDurationTimeLabelInNowButton: It retrieves the specified Duration Time
+	 * of a Meeting In Now Button.
+	 * @return String
+	 */
+	 
+	 public String getDurationTimeLabelInNowButton(){
+		 new WebDriverWait(driver,60).until(ExpectedConditions
+								.visibilityOf(durationTimeLabelInNowButton));
+		 String getDuration = durationTimeLabelInNowButton.getText();
+		 return getDuration ;
+	 }
+	 
+	 /**
+	 * existMeetingInNowButton: Making Verification if Meeting is showed in the
+	 * Now Button.
+	 * @return boolean
+	 */
+	 public boolean existMeetingInNowButton(String Subject, String Organizer){
+		 
+		 boolean existMeetingInNowButton=false;
+		 
+		 new WebDriverWait(driver,80).until(ExpectedConditions
+							.visibilityOf(organizerMeetingLabelInNowButton));
+					
+		 new WebDriverWait(driver,80).until(ExpectedConditions
+							.visibilityOf(nameMeetingLabelInNowButton));
+
+		 if(organizerMeetingLabelInNowButton.isDisplayed()&&
+				 nameMeetingLabelInNowButton.isDisplayed()){
+			 	
+			 String ExpectedSubject= getNameMeetingLabelInNowButton();
+			 String ExpectedOrganizer= getOrganizerMeetingLabelInNowButton();
+			 
+				 if ((ExpectedSubject.equals(Subject))&&(ExpectedOrganizer.equals(Organizer))){
+					 existMeetingInNowButton=true;
+				 } 
+		 }		 
+		 LogManager.info("Subject of Meeting: <" + getNameMeetingLabelInNowButton()
+				 		+ "Organizer"+getOrganizerMeetingLabelInNowButton()+">");
+		 return existMeetingInNowButton;
+		 }
+	 
+	 /**
+	 * getNameMeetingLabelInNextButton: It retrieves the specified Name of a 
+	 * meeting In Next Button
+	 * @return String
+	 */
+	 public String getNameMeetingLabelInNextButton(){
+		 new WebDriverWait(driver,60).until(ExpectedConditions
+								.visibilityOf(nameMeetingLabelInNextButton));
+		 String getTitle = nameMeetingLabelInNextButton.getAttribute("value");
+		 return getTitle ;
+	 }
+	 
+	 /**
+	 * getOrganizerMeetingLabelInNextButton: It retrieves the specified Organizer
+	 * of a Meeting In Next Button.
+	 * @return String
+	 */
+	 public String getOrganizerMeetingLabelInNextButton(){
+		 new WebDriverWait(driver,60).until(ExpectedConditions
+								.visibilityOf(organizerMeetingLabelInNextButton));
+		 String getTitle = organizerMeetingLabelInNextButton.getAttribute("value");
+		 return getTitle ;
+	 }
+
+	 /**
+	 * getDurationTimeLabelInNextButton: It retrieves the specified Duration Time
+	 * of a Meeting In Next Button.
+	 * @return String
+	 */
+	 public String getStartEndTimeLabelInNextButton(){
+		 new WebDriverWait(driver,60).until(ExpectedConditions
+								.visibilityOf(startEndTimeLabelInNextButton));
+		 String getTitle = startEndTimeLabelInNextButton.getAttribute("value");
+		 return getTitle ;
+	 }
+	 
+	 /**
+	 * existMeetingInNowButton: Making Verification if Meeting is showed in the
+	 * Next Button.
+	 * @return boolean
+	 */
+	 public boolean existMeetingInNextButton(){
+		 boolean existMeetingInNowButton=false;
+		 new WebDriverWait(driver,80).until(ExpectedConditions
+							.visibilityOf(organizerMeetingLabelInNextButton));
+					
+		 new WebDriverWait(driver,80).until(ExpectedConditions
+							.visibilityOf(nameMeetingLabelInNextButton));
+
+		 if(organizerMeetingLabelInNextButton.isDisplayed()&&
+				 nameMeetingLabelInNextButton.isDisplayed()){
+			 		existMeetingInNowButton=true;
+			}	
+		 LogManager.info("Subject of Meeting: <" + getNameMeetingLabelInNextButton()
+				 		+ "Organizer"+getOrganizerMeetingLabelInNextButton()+">");
+		 return existMeetingInNowButton;
+	 }
+	 
+	 /**
+	 * getRoomNameLabel: It retrieves the Name of room Selected.
+	 * @return String
+	 */
+	 public String getRoomNameLabel(){
+		 new WebDriverWait(driver,60).until(ExpectedConditions
+								.visibilityOf(nameRoomLabel));
+		 String getRoomName = nameRoomLabel.getText();
+		 return getRoomName ;
+	 }
+	 
+	 /**
+	  * getEndOfDayMessage: It Retrieve the EndOfDay Message 
+	  * */
+	 public String getEndOfDayMessage(){
+		 new WebDriverWait(driver,60).until(ExpectedConditions
+					.visibilityOf(nextButton));
+		String getEndOfDayMessage = nextButton.getText();
+		return getEndOfDayMessage ;
+	 }
+	 
+	 /**
+	  * getAvailableMessage: It Retrieve the Available Message
+	  * */
+	 public String getAvailableMessage(){
+		 new WebDriverWait(driver,60).until(ExpectedConditions
+					.visibilityOf(nowButton));
+		String getAvailableMessage = nowButton.getText();
+		return getAvailableMessage ;
+	 }
 }

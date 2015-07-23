@@ -37,7 +37,7 @@ public class VerifyMeetingIsUpdated extends TestBase {
 				.clickAcceptButton();
 
 			SchedulerPage scheduler = home
-				.clickSchedulerLink();
+				.clickOnSchedulerPageLink();
 
 			CredentialsPage credential = scheduler
 				.clickOnMeetingBox(subject)
