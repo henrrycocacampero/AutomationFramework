@@ -10,9 +10,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.tablet.search.SearchConstant;
+import org.roommanager.framework.pages.tablet.common.TopMenuPage;
 import org.roommanager.framework.utilities.common.LogManager;
 
-public class SearchPage {
+public class SearchPage extends TopMenuPage{
 	@FindBy (xpath = SearchConstant.SEARCH_ICON) 
 	private WebElement searchIcon;
 	@FindBy (xpath = SearchConstant.ADVANCED_BUTTON) 
@@ -33,6 +34,7 @@ public class SearchPage {
 	WebElement locationElements;
 	
 	public SearchPage(WebDriver driver){
+		super(driver);
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
