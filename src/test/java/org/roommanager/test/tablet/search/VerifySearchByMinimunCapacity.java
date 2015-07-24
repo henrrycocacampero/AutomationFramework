@@ -62,7 +62,7 @@ public class VerifySearchByMinimunCapacity extends TestBase {
 				.selectConferenceRoomByName("Room07").clickSaveButton();
 
 		SearchPage search = navigation.clickOnSearchPageLink();
-		search.clickSearchIcon().clickAdvancedButton().enterCapacity(capacity);
+		search.clickAdvancedButton().enterCapacity(capacity);
 		Assert.assertTrue(search.isRoomPresent(roomName), errorMessage);
 	}
 
