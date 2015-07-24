@@ -57,7 +57,7 @@ public class VerifySearchByLocation extends TestBase{
 		
 		SearchPage search = navigation.clickOnSearchPageLink();
 		
-		search.clickSearchIcon().clickAdvancedButton().selectLocation()
+		search.clickAdvancedButton().selectLocation()
 		.clickOnSelectLocation(locationDisplayName);
 		
 		Assert.assertTrue(search.isRoomPresent(roomName), errorMessage);

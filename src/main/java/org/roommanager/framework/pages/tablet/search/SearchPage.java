@@ -13,16 +13,17 @@ import org.roommanager.framework.models.tablet.search.SearchConstant;
 import org.roommanager.framework.pages.tablet.common.TopMenuPage;
 import org.roommanager.framework.utilities.common.LogManager;
 
-public class SearchPage extends TopMenuPage{
-	@FindBy (xpath = SearchConstant.SEARCH_ICON) 
-	private WebElement searchIcon;
-	@FindBy (xpath = SearchConstant.ADVANCED_BUTTON) 
+public class SearchPage extends TopMenuPage {
+
+	@FindBy(xpath = SearchConstant.ADVANCED_BUTTON)
 	private WebElement advancedButton;
-	@FindBy (xpath = SearchConstant.ROOM_NAME_TEXT_FIELD) 
+	@FindBy(xpath = SearchConstant.ROOM_NAME_TEXT_FIELD)
 	private WebElement roomNameTextField;
-	@FindBy (xpath = SearchConstant.ROOM_LIST) 
+	@FindBy(xpath = SearchConstant.MINIMUN_CAPACITY_TEXT_FIELD)
+	private WebElement minimunCapacityTextField;
+	@FindBy(xpath = SearchConstant.ROOM_LIST)
 	private WebElement roomList;
-	@FindBy (xpath = SearchConstant.DIV_ELEMENT) 
+	@FindBy(xpath = SearchConstant.DIV_ELEMENT)
 	private WebElement divElement;
 	@FindBy (xpath = SearchConstant.ROOM_NAME)
 	private WebElement roomName;
@@ -38,20 +39,7 @@ public class SearchPage extends TopMenuPage{
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
-	
-	/**
-	 * clickSearchIcon: It clicks on the search icon.
-	 *        
-	 * @return SearchPage
-	 */
-	public SearchPage clickSearchIcon(){
-		(new WebDriverWait(driver, 60))
-		.until(ExpectedConditions.visibilityOf(searchIcon));
-		searchIcon.click();
-		LogManager.info("Click on Search Icon");
-		return this;
-	}
-	
+
 	/**
 	 * clickAdvancedButton: It clicks on the advanced search button.
 	 *        
@@ -64,7 +52,7 @@ public class SearchPage extends TopMenuPage{
 		LogManager.info("Click on advanced Button");
 		return this;
 	}
-	
+
 	/**
 	 * enterRoomName: It sets the room name for search.
 	 *        
@@ -80,6 +68,75 @@ public class SearchPage extends TopMenuPage{
 		roomNameTextField.sendKeys(roomName);
 		LogManager.info("RoomName: <" + roomName + "> was entered");
 		return this;
+	}
+	
+	/**
+	 * enterCapacity: It sets the Room's capacity for search.
+	 *        
+	 * @param capacity
+	 *          : It represents the Room's Capacity
+	 *          
+	 * @return SearchPage
+	 */
+	public SearchPage enterCapacity(String capacity) {
+		(new WebDriverWait(driver, 60)).until(ExpectedConditions
+				.visibilityOf(minimunCapacityTextField));
+		minimunCapacityTextField.clear();
+		minimunCapacityTextField.sendKeys(capacity);
+		LogManager.info("Minimun Capacity: <" + capacity + "> was entered");
+		return this;
+	}
+	
+	/**
+	 * getRoomPosition: It gets the room's position on the Schedule Table
+	 * by display name room.
+	 *        
+	 * @param roomName
+	 *          : It represents the Room's Display Name
+	 *          
+	 * @return Room's Position
+	 */
+	private Integer getRoomPosition(String roomName) {
+		(new WebDriverWait(driver, 60)).until(ExpectedConditions
+				.visibilityOf(roomList));
+		List<WebElement> rooms = roomList.findElements(By
+				.xpath(SearchConstant.DIV_ELEMENT));
+		for (WebElement room : rooms) {
+
+			(new WebDriverWait(driver, 60)).until(ExpectedConditions
+					.visibilityOf(room));
+			String roomItemName = room.findElement(
+					By.xpath(SearchConstant.ROOM_NAME)).getText();
+			if (roomItemName.equals(roomName)) {
+				Integer index = rooms.indexOf(room) + 1;
+				LogManager.info("The index of the room: <" + roomItemName
+						+ "> is: " + index);
+
+				return index;
+			}
+		}
+		LogManager.info("The index of the room: <" + roomName
+				+ "> wasn't found on Room list");
+		return null;
+	}
+	
+	/**
+	 * getMeetingByRoom: It gets a meeting on the room's row on 
+	 * the Schedule Table by display name room.
+	 *        
+	 * @param roomName
+	 *          : It represents the Room's Display Name
+	 *          
+	 * @return Meeting's Subject
+	 */
+	public String getMeetingByRoom(String roomName) {
+		Integer index = getRoomPosition(roomName);
+		String path = "//div[2]/div/div/div[3]/div[2]/div/div[2]/div/rm-timeline/div/div[4]/div[1]/div/div[2]/div["
+				+ index + "]/div/div/div/div[1]";
+		WebElement roomMeeting = driver.findElement(By.xpath(path));
+		String subject = roomMeeting.getText();
+		LogManager.info("Room: <" + roomName + "> has a meeting with subject: <" + subject+">");
+		return subject;
 	}
 	
 	/**

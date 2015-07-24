@@ -36,7 +36,7 @@ public class VerifySearchByRoomName extends TestBase{
 		
 		SearchPage search = navigation.clickOnSearchPageLink();
 		
-		search.clickSearchIcon().clickAdvancedButton().enterRoomName(roomName);
+		search.clickAdvancedButton().enterRoomName(roomName);
 		
 		Assert.assertTrue(search.isRoomPresent(roomName), errorMessage);
 	}

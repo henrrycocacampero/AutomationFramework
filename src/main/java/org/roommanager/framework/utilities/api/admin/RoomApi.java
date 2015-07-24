@@ -67,6 +67,21 @@ public class RoomApi {
 		url = url + "/"+ roomId;
 		ApiManager.putHttpMethod(url, requestBody);
 	}
+	/**
+	 * setRoomCapacity: It sets the specified Room to the given capacity
+	 * @param roomName: It represents the Room's Name
+	 * @param capacity: It represents Room's capacity
+	 */
+	public static void setRoomCapacity(String roomName, String capacity){
+		String requestBody = "{\"capacity\": [capacity],"
+				             + " \"customDisplayName\": \"[displayName]\"}";
+		requestBody = requestBody.replace("[displayName]", roomName)
+					  .replace("[capacity]", capacity);
+		String url = PropertiesReader.getRoomManagerApi() + "rooms";
+		String roomId = getRoomIdByName(roomName);
+		url = url + "/"+ roomId;
+		ApiManager.putHttpMethod(url, requestBody);
+	}
 	
 	/**
 	 * createOutOfOrder: It created an OutOfOrder in the specified Room 
