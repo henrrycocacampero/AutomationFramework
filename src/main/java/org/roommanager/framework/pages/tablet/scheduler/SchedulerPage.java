@@ -199,4 +199,16 @@ public class SchedulerPage extends PageFactory{
 
 		return organizerComparison && subjectComparision && isAttendeePresent;
 	}
+	
+	public SchedulerPage dragTimeLineBoxRightEnd(String subject, String hour){
+		WebElement room = getMeetingBoxBySubject(subject);
+		System.out.println("Room encontrado");
+		WebElement rightEnd = room.findElement(By
+				.xpath(SchedulerConstant.MEETING_BOX_RIGHT_END));
+		System.out.println("Right end encontrado");
+		int pixels = 100;
+		rightEnd.click();
+		(new Actions(driver)).dragAndDropBy(rightEnd, 200, 0);
+		return this;
+	}
 }
