@@ -1,8 +1,8 @@
 package org.roommanager.test.tablet.meetings;
 
-import org.roommanager.framework.pages.tablet.home.HomePage;
 import org.roommanager.framework.pages.tablet.scheduler.SchedulerPage;
-import org.roommanager.framework.pages.tablet.settings.SettingsPage;
+import org.roommanager.framework.pages.tablet.settings.ConnectionPage;
+import org.roommanager.framework.pages.tablet.settings.NavigationPage;
 import org.roommanager.framework.utilities.api.admin.EmailServerApi;
 import org.roommanager.framework.utilities.common.PropertiesReader;
 import org.roommanager.framework.utilities.common.TestBase;
@@ -18,14 +18,19 @@ public class VerifyMeetingInvalidSubject extends TestBase{
 	
 	@Test 
 	public void VerifyMeetingInvalidSubjectErrorMessage(){
-		SettingsPage settings = new SettingsPage(driver);
+		ConnectionPage connection = new ConnectionPage(driver);
 		
-		HomePage home = settings
-			.waitForSettingPageToLoad()
-			.clickRoomItem(roomName)
-			.clickAcceptButton();
+		connection
+			.enterServiceUrl(PropertiesReader.getRoomManagerApi())
+			.clickSaveButton();
 		
-		SchedulerPage scheduler = home
+		NavigationPage navigation = connection
+			.clickNavigationLink()
+			.clickDefaultRoomComboBox()
+			.selectConferenceRoomByName(roomName)
+			.clickSaveButton();
+		
+		SchedulerPage scheduler = navigation
 			.clickOnSchedulerPageLink();
 			
 		scheduler
