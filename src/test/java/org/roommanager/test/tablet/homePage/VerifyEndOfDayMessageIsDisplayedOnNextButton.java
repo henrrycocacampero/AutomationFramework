@@ -10,7 +10,7 @@ import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
-public class VerifyAvailableMessageIsDisplayedOnNowButton extends TestBase{
+public class VerifyEndOfDayMessageIsDisplayedOnNextButton extends TestBase{
 	/** urlTablet :It represents the URL of module Tablet  */
 	private String urlTablet= PropertiesReader.getRoomManagerApi();
 	
@@ -19,23 +19,22 @@ public class VerifyAvailableMessageIsDisplayedOnNowButton extends TestBase{
 	
 	/** errorMessage: It represents the Error Message 
 	 * that will be displayed if the test fails*/
-	private String msgError = "The test failed because the Available message not displayed in Now Button";
+	private String msgError = "The test failed because the End of Day message not displayed in Next Button";
 	
 	/** subject: It represents the Meeting's Subject*/
 	private String subject = "Subject Test";
 	
 	/** subject: It represents Available Message*/
-	private String expectedMessage ="Available";
+	private String expectedMessage = "End of day";
 	
 	/**
-	 * verifyAvailableMessageIsDisplayedOnNowButton: The Available Message of room 
-	 * selected is displayed on Now button.
+	 * verifyEndOfDayMessageIsDisplayedOnNextButton: The End Of Day Message 
+	 * of room selected is displayed on Next button.
 	 *
 	 * @author Paulo Ormachea
 	 */
 	@Test
-	public void verifyAvailableMessageIsDisplayedOnNowButton() {
-		
+	public void verifyEndOfDayMessageIsDisplayedOnNextButton() {
 		ConnectionPage connection = new ConnectionPage(driver);
 		connection.enterServiceUrl(urlTablet)
 		.clickSaveButton();
@@ -46,7 +45,7 @@ public class VerifyAvailableMessageIsDisplayedOnNowButton extends TestBase{
 									.clickSaveButton();
 		
 		HomePage homePage = navigation.clickOnHomePageLink();
-		String actualMessage = homePage.getAvailableMessage();
+		String actualMessage = homePage.getEndOfDayMessage();
 		
 		Assert.assertEquals(actualMessage, expectedMessage, msgError);
 	}
