@@ -28,7 +28,7 @@ public class ConnectionPage extends TopMenuPage{
 	}
 
 	public ConnectionPage clickSaveButton(){
-		(new WebDriverWait(driver, 60))
+		(new WebDriverWait(driver, 30))
 			.until(ExpectedConditions.elementToBeClickable(saveButton));
 		saveButton.click();
 		LogManager.info("save Button was clicked");

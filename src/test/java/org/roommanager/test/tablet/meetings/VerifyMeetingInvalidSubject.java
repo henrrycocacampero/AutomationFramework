@@ -26,7 +26,7 @@ public class VerifyMeetingInvalidSubject extends TestBase{
 			.clickAcceptButton();
 		
 		SchedulerPage scheduler = home
-			.clickSchedulerLink();
+			.clickOnSchedulerPageLink();
 			
 		scheduler
 			.setOrganizerTextField(username)
