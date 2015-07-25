@@ -5,20 +5,13 @@ import org.roommanager.framework.pages.tablet.scheduler.SchedulerPage;
 import org.roommanager.framework.pages.tablet.settings.ConnectionPage;
 import org.roommanager.framework.pages.tablet.settings.NavigationPage;
 import org.roommanager.framework.utilities.api.tablet.MeetingApi;
+import org.roommanager.framework.utilities.common.PropertiesReader;
 import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
-import org.roommanager.framework.utilities.common.PropertiesReader;
 
-/**
- * This class contains a test case to verify that is possible
- * to create a meeting
- * @author Qadev02
- *
- */
-public class VerifyMeetingIsCreated extends TestBase{
-	
+public class VerifySetTimeByTimeline extends TestBase{
 	/** username: It represents the meeting's organizer*/
 	private String username = PropertiesReader.getUsername();
 	
@@ -48,7 +41,7 @@ public class VerifyMeetingIsCreated extends TestBase{
 	 * This method contains the test case's steps and assertions
 	 */
 	@Test 
-	public void verifyAMeetingIsCreated(){
+	public void verifySetTimeByTimeline(){
 		
 		ConnectionPage connection = new ConnectionPage(driver);
 		
@@ -66,6 +59,7 @@ public class VerifyMeetingIsCreated extends TestBase{
 			.clickOnSchedulerPageLink();
 					
 		CredentialsPage credential = scheduler
+			.setSpecificTimeinTimeline(13)
 			.setOrganizerTextField(username)
 			.setSubjectTextField(meetingSubject)
 			.clickCreateButton();

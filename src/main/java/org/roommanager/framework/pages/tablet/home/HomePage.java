@@ -7,13 +7,12 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.tablet.home.HomeConstant;
-import org.roommanager.framework.pages.tablet.common.TopMenuPage;
 import org.roommanager.framework.pages.tablet.scheduler.SchedulerPage;
 import org.roommanager.framework.pages.tablet.search.SearchPage;
 import org.roommanager.framework.pages.tablet.settings.SettingsPage;
 import org.roommanager.framework.utilities.common.LogManager;
 
-public class HomePage extends TopMenuPage {
+public class HomePage extends PageFactory {
 	
 	private WebDriver driver;
 	
@@ -45,11 +44,11 @@ public class HomePage extends TopMenuPage {
 	private WebElement nameRoomLabel;
 	
 	public HomePage(WebDriver driver){
-		super(driver);
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 		}
 
+	
 	/**
 	 * clickSchedulerButton: It click on Scheduler Button.
 	 * @return SchedulerPage
@@ -129,8 +128,7 @@ public class HomePage extends TopMenuPage {
 	 * getDurationTimeLabelInNowButton: It retrieves the specified Duration Time
 	 * of a Meeting In Now Button.
 	 * @return String
-	 */
-	 
+	 */	 
 	 public String getDurationTimeLabelInNowButton(){
 		 new WebDriverWait(driver,60).until(ExpectedConditions
 								.visibilityOf(durationTimeLabelInNowButton));
@@ -163,67 +161,86 @@ public class HomePage extends TopMenuPage {
 					 existMeetingInNowButton=true;
 				 } 
 		 }		 
-		 LogManager.info("Subject of Meeting: <" + getNameMeetingLabelInNowButton()
-				 		+ "Organizer"+getOrganizerMeetingLabelInNowButton()+">");
+		 LogManager.info("Subject of Meeting: <" + getNameMeetingLabelInNowButton()+ 
+				 		"> and  "  + 
+				 		"Organizer: <" + getOrganizerMeetingLabelInNowButton()+ ">");
 		 return existMeetingInNowButton;
 		 }
 	 
 	 /**
-	 * getNameMeetingLabelInNextButton: It retrieves the specified Name of a 
-	 * meeting In Next Button
-	 * @return String
-	 */
-	 public String getNameMeetingLabelInNextButton(){
-		 new WebDriverWait(driver,60).until(ExpectedConditions
-								.visibilityOf(nameMeetingLabelInNextButton));
-		 String getTitle = nameMeetingLabelInNextButton.getAttribute("value");
-		 return getTitle ;
-	 }
+		 * getNameMeetingLabelInNextButton: It retrieves the specified Name of a 
+		 * meeting In Next Button
+		 * @return String
+		 */
+		 public String getNameMeetingLabelInNextButton(){
+			 new WebDriverWait(driver,60).until(ExpectedConditions
+									.visibilityOf(nameMeetingLabelInNextButton));
+			 String getTitle = nameMeetingLabelInNextButton.getText();
+			 return getTitle ;
+		 }
+		 
+		 /**
+		 * getOrganizerMeetingLabelInNextButton: It retrieves the specified Organizer
+		 * of a Meeting In Next Button.
+		 * @return String
+		 */
+		 public String getOrganizerMeetingLabelInNextButton(){
+			 new WebDriverWait(driver,60).until(ExpectedConditions
+									.visibilityOf(organizerMeetingLabelInNextButton));
+			 String getTitle = organizerMeetingLabelInNextButton.getText();
+			 return getTitle ;
+		 }
 	 
 	 /**
-	 * getOrganizerMeetingLabelInNextButton: It retrieves the specified Organizer
-	 * of a Meeting In Next Button.
-	 * @return String
+	 * existMeetingInNextButton: Making Verification if Meeting is showed in the
+	 * Next Button.
+	 * @return boolean
 	 */
-	 public String getOrganizerMeetingLabelInNextButton(){
-		 new WebDriverWait(driver,60).until(ExpectedConditions
-								.visibilityOf(organizerMeetingLabelInNextButton));
-		 String getTitle = organizerMeetingLabelInNextButton.getAttribute("value");
-		 return getTitle ;
+	 public boolean existMeetingInNextButton(String Subject, String Organizer){
+		 
+		 boolean existMeetingInNextwButton=false;
+		 
+		 new WebDriverWait(driver,80).until(ExpectedConditions
+							.visibilityOf(organizerMeetingLabelInNextButton));
+					
+		 new WebDriverWait(driver,80).until(ExpectedConditions
+							.visibilityOf(nameMeetingLabelInNextButton));
+	
+		 if(organizerMeetingLabelInNextButton.isDisplayed()&&
+				 nameMeetingLabelInNextButton.isDisplayed()){
+			 	
+			 String ExpectedSubject= getNameMeetingLabelInNextButton();
+			 String ExpectedOrganizer= getOrganizerMeetingLabelInNextButton();
+			 
+				 if ((ExpectedSubject.equals(Subject))&&(ExpectedOrganizer.equals(Organizer))){
+					 existMeetingInNextwButton=true;
+				 } 
+		 }		 
+	 LogManager.info("Subject of Meeting: <" + getNameMeetingLabelInNextButton()+"> - "
+			 		+ "Organizer: <"+getOrganizerMeetingLabelInNextButton()+">");
+	 return existMeetingInNextwButton;
 	 }
-
+ 
 	 /**
-	 * getDurationTimeLabelInNextButton: It retrieves the specified Duration Time
-	 * of a Meeting In Next Button.
-	 * @return String
-	 */
-	 public String getStartEndTimeLabelInNextButton(){
-		 new WebDriverWait(driver,60).until(ExpectedConditions
-								.visibilityOf(startEndTimeLabelInNextButton));
-		 String getTitle = startEndTimeLabelInNextButton.getAttribute("value");
-		 return getTitle ;
-	 }
-	 
-	 /**
-	 * existMeetingInNowButton: Making Verification if Meeting is showed in the
+	 * existMeetingInNextButton: Making Verification if Meeting is showed in the
 	 * Next Button.
 	 * @return boolean
 	 */
 	 public boolean existMeetingInNextButton(){
-		 boolean existMeetingInNowButton=false;
+		 boolean existMeetingInNextButton=false;
 		 new WebDriverWait(driver,80).until(ExpectedConditions
 							.visibilityOf(organizerMeetingLabelInNextButton));
 					
 		 new WebDriverWait(driver,80).until(ExpectedConditions
 							.visibilityOf(nameMeetingLabelInNextButton));
 
-		 if(organizerMeetingLabelInNextButton.isDisplayed()&&
-				 nameMeetingLabelInNextButton.isDisplayed()){
-			 		existMeetingInNowButton=true;
-			}	
+			 if(organizerMeetingLabelInNextButton.isDisplayed()&&
+					 nameMeetingLabelInNextButton.isDisplayed()){
+				 		existMeetingInNextButton=true;
+			 }	
 		 LogManager.info("Subject of Meeting: <" + getNameMeetingLabelInNextButton()
-				 		+ "Organizer"+getOrganizerMeetingLabelInNextButton()+">");
-		 return existMeetingInNowButton;
+				 		+ "Organizer" + getOrganizerMeetingLabelInNextButton()+">");
+		 return existMeetingInNextButton;
 	 }
 	 
 	 /**

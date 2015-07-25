@@ -3,27 +3,32 @@
 <suite name="Test Suite For Meetings" parallel="false">	
   	<test name="Make sure that is possible to create a Meeting after entering all Scheduler form required fields.">
    		<classes>
-      		<class name="org.roommanager.test.tablet.meetings.VerifyMeetingIsCreated" />
+      		<class name="org.roommanager.test.tablet.meetings.VerifyMeetingIsCreated"/>
     	</classes>
   	</test>
   	<test name="Verify that is possible to remove a Meeting from a Room.">
    		<classes>
-      		<class name="org.roommanager.test.tablet.meetings.VerifyMeetingIsRemoved" />
+      		<class name="org.roommanager.test.tablet.meetings.VerifyMeetingIsRemoved"/>
     	</classes>
   	</test>
   	<test name="Verify that is possible to update a Meetings data after entering all Scheduler form required fields.">
    		<classes>
-      		<class name="org.roommanager.test.tablet.meetings.VerifyMeetingIsUpdated" />
+      		<class name="org.roommanager.test.tablet.meetings.VerifyMeetingIsUpdated"/>
     	</classes>
   	</test>
   	<test name="An error message is displayed when creating a Meeting with invalid Organizer">
    		<classes>
-      		<class name="org.roommanager.test.tablet.meetings.VerifyMeetingInvalidOrganizer" />
+      		<class name="org.roommanager.test.tablet.meetings.VerifyMeetingInvalidOrganizer"/>
     	</classes>
   	</test>
   	<test name="An error message is displayed when creating a Meeting with invalid Subject">
    		<classes>
-      		<class name="org.roommanager.test.tablet.meetings.VerifyMeetingInvalidSubject" />
+      		<class name="org.roommanager.test.tablet.meetings.VerifyMeetingInvalidSubject"/>
+    	</classes>
+  	</test>
+  	<test name="Verify that after clicking on a Meeting from Scheduler Page Timeline, the Meeting's data is retrieved.">
+   		<classes>
+      		<class name="org.roommanager.test.tablet.meetings.VerifyAMeetingCanBeRetrieved"/>
     	</classes>
   	</test>
 </suite>

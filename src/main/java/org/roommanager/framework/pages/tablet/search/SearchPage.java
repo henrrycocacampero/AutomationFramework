@@ -10,11 +10,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.tablet.search.SearchConstant;
+import org.roommanager.framework.pages.tablet.common.TopMenuPage;
 import org.roommanager.framework.utilities.common.LogManager;
 
-public class SearchPage {
-	@FindBy(xpath = SearchConstant.SEARCH_ICON)
-	private WebElement searchIcon;
+public class SearchPage extends TopMenuPage {
+
 	@FindBy(xpath = SearchConstant.ADVANCED_BUTTON)
 	private WebElement advancedButton;
 	@FindBy(xpath = SearchConstant.ROOM_NAME_TEXT_FIELD)
@@ -35,22 +35,9 @@ public class SearchPage {
 	WebElement locationElements;
 	
 	public SearchPage(WebDriver driver){
+		super(driver);
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
-	}
-	
-	/**
-	 * clickSearchIcon: It clicks on the search icon.
-	 *        
-	 * @return SearchPage
-	 */
-	public SearchPage clickSearchIcon(){
-		(new WebDriverWait(driver, 60))
-		.until(ExpectedConditions.visibilityOf(searchIcon));
-
-		searchIcon.click();
-		LogManager.info("Click on Search Icon");
-		return this;
 	}
 
 	/**

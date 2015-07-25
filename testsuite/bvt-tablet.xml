@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="BVT- Test Suite Tablet Module - Room Manager Application" parallel="false">
+	<suite-files>
+    	<suite-file path="testsuite/tablet/bvt/search-suite.xml"/>  
+    	<suite-file path="testsuite/tablet/bvt/meetings-suite.xml"/>     
+    	<suite-file path="testsuite/tablet/bvt/home-page-suite.xml"/>   	  	
+	</suite-files>
+</suite>
