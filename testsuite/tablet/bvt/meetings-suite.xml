@@ -16,16 +16,6 @@
       		<class name="org.roommanager.test.tablet.meetings.VerifyMeetingIsUpdated"/>
     	</classes>
   	</test>
-  	<test name="An error message is displayed when creating a Meeting with invalid Organizer">
-   		<classes>
-      		<class name="org.roommanager.test.tablet.meetings.VerifyMeetingInvalidOrganizer"/>
-    	</classes>
-  	</test>
-  	<test name="An error message is displayed when creating a Meeting with invalid Subject">
-   		<classes>
-      		<class name="org.roommanager.test.tablet.meetings.VerifyMeetingInvalidSubject"/>
-    	</classes>
-  	</test>
   	<test name="Verify that after clicking on a Meeting from Scheduler Page Timeline, the Meeting's data is retrieved.">
    		<classes>
       		<class name="org.roommanager.test.tablet.meetings.VerifyAMeetingCanBeRetrieved"/>
