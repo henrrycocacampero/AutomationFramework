@@ -44,6 +44,8 @@ public class SchedulerPage extends PageFactory{
 	WebElement roomTimeline;
 	@FindBy (xpath = SchedulerConstant.MEETING_BOX) 
 	WebElement meetingBox;
+	@FindBy (xpath = SchedulerConstant.TIME_LINE_HOURS_LIST) 
+	WebElement timelineHoursList;
 	
 	public SchedulerPage(WebDriver driver){
 		this.driver = driver;
@@ -181,7 +183,7 @@ public class SchedulerPage extends PageFactory{
 	@SuppressWarnings("unused")
 	private void moveTimeline(){
 		int xDirection = 0;
-		if(Calendar.HOUR_OF_DAY > 19)
+		if(Calendar.HOUR_OF_DAY > 9)
 			xDirection = -500;
 		else if(Calendar.HOUR_OF_DAY < 7)
 			xDirection = 800;
@@ -198,5 +200,23 @@ public class SchedulerPage extends PageFactory{
 		boolean isAttendeePresent = existAttendee(attendee);
 
 		return organizerComparison && subjectComparision && isAttendeePresent;
+	}
+	
+	public WebElement getHourFromTimeline(int expectedHour){
+		(new WebDriverWait(driver,60))
+		.until(ExpectedConditions.visibilityOf(timelineHoursList));
+		List<WebElement> hours = timelineHoursList
+								 .findElements(SchedulerConstant.DIV_ELEMENT);
+		
+		for (WebElement hour : hours) {
+			String actualHour = hour.getText();
+			System.out.println(actualHour);
+			if(actualHour.contains(expectedHour + ":00")){
+				LogManager.info("Hour <" + expectedHour + "> was found on Timeline");
+				return hour;
+			}
+		}
+		LogManager.info("Hour <" + expectedHour + "> wasn't found on Timeline");
+		return null;
 	}
 }
