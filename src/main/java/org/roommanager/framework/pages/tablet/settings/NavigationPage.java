@@ -50,8 +50,6 @@ public class NavigationPage extends TopMenuPage{
 	
 	public NavigationPage selectConferenceRoomByName(String name){		
 		WebElement room = getConferenceRoomByName(name);
-		(new WebDriverWait(driver, 30))
-		.until(ExpectedConditions.visibilityOf(room));
 		room.click();
 		return this;
 	}

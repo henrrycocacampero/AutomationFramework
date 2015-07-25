@@ -27,7 +27,7 @@ public class VerifyMeetingIsUpdatedByMoving extends TestBase{
 			+ PropertiesReader.getExchangeDomain() + "\"";
 	
 	/** conferenceRoom: It represents the name of the Room*/
-	private String roomName = "Room10";
+	private String roomName = "Room07";
 	
 	/** subject: It represents the Meeting's Subject*/
 	private String subject = "Subject Test";
@@ -68,9 +68,12 @@ public class VerifyMeetingIsUpdatedByMoving extends TestBase{
 		SchedulerPage scheduler = navigation
 			.clickOnSchedulerPageLink();
 
-		scheduler
-			//.clickOnMeetingBox(subject)
-			.dragTimeLineBoxRightEnd(subject, "10");
+		CredentialsPage credentials = scheduler
+			.dragTimeLineBoxRightEnd(subject,22)
+			.clickUpdateButton();
+		
+		credentials.enterPassword(password)
+		.clickOkButton();
 	}
 	/**
 	 * This method deletes the meeting updated by the test case
