@@ -41,6 +41,20 @@ public class ConnectionPage extends TopMenuPage{
 		.until(ExpectedConditions.invisibilityOfElementLocated(message));
 		return this;
 	}
+	public Boolean isConnectionNotEstablished(String url){
+		(new WebDriverWait(driver, 60))
+		.until(ExpectedConditions.visibilityOf(serverUrlTextField));
+		Boolean Notconnection=true;
+		String actualConnection=serverUrlTextField.getAttribute("value");
+		if(url.equals(actualConnection)){
+			Notconnection=false;
+			LogManager.info("There is a connection on URL: "+ actualConnection);
+		}
+		else{
+			LogManager.info("There isn't a connection on URL: "+ actualConnection);
+		}
+		return Notconnection;
+	}
 	
 	public ConnectionPage enterServiceUrl(String url){
 		(new WebDriverWait(driver, 30))

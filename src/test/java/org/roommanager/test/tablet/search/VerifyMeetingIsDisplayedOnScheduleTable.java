@@ -3,7 +3,6 @@ package org.roommanager.test.tablet.search;
 import org.testng.Assert;
 import org.roommanager.framework.pages.tablet.search.SearchPage;
 import org.roommanager.framework.pages.tablet.settings.ConnectionPage;
-import org.roommanager.framework.pages.tablet.settings.NavigationPage;
 import org.roommanager.framework.utilities.api.admin.EmailServerApi;
 import org.roommanager.framework.utilities.api.tablet.MeetingApi;
 import org.roommanager.framework.utilities.common.Generator;
@@ -72,14 +71,15 @@ public class VerifyMeetingIsDisplayedOnScheduleTable extends TestBase {
 	@Test
 	public void verifyMeetingIsDisplayedOnScheduleTable() {
 		ConnectionPage connection = new ConnectionPage(driver);
-		connection.enterServiceUrl("http://172.20.208.84:4040/")
-				.clickSaveButton();
+		String url = "http://172.20.208.84:4040/";
+		if (connection.isConnectionNotEstablished(url)) {
+			connection.enterServiceUrl("http://172.20.208.84:4040/")
+					.clickSaveButton().clickNavigationLink()
+					.clickDefaultRoomComboBox()
+					.selectConferenceRoomByName("Room07").clickSaveButton();
 
-		NavigationPage navigation = connection.clickNavigationLink()
-				.clickDefaultRoomComboBox()
-				.selectConferenceRoomByName("Room07").clickSaveButton();
-
-		SearchPage search = navigation.clickOnSearchPageLink();
+		}
+		SearchPage search = connection.clickOnSearchPageLink();
 		Assert.assertEquals(search.getMeetingByRoom(conferenceRoom), subject,
 				errorMessage);
 	}

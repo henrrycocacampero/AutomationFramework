@@ -3,7 +3,6 @@ package org.roommanager.test.tablet.search;
 import org.testng.Assert;
 import org.roommanager.framework.pages.tablet.search.SearchPage;
 import org.roommanager.framework.pages.tablet.settings.ConnectionPage;
-import org.roommanager.framework.pages.tablet.settings.NavigationPage;
 import org.roommanager.framework.utilities.api.admin.EmailServerApi;
 import org.roommanager.framework.utilities.api.admin.RoomApi;
 import org.roommanager.framework.utilities.common.PropertiesReader;
@@ -53,17 +52,18 @@ public class VerifySearchByMinimunCapacity extends TestBase {
 	 */
 	@Test
 	public void verifySearchByMinimunCapacity() {
+
 		ConnectionPage connection = new ConnectionPage(driver);
-		connection.enterServiceUrl("http://172.20.208.84:4040/")
-				.clickSaveButton();
-
-		NavigationPage navigation = connection.clickNavigationLink()
-				.clickDefaultRoomComboBox()
-				.selectConferenceRoomByName("Room07").clickSaveButton();
-
-		SearchPage search = navigation.clickOnSearchPageLink();
+		String url = "http://172.20.208.84:4040/";
+		if (connection.isConnectionNotEstablished(url)) {
+			connection.enterServiceUrl(url).clickSaveButton()
+					.clickNavigationLink().clickDefaultRoomComboBox()
+					.selectConferenceRoomByName("Room07").clickSaveButton();
+		}
+		SearchPage search = connection.clickOnSearchPageLink();
 		search.clickAdvancedButton().enterCapacity(capacity);
 		Assert.assertTrue(search.isRoomPresent(roomName), errorMessage);
+
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class VerifySearchByMinimunCapacity extends TestBase {
 	 */
 	@AfterTest
 	public void testTearDown() {
-		RoomApi.setRoomCapacity(roomName,"");
+		RoomApi.setRoomCapacity(roomName, "");
 	}
 
 }
