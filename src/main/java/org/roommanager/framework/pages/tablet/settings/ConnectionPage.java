@@ -13,15 +13,19 @@ import org.roommanager.framework.utilities.common.LogManager;
 import org.roommanager.framework.utilities.common.PropertiesReader;
 
 public class ConnectionPage extends TopMenuPage{
-	@FindBy (xpath = ConnectionConstant.SAVE_URL_BUTTON)
-	private WebElement saveButton;
-	@FindBy (xpath = ConnectionConstant.URL_TEXT_FIELD) 
-	private WebElement serverUrlTextField;
-	@FindBy (xpath = ConnectionConstant.NAVIGATION_LINK) 
-	private WebElement navigationLink;
-	@FindBy (xpath = ConnectionConstant.SUCCESSFUL_MESSAGE)
-	private WebElement successfulMessage;
-	By message= By.xpath(ConnectionConstant.SUCCESSFUL_MESSAGE);
+    @FindBy (xpath = ConnectionConstant.SAVE_URL_BUTTON)
+    private WebElement saveButton;
+    @FindBy (xpath = ConnectionConstant.URL_TEXT_FIELD) 
+    private WebElement serverUrlTextField;
+    @FindBy (xpath = ConnectionConstant.NAVIGATION_LINK) 
+    private WebElement navigationLink;
+    @FindBy (xpath = ConnectionConstant.SUCCESSFUL_MESSAGE)
+    private WebElement successfulMessage;
+    By message= By.xpath(ConnectionConstant.SUCCESSFUL_MESSAGE);
+    By error = By.xpath(ConnectionConstant.ERROR_MESSAGE);
+    
+	@FindBy(xpath = ConnectionConstant.ROOM_LOAD)
+	private WebElement nameRoomLabel;
 	
 	private WebDriver driver;
 	
@@ -33,13 +37,16 @@ public class ConnectionPage extends TopMenuPage{
 	}
 
 	public ConnectionPage clickSaveButton(){
-		(new WebDriverWait(driver, 60))
-		.until(ExpectedConditions.invisibilityOfElementLocated(message));
-		saveButton.click();
-		LogManager.info("save Button was clicked");
-		(new WebDriverWait(driver, 60))
-		.until(ExpectedConditions.invisibilityOfElementLocated(message));
-		return this;
+        (new WebDriverWait(driver, 60))
+        .until(ExpectedConditions.invisibilityOfElementLocated(error));
+        (new WebDriverWait(driver, 60))
+        .until(ExpectedConditions.elementToBeClickable(saveButton));
+        saveButton.click();
+        LogManager.info("save Button was clicked");
+        (new WebDriverWait(driver, 60))
+        .until(ExpectedConditions.invisibilityOfElementLocated(message));
+        return this;
+
 	}
 	public Boolean isConnectionNotEstablished(String url){
 		(new WebDriverWait(driver, 60))
@@ -73,12 +80,24 @@ public class ConnectionPage extends TopMenuPage{
 	}
 	
 	public String connectionMessage(){
-		//String expectedSuccessfulMessage = "Connection settings was updated";
-		(new WebDriverWait(driver,60))
-		.until(ExpectedConditions.visibilityOf(successfulMessage));
-		String successfulConnectMessage = successfulMessage.getText();
-		LogManager.info("Successfull Message: <"+ successfulConnectMessage +"> was displayed");
-		return successfulConnectMessage; 
+        (new WebDriverWait(driver, 30))
+        .until(ExpectedConditions.invisibilityOfElementLocated(error));
+        (new WebDriverWait(driver,30))
+        .until(ExpectedConditions.visibilityOf(successfulMessage));
+        String successfulConnectMessage = successfulMessage.getText();
+        (new WebDriverWait(driver, 60))
+        .until(ExpectedConditions.invisibilityOfElementLocated(message));
+        LogManager.info("Successfull Message: <"+ successfulConnectMessage +"> was displayed");
+        return successfulConnectMessage; 
 	}
+	
+	 public String getRoomName(){
+		 new WebDriverWait(driver,60).until(ExpectedConditions
+								.visibilityOf(nameRoomLabel));
+		 String getRoomName = nameRoomLabel.getText();
+		 return getRoomName ;
+	 }
+	
+
 
 }
