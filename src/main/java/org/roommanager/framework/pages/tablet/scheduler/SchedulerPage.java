@@ -187,21 +187,23 @@ public class SchedulerPage extends PageFactory{
 	private void moveTimeline(){
 		int pixels = -60;
 		int hour = (new Date()).getHours();
-		if(hour >= 19){
-			pixels = -2000;
-		}	
-		else if(hour <= 7){
-			pixels = 2000;
-		}	
-		WebElement elementToMove = getElementToDragAndDrop();
-		Actions act = new Actions(driver);
-		act.clickAndHold(elementToMove);
-		act.moveToElement(roomTimeline);
-		act.moveByOffset(pixels, 5);
-		act.release();
-		act.build().perform();
-		LogManager.info("Timeline moved <"+ pixels + 
-				"> pixels, hour <" + hour + ">");
+		if(hour <= 7 || hour >= 19){
+			if(hour >= 19){
+				pixels = -2000;
+			}	
+			else if(hour <= 7){
+				pixels = 2000;
+			}	
+			WebElement elementToMove = getElementToDragAndDrop();
+			Actions act = new Actions(driver);
+			act.clickAndHold(elementToMove);
+			act.moveToElement(roomTimeline);
+			act.moveByOffset(pixels, 5);
+			act.release();
+			act.build().perform();
+			LogManager.info("Timeline moved <"+ pixels + 
+					"> pixels, hour <" + hour + ">");
+		}
 	}
 	
 	public boolean compareMeetingData(String organizer, String subject, String attendee){
@@ -217,8 +219,8 @@ public class SchedulerPage extends PageFactory{
 	}
 	
 	public SchedulerPage dragTimeLineBoxRightEnd(String subject, int hour){
-		WebElement conferenceRoom = getMeetingBoxBySubject(subject);
 		WebElement hourElement = getHourFromTimeline(hour);
+		WebElement conferenceRoom = getMeetingBoxBySubject(subject);
 		conferenceRoom.click();
 		WebElement rightEnd =(new WebDriverWait(driver, 20))
 				.until(ExpectedConditions.visibilityOf(conferenceRoom
@@ -228,8 +230,8 @@ public class SchedulerPage extends PageFactory{
 	}
 	
 	public SchedulerPage dragTimeLineBoxLeftEnd(String subject, int hour) {
-		WebElement conferenceRoom = getMeetingBoxBySubject(subject);
 		WebElement hourElement = getHourFromTimeline(hour);
+		WebElement conferenceRoom = getMeetingBoxBySubject(subject);
 		conferenceRoom.click();
 		WebElement leftEnd =(new WebDriverWait(driver, 20))
 				.until(ExpectedConditions.visibilityOf(conferenceRoom
@@ -246,6 +248,7 @@ public class SchedulerPage extends PageFactory{
 		pixelsToMove = pixelsFrom - pixelsTo + size;
 		Actions builder = new Actions(driver); 
 		Action dragAndDrop = builder.clickAndHold(fromElement)
+				//.moveToElement(toElement)
 				.moveByOffset(pixelsToMove, 0)
 				.release(fromElement)
 				.build();
