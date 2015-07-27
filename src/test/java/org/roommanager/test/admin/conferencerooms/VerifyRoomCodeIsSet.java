@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
 public class VerifyRoomCodeIsSet extends TestBase {
 	
 	/** roomSelected: Name of the room*/ 
-	private String roomSelected =  "SM-Room1";
+	private String roomSelected =  "Room01";
 	
 	/**codeRoomUpdated: Code of the room*/
     private String codeRoomUpdated = "Micode";

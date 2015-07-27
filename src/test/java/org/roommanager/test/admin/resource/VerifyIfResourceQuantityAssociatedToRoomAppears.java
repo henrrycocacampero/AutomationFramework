@@ -39,7 +39,7 @@ public class VerifyIfResourceQuantityAssociatedToRoomAppears extends TestBase{
 	 * roomName represents the conference room to be associated to 
 	 * a resource
 	 * */
-	private String roomName = "SM-Room10";
+	private String roomName = "Room10";
 	
 	/**
 	 * quantity represents the resource's quantity associated to 

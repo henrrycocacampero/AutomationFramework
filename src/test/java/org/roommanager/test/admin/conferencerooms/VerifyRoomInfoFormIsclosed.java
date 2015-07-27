@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 public class VerifyRoomInfoFormIsclosed extends TestBase {
 	
 	/** roomName: Name of the room */
-	private String roomName = "SM-Room10";
+	private String roomName = "Room10";
 	
 	/**
 	 * errorMessage: It contains the error message that would appear if test

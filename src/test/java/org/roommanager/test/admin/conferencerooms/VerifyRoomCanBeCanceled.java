@@ -23,7 +23,7 @@ import org.testng.annotations.Test;
 public class VerifyRoomCanBeCanceled extends TestBase{
 	
 	/** roomName: Name of room to be changed*/
-	private String roomName = "SM-Room1";
+	private String roomName = "Room01";
 	
 	/** displayName: Display name of room to be changed*/
 	private String displayName = "DisplayName-Updated";

@@ -30,7 +30,7 @@ public class VerifyOutOfOrderTitleIsObligatory extends TestBase{
 	String msgError= "The Out Of Order was not created!";
     	  
 	/** roomSelected: Name of room to be selected for create a Out-Of-Order*/	  
-    String roomSelected = "SM-Room6";
+    String roomSelected = "Room06";
     
     /** isPresentErrorMessage: Boolean value, that indicates whether or not 
      * that indicates whether or not there is Error Message, 

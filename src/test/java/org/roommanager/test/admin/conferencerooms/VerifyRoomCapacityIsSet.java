@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
 public class VerifyRoomCapacityIsSet extends TestBase {
 	
 	/** roomSelected: Name of the room*/ 
-	private String roomSelected =  "SM-Room1";
+	private String roomSelected =  "Room01";
 	
 	/**capacityRoomUpdated: Capacity of the room*/
     private String capacityRoomUpdated = "100";

@@ -9,17 +9,19 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class VerifySearchByLocation extends TestBase {
-	/** resourceName: Name of room to be used */
+
+public class VerifySearchByLocation extends TestBase{
+	/** roomName: Name of room to be used*/
 	private String roomName = "Room02";
-
-	/** name: represents the location's name to be created */
+	
+	/** locationName: represents the location's name to be created*/
 	private String locationName = "Location Name";
-
-	/** displayName: represents the location's display name to be created */
+	
+	/** locationDisplayName: represents the location's display name to be created*/
 	private String locationDisplayName = "Location Display Name";
+	
+	/** locationDescription: represents the location's description to be created*/
 
-	/** description: represents the location's description to be created */
 	private String locationDescription = "Location Description";
 
 	/**
