@@ -8,19 +8,11 @@ import org.roommanager.framework.utilities.api.tablet.MeetingApi;
 import org.roommanager.framework.utilities.common.Generator;
 import org.roommanager.framework.utilities.common.PropertiesReader;
 import org.roommanager.framework.utilities.common.TestBase;
-import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterTest;
 
-/**
- * This class contains a test case to verify that is possible
- * to update a meeting
- * @author Qadev02
- *
- */
-public class VerifyMeetingIsUpdated extends TestBase {
-	
+public class VerifyMeetingIsUpdatedByMoving extends TestBase{
 	/** username: It represents the name of the Current User*/
 	private String username = PropertiesReader.getUsername();
 	
@@ -35,7 +27,7 @@ public class VerifyMeetingIsUpdated extends TestBase {
 			+ PropertiesReader.getExchangeDomain() + "\"";
 	
 	/** conferenceRoom: It represents the name of the Room*/
-	private String roomName = "Room10";
+	private String roomName = "Room07";
 	
 	/** subject: It represents the Meeting's Subject*/
 	private String subject = "Subject Test";
@@ -58,13 +50,9 @@ public class VerifyMeetingIsUpdated extends TestBase {
 	 * meeting's subject
 	 */
 	private String subjetcUpdate = "Subject was Updated";
-
-	/**
-	 * This method contains the test case's steps and assertions
-	 */
+	
 	@Test
-	public void verifyMeetingIsUpdated(){
-		
+	public void f() throws InterruptedException {
 		ConnectionPage connection = new ConnectionPage(driver);
 		
 		connection
@@ -80,23 +68,16 @@ public class VerifyMeetingIsUpdated extends TestBase {
 		SchedulerPage scheduler = navigation
 			.clickOnSchedulerPageLink();
 
-		CredentialsPage credential = scheduler
-			.clickOnMeetingBox(subject)
-			.setSubjectTextField(subjetcUpdate)				
+		CredentialsPage credentials = scheduler
+			.dragTimeLineBoxRightEnd(subject,22)
 			.clickUpdateButton();
-
-		scheduler = credential	
-			.enterPassword(password)
-			.clickOkButton();
-
-		boolean meetingExists = scheduler.existSubjectOnTimeline(subjetcUpdate);
 		
-		Assert.assertTrue(meetingExists, errorMessage);
+		credentials.enterPassword(password)
+		.clickOkButton();
 	}
-	  
-    /**
-     * This method deletes the meeting updated by the test case
-     */
+	/**
+	 * This method deletes the meeting updated by the test case
+	 */
 	@AfterTest
 	public void afterTest(){
 		MeetingApi.deleteMeetingBySubjectName(roomName, subjetcUpdate);

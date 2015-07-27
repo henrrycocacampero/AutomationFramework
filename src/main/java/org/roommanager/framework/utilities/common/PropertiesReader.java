@@ -111,6 +111,14 @@ public class PropertiesReader {
 	}
 	
 	/**
+     * This method get a URL of Room Manager settings APIe
+     * @return property URL_API
+     */
+	public static String getRoomManagerSettingsApi(){
+		return getConfiguration().getProperty("URL_API" + "/service-types");
+	}
+	
+	/**
      * This method get a URL of Room Manager APIe
      * @return property URL_API
      */
