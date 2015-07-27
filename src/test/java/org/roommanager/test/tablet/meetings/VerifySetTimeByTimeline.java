@@ -59,7 +59,7 @@ public class VerifySetTimeByTimeline extends TestBase{
 			.clickOnSchedulerPageLink();
 					
 		CredentialsPage credential = scheduler
-			.setSpecificTimeinTimeline(13)
+			.setSpecificTimeinTimeline(23)
 			.setOrganizerTextField(username)
 			.setSubjectTextField(meetingSubject)
 			.clickCreateButton();

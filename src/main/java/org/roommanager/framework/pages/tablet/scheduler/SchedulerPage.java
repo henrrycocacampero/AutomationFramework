@@ -331,10 +331,11 @@ public class SchedulerPage extends PageFactory{
 	}
 	
 	public SchedulerPage setSpecificTimeinTimeline(int hour){
-		WebElement hourInTimeLine = getHourFromTimeline(hour);
 		
+		moveTimelineToSpecificHour(hour);
+		WebElement hourInTimeLine = getHourFromTimeline(hour);
 		Actions actions = new Actions(driver);
-		actions.moveToElement(hourInTimeLine, 0, -100);
+		actions.moveToElement(roomTimeline, hourInTimeLine.getLocation().x, 0);
 		actions.doubleClick();
 		actions.build().perform();	
 		return this;
