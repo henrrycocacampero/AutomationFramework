@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 public class VerifyACreatedResourceIsAvailableInRoom extends TestBase{
 	
 	/** resourceName: Name of room to be used*/
-	private String roomName = "SM-Room9";
+	private String roomName = "Room01";
 	
 	/** resourceName: Name of resource to be created*/
 	private String resourceName = "Test Resource";

@@ -27,7 +27,7 @@ public class VerifyMeetingIsUpdatedByMoving extends TestBase{
 			+ PropertiesReader.getExchangeDomain() + "\"";
 	
 	/** conferenceRoom: It represents the name of the Room*/
-	private String roomName = "Room07";
+	private String roomName = "Room05";
 	
 	/** subject: It represents the Meeting's Subject*/
 	private String subject = "Subject Test";

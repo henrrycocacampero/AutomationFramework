@@ -38,7 +38,7 @@ public class VerifyResourceAssociationQuantity extends TestBase{
 	 * roomName represents the conference room to be associated to 
 	 * a resource
 	 * */
-	private String roomName = "SM-Room1";
+	private String roomName = "Room01";
 	
 	/**
 	 * quantity represents the resource's quantity associated to 

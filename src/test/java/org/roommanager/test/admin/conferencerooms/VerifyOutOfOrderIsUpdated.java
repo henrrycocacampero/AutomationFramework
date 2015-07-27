@@ -37,7 +37,7 @@ public class VerifyOutOfOrderIsUpdated extends TestBase{
 	String msgError= "The Out Of Order was not updated!";
     	  
 	/** roomSelected: Name of room to be selected for create a Out-Of-Order*/	  
-    String roomSelected = "SM-Room11";
+    String roomSelected = "Room10";
     
 	String startTime = Generator.getStartTime();
 	String endTime = Generator.getEndTime();

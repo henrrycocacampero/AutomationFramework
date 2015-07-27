@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
 public class VerifyUpdateRoomNameIsDisabled extends TestBase {
 	
 	/** roomSelected: Name of the room*/ 
-	private String roomSelected =  "SM-Room1";
+	private String roomSelected =  "Room01";
     
 	/** 
 	  * errorMessage: It contains the error message that would appear 

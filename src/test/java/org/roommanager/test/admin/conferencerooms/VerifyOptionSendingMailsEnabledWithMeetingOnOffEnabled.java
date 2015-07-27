@@ -63,7 +63,7 @@ public class VerifyOptionSendingMailsEnabledWithMeetingOnOffEnabled extends Test
 	private String msgError= "The Out Of Order was not created!";	  
 	
 	/** roomSelected: Name of room to be selected for create a Out-Of-Order*/	  
-	private String roomSelected = "SM-Room10";
+	private String roomSelected = "Room10";
         
     /**
 	* This method performs the test case: It verify if enabled the SendMail 
