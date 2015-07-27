@@ -267,7 +267,6 @@ public class SchedulerPage extends PageFactory{
         		.findElements(SchedulerConstant.DIV_ELEMENT);
         for (WebElement hour : hours) {
               String actualHour = hour.getText();
-              System.out.println(actualHour);
               if(actualHour.contains(expectedHour + ":00")){
                     LogManager.info("Hour <" + expectedHour + "> was found on Timeline");
                     return hour;
@@ -276,27 +275,7 @@ public class SchedulerPage extends PageFactory{
         LogManager.info("Hour <" + expectedHour + "> wasn't found on Timeline");
         return null;
 	}
-	/*
-	private void moveTimelineToSpecificHour(int hour){
-		if(hour < 7 && hour >19 ){
-			int xDirection = -10;
-			if(hour > 19){
-				xDirection = -1000;
-			}
-			else if(hour < 7){
-				xDirection = 1000;
-			}
-			
-			WebElement elementToMove = getHourFromTimeline(hour);
-			Actions act = new Actions(driver);
-			act.clickAndHold(elementToMove);
-			act.moveToElement(roomTimeline);
-			act.moveByOffset(xDirection, 5);
-			act.release();
-			act.build().perform();
-		}
-	}*/
-	
+
 	private WebElement getElementToDragAndDrop(){
 		(new WebDriverWait(driver,60))
     	.until(ExpectedConditions.visibilityOf(timelineHoursList));
@@ -304,7 +283,6 @@ public class SchedulerPage extends PageFactory{
 	    		.findElements(SchedulerConstant.DIV_ELEMENT);
 	    for (WebElement hour : hours) {
 	          String actualHour = hour.getText();
-	          System.out.println(actualHour);
 	          if(actualHour.contains("12:00")){
 	                return hour;
 	          }
@@ -334,13 +312,13 @@ public class SchedulerPage extends PageFactory{
 	}
 	
 	public SchedulerPage setSpecificTimeinTimeline(int hour){
-		
 		moveTimelineToSpecificHour(hour);
 		WebElement hourInTimeLine = getHourFromTimeline(hour);
 		Actions actions = new Actions(driver);
 		actions.moveToElement(roomTimeline, hourInTimeLine.getLocation().x, 0);
 		actions.doubleClick();
-		actions.build().perform();	
+		actions.build().perform();
+		LogManager.info("Meeting start Time was set to <" + hour+ ">");
 		return this;
 	}
 }

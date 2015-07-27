@@ -31,6 +31,12 @@ public class VerifySetTimeByTimeline extends TestBase{
 	private String meetingSubject = "Subject";
 	
 	/** 
+	 * startTime: It represents the start time from the meeting to 
+	 * be created.
+	 */
+	private int meetingStartTime = 23;
+	
+	/** 
 	 * errorMessage: It represents the Error Message 
 	 * that will be displayed if the test fails
 	 */
@@ -59,7 +65,7 @@ public class VerifySetTimeByTimeline extends TestBase{
 			.clickOnSchedulerPageLink();
 					
 		CredentialsPage credential = scheduler
-			.setSpecificTimeinTimeline(23)
+			.setSpecificTimeinTimeline(meetingStartTime)
 			.setOrganizerTextField(username)
 			.setSubjectTextField(meetingSubject)
 			.clickCreateButton();
