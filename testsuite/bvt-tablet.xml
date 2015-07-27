@@ -4,6 +4,7 @@
 	<suite-files>
     	<suite-file path="testsuite/tablet/bvt/search-suite.xml"/>  
     	<suite-file path="testsuite/tablet/bvt/meetings-suite.xml"/>     
-    	<suite-file path="testsuite/tablet/bvt/home-page-suite.xml"/>   	  	
+    	<suite-file path="testsuite/tablet/bvt/home-page-suite.xml"/>
+    	<suite-file path="testsuite/tablet/bvt/seetings-suite.xml"/>    	  	
 	</suite-files>
 </suite>
