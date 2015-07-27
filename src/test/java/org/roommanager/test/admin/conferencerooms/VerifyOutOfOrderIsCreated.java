@@ -34,7 +34,7 @@ public class VerifyOutOfOrderIsCreated extends TestBase{
 	String msgError= "The Out Of Order was not created!";
     	  
 	/** roomSelected: Name of room to be selected for create a Out-Of-Order*/	  
-    String roomSelected = "SM-Room6";
+    String roomSelected = "Room06";
     
     @BeforeTest
 	public void beforeTest() {

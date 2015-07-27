@@ -41,7 +41,7 @@ public class VerifyResourceAssociatedToRoomIsDisplayed extends TestBase {
 	private String quantity = "10";
 	
 	/** roomName name of room to associate the resource*/
-	private String roomName = "SM-Room1";
+	private String roomName = "Room01";
 	
 	/** 
 	 * errorMessage: It contains the error message that would appear 

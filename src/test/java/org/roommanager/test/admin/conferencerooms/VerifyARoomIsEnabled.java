@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
 public class VerifyARoomIsEnabled extends TestBase {
 	
 	/** roomName: Name of the room  */
-	private String roomName = "SM-Room10";
+	private String roomName = "Room03";
 	/** 
 	 * errorMessage: It contains the error message that would appear 
 	 * if test case fails

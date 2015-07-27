@@ -33,7 +33,7 @@ public class VerifyLocationRoomIsSet extends TestBase{
 	private String locationDescription = "Description location";
 	
 	/** roomName: Name of the room*/
-    private String roomName = "SM-Room1";
+    private String roomName = "Room08";
 	 
     /** 
 	  * errorMessage: It contains the error message that would appear 

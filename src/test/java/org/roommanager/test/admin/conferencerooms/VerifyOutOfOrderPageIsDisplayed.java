@@ -12,7 +12,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class VerifyOutOfOrderPageIsDisplayed extends TestBase{
-	private String roomName = "SM-Room9";
+	private String roomName = "Room09";
 	/** 
 	 * errorMessage: It contains the error message that is displayed 
 	 * if test case fails

@@ -68,7 +68,7 @@ public class VerifyOutOfOrderIsCreatedWithOnOffCalendarButtonWithMeeting extends
 	private String msgError= "The Out Of Order was not created!";
 	
 	/**roomSelected: Name of room to be selected for create a Out-Of-Order*/	  
-	private String roomSelected = "SM-Room8";
+	private String roomSelected = "Room08";
         
     /**
 	* This method performs the test case: Check if saved the state of the room 

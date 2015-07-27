@@ -22,7 +22,7 @@ import org.testng.annotations.Test;
 public class VerifyDisassociateResourceFromRoom extends TestBase {
 
 	/** roomName: Name of room with the associated resource */
-	private String roomName = "SM-Room10";
+	private String roomName = "Room10";
 
 	/** resourceName: Name of resource to be created */
 	private String resourceName = "ResourceTest";

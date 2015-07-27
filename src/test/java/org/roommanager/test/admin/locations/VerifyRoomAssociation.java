@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 public class VerifyRoomAssociation extends TestBase {
 	
 	/** resourceName: Name of room to be used*/
-	private String roomName = "SM-Room9";
+	private String roomName = "Room09";
 	
 	/** name: represents the location's name to be created*/
 	private String locationName = "Location Test";

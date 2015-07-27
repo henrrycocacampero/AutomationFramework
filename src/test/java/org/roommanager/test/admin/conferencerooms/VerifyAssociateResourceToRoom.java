@@ -37,7 +37,7 @@ public class VerifyAssociateResourceToRoom extends TestBase {
  	  private String resourceIcon = "fa fa-desktop";
  	  
  	  /** roomName: Name of the room*/
-      private String roomName = "SM-Room1";
+      private String roomName = "Room03";
       
       /** 
  	  * errorMessage: It contains the error message that would appear 

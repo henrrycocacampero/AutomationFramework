@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 public class VerifyRoomInfoPageIsDisplayed extends TestBase{
 	/** roomName: Name of room to be used*/
-	private String roomName = "SM-Room9";
+	private String roomName = "Room09";
 	
 	/** 
 	 * errorMessage: It contains the error message that is displayed 
