@@ -18,6 +18,9 @@ public class ConnectionPage extends TopMenuPage{
 	private WebElement serverUrlTextField;
 	@FindBy (xpath = ConnectionConstant.NAVIGATION_LINK) 
 	private WebElement navigationLink;
+	@FindBy (xpath = ConnectionConstant.SUCCESSFUL_MESSAGE)
+	private WebElement successfulMessage;
+	
 	private WebDriver driver;
 	
 	public ConnectionPage(WebDriver driver){
@@ -50,4 +53,14 @@ public class ConnectionPage extends TopMenuPage{
 		navigationLink.click();
 		return new NavigationPage(driver);
 	}
+	
+	public String connectionMessage(){
+		//String expectedSuccessfulMessage = "Connection settings was updated";
+		(new WebDriverWait(driver,60))
+		.until(ExpectedConditions.visibilityOf(successfulMessage));
+		String successfulConnectMessage = successfulMessage.getText();
+		LogManager.info("Successfull Message: <"+ successfulConnectMessage +"> was displayed");
+		return successfulConnectMessage; 
+	}
+
 }

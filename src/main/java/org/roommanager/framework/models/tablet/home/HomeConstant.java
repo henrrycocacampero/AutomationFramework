@@ -16,7 +16,7 @@ public class HomeConstant {
 	/**Locator Type = Xpath*/
 	public static final String NAME_MEETING_LABEL_IN_NEXT_BUTTON = "//rm-panel/div[2]/div/div";
 	/**Locator Type = Xpath*/
-	public static final String ORGANIZER_LABEL_IN_NEXT_BUTTON = "//rm-panel/div[2]/div/div";
+	public static final String ORGANIZER_LABEL_IN_NEXT_BUTTON = "//div[2]/div/div[2]";
 	/**Locator Type = Xpath*/
 	public static final String START_END_TIME_LABEL_IN_NEXT_BUTTON = "//rm-panel/div[2]/div/div";
 	

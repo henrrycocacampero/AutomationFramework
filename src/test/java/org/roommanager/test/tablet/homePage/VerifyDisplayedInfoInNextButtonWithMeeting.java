@@ -13,13 +13,13 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
- * Verify the meetings information is displayed on Now button 
- * when the meeting is being held at this time. 
+ * Verify the meetings information is displayed on Next button 
+ * when the meeting is created after the current date. 
  * 
  * @author Daneiva Gamboa
  *
  */
-public class VerifyDisplayedInfoInNowButtonWithMeeting extends TestBase{
+public class VerifyDisplayedInfoInNextButtonWithMeeting extends TestBase{
 	/** urlTablet :It represents the URL of module Tablet  */
 	private String urlTablet= PropertiesReader.getRoomManagerApi();
 	
@@ -35,15 +35,18 @@ public class VerifyDisplayedInfoInNowButtonWithMeeting extends TestBase{
 	/** conferenceRoom: It represents the name of the Room*/
 	private String conferenceRoom = "Room09";
 	
+	/** afterCurrentTime: It represents time after current time for start meeting*/
+	int afterCurrentTime = 1;
+	
 	/** startTime: It represents the Meeting's Start Time*/
-	private String startTime = Generator.getStartTime();
+	private String startTime = Generator.getStartTimeAfterCurrentTime(afterCurrentTime);
 	
 	/** startTime: It represents the eeting's End Time*/
-	private String endTime = Generator.getEndTime();
+	private String endTime = Generator.getEndTimeLateAfterCurrentTime(afterCurrentTime);
 	
 	/** errorMessage: It represents the Error Message 
 	 * that will be displayed if the test fails*/
-	private String msgError = "The Test failed because the meeting not found in the Now Button";
+	private String msgError = "The Test failed because the meeting not found in the Next Button";
 	
 	/** subject: It represents the Meeting's Subject*/
 	private String subject = "Subject Test";
@@ -55,12 +58,12 @@ public class VerifyDisplayedInfoInNowButtonWithMeeting extends TestBase{
 	boolean isPresentMeeting= false;
 	
 	/**
-	 * verifyDisplayedInfoInNowButtonWithMeeting: The meetings information 
-	 * is displayed on Now button.
+	 * verifyDisplayedInfoInNextButtonWithMeeting: The meetings information 
+	 * is displayed on Next button.
 	 *
 	 */
 	@Test
-	public void verifyDisplayedInfoInNowButtonWithMeeting() {
+	public void verifyDisplayedInfoInNextButtonWithMeeting() {
 		ConnectionPage connection = new ConnectionPage(driver);
 		connection.enterServiceUrl(urlTablet)
 		.clickSaveButton();
@@ -72,11 +75,11 @@ public class VerifyDisplayedInfoInNowButtonWithMeeting extends TestBase{
 		
 		HomePage homePage = navigation.clickOnHomePageLink();
 		
-		isPresentMeeting = homePage.existMeetingInNowButton(subject,organizer);
+		isPresentMeeting = homePage.
+				existMeetingInNextButton(subject,organizer);
 		/*Assert*/
-		Assert.assertTrue( isPresentMeeting,msgError);		
-	}	
-	
+		Assert.assertTrue( isPresentMeeting,msgError);
+	}
 	/**
     * beforeTest: This method verify the Meeting was created.
     */	
@@ -90,7 +93,6 @@ public class VerifyDisplayedInfoInNowButtonWithMeeting extends TestBase{
 								 conferenceRoom,
 								 attendee);
 	}
-	
 	/**
      * afterTest: It deletes the Meeting that was created by the test. 
      */

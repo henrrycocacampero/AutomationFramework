@@ -22,4 +22,16 @@ public class Generator {
 		calendar.add(Calendar.MINUTE,defaultMeetingDuration);
 		return dateFormat.format(calendar.getTime());
 	}
+	public static String getStartTimeAfterCurrentTime(int afterCurrentTime){
+		Calendar calendar = new GregorianCalendar();
+		calendar.add(Calendar.HOUR, (differenceOfHours + afterCurrentTime));
+		return dateFormat.format(calendar.getTime());
+	}
+	public static String getEndTimeLateAfterCurrentTime(int afterCurrentTime){
+		Calendar calendar = new GregorianCalendar();
+		calendar.add(Calendar.HOUR, (differenceOfHours + afterCurrentTime));
+		calendar.add(Calendar.MINUTE,defaultMeetingDuration);
+		return dateFormat.format(calendar.getTime());
+	}
+	
 }

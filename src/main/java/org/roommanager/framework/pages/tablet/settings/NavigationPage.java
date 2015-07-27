@@ -48,7 +48,7 @@ public class NavigationPage extends TopMenuPage{
 		return null;
 	}
 	
-	public NavigationPage selectConferenceRoomByName(String name){
+	public NavigationPage selectConferenceRoomByName(String name){		
 		WebElement room = getConferenceRoomByName(name);
 		room.click();
 		return this;
