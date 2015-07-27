@@ -1,5 +1,6 @@
 package org.roommanager.framework.pages.tablet.settings;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,6 +21,7 @@ public class ConnectionPage extends TopMenuPage{
 	private WebElement navigationLink;
 	@FindBy (xpath = ConnectionConstant.SUCCESSFUL_MESSAGE)
 	private WebElement successfulMessage;
+	By message= By.xpath(ConnectionConstant.SUCCESSFUL_MESSAGE);
 	
 	private WebDriver driver;
 	
@@ -31,10 +33,12 @@ public class ConnectionPage extends TopMenuPage{
 	}
 
 	public ConnectionPage clickSaveButton(){
-		(new WebDriverWait(driver, 30))
-			.until(ExpectedConditions.elementToBeClickable(saveButton));
+		(new WebDriverWait(driver, 60))
+		.until(ExpectedConditions.invisibilityOfElementLocated(message));
 		saveButton.click();
 		LogManager.info("save Button was clicked");
+		(new WebDriverWait(driver, 60))
+		.until(ExpectedConditions.invisibilityOfElementLocated(message));
 		return this;
 	}
 	
