@@ -64,6 +64,7 @@ public class VerifyMeetingIsDisplayedOnScheduleTable extends TestBase {
 					PropertiesReader.getExchangePassWord(),
 					PropertiesReader.getExchangeHostName());
 		}
+		MeetingApi.deleteAllRoomMeetings(conferenceRoom);
 		MeetingApi.createMeeting(organizer, subject, startTime, endTime,
 				conferenceRoom, attendee);
 		connection = new ConnectionPage(driver);

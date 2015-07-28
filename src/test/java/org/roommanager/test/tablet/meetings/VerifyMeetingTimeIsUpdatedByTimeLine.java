@@ -17,6 +17,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
 public class VerifyMeetingTimeIsUpdatedByTimeLine extends TestBase{
+	
 	/** username: It represents the name of the Current User*/
 	private String username = PropertiesReader.getUsername();
 	
@@ -62,7 +63,9 @@ public class VerifyMeetingTimeIsUpdatedByTimeLine extends TestBase{
 	 */
 	private String errorMessage = "The Test failed because the updated"
 			+ " meeting could be found in the Scheduler Page";	
-	
+	/**
+	 * This method contains the test case's steps and assertions
+	 */
 	@Test
 	public void verifyMeetingUpdateMeetingTimeByTimeLine() {
 		

@@ -68,7 +68,7 @@ public class VerifyOutOfOrderIsCreatedWithOnOffCalendarButtonWithMeeting extends
 	private String msgError= "The Out Of Order was not created!";
 	
 	/**roomSelected: Name of room to be selected for create a Out-Of-Order*/	  
-	private String roomSelected = "Room08";
+	private String roomSelected = "Room01";
         
     /**
 	* This method performs the test case: Check if saved the state of the room 
@@ -83,18 +83,16 @@ public class VerifyOutOfOrderIsCreatedWithOnOffCalendarButtonWithMeeting extends
 	  	OutOfOrderPage outOfOrderPage = 
 	  					conferenceRoom.doubleClickOnRoom(roomSelected)
 						  			  .clickOnOutOfOrderPlanning();
+	  	
 	  	outOfOrderPage.setTitle(nameTitle)										
 						  .setDescription(setDescription)
 					      .clickScheduleButton()
-						  .checkSendMailCheckbox();				  
+					      .checkSendMailCheckbox()
+					      .clickSaveButtonOutOfOrder();
 	  	
-	  	isEnabledSendMailCheckbox = outOfOrderPage.enabledSendMailCheckbox();
-	  	
-	  	outOfOrderPage.checkSendMailCheckbox()
-	  				  .clickSaveButtonOutOfOrder();
-	  	if (isEnabledSendMailCheckbox==true){
-	  		Assert.assertTrue( isPresentOutOfOrder,msgError );
-	  	}
+	  	isPresentOutOfOrder = conferenceRoom.existOutOfOrder(roomSelected);
+		/*Asserts*/	  
+		Assert.assertTrue( isPresentOutOfOrder,msgError );
 	}
 	
 	 /**
@@ -119,13 +117,13 @@ public class VerifyOutOfOrderIsCreatedWithOnOffCalendarButtonWithMeeting extends
 								PropertiesReader.getPassword(), 
 								PropertiesReader.getExchangeHostName());
 		}
+		RoomApi.deleteAllOutOfOrders(roomSelected);
 		MeetingApi.deleteAllRoomMeetings(roomSelected);
 		MeetingApi.createMeeting(organizer, 
 								 subject, 
 								 startTime, 
 								 endTime, 
 								 roomSelected, 
-								 attendee);
-	
+								 attendee);	
 	}
   }
