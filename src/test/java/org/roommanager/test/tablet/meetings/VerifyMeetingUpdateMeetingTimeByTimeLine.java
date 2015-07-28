@@ -8,11 +8,12 @@ import org.roommanager.framework.utilities.api.tablet.MeetingApi;
 import org.roommanager.framework.utilities.common.Generator;
 import org.roommanager.framework.utilities.common.PropertiesReader;
 import org.roommanager.framework.utilities.common.TestBase;
-import org.testng.annotations.Test;
+import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.Test;
 
-public class VerifyMeetingIsUpdatedByMoving extends TestBase{
+public class VerifyMeetingUpdateMeetingTimeByTimeLine extends TestBase{
 	/** username: It represents the name of the Current User*/
 	private String username = PropertiesReader.getUsername();
 	
@@ -27,7 +28,7 @@ public class VerifyMeetingIsUpdatedByMoving extends TestBase{
 			+ PropertiesReader.getExchangeDomain() + "\"";
 	
 	/** conferenceRoom: It represents the name of the Room*/
-	private String roomName = "Room07";
+	private String roomName = "Room03";
 	
 	/** subject: It represents the Meeting's Subject*/
 	private String subject = "Subject Test";
@@ -35,24 +36,31 @@ public class VerifyMeetingIsUpdatedByMoving extends TestBase{
 	/** startTime: It represents the Meeting's Start Time*/
 	private String startTime = Generator.getStartTime();
 	
-	/** startTime: It represents the eeting's End Time*/
+	/** startTime: It represents the meeting's End Time*/
 	private String endTime = Generator.getEndTime();
+	
+	/** 
+	 * startHourToUpdate: It represents the meeting's start hour
+	 * to be updated
+	 */
+	private int startHourToUpdate =  10;
+	
+	/** 
+	 * endHourToUpdate: It represents the eeting's end hour
+	 * to be updated
+	 */
+	private int endHourToUpdate = 14;
 	
 	/** 
 	 * errorMessage: It represents the Error Message 
 	 * that will be displayed if the test fails
 	 */
 	private String errorMessage = "The Test failed because the updated"
-			+ " meeting could be found in the Scheduler Page";
-	
-	/** 
-	 * subjetcUpdate: It contains the new value of the 
-	 * meeting's subject
-	 */
-	private String subjetcUpdate = "Subject was Updated";
+			+ " meeting could be found in the Scheduler Page";	
 	
 	@Test
-	public void f() throws InterruptedException {
+	public void verifyMeetingUpdateMeetingTimeByTimeLine() {
+		
 		ConnectionPage connection = new ConnectionPage(driver);
 		
 		connection
@@ -69,18 +77,26 @@ public class VerifyMeetingIsUpdatedByMoving extends TestBase{
 			.clickOnSchedulerPageLink();
 
 		CredentialsPage credentials = scheduler
-			.dragTimeLineBoxRightEnd(subject,22)
+			.clickOnMeetingBox(subject)
+			.dragTimeLineBoxRightEnd(subject,endHourToUpdate)
+			.dragTimeLineBoxLeftEnd(subject, startHourToUpdate)
 			.clickUpdateButton();
 		
-		credentials.enterPassword(password)
-		.clickOkButton();
+		scheduler = credentials
+			.enterPassword(password)
+			.clickOkButton();
+		
+		boolean  meetingUpdated = scheduler
+			.compareMeetingTime(endHourToUpdate, startHourToUpdate);
+		
+		Assert.assertTrue(meetingUpdated,errorMessage);
 	}
 	/**
 	 * This method deletes the meeting updated by the test case
 	 */
 	@AfterTest
 	public void afterTest(){
-		MeetingApi.deleteMeetingBySubjectName(roomName, subjetcUpdate);
+		MeetingApi.deleteMeetingBySubjectName(roomName, subject);
 	}	
 	 
 	/**
