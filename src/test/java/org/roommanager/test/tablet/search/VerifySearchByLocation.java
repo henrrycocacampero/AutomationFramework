@@ -67,7 +67,6 @@ public class VerifySearchByLocation extends TestBase {
 		Assert.assertTrue(search.isRoomPresent(roomName), errorMessage);
 
 	}
-
 	/**
 	 * This method removes the Location that was created by the test
 	 */

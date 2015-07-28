@@ -3,6 +3,7 @@ package org.roommanager.test.tablet.homePage;
 import org.testng.Assert;
 import org.roommanager.framework.pages.tablet.home.HomePage;
 import org.roommanager.framework.pages.tablet.settings.ConnectionPage;
+import org.roommanager.framework.pages.tablet.settings.NavigationPage;
 import org.roommanager.framework.utilities.api.tablet.MeetingApi;
 import org.roommanager.framework.utilities.common.Generator;
 import org.roommanager.framework.utilities.common.PropertiesReader;
@@ -19,8 +20,6 @@ import org.testng.annotations.Test;
  *
  */
 public class VerifyDisplayedInfoInNowButtonWithMeeting extends TestBase {
-	/** urlTablet :It represents the URL of module Tablet */
-	private String urlTablet = PropertiesReader.getRoomManagerApi();
 
 	/** username: It represents the name of the Current User */
 	private String username = PropertiesReader.getUsername();
@@ -66,8 +65,15 @@ public class VerifyDisplayedInfoInNowButtonWithMeeting extends TestBase {
 	 */
 	@Test
 	public void verifyDisplayedInfoInNowButtonWithMeeting() {
-
-		HomePage homePage = connection.clickOnHomePageLink();
+    	ConnectionPage connection = new ConnectionPage(driver);
+		NavigationPage navigation = connection
+									.enterServiceUrl("http://172.20.208.84:4040/")
+									.clickSaveButton()
+									.clickNavigationLink()
+									.clickDefaultRoomComboBox()
+									.selectConferenceRoomByName(conferenceRoom)
+									.clickSaveButton();
+		HomePage homePage = navigation.clickOnHomePageLink();
 
 		isPresentMeeting = homePage.existMeetingInNowButton(subject, organizer);
 		/* Assert */
@@ -79,19 +85,9 @@ public class VerifyDisplayedInfoInNowButtonWithMeeting extends TestBase {
 	 */
 	@BeforeTest
 	public void beforeTest() {
-		MeetingApi.deleteAllRoomMeetings(conferenceRoom);
+		MeetingApi.deleteMeetingBySubjectName(conferenceRoom, subject);
 		MeetingApi.createMeeting(organizer, subject, startTime, endTime,
 				conferenceRoom, attendee);
-		/**
-		 * Create a new connection if there is not
-		 */
-		connection = new ConnectionPage(driver);
-		if (connection.isConnectionNotEstablished(urlTablet)) {
-			connection.enterServiceUrl(urlTablet).clickSaveButton()
-					.clickNavigationLink().clickDefaultRoomComboBox()
-					.selectConferenceRoomByName(conferenceRoom)
-					.clickSaveButton();
-		}
 	}
 
 	/**
