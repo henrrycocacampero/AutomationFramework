@@ -15,7 +15,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
-public class VerifyMeetingUpdateMeetingTimeByTimeLine extends TestBase{
+public class VerifyMeetingTimeIsUpdatedByTimeLine extends TestBase{
 	/** username: It represents the name of the Current User*/
 	private String username = PropertiesReader.getUsername();
 	

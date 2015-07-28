@@ -34,7 +34,13 @@ public class VerifySetTimeByTimeline extends TestBase{
 	 * startTime: It represents the start time from the meeting to 
 	 * be created.
 	 */
-	private int meetingStartTime = 23;
+	private int meetingStartTime = 21;
+	
+	/** 
+	 * startTime: It represents the start time from the meeting to 
+	 * be created.
+	 */
+	private int meetingEndTime = 23;
 	
 	/** 
 	 * errorMessage: It represents the Error Message 
@@ -66,6 +72,7 @@ public class VerifySetTimeByTimeline extends TestBase{
 					
 		CredentialsPage credential = scheduler
 			.setSpecificTimeinTimeline(meetingStartTime)
+			.dragTimeLineBoxRightEnd("", meetingEndTime)
 			.setOrganizerTextField(username)
 			.setSubjectTextField(meetingSubject)
 			.clickCreateButton();
