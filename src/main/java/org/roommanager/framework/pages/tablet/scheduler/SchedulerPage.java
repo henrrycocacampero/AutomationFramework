@@ -49,6 +49,10 @@ public class SchedulerPage extends PageFactory{
     WebElement timelineHoursList;
 	@FindBy (xpath = SchedulerConstant.TIME_LINE) 
     WebElement timeline;
+	@FindBy (xpath = SchedulerConstant.FROM_HOUR) 
+    WebElement fromHour;
+	@FindBy (xpath = SchedulerConstant.TO_HOUR) 
+    WebElement toHour;
 	
 	public SchedulerPage(WebDriver driver){
 		this.driver = driver;
@@ -218,44 +222,41 @@ public class SchedulerPage extends PageFactory{
 		return organizerComparison && subjectComparision && isAttendeePresent;
 	}
 	
-	public SchedulerPage dragTimeLineBoxRightEnd(String subject, int hour){
-		WebElement hourElement = getHourFromTimeline(hour);
+	public SchedulerPage dragTimeLineBoxRightEnd(String subject, int endHour){
+		WebElement hourElement = getHourFromTimeline(endHour);
 		WebElement conferenceRoom = getMeetingBoxBySubject(subject);
-		conferenceRoom.click();
 		WebElement rightEnd =(new WebDriverWait(driver, 20))
 				.until(ExpectedConditions.visibilityOf(conferenceRoom
 				.findElement(By.xpath(SchedulerConstant.MEETING_BOX_RIGHT_END))));
 		dragAndDrop(rightEnd, hourElement);
+		LogManager.info("Drag and drop meeting <" + subject + 
+				"> to hour <" + endHour + ">");
 		return this;
 	}
 	
-	public SchedulerPage dragTimeLineBoxLeftEnd(String subject, int hour) {
-		WebElement hourElement = getHourFromTimeline(hour);
+	public SchedulerPage dragTimeLineBoxLeftEnd(String subject, int startHour) {
+		WebElement hourElement = getHourFromTimeline(startHour);
 		WebElement conferenceRoom = getMeetingBoxBySubject(subject);
-		conferenceRoom.click();
 		WebElement leftEnd =(new WebDriverWait(driver, 20))
 				.until(ExpectedConditions.visibilityOf(conferenceRoom
 				.findElement(By.xpath(SchedulerConstant.MEETING_BOX_LEFT_END))));
 		dragAndDrop(leftEnd, hourElement);
+		LogManager.info("Drag and drop meeting <" + subject + 
+				"> to hour <" + startHour + ">");
 		return this;
 	}
 	
 	private void dragAndDrop(WebElement fromElement, WebElement toElement){
 		int pixelsTo = toElement.getLocation().x;
 		int pixelsFrom = fromElement.getLocation().x;
-		int size = toElement.getSize().width;
 		int pixelsToMove;
-		pixelsToMove = pixelsFrom - pixelsTo + size;
+		pixelsToMove = (int)((pixelsFrom - pixelsTo)/2);
 		Actions builder = new Actions(driver); 
 		Action dragAndDrop = builder.clickAndHold(fromElement)
-				//.moveToElement(toElement)
-				.moveByOffset(pixelsToMove, 0)
+				.moveByOffset(pixelsToMove, fromElement.getLocation().y)
 				.release(fromElement)
 				.build();
 		dragAndDrop.perform();
-		System.out.println("To: " + pixelsTo);
-		System.out.println("From: " + pixelsFrom);
-		System.out.println("Size: " + size);
 		LogManager.info("Drag and Drop <" + pixelsToMove + "> pixels");
 	}
 	
@@ -284,9 +285,11 @@ public class SchedulerPage extends PageFactory{
 	    for (WebElement hour : hours) {
 	          String actualHour = hour.getText();
 	          if(actualHour.contains("12:00")){
-	                return hour;
+	        	  LogManager.info("Element to drag and drop was retrived");
+	              return hour;
 	          }
 	    }
+	    LogManager.info("Element to drag and drop was not retrived");
 	    return null;
 	}
 	
@@ -320,5 +323,14 @@ public class SchedulerPage extends PageFactory{
 		actions.build().perform();
 		LogManager.info("Meeting start Time was set to <" + hour+ ">");
 		return this;
+	}
+	
+	public boolean compareMeetingTime(int startHour, int endHour){
+		String actualFromHour = fromHour.getAttribute("value");
+		String actualToHour = toHour.getAttribute("value");
+
+		boolean fromHourComparison = actualFromHour.contains(endHour + ":00:00.000");
+		boolean toHourComparision = actualToHour.contains(startHour + ":00:00.000");;
+		return fromHourComparison && toHourComparision;
 	}
 }

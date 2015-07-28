@@ -23,4 +23,6 @@ public class SchedulerConstant {
 	public static final String MEETING_BOX_RIGHT_END = "div[3]";
 	public static final String MEETING_BOX_LEFT_END = "div[2]";
 	public static final String TIME_LINE = "//div[@id='timelinePanel']/rm-vis/div/div[2]/div[3]";
+	public static final String FROM_HOUR = "//div[2]/div/div/div/div[3]/div/div[1]/div[2]/div/div/div[2]/div[1]/form/div[3]/div/div[1]/input[2]";
+	public static final String TO_HOUR = "//div[2]/div/div/div/div[3]/div/div[1]/div[2]/div/div/div[2]/div[1]/form/div[3]/div/div[2]/input[2]";
 }

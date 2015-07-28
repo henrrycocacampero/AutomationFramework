@@ -50,7 +50,8 @@ public class ConferenceRoomPage {
 	 */
 	public RoomInfoPage doubleClickOnRoom(String roomName) {
 		WebElement room = getRoomFromAllPagesByName(roomName,
-				getRoomsTableNumberOfPages(), true);
+				getRoomsTableNumberOfPages(), true)
+				.findElement(roomNameLocator);
 		Actions action = new Actions(driver);
 		action.doubleClick(room);
 		action.perform();
