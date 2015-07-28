@@ -1,5 +1,7 @@
 package org.roommanager.test.tablet.meetings;
 
+import java.util.Date;
+
 import org.roommanager.framework.pages.tablet.scheduler.CredentialsPage;
 import org.roommanager.framework.pages.tablet.scheduler.SchedulerPage;
 import org.roommanager.framework.pages.tablet.settings.ConnectionPage;
@@ -43,13 +45,15 @@ public class VerifyMeetingUpdateMeetingTimeByTimeLine extends TestBase{
 	 * startHourToUpdate: It represents the meeting's start hour
 	 * to be updated
 	 */
-	private int startHourToUpdate =  10;
+	@SuppressWarnings("deprecation")
+	private int startHourToUpdate =  (new Date()).getHours() - 1;
 	
 	/** 
 	 * endHourToUpdate: It represents the eeting's end hour
 	 * to be updated
 	 */
-	private int endHourToUpdate = 14;
+	@SuppressWarnings("deprecation")
+	private int endHourToUpdate = (new Date()).getHours() + 1;
 	
 	/** 
 	 * errorMessage: It represents the Error Message 

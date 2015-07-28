@@ -26,4 +26,9 @@
       		<class name="org.roommanager.test.tablet.meetings.VerifySetTimeByTimeline"/>
     	</classes>
   	</test>
+  	<test name="Verify that is possible to update a Meeting time period from Timeline Component by clicking on its front/back end and moving it.">
+   		<classes>
+      		<class name="org.roommanager.test.tablet.meetings.VerifyMeetingUpdateMeetingTimeByTimeLine"/>
+    	</classes>
+  	</test>
 </suite>
