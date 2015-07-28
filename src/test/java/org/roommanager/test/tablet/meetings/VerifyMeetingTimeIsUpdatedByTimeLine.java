@@ -46,14 +46,14 @@ public class VerifyMeetingTimeIsUpdatedByTimeLine extends TestBase{
 	 * to be updated
 	 */
 	@SuppressWarnings("deprecation")
-	private int startHourToUpdate =  (new Date()).getHours() - 1;
+	private int startHourToUpdate =  (new Date()).getHours() - 2;
 	
 	/** 
 	 * endHourToUpdate: It represents the eeting's end hour
 	 * to be updated
 	 */
 	@SuppressWarnings("deprecation")
-	private int endHourToUpdate = (new Date()).getHours() + 1;
+	private int endHourToUpdate = (new Date()).getHours() + 2;
 	
 	/** 
 	 * errorMessage: It represents the Error Message 
