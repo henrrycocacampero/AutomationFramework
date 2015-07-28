@@ -9,18 +9,19 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-
-public class VerifySearchByLocation extends TestBase{
-	/** roomName: Name of room to be used*/
+public class VerifySearchByLocation extends TestBase {
+	/** roomName: Name of room to be used */
 	private String roomName = "Room02";
-	
-	/** locationName: represents the location's name to be created*/
+
+	/** locationName: represents the location's name to be created */
 	private String locationName = "Location Name";
-	
-	/** locationDisplayName: represents the location's display name to be created*/
+
+	/**
+	 * locationDisplayName: represents the location's display name to be created
+	 */
 	private String locationDisplayName = "Location Display Name";
-	
-	/** locationDescription: represents the location's description to be created*/
+
+	/** locationDescription: represents the location's description to be created */
 
 	private String locationDescription = "Location Description";
 
@@ -31,14 +32,25 @@ public class VerifySearchByLocation extends TestBase{
 	private String errorMessage = "The Test failed because the Location "
 			+ "couldn't be dissociated from the specified Room";
 
+	/** connection: Name of a new ConnectionPage */
+	ConnectionPage connection;
+
 	/**
-	 * This method creates a Location and associates it to a Room
+	 * This method creates a Location and associates it to a Room and creates a
+	 * new connection if there is not
 	 */
 	@BeforeTest
 	public void beforeTest() {
 		LocationApi.createLocation(locationName, locationDisplayName,
 				locationDescription);
 		LocationApi.associateLocation(locationName, roomName);
+		connection = new ConnectionPage(driver);
+		String url = "http://172.20.208.84:4040/";
+		if (connection.isConnectionNotEstablished(url)) {
+			connection.enterServiceUrl(url).clickSaveButton()
+					.clickNavigationLink().clickDefaultRoomComboBox()
+					.selectConferenceRoomByName(roomName).clickSaveButton();
+		}
 	}
 
 	/**
@@ -47,15 +59,7 @@ public class VerifySearchByLocation extends TestBase{
 	 */
 	@Test
 	public void verifySearchByLocation() throws InterruptedException {
-		ConnectionPage connection = new ConnectionPage(driver);
-		String url = "http://172.20.208.84:4040/";
-		if (connection.isConnectionNotEstablished(url)) {
-			connection.enterServiceUrl("http://172.20.208.84:4040/")
-					.clickSaveButton().clickNavigationLink()
-					.clickDefaultRoomComboBox()
-					.selectConferenceRoomByName(roomName).clickSaveButton();
 
-		}
 		SearchPage search = connection.clickOnSearchPageLink();
 		search.clickAdvancedButton().selectLocation()
 				.clickOnSelectLocation(locationDisplayName);

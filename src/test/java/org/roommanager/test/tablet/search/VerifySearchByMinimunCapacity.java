@@ -32,8 +32,12 @@ public class VerifySearchByMinimunCapacity extends TestBase {
 	private String errorMessage = "The test failed because the Room "
 			+ "was not found by its capacity";
 
+	/** connection: Name of a new ConnectionPage */
+	ConnectionPage connection;
+
 	/**
-	 * This method associates a capacity to a Room
+	 * This method associates a capacity to a Room and creates a new connection
+	 * if there is not
 	 */
 	@BeforeTest
 	public void beforeTest() {
@@ -44,7 +48,13 @@ public class VerifySearchByMinimunCapacity extends TestBase {
 					PropertiesReader.getExchangeHostName());
 		}
 		RoomApi.setRoomCapacity(roomName, capacity);
-
+		connection = new ConnectionPage(driver);
+		String url = "http://172.20.208.84:4040/";
+		if (connection.isConnectionNotEstablished(url)) {
+			connection.enterServiceUrl(url).clickSaveButton()
+					.clickNavigationLink().clickDefaultRoomComboBox()
+					.selectConferenceRoomByName(roomName).clickSaveButton();
+		}
 	}
 
 	/**
@@ -53,13 +63,6 @@ public class VerifySearchByMinimunCapacity extends TestBase {
 	@Test
 	public void verifySearchByMinimunCapacity() {
 
-		ConnectionPage connection = new ConnectionPage(driver);
-		String url = "http://172.20.208.84:4040/";
-		if (connection.isConnectionNotEstablished(url)) {
-			connection.enterServiceUrl(url).clickSaveButton()
-					.clickNavigationLink().clickDefaultRoomComboBox()
-					.selectConferenceRoomByName("Room07").clickSaveButton();
-		}
 		SearchPage search = connection.clickOnSearchPageLink();
 		search.clickAdvancedButton().enterCapacity(capacity);
 		Assert.assertTrue(search.isRoomPresent(roomName), errorMessage);

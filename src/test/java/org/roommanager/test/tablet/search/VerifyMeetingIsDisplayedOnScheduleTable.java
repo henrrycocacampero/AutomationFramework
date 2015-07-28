@@ -49,8 +49,12 @@ public class VerifyMeetingIsDisplayedOnScheduleTable extends TestBase {
 	private String errorMessage = "The test failed because the Meeting "
 			+ "was not displayed on the Scredule Tabled";
 
+	/** connection: Name of a new ConnectionPage */
+	ConnectionPage connection;
+
 	/**
-	 * This method creates a meeting to a Room
+	 * This method creates a meeting to a Room and creates a new connection if
+	 * there is not
 	 */
 	@BeforeTest
 	public void beforeTest() {
@@ -62,15 +66,7 @@ public class VerifyMeetingIsDisplayedOnScheduleTable extends TestBase {
 		}
 		MeetingApi.createMeeting(organizer, subject, startTime, endTime,
 				conferenceRoom, attendee);
-	}
-
-	/**
-	 * Test method: Verify that a meeting of an specific room is displayed on
-	 * [Rooms List] schedule table after clicking on the search page
-	 */
-	@Test
-	public void verifyMeetingIsDisplayedOnScheduleTable() {
-		ConnectionPage connection = new ConnectionPage(driver);
+		connection = new ConnectionPage(driver);
 		String url = "http://172.20.208.84:4040/";
 		if (connection.isConnectionNotEstablished(url)) {
 			connection.enterServiceUrl("http://172.20.208.84:4040/")
@@ -79,6 +75,15 @@ public class VerifyMeetingIsDisplayedOnScheduleTable extends TestBase {
 					.selectConferenceRoomByName("Room07").clickSaveButton();
 
 		}
+	}
+
+	/**
+	 * Test method: Verify that a meeting of an specific room is displayed on
+	 * [Rooms List] schedule table after clicking on the search page
+	 */
+	@Test
+	public void verifyMeetingIsDisplayedOnScheduleTable() {
+
 		SearchPage search = connection.clickOnSearchPageLink();
 		Assert.assertEquals(search.getMeetingByRoom(conferenceRoom), subject,
 				errorMessage);
