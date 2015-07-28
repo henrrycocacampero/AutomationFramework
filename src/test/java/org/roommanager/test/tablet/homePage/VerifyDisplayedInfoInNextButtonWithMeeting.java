@@ -87,7 +87,7 @@ public class VerifyDisplayedInfoInNextButtonWithMeeting extends TestBase {
 	 */
 	@BeforeTest
 	public void beforeTest() {
-		MeetingApi.deleteMeetingBySubjectName(conferenceRoom, subject);
+		MeetingApi.deleteAllRoomMeetings(conferenceRoom);
 		MeetingApi.createMeeting(organizer, subject, startTime, endTime,
 				conferenceRoom, attendee);
 		/**
