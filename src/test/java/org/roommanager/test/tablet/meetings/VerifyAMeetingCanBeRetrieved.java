@@ -3,6 +3,7 @@ package org.roommanager.test.tablet.meetings;
 import org.roommanager.framework.pages.tablet.scheduler.SchedulerPage;
 import org.roommanager.framework.pages.tablet.settings.ConnectionPage;
 import org.roommanager.framework.pages.tablet.settings.NavigationPage;
+import org.roommanager.framework.utilities.api.admin.EmailServerApi;
 import org.roommanager.framework.utilities.api.tablet.MeetingApi;
 import org.roommanager.framework.utilities.common.Generator;
 import org.roommanager.framework.utilities.common.PropertiesReader;
@@ -43,7 +44,11 @@ public class VerifyAMeetingCanBeRetrieved extends TestBase {
      */
 	@BeforeTest
     public void beforeTest() {
-
+		if(EmailServerApi.getEmailServiceId() == null){
+			EmailServerApi.createEmailServer(PropertiesReader.getExchangeUserName(),
+											 PropertiesReader.getExchangePassWord(),
+											 PropertiesReader.getExchangeHostName());
+		}
     	MeetingApi.createMeeting(organizer, subject, startTime, 
     							 endTime, conferenceRoom, attendee);
     }
