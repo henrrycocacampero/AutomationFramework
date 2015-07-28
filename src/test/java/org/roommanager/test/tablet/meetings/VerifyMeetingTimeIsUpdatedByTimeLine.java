@@ -6,6 +6,7 @@ import org.roommanager.framework.pages.tablet.scheduler.CredentialsPage;
 import org.roommanager.framework.pages.tablet.scheduler.SchedulerPage;
 import org.roommanager.framework.pages.tablet.settings.ConnectionPage;
 import org.roommanager.framework.pages.tablet.settings.NavigationPage;
+import org.roommanager.framework.utilities.api.admin.EmailServerApi;
 import org.roommanager.framework.utilities.api.tablet.MeetingApi;
 import org.roommanager.framework.utilities.common.Generator;
 import org.roommanager.framework.utilities.common.PropertiesReader;
@@ -100,6 +101,11 @@ public class VerifyMeetingTimeIsUpdatedByTimeLine extends TestBase{
 	 */
 	@AfterTest
 	public void afterTest(){
+		if(EmailServerApi.getEmailServiceId() == null){
+			EmailServerApi.createEmailServer(PropertiesReader.getExchangeUserName(),
+											 PropertiesReader.getExchangePassWord(),
+											 PropertiesReader.getExchangeHostName());
+		}
 		MeetingApi.deleteMeetingBySubjectName(roomName, subject);
 	}	
 	 
