@@ -21,4 +21,9 @@
       		<class name="org.roommanager.test.tablet.meetings.VerifyAMeetingCanBeRetrieved"/>
     	</classes>
   	</test>
+  	<test name="Verify that is possible to create a Meeting by using timeline component to set the meeting start time..">
+   		<classes>
+      		<class name="org.roommanager.test.tablet.meetings.VerifySetTimeByTimeline"/>
+    	</classes>
+  	</test>
 </suite>
