@@ -51,7 +51,7 @@ public class VerifyOutOfOrderIsCreatedWithOnOffCalendarButton extends TestBase{
 	private String msgError= "The Out Of Order was not created!";	  
 	
 	/** roomSelected: Name of room to be selected for create a Out-Of-Order*/	  
-	private String roomSelected = "Room07";
+	private String roomSelected = "Room09";
         
 	@Test
 	public void verifyOutOfOrderIsCreatedWithOnOffCalendarButton() {
