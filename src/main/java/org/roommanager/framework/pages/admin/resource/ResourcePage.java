@@ -60,8 +60,9 @@ public class ResourcePage extends LeftMenu {
 	
 	public ResourceInfoPage doubleClickOnResourceFromTable(String resourceName) {
 		WebElement resource = getResourceFromAllPages(propertyName,resourceName,
-				getResourcesTableNumberOfPages());
-		String resourceItemName = resource.findElement(By.xpath(ResourceConstant.RESOURCE_TABLE_ITEM)).getText();
+				getResourcesTableNumberOfPages())
+				.findElement(By.xpath(ResourceConstant.RESOURCE_TABLE_ITEM));
+		String resourceItemName = resource.getText();
 		Actions action = new Actions(driver);
 		action.doubleClick(resource);
 		action.perform();

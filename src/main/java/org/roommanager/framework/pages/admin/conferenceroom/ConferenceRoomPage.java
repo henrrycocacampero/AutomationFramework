@@ -70,7 +70,8 @@ public class ConferenceRoomPage {
 	 */
 	public RoomInfoPage doubleClickOnDisabledRoom(String roomName) {
 		WebElement room = getRoomFromAllPagesByName(roomName,
-				getRoomsTableNumberOfPages(), false);
+				getRoomsTableNumberOfPages(), false)
+				.findElement(disabledRoomNameLocator);	
 		Actions action = new Actions(driver);
 		action.doubleClick(room);
 		action.perform();

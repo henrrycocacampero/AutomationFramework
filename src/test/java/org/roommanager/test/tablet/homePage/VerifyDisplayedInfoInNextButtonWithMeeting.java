@@ -33,7 +33,7 @@ public class VerifyDisplayedInfoInNextButtonWithMeeting extends TestBase {
 			+ PropertiesReader.getExchangeDomain() + "\"";
 
 	/** conferenceRoom: It represents the name of the Room */
-	private String conferenceRoom = "Room09";
+	private String conferenceRoom = "Room01";
 
 	/**
 	 * afterCurrentTime: It represents time after current time for start meeting

@@ -15,7 +15,7 @@ public class VerifyEndOfDayMessageIsDisplayedOnNextButton extends TestBase {
 	private String urlTablet = PropertiesReader.getRoomManagerApi();
 
 	/** conferenceRoom: It represents the name of the Room */
-	private String conferenceRoom = "Room09";
+	private String conferenceRoom = "Room01";
 
 	/**
 	 * errorMessage: It represents the Error Message that will be displayed if
