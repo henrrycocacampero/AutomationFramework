@@ -90,5 +90,7 @@ public class VerifyOutOfOrderIsCreatedWithOnOffCalendarButton extends TestBase{
 							PropertiesReader.getPassword(), 
 							PropertiesReader.getExchangeHostName());
 		}
+		MeetingApi.deleteMeetingBySubjectName(roomSelected, meetingSubject);
+		RoomApi.deleteAllOutOfOrders(roomSelected);
 	}
   }

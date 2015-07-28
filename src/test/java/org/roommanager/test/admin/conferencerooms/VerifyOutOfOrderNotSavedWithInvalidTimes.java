@@ -65,11 +65,10 @@ public class VerifyOutOfOrderNotSavedWithInvalidTimes extends TestBase{
 	    ConferenceRoomPage conferenceRoom = adminHome.selectConferenceRoomsLink();
 		  
 		OutOfOrderPage outOfOrderPage = conferenceRoom.doubleClickOnRoom(roomSelected)
-													  .clickOnOutOfOrderPlanning()
-													  .setTitle(nameTitle)
+													  .clickOnOutOfOrderPlanning()													  
 													  .clickBottomArrowStartHourToField()
 													  .clickBottomArrowStartHourToField()
-													  .setDescription(setDescription)
+													  .setDescription(setDescription)													  
 													  .clickSaveButtonOutOfOrder();
 		isPresentErrorMessage = outOfOrderPage.errorMessageToGreaterFrom();
 
