@@ -2,6 +2,7 @@ package org.roommanager.framework.pages.admin.locations;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.roommanager.framework.models.admin.locations.LocationsInfoConstant;
 import org.roommanager.framework.utilities.common.LogManager;
+import org.roommanager.framework.utilities.common.PropertiesReader;
 
 /**
  * This class contains the actions about Locations Info Page
@@ -56,7 +58,6 @@ public class LocationsInfoPage extends LocationsTopMenu{
 		((JavascriptExecutor) driver)
 			.executeScript("arguments[0].click();", saveButton);
 		restoreZoomPage();
-		LogManager.info("Click on Save button");
 		(new WebDriverWait(driver,30))
 			.until(ExpectedConditions.invisibilityOfElementLocated(By
 					.xpath(LocationsInfoConstant.SAVE_BUTTON)));
@@ -69,16 +70,28 @@ public class LocationsInfoPage extends LocationsTopMenu{
 	 * @param percentage
 	 */
 	public void zoomOutPage(int percentage){
-		((JavascriptExecutor) driver)
-			.executeScript("document.body.style.zoom='" + percentage + "%'");
+		String browser = PropertiesReader.getBrowser();
+		if(browser.equals("CHROME")){
+			((JavascriptExecutor) driver)
+				.executeScript("document.body.style.zoom='" + percentage + "%'");
+		} else if(browser.equals("FIREFOX")){
+			WebElement html = driver.findElement(By.tagName("html"));
+			html.sendKeys(Keys.chord(Keys.CONTROL, Keys.SUBTRACT));
+		}
 	}
 	
 	/**
 	 * This method restores the zoom page (100%)
 	 */
 	public void restoreZoomPage(){
-		((JavascriptExecutor) driver)
-			.executeScript("document.body.style.zoom='100%'");
+		String browser = PropertiesReader.getBrowser();
+		if(browser.equals("CHROME")){
+			((JavascriptExecutor) driver)
+				.executeScript("document.body.style.zoom='100%'");
+		} else if(browser.equals("FIREFOX")){
+			WebElement html = driver.findElement(By.tagName("html"));
+			html.sendKeys(Keys.chord(Keys.CONTROL, Keys.ADD));
+		}
 	}
 	
 	/**
