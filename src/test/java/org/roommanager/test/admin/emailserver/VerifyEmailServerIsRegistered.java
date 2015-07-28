@@ -27,8 +27,8 @@ public class VerifyEmailServerIsRegistered extends TestBase{
 		  EmailServerPage emailServer = home.selectEmailServerLink();	
 		  CreateEmailServerPage addServer = emailServer.clickAddButton();
 		  addServer.setHostname(PropertiesReader.getExchangeHostName());
-		  addServer.setUsername(PropertiesReader.getUsername());
-		  addServer.setPassword(PropertiesReader.getPassword());
+		  addServer.setUsername(PropertiesReader.getExchangeUserName());
+		  addServer.setPassword(PropertiesReader.getExchangePassWord());
 		  emailServer = addServer.clickSaveButton();
 		  Assert.assertEquals(emailServer.getEmailServer(), expected, errorMessage);
 	  }

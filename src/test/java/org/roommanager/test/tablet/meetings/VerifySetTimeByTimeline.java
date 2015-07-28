@@ -4,11 +4,13 @@ import org.roommanager.framework.pages.tablet.scheduler.CredentialsPage;
 import org.roommanager.framework.pages.tablet.scheduler.SchedulerPage;
 import org.roommanager.framework.pages.tablet.settings.ConnectionPage;
 import org.roommanager.framework.pages.tablet.settings.NavigationPage;
+import org.roommanager.framework.utilities.api.admin.EmailServerApi;
 import org.roommanager.framework.utilities.api.tablet.MeetingApi;
 import org.roommanager.framework.utilities.common.PropertiesReader;
 import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class VerifySetTimeByTimeline extends TestBase{
@@ -34,7 +36,13 @@ public class VerifySetTimeByTimeline extends TestBase{
 	 * startTime: It represents the start time from the meeting to 
 	 * be created.
 	 */
-	private int meetingStartTime = 23;
+	private int meetingStartTime = 21;
+	
+	/** 
+	 * startTime: It represents the start time from the meeting to 
+	 * be created.
+	 */
+	private int meetingEndTime = 23;
 	
 	/** 
 	 * errorMessage: It represents the Error Message 
@@ -66,6 +74,7 @@ public class VerifySetTimeByTimeline extends TestBase{
 					
 		CredentialsPage credential = scheduler
 			.setSpecificTimeinTimeline(meetingStartTime)
+			.dragTimeLineBoxRightEnd("", meetingEndTime)
 			.setOrganizerTextField(username)
 			.setSubjectTextField(meetingSubject)
 			.clickCreateButton();
@@ -86,5 +95,17 @@ public class VerifySetTimeByTimeline extends TestBase{
 	@AfterTest
 	public void testTearDown(){
 		MeetingApi.deleteMeetingBySubjectName(roomName, meetingSubject);
+	}
+	
+	/**
+	 * This method verifies if an email server is registered
+	 */
+	@BeforeTest
+	public void beforeTest(){
+		if(EmailServerApi.getEmailServiceId() == null){
+			EmailServerApi.createEmailServer(PropertiesReader.getExchangeUserName(),
+											 PropertiesReader.getExchangePassWord(),
+											 PropertiesReader.getExchangeHostName());
+		}
 	}
 }

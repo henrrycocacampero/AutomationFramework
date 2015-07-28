@@ -1,9 +1,12 @@
 package org.roommanager.test.tablet.meetings;
 
+import java.util.Date;
+
 import org.roommanager.framework.pages.tablet.scheduler.CredentialsPage;
 import org.roommanager.framework.pages.tablet.scheduler.SchedulerPage;
 import org.roommanager.framework.pages.tablet.settings.ConnectionPage;
 import org.roommanager.framework.pages.tablet.settings.NavigationPage;
+import org.roommanager.framework.utilities.api.admin.EmailServerApi;
 import org.roommanager.framework.utilities.api.tablet.MeetingApi;
 import org.roommanager.framework.utilities.common.Generator;
 import org.roommanager.framework.utilities.common.PropertiesReader;
@@ -13,7 +16,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
-public class VerifyMeetingUpdateMeetingTimeByTimeLine extends TestBase{
+public class VerifyMeetingTimeIsUpdatedByTimeLine extends TestBase{
 	/** username: It represents the name of the Current User*/
 	private String username = PropertiesReader.getUsername();
 	
@@ -43,13 +46,15 @@ public class VerifyMeetingUpdateMeetingTimeByTimeLine extends TestBase{
 	 * startHourToUpdate: It represents the meeting's start hour
 	 * to be updated
 	 */
-	private int startHourToUpdate =  10;
+	@SuppressWarnings("deprecation")
+	private int startHourToUpdate =  (new Date()).getHours() - 2;
 	
 	/** 
 	 * endHourToUpdate: It represents the eeting's end hour
 	 * to be updated
 	 */
-	private int endHourToUpdate = 14;
+	@SuppressWarnings("deprecation")
+	private int endHourToUpdate = (new Date()).getHours() + 2;
 	
 	/** 
 	 * errorMessage: It represents the Error Message 
@@ -96,6 +101,11 @@ public class VerifyMeetingUpdateMeetingTimeByTimeLine extends TestBase{
 	 */
 	@AfterTest
 	public void afterTest(){
+		if(EmailServerApi.getEmailServiceId() == null){
+			EmailServerApi.createEmailServer(PropertiesReader.getExchangeUserName(),
+											 PropertiesReader.getExchangePassWord(),
+											 PropertiesReader.getExchangeHostName());
+		}
 		MeetingApi.deleteMeetingBySubjectName(roomName, subject);
 	}	
 	 
