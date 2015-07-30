@@ -263,7 +263,8 @@ public class RoomInfoPage extends ConferenceRoomTopMenu{
 	 * @return RoomInfoPage
 	 */
 	public RoomInfoPage clickOnLocation(String location) {
-		WebElement locationName = getLocationByName(location);
+		WebElement locationName = getLocationByName(location)
+				.findElement(By.xpath(RoomInfoPageConstant.NAME_LOCATION));
 		locationName.click();
 		LogManager.info("Location: <" + location + "> was selected");
 		return this;

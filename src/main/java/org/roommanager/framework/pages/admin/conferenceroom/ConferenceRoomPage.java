@@ -372,7 +372,8 @@ public class ConferenceRoomPage {
 	 * @return ConferenceRoomPage
 	 */
 	public ConferenceRoomPage clickOnResource(String resourceName) {
-		WebElement resource = getResourceByName(resourceName);
+		WebElement resource = getResourceByName(resourceName)
+				.findElement(ConferenceRoomConstant.RESOURCE_NAME_LOCATOR);
 		resource.click();
 		LogManager.info("Resource: <"+ resourceName + "> was clicked");
 		return this;
