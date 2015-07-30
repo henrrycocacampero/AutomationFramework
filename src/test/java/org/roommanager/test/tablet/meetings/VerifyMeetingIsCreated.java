@@ -100,5 +100,6 @@ public class VerifyMeetingIsCreated extends TestBase{
 											 PropertiesReader.getExchangePassWord(),
 											 PropertiesReader.getExchangeHostName());
 		}
+		MeetingApi.deleteAllRoomMeetings(roomName);
 	}
 }

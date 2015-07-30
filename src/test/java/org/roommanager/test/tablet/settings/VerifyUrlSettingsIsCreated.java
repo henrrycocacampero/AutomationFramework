@@ -1,24 +1,35 @@
 package org.roommanager.test.tablet.settings;
 
 import org.roommanager.framework.pages.tablet.settings.ConnectionPage;
+import org.roommanager.framework.utilities.api.admin.EmailServerApi;
+import org.roommanager.framework.utilities.common.PropertiesReader;
 import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+/**
+ * This class contains a test for verify the room name displayed
+ * 
+ * @author Samuel Vargas
+ *
+ */
 public class VerifyUrlSettingsIsCreated extends TestBase {
 	
-	/**
-	 * This class contains a test for verify the room name displayed
-	 * 
-	 * @author Samuel Vargas
-	 *
-	 */
 	private String roomName = "Room01";
 	
+	/**
+	 * This method registers an email server if it is not registered
+	 */
 	@BeforeTest
 	public void BeforeTest(){
 		driver.manage().deleteAllCookies();
+		if (EmailServerApi.getEmailServiceId() == null) {
+			EmailServerApi.createEmailServer(
+						PropertiesReader.getExchangeUserName(),
+						PropertiesReader.getExchangePassWord(),
+						PropertiesReader.getExchangeHostName());
+		}
 	}
 	
 	/**
@@ -26,14 +37,18 @@ public class VerifyUrlSettingsIsCreated extends TestBase {
 	 */
 	@Test 
 	public void VerifyAMeetingIsCreated(){
+		
 		ConnectionPage connection = new ConnectionPage(driver);
-		connection.enterServiceUrl("http://172.20.208.84:4040/")
-		.clickSaveButton()
-		.clickNavigationLink()
-		.clickDefaultRoomComboBox()
-		.selectConferenceRoomByName(roomName)
-		.clickSaveButton();
+		
+		connection.enterServiceUrl(PropertiesReader.getRoomManagerApi())
+			.clickSaveButton()
+			.clickNavigationLink()
+			.clickDefaultRoomComboBox()
+			.selectConferenceRoomByName(roomName)
+			.clickSaveButton();
+		
 		String roomByName = connection.getRoomName();
+		
 		Assert.assertEquals(roomByName, roomName);
 	}
 

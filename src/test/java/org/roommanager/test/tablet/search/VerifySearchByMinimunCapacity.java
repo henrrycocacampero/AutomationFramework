@@ -49,7 +49,7 @@ public class VerifySearchByMinimunCapacity extends TestBase {
 		}
 		RoomApi.setRoomCapacity(roomName, capacity);
 		connection = new ConnectionPage(driver);
-		String url = "http://172.20.208.84:4040/";
+		String url = PropertiesReader.getRoomManagerApi();
 		if (connection.isConnectionNotEstablished(url)) {
 			connection.enterServiceUrl(url).clickSaveButton()
 					.clickNavigationLink().clickDefaultRoomComboBox()
@@ -64,7 +64,9 @@ public class VerifySearchByMinimunCapacity extends TestBase {
 	public void verifySearchByMinimunCapacity() {
 
 		SearchPage search = connection.clickOnSearchPageLink();
+		
 		search.clickAdvancedButton().enterCapacity(capacity);
+		
 		Assert.assertTrue(search.isRoomPresent(roomName), errorMessage);
 
 	}

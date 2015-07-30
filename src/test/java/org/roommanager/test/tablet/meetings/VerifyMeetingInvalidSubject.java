@@ -14,10 +14,13 @@ public class VerifyMeetingInvalidSubject extends TestBase{
 	private String username = PropertiesReader.getUsername();
 	private String roomName = "SM-Room9";
 	private String invalidMeetingSubject = "";
-	private String errorMessage = "The Test failed because the Meeting doesn't display an Error Message when invalid values are entered in \"Subject\" text field";
+	private String errorMessage = "The Test failed because the Meeting "
+			+ "doesn't display an Error Message when invalid values are "
+			+ "entered in \"Subject\" text field";
 	
 	@Test 
 	public void VerifyMeetingInvalidSubjectErrorMessage(){
+		
 		ConnectionPage connection = new ConnectionPage(driver);
 		
 		connection
@@ -38,7 +41,8 @@ public class VerifyMeetingInvalidSubject extends TestBase{
 			.setSubjectTextField(invalidMeetingSubject)
 			.clickCreateButton();
 		
-		boolean isErrorMessagePresent = scheduler.isSubjectFieldErrorMessagePresent();
+		boolean isErrorMessagePresent = scheduler
+			.isSubjectFieldErrorMessagePresent();
 		
 		Assert.assertTrue(isErrorMessagePresent, errorMessage);
 	}
@@ -46,6 +50,8 @@ public class VerifyMeetingInvalidSubject extends TestBase{
 	@BeforeTest
 	public void beforeTest(){
 		if(EmailServerApi.getEmailServiceId() == null)
-			EmailServerApi.createEmailServer(PropertiesReader.getUsername(), PropertiesReader.getPassword(), PropertiesReader.getExchangeHostName());
+			EmailServerApi.createEmailServer(PropertiesReader.getUsername(),
+											 PropertiesReader.getPassword(),
+											 PropertiesReader.getExchangeHostName());
 	}
 }

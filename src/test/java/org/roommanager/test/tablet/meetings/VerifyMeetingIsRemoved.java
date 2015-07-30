@@ -25,7 +25,8 @@ public class VerifyMeetingIsRemoved extends TestBase{
 	private String organizer = username;
 	
 	/** attendee: It represents the Email of an attendee*/
-	private String attendee = "\"" + username + "@" + PropertiesReader.getExchangeDomain() + "\"";
+	private String attendee = "\"" + username + "@" 
+			+ PropertiesReader.getExchangeDomain() + "\"";
 	
 	/** conferenceRoom: It represents the name of the Room*/
 	private String conferenceRoom = "Room01";
@@ -41,7 +42,8 @@ public class VerifyMeetingIsRemoved extends TestBase{
 	
 	/** errorMessage: It represents the Error Message 
 	 * that will be displayed if the test fails*/
-	private String errorMessage = "The Test failed because the deleted meeting could be found in the Scheduler Page";
+	private String errorMessage = "The Test failed because the deleted meeting "
+			+ "could be found in the Scheduler Page";
 	
 	/**
      * beforeTest: It creates a Meeting is created. 
@@ -53,6 +55,7 @@ public class VerifyMeetingIsRemoved extends TestBase{
 											 PropertiesReader.getExchangePassWord(),
 											 PropertiesReader.getExchangeHostName());
 		}
+		MeetingApi.deleteAllRoomMeetings(conferenceRoom);
     	MeetingApi.createMeeting(organizer, subject, startTime, 
     							 endTime, conferenceRoom, attendee);
     }
@@ -64,7 +67,7 @@ public class VerifyMeetingIsRemoved extends TestBase{
     public void VerifyAMeetingIsRemoved() {
     	
     	ConnectionPage connection = new ConnectionPage(driver);
-		connection.enterServiceUrl("http://172.20.208.84:4040/")
+		connection.enterServiceUrl(PropertiesReader.getRoomManagerApi())
 		.clickSaveButton();
 		
 		NavigationPage navigation = connection.clickNavigationLink()
