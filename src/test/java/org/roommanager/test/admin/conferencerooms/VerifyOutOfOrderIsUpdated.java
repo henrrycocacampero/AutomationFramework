@@ -25,9 +25,10 @@ import org.testng.annotations.Test;
  */
 public class VerifyOutOfOrderIsUpdated extends TestBase{
 	
-	/** isOutOfOrderUpdated: Boolean value, that indicates whether or not there is an 
-	* Out-Of-Order is updated 
-	**/
+	/** 
+	 * isOutOfOrderUpdated: Boolean value, that indicates whether or not there is an 
+	 * Out-Of-Order is updated 
+	 */
 	boolean isOutOfOrderUpdated= false;
 	  
 	/** 
@@ -40,7 +41,9 @@ public class VerifyOutOfOrderIsUpdated extends TestBase{
     String roomSelected = "Room10";
     
 	String startTime = Generator.getStartTime();
+	
 	String endTime = Generator.getEndTime();
+	
     @BeforeTest
 	public void beforeTest() {
 		if(EmailServerApi.getEmailServiceId() == null){
@@ -49,7 +52,6 @@ public class VerifyOutOfOrderIsUpdated extends TestBase{
 											 PropertiesReader.getExchangeHostName());
 			
 		}	
-		System.out.println(startTime+ endTime);
 		RoomApi.createOutOfOrder(startTime, endTime,roomSelected);
 	}
     
@@ -59,8 +61,10 @@ public class VerifyOutOfOrderIsUpdated extends TestBase{
 	*/
     @Test
     public void verifyOutOfOrderIsUpdated() {
+    	
     	/** setDescription: It contains Description for a Out-Of-Order*/
     	String setDescriptionExpected = "Out-Of-Order in the room updated";
+    	
     	/** roomSelected: It contains Title for a Out-Of-Order*/
     	String nameTitleExpected ="Temporarily Out of Order updated"; 	   	
     	
@@ -89,7 +93,7 @@ public class VerifyOutOfOrderIsUpdated extends TestBase{
 														   		 EndHourActual,
 															     StartHourExpected,
 															     EndHourExpeted);   	
-    	/*Asserts*/	  
+ 
 		Assert.assertTrue(isOutOfOrderUpdated,msgError);
     }
         

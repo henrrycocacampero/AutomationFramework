@@ -47,9 +47,6 @@ public class VerifyOutOfOrderIsCreatedWithOnOffCalendarButtonWithMeeting extends
 	/** endTime: It contains endTime for a Meeting*/
 	private String endTime = Generator.getEndTime();
 	
-	/** meetingSubject: It contains meetingSubject for a Meeting*/
-	private String meetingSubject = "Subject Meeting";
-	
 	/** setDescription: It contains Description for a Out-Of-Order*/
 	private String setDescription = "Out-Of-Order in the room";
 	/** roomSelected: It contains Title for a Out-Of-Order*/
@@ -77,9 +74,12 @@ public class VerifyOutOfOrderIsCreatedWithOnOffCalendarButtonWithMeeting extends
 	@Test
 	public void  verifyOutOfOrderIsCreatedWithOnOffCalendarButtonWithMeeting() {
 		LoginPage login = new LoginPage(driver);
-		HomePage adminHome = login.clickSignInButton();			
+		
+		HomePage adminHome = login.clickSignInButton();	
+		
 	  	ConferenceRoomPage conferenceRoom = 
 	  					adminHome.selectConferenceRoomsLink();
+	  	
 	  	OutOfOrderPage outOfOrderPage = 
 	  					conferenceRoom.doubleClickOnRoom(roomSelected)
 						  			  .clickOnOutOfOrderPlanning();
@@ -91,25 +91,25 @@ public class VerifyOutOfOrderIsCreatedWithOnOffCalendarButtonWithMeeting extends
 					      .clickSaveButtonOutOfOrder();
 	  	
 	  	isPresentOutOfOrder = conferenceRoom.existOutOfOrder(roomSelected);
-		/*Asserts*/	  
+  
 		Assert.assertTrue( isPresentOutOfOrder,msgError );
 	}
 	
-	 /**
-     * afterTest: This method deletes the: Out-Of-Order and Meetings, 
-     * created in the beforeTest method.
-     */
+	/**
+    * afterTest: This method deletes the: Out-Of-Order and Meetings, 
+    * created in the beforeTest method.
+    */
 	@AfterTest
 	public void testTearDown(){
-		MeetingApi.deleteMeetingBySubjectName(roomSelected, meetingSubject);
+		MeetingApi.deleteAllRoomMeetings(roomSelected);
 		RoomApi.deleteAllOutOfOrders(roomSelected);
 	}
 	
-	 /**
-     * beforeTest: This method verify for the Email service was created.
-     * Delete all meetings.
-     * Create new Meeting.
-     */
+	/**
+    * beforeTest: This method verify for the Email service was created.
+    * Delete all meetings.
+    * Create new Meeting.
+    */
 	@BeforeTest
 	public void beforeTest(){
 		if(EmailServerApi.getEmailServiceId() == null){
@@ -118,12 +118,8 @@ public class VerifyOutOfOrderIsCreatedWithOnOffCalendarButtonWithMeeting extends
 								PropertiesReader.getExchangeHostName());
 		}
 		RoomApi.deleteAllOutOfOrders(roomSelected);
-		MeetingApi.deleteAllRoomMeetings(roomSelected);
-		MeetingApi.createMeeting(organizer, 
-								 subject, 
-								 startTime, 
-								 endTime, 
-								 roomSelected, 
+		MeetingApi.deleteAllRoomMeetings(roomSelected);	
+		MeetingApi.createMeeting(organizer, subject, startTime, endTime, roomSelected, 
 								 attendee);	
 	}
   }

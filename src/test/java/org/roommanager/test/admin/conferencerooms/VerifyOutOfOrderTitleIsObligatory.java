@@ -19,8 +19,10 @@ import org.testng.annotations.Test;
  * 
  */
 public class VerifyOutOfOrderTitleIsObligatory extends TestBase{
+	
 	/** setDescription: It contains Description for a Out-Of-Order*/
 	String setDescription = "Out-Of-Order in the room";
+	
 	/** roomSelected: It contains Title for a Out-Of-Order*/
 	String nameTitle ="";
 	
@@ -32,10 +34,10 @@ public class VerifyOutOfOrderTitleIsObligatory extends TestBase{
 	/** roomSelected: Name of room to be selected for create a Out-Of-Order*/	  
     String roomSelected = "Room06";
     
-    /** isPresentErrorMessage: Boolean value, that indicates whether or not 
-     * that indicates whether or not there is Error Message, 
-     * In case it is published the title of Out-Of-Order. 
-	**/ 
+    /** 
+     * isPresentErrorMessage: Boolean value, that indicates whether or not 
+     * there is Error Message, in case it is published the title of Out-Of-Order. 
+	 */ 
     boolean isPresentErrorMessage =false;
     
     /**

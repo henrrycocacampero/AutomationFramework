@@ -14,19 +14,28 @@ import org.testng.annotations.Test;
 public class VerifyEmailServerIsRemoved extends TestBase {
 	
 	 @BeforeTest
-	  public void beforeTest(){
-		  EmailServerApi.createEmailServer(PropertiesReader.getUsername(),
-										   PropertiesReader.getPassword(),
-										   PropertiesReader.getExchangeHostName());
-	  }
+	 public void beforeTest(){
+		if(EmailServerApi.getEmailServiceId() == null){
+			EmailServerApi.createEmailServer(PropertiesReader.getExchangeUserName(),
+											 PropertiesReader.getExchangePassWord(),
+											 PropertiesReader.getExchangeHostName());
+		}
+	 }
 	 @Test
 	  public void removeEmailServer(){
+		 
 		  String errorMessage = "The email server was not removed";
+		  
 		  LoginPage login = new LoginPage(driver);
+		  
 		  HomePage home = login.clickSignInButton();
+		  
 		  EmailServerPage emailServer = home.selectEmailServerLink();
+		  
 		  RemoveEmailServerPage removeEmailServer = emailServer.clickRemoveButton();
+		  
 		  emailServer = removeEmailServer.clickOnYesButton();
+		  
 		  Assert.assertTrue(emailServer.existsEmailServerRegistered(), errorMessage);
 	 }
 }

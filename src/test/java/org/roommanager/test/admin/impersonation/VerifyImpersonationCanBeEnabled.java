@@ -60,12 +60,12 @@ public class VerifyImpersonationCanBeEnabled extends TestBase{
 	 */
 	@BeforeTest
 	public void beforeTest(){
-		
 		if(EmailServerApi.getEmailServiceId() == null){
 			EmailServerApi.createEmailServer(PropertiesReader.getExchangeUserName(),
 											 PropertiesReader.getExchangePassWord(),
 											 PropertiesReader.getExchangeHostName());
 		}	
-			ImpersonationApi.setImpersonation(impersonation,PropertiesReader.getExchangeServerDescription());
+		ImpersonationApi.setImpersonation(impersonation, 
+				PropertiesReader.getExchangeServerDescription());
 	}
 }
