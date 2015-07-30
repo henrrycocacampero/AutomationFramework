@@ -17,7 +17,8 @@ public class VerifyOutOfOrderPageIsDisplayed extends TestBase{
 	 * errorMessage: It contains the error message that is displayed 
 	 * if test case fails
 	 */
-	private String errorMessage = "The test failed because Out Of Order Page Link wasn't displayed";
+	private String errorMessage = "The test failed because Out Of Order Page "
+			+ "Link wasn't displayed";
 	
 	@BeforeTest
 	public void beforeTest() {

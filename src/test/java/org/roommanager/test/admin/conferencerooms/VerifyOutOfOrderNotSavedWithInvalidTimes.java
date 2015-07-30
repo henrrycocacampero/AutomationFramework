@@ -19,13 +19,14 @@ import org.testng.annotations.Test;
  * 
  */
 public class VerifyOutOfOrderNotSavedWithInvalidTimes extends TestBase{
+	
 	String setDescription = "Out-Of-Order in the room";
 	
 	/** roomSelected: It contains Title for a Out-Of-Order*/
 	String nameTitle ="";
 	
 	/** isPresentOutOfOrder: Boolean value, that indicates whether or not there is an 
-	* Out-Of-Order is created 
+	* Out-Of-Order is created
 	**/
 	boolean isPresentOutOfOrder= false;
 	  

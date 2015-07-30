@@ -64,6 +64,7 @@ public class VerifyImpersonationCanBeDisabled extends TestBase{
 											 PropertiesReader.getExchangePassWord(),
 											 PropertiesReader.getExchangeHostName());
 		}
-		ImpersonationApi.setImpersonation(impersonation, PropertiesReader.getExchangeServerDescription());
+		ImpersonationApi.setImpersonation(impersonation, 
+				PropertiesReader.getExchangeServerDescription());
 	}
 }

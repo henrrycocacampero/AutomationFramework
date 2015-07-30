@@ -29,9 +29,6 @@ public class VerifyOutOfOrderIsCreatedWithOnOffCalendarButton extends TestBase{
 	 */
 	boolean isPresentOutOfOrder= false;
 	
-	/** meetingSubject: It contains meetingSubject for a Meeting*/
-	private String meetingSubject = "Subject Meeting";
-	
 	/** setDescription: It contains Description for a Out-Of-Order*/
 	private String setDescription = "Out-Of-Order in the room";
 	
@@ -56,9 +53,12 @@ public class VerifyOutOfOrderIsCreatedWithOnOffCalendarButton extends TestBase{
 	@Test
 	public void verifyOutOfOrderIsCreatedWithOnOffCalendarButton() {
 		LoginPage login = new LoginPage(driver);
-		HomePage adminHome = login.clickSignInButton();			
+		
+		HomePage adminHome = login.clickSignInButton();	
+		
 	  	ConferenceRoomPage conferenceRoom = 
 	  			adminHome.selectConferenceRoomsLink();
+	  	
 	  	OutOfOrderPage outOfOrderPage = 
 	  			conferenceRoom.doubleClickOnRoom(roomSelected)
 						  	  .clickOnOutOfOrderPlanning();
@@ -69,7 +69,7 @@ public class VerifyOutOfOrderIsCreatedWithOnOffCalendarButton extends TestBase{
 					      .checkSendMailCheckbox()
 					      .clickSaveButtonOutOfOrder();	
 	  	isPresentOutOfOrder = conferenceRoom.existOutOfOrder(roomSelected);
-		/*Asserts*/	  
+	  	
 	  	Assert.assertTrue( isPresentOutOfOrder,msgError);
 	}
 	
@@ -79,13 +79,12 @@ public class VerifyOutOfOrderIsCreatedWithOnOffCalendarButton extends TestBase{
      */
 	@AfterTest
 	public void testTearDown(){
-		MeetingApi.deleteMeetingBySubjectName(roomSelected, meetingSubject);
 		RoomApi.deleteAllOutOfOrders(roomSelected);
 	}
 	
-	 /**
-     * beforeTest: This method verify for the Email service was created.
-     */	
+	/**
+    * beforeTest: This method verify for the Email service was created.
+    */	
 	@BeforeTest
 	public void beforeTest(){
 		if(EmailServerApi.getEmailServiceId() == null){
@@ -94,7 +93,6 @@ public class VerifyOutOfOrderIsCreatedWithOnOffCalendarButton extends TestBase{
 							PropertiesReader.getExchangeHostName());
 		}
 		RoomApi.deleteAllOutOfOrders(roomSelected);
-		MeetingApi.deleteMeetingBySubjectName(roomSelected, 
-											meetingSubject);		
+		MeetingApi.deleteAllRoomMeetings(roomSelected);		
 	}
   }

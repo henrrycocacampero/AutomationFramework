@@ -51,16 +51,19 @@ public class VerifyOutOfOrderIsCreated extends TestBase{
 	* a Out-Of-Order with correct values("From" field is less than "To").
 	*/
     @Test
-    public void verifyOutOfOrderIsCreated() {	    
+    public void verifyOutOfOrderIsCreated() {	  
+    	
     	/** setDescription: It contains Description for a Out-Of-Order*/
     	String setDescription = "Out-Of-Order in the room";
+    	
     	/** roomSelected: It contains Title for a Out-Of-Order*/
     	String nameTitle ="Temporarily Out of Order";
     	
     	LoginPage login = new LoginPage(driver);
     	HomePage adminHome = login.clickSignInButton();
 		
-    	ConferenceRoomPage conferenceRoom = adminHome.selectConferenceRoomsLink();
+    	ConferenceRoomPage conferenceRoom = adminHome
+    		.selectConferenceRoomsLink();
 	  
     	conferenceRoom.doubleClickOnRoom(roomSelected)
     		.clickOnOutOfOrderPlanning()
@@ -68,7 +71,7 @@ public class VerifyOutOfOrderIsCreated extends TestBase{
 			.setDescription(setDescription)
 			.clickSaveButtonOutOfOrder();
 		isPresentOutOfOrder = conferenceRoom.existOutOfOrder(roomSelected);
-		/*Asserts*/	  
+		  
 		Assert.assertTrue( isPresentOutOfOrder,msgError );
     }
    

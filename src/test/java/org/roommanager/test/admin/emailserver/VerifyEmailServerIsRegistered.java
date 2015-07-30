@@ -16,24 +16,41 @@ public class VerifyEmailServerIsRegistered extends TestBase{
 
 	  @BeforeTest
 	  public void beforeTest(){
-		  EmailServerApi.removeEmailServer(PropertiesReader.getExchangeServerDescription());
+		  if(EmailServerApi.getEmailServiceId() != null){
+			  EmailServerApi.removeEmailServer(
+					  PropertiesReader.getExchangeServerDescription());
+		  }
 	  }
+	  
 	  @Test
 	  public void registerEmailServer() {
-		  String expected = PropertiesReader.getExchangeHostName()+"\n" + PropertiesReader.getExchangeServerDescription();
+		  String expected = PropertiesReader.getExchangeHostName()+ "\n" + 
+				  PropertiesReader.getExchangeServerDescription();
+		  
 		  String errorMessage = "The email server was not registered";  
+		  
 		  LoginPage login = new LoginPage(driver);
-		  HomePage home = login.clickSignInButton();	
-		  EmailServerPage emailServer = home.selectEmailServerLink();	
+		  
+		  HomePage home = login.clickSignInButton();
+		  
+		  EmailServerPage emailServer = home.selectEmailServerLink();
+		  
 		  CreateEmailServerPage addServer = emailServer.clickAddButton();
+		  
 		  addServer.setHostname(PropertiesReader.getExchangeHostName());
+		  
 		  addServer.setUsername(PropertiesReader.getExchangeUserName());
+		  
 		  addServer.setPassword(PropertiesReader.getExchangePassWord());
+		  
 		  emailServer = addServer.clickSaveButton();
+		  
 		  Assert.assertEquals(emailServer.getEmailServer(), expected, errorMessage);
 	  }
+	  
 	  @AfterTest
 	  public void afterTest(){
-		  EmailServerApi.removeEmailServer(PropertiesReader.getExchangeServerDescription());
+		  EmailServerApi.removeEmailServer(PropertiesReader
+				  .getExchangeServerDescription());
 	  }
 }
