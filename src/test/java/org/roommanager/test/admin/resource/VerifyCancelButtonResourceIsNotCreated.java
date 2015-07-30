@@ -18,7 +18,10 @@ import org.testng.annotations.Test;
  */ 
 
 public class VerifyCancelButtonResourceIsNotCreated extends TestBase{
-
+	/** 
+	 * errorMessage: It contains the error message that would appear 
+	 * if test case fails
+	 */
 	private String errorMessage = "The test failed because the Resource "
 			+ "is created";
 	/** resourceName value the resource to be created*/
