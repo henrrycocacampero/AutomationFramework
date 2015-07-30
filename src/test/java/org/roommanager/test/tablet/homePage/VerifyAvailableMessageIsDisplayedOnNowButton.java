@@ -3,10 +3,10 @@ package org.roommanager.test.tablet.homePage;
 import org.testng.Assert;
 import org.roommanager.framework.pages.tablet.home.HomePage;
 import org.roommanager.framework.pages.tablet.settings.ConnectionPage;
+import org.roommanager.framework.utilities.api.admin.EmailServerApi;
 import org.roommanager.framework.utilities.api.tablet.MeetingApi;
 import org.roommanager.framework.utilities.common.PropertiesReader;
 import org.roommanager.framework.utilities.common.TestBase;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -19,10 +19,8 @@ public class VerifyAvailableMessageIsDisplayedOnNowButton extends TestBase{
 	
 	/** errorMessage: It represents the Error Message 
 	 * that will be displayed if the test fails*/
-	private String msgError = "The test failed because the Available message not displayed in Now Button";
-	
-	/** subject: It represents the Meeting's Subject*/
-	private String subject = "Subject Test";
+	private String msgError = "The test failed because the Available"
+			+ " message not displayed in Now Button";
 	
 	/** subject: It represents Available Message*/
 	private String expectedMessage ="Available";
@@ -35,6 +33,12 @@ public class VerifyAvailableMessageIsDisplayedOnNowButton extends TestBase{
 	 */
 	@BeforeTest
 	public void beforeTest() {
+		if(EmailServerApi.getEmailServiceId() == null){
+			EmailServerApi.createEmailServer(PropertiesReader.getExchangeUserName(),
+											 PropertiesReader.getExchangePassWord(),
+											 PropertiesReader.getExchangeHostName());
+		}
+		MeetingApi.deleteAllRoomMeetings(conferenceRoom);
 		connection = new ConnectionPage(driver);
 		if (connection.isConnectionNotEstablished(urlTablet)) {
 			connection.enterServiceUrl(urlTablet).clickSaveButton()
@@ -53,16 +57,10 @@ public class VerifyAvailableMessageIsDisplayedOnNowButton extends TestBase{
 	public void verifyAvailableMessageIsDisplayedOnNowButton() {
 		
 		HomePage homePage = connection.clickOnHomePageLink();
+		
 		String actualMessage = homePage.getAvailableMessage();
 		
 		Assert.assertEquals(actualMessage, expectedMessage, msgError);
 	}
 	
-	/**
-     * afterTest: It deletes the Meeting that was created by the test. 
-     */
-    @AfterTest
-	  public void afterTest(){
-		  MeetingApi.deleteMeetingBySubjectName(conferenceRoom, subject);
-	}
 }

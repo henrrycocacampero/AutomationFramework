@@ -14,10 +14,12 @@ public class VerifyMeetingInvalidOrganizer extends TestBase{
 	private String invalidOrganizer = "";
 	private String roomName = "SM-Room10";
 	private String subject = "Subject Test";
-	private String errorMessage = "The Test failed because the Meeting accepts invalid username";
+	private String errorMessage = "The Test failed because the Meeting "
+			+ "accepts invalid username";
 	
 	@Test 
 	public void VerifyErrorMeetingInvalidUsername(){
+		
 		ConnectionPage connection = new ConnectionPage(driver);
 		
 		connection
@@ -38,12 +40,15 @@ public class VerifyMeetingInvalidOrganizer extends TestBase{
 			.setSubjectTextField(subject)
 			.clickCreateButton();
 		
-		Assert.assertTrue(scheduler.isOrganizerFieldErrorMessagePresent(), errorMessage);
+		Assert.assertTrue(scheduler.isOrganizerFieldErrorMessagePresent(),
+				errorMessage);
 	}
 	
 	@BeforeTest
 	public void beforeTest(){
 		if(EmailServerApi.getEmailServiceId() == null)
-			EmailServerApi.createEmailServer(PropertiesReader.getUsername(), PropertiesReader.getPassword(), PropertiesReader.getExchangeHostName());
+			EmailServerApi.createEmailServer(PropertiesReader.getUsername(),
+											 PropertiesReader.getPassword(),
+											 PropertiesReader.getExchangeHostName());
 	}
 }

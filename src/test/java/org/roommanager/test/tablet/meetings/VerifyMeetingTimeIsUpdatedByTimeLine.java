@@ -104,11 +104,6 @@ public class VerifyMeetingTimeIsUpdatedByTimeLine extends TestBase{
 	 */
 	@AfterTest
 	public void afterTest(){
-		if(EmailServerApi.getEmailServiceId() == null){
-			EmailServerApi.createEmailServer(PropertiesReader.getExchangeUserName(),
-											 PropertiesReader.getExchangePassWord(),
-											 PropertiesReader.getExchangeHostName());
-		}
 		MeetingApi.deleteMeetingBySubjectName(roomName, subject);
 	}	
 	 
@@ -117,6 +112,12 @@ public class VerifyMeetingTimeIsUpdatedByTimeLine extends TestBase{
 	 */
 	@BeforeTest
 	public void beforeTest() {
+		if(EmailServerApi.getEmailServiceId() == null){
+			EmailServerApi.createEmailServer(PropertiesReader.getExchangeUserName(),
+											 PropertiesReader.getExchangePassWord(),
+											 PropertiesReader.getExchangeHostName());
+		}
+		MeetingApi.deleteAllRoomMeetings(roomName);
 		MeetingApi.createMeeting(organizer, subject, startTime, endTime,
 				roomName, attendee);
 	}

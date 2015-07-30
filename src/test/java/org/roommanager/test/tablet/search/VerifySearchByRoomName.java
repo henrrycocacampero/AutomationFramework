@@ -2,6 +2,8 @@ package org.roommanager.test.tablet.search;
 
 import org.roommanager.framework.pages.tablet.search.SearchPage;
 import org.roommanager.framework.pages.tablet.settings.ConnectionPage;
+import org.roommanager.framework.utilities.api.admin.EmailServerApi;
+import org.roommanager.framework.utilities.common.PropertiesReader;
 import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -26,8 +28,14 @@ public class VerifySearchByRoomName extends TestBase {
 	 */
 	@BeforeTest
 	public void beforeTest() {
+		if (EmailServerApi.getEmailServiceId() == null) {
+			EmailServerApi.createEmailServer(
+					PropertiesReader.getExchangeUserName(),
+					PropertiesReader.getExchangePassWord(),
+					PropertiesReader.getExchangeHostName());
+		}
 		connection = new ConnectionPage(driver);
-		String url = "http://172.20.208.84:4040/";
+		String url = PropertiesReader.getRoomManagerApi();
 		if (connection.isConnectionNotEstablished(url)) {
 			connection.enterServiceUrl(url).clickSaveButton()
 					.clickNavigationLink().clickDefaultRoomComboBox()

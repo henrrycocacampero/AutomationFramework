@@ -2,17 +2,20 @@ package org.roommanager.test.tablet.settings;
 
 import org.roommanager.framework.pages.tablet.home.HomePage;
 import org.roommanager.framework.pages.tablet.settings.ConnectionPage;
+import org.roommanager.framework.utilities.api.admin.EmailServerApi;
+import org.roommanager.framework.utilities.common.PropertiesReader;
 import org.roommanager.framework.utilities.common.TestBase;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+/**
+ * This class contains a test for verify the room name displayed
+ * 
+ * @author Samuel Vargas
+ *
+ */
 public class VerifyDefaultRoomIsDisplayed extends TestBase{
-	/**
-	 * This class contains a test for verify the room name displayed
-	 * 
-	 * @author Samuel Vargas
-	 *
-	 */
 	
 	/** roomName: It represents the name of the Current room */
 	private String roomName = "Room01";
@@ -23,17 +26,35 @@ public class VerifyDefaultRoomIsDisplayed extends TestBase{
 	 */
 	@Test 
 	public void VerifyDeafultRoomIsDisplayed(){
+		
 		ConnectionPage connection = new ConnectionPage(driver);
-		connection.enterServiceUrl("http://172.20.208.84:4040/")
-		.clickSaveButton()
-		.clickNavigationLink()
-		.clickDefaultRoomComboBox()
-		.selectConferenceRoomByName(roomName)
-		.clickSaveButton();
-		HomePage home = connection.clickOnHomePageLink();		
+		
+		connection.enterServiceUrl(PropertiesReader.getRoomManagerApi())
+			.clickSaveButton()
+			.clickNavigationLink()
+			.clickDefaultRoomComboBox()
+			.selectConferenceRoomByName(roomName)
+			.clickSaveButton();
+		
+		HomePage home = connection.clickOnHomePageLink();	
+		
 		String roomByDefault = home.getRoomNameLabel();
+		
 		Assert.assertEquals(roomByDefault, roomName);
 						
+	}
+	
+	/**
+	 * This method registers an email server if it is not registered
+	 */
+	@BeforeTest
+	public void beforeTest(){
+		if (EmailServerApi.getEmailServiceId() == null) {
+			EmailServerApi.createEmailServer(
+					PropertiesReader.getExchangeUserName(),
+					PropertiesReader.getExchangePassWord(),
+					PropertiesReader.getExchangeHostName());
+		}
 	}
 
 }

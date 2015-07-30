@@ -107,5 +107,6 @@ public class VerifySetTimeByTimeline extends TestBase{
 											 PropertiesReader.getExchangePassWord(),
 											 PropertiesReader.getExchangeHostName());
 		}
+		MeetingApi.deleteAllRoomMeetings(roomName);
 	}
 }

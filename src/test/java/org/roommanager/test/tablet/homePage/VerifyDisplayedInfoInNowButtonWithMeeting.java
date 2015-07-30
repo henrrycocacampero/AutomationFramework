@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.roommanager.framework.pages.tablet.home.HomePage;
 import org.roommanager.framework.pages.tablet.settings.ConnectionPage;
 import org.roommanager.framework.pages.tablet.settings.NavigationPage;
+import org.roommanager.framework.utilities.api.admin.EmailServerApi;
 import org.roommanager.framework.utilities.api.tablet.MeetingApi;
 import org.roommanager.framework.utilities.common.Generator;
 import org.roommanager.framework.utilities.common.PropertiesReader;
@@ -20,6 +21,9 @@ import org.testng.annotations.Test;
  *
  */
 public class VerifyDisplayedInfoInNowButtonWithMeeting extends TestBase {
+	
+	/** urlTablet :It represents the URL of module Tablet */
+	private String urlTablet = PropertiesReader.getRoomManagerApi();
 
 	/** username: It represents the name of the Current User */
 	private String username = PropertiesReader.getUsername();
@@ -44,7 +48,8 @@ public class VerifyDisplayedInfoInNowButtonWithMeeting extends TestBase {
 	 * errorMessage: It represents the Error Message that will be displayed if
 	 * the test fails
 	 */
-	private String msgError = "The Test failed because the meeting not found in the Now Button";
+	private String msgError = "The Test failed because the meeting not found "
+			+ "in the Now Button";
 
 	/** subject: It represents the Meeting's Subject */
 	private String subject = "Subject Test";
@@ -67,7 +72,7 @@ public class VerifyDisplayedInfoInNowButtonWithMeeting extends TestBase {
 	public void verifyDisplayedInfoInNowButtonWithMeeting() {
     	ConnectionPage connection = new ConnectionPage(driver);
 		NavigationPage navigation = connection
-									.enterServiceUrl("http://172.20.208.84:4040/")
+									.enterServiceUrl(urlTablet)
 									.clickSaveButton()
 									.clickNavigationLink()
 									.clickDefaultRoomComboBox()
@@ -85,7 +90,12 @@ public class VerifyDisplayedInfoInNowButtonWithMeeting extends TestBase {
 	 */
 	@BeforeTest
 	public void beforeTest() {
-		MeetingApi.deleteMeetingBySubjectName(conferenceRoom, subject);
+		if(EmailServerApi.getEmailServiceId() == null){
+			EmailServerApi.createEmailServer(PropertiesReader.getExchangeUserName(),
+											 PropertiesReader.getExchangePassWord(),
+											 PropertiesReader.getExchangeHostName());
+		}
+		MeetingApi.deleteAllRoomMeetings(conferenceRoom);
 		MeetingApi.createMeeting(organizer, subject, startTime, endTime,
 				conferenceRoom, attendee);
 	}

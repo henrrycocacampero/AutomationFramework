@@ -113,6 +113,7 @@ public class VerifyMeetingIsUpdated extends TestBase {
 											 PropertiesReader.getExchangePassWord(),
 											 PropertiesReader.getExchangeHostName());
 		}
+		MeetingApi.deleteAllRoomMeetings(roomName);
 		MeetingApi.createMeeting(organizer, subject, startTime, endTime,
 				roomName, attendee);
 	}

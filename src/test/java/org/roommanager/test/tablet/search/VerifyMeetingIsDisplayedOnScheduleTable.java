@@ -68,9 +68,9 @@ public class VerifyMeetingIsDisplayedOnScheduleTable extends TestBase {
 		MeetingApi.createMeeting(organizer, subject, startTime, endTime,
 				conferenceRoom, attendee);
 		connection = new ConnectionPage(driver);
-		String url = "http://172.20.208.84:4040/";
+		String url = PropertiesReader.getRoomManagerApi();
 		if (connection.isConnectionNotEstablished(url)) {
-			connection.enterServiceUrl("http://172.20.208.84:4040/")
+			connection.enterServiceUrl(url)
 					.clickSaveButton().clickNavigationLink()
 					.clickDefaultRoomComboBox()
 					.selectConferenceRoomByName("Room07").clickSaveButton();
@@ -86,6 +86,7 @@ public class VerifyMeetingIsDisplayedOnScheduleTable extends TestBase {
 	public void verifyMeetingIsDisplayedOnScheduleTable() {
 
 		SearchPage search = connection.clickOnSearchPageLink();
+		
 		Assert.assertEquals(search.getMeetingByRoom(conferenceRoom), subject,
 				errorMessage);
 	}

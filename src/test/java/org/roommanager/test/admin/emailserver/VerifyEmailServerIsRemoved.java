@@ -15,7 +15,9 @@ public class VerifyEmailServerIsRemoved extends TestBase {
 	
 	 @BeforeTest
 	  public void beforeTest(){
-		  EmailServerApi.createEmailServer(PropertiesReader.getUsername(), PropertiesReader.getPassword(), PropertiesReader.getExchangeHostName());
+		  EmailServerApi.createEmailServer(PropertiesReader.getUsername(),
+										   PropertiesReader.getPassword(),
+										   PropertiesReader.getExchangeHostName());
 	  }
 	 @Test
 	  public void removeEmailServer(){
