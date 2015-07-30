@@ -51,7 +51,11 @@ public class VerifyDisplayNameUpdatedIsDisplayed extends TestBase{
 	 */
   	@Test
 	public void verifyResourceDisplayNameUpdatedIsDisplayed() throws Exception {
-		String errorMessage = "The resource name is not changed";
+  		/** 
+  		 * errorMessage: It contains the error message that would appear 
+  		 * if test case fails
+  		 */
+  		String errorMessage = "The resource name is not changed";
 		
 		LoginPage login = new LoginPage(driver);
 		

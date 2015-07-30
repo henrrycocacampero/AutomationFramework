@@ -16,7 +16,10 @@ import org.testng.annotations.Test;
  *
  */
 public class VerifyCreateResourcesPageIsDisplayed extends TestBase {
-	
+	/** 
+	 * errorMessage: It contains the error message that would appear 
+	 * if test case fails
+	 */
 	private String errorMessage = "The test failed because the CreateResource Page "
 			+ "is not displayed";
 
