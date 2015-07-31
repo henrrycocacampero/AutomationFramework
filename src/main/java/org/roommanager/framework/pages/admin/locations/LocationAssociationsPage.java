@@ -142,6 +142,8 @@ public class LocationAssociationsPage extends LocationsTopMenu {
 		} else if(browser.equals("FIREFOX")){
 			WebElement html = driver.findElement(By.tagName("html"));
 			html.sendKeys(Keys.chord(Keys.CONTROL, Keys.ADD));
+			html.sendKeys(Keys.chord(Keys.CONTROL, Keys.ADD));
+			html.sendKeys(Keys.chord(Keys.CONTROL, Keys.ADD));
 		}
 	}
 	
