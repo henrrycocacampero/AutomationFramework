@@ -77,6 +77,8 @@ public class LocationsInfoPage extends LocationsTopMenu{
 		} else if(browser.equals("FIREFOX")){
 			WebElement html = driver.findElement(By.tagName("html"));
 			html.sendKeys(Keys.chord(Keys.CONTROL, Keys.SUBTRACT));
+			html.sendKeys(Keys.chord(Keys.CONTROL, Keys.SUBTRACT));
+			html.sendKeys(Keys.chord(Keys.CONTROL, Keys.SUBTRACT));
 		}
 	}
 	
